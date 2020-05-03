@@ -89,7 +89,7 @@ namespace ZSim.Services.HypergridService
             // Permissions
             m_AssetPerms = new AssetPermissions(assetConfig);
 
-            string str = assetConfig.GetString("BackingService", "OpenSim.Services.AssetService.dll:AssetService");
+            string str = assetConfig.GetString("BackingService", "ZSim.Services.AssetService.dll:AssetService");
 
             if (str != string.Empty)
             {

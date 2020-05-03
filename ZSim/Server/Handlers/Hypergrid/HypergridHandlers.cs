@@ -31,7 +31,7 @@ using System.Net;
 using System.Reflection;
 
 using ZSim.Services.Interfaces;
-using GridRegion = OpenSim.Services.Interfaces.GridRegion;
+using GridRegion = ZSim.Services.Interfaces.GridRegion;
 
 using log4net;
 using Nwc.XmlRpc;

@@ -601,7 +601,7 @@ namespace ZSim.Framework.Servers.HttpServer
 
             try
             {
-                // OpenSim.Framework.WebUtil.OSHeaderRequestID
+                // ZSim.Framework.WebUtil.OSHeaderRequestID
 //                if (request.Headers["opensim-request-id"] != null)
 //                    reqnum = String.Format("{0}:{1}",request.RemoteIPEndPoint,request.Headers["opensim-request-id"]);
                  //m_log.DebugFormat("[BASE HTTP SERVER]: <{0}> handle request for {1}",reqnum,request.RawUrl);

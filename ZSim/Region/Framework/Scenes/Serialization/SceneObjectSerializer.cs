@@ -45,7 +45,7 @@ namespace ZSim.Region.Framework.Scenes.Serialization
     /// <summary>
     /// Serialize and deserialize scene objects.
     /// </summary>
-    /// This should really be in OpenSim.Framework.Serialization but this would mean circular dependency problems
+    /// This should really be in ZSim.Framework.Serialization but this would mean circular dependency problems
     /// right now - hopefully this isn't forever.
     public class SceneObjectSerializer
     {

@@ -28,13 +28,13 @@
 using System.Collections;
 using ZSim.Region.ScriptEngine.Interfaces;
 
-using key = OpenSim.Region.ScriptEngine.Shared.LSL_Types.LSLString;
-using rotation = OpenSim.Region.ScriptEngine.Shared.LSL_Types.Quaternion;
-using vector = OpenSim.Region.ScriptEngine.Shared.LSL_Types.Vector3;
-using LSL_List = OpenSim.Region.ScriptEngine.Shared.LSL_Types.list;
-using LSL_String = OpenSim.Region.ScriptEngine.Shared.LSL_Types.LSLString;
-using LSL_Integer = OpenSim.Region.ScriptEngine.Shared.LSL_Types.LSLInteger;
-using LSL_Float = OpenSim.Region.ScriptEngine.Shared.LSL_Types.LSLFloat;
+using key = ZSim.Region.ScriptEngine.Shared.LSL_Types.LSLString;
+using rotation = ZSim.Region.ScriptEngine.Shared.LSL_Types.Quaternion;
+using vector = ZSim.Region.ScriptEngine.Shared.LSL_Types.Vector3;
+using LSL_List = ZSim.Region.ScriptEngine.Shared.LSL_Types.list;
+using LSL_String = ZSim.Region.ScriptEngine.Shared.LSL_Types.LSLString;
+using LSL_Integer = ZSim.Region.ScriptEngine.Shared.LSL_Types.LSLInteger;
+using LSL_Float = ZSim.Region.ScriptEngine.Shared.LSL_Types.LSLFloat;
 
 namespace ZSim.Region.ScriptEngine.Shared.Api.Interfaces
 {

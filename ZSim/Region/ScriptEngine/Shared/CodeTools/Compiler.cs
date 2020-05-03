@@ -400,9 +400,9 @@ namespace ZSim.Region.ScriptEngine.Shared.CodeTools
 //        private static string CreateJSCompilerScript(string compileScript)
 //        {
 //            compileScript = String.Empty +
-//                "import OpenSim.Region.ScriptEngine.Shared; import System.Collections.Generic;\r\n" +
+//                "import ZSim.Region.ScriptEngine.Shared; import System.Collections.Generic;\r\n" +
 //                "package SecondLife {\r\n" +
-//                "class Script extends OpenSim.Region.ScriptEngine.Shared.ScriptBase.ScriptBaseClass { \r\n" +
+//                "class Script extends ZSim.Region.ScriptEngine.Shared.ScriptBase.ScriptBaseClass { \r\n" +
 //                compileScript +
 //                "} }\r\n";
 //            return compileScript;
@@ -467,7 +467,7 @@ namespace SecondLife
         public static string CreateVBCompilerScript(string compileScript, string className, string baseClassName)
         {
             compileScript = String.Empty +
-                "Imports OpenSim.Region.ScriptEngine.Shared: Imports System.Collections.Generic: " +
+                "Imports ZSim.Region.ScriptEngine.Shared: Imports System.Collections.Generic: " +
                 String.Empty + "NameSpace SecondLife:" +
                 String.Empty + "Public Class " + className + ": Inherits " + baseClassName +
                 "\r\nPublic Sub New()\r\nEnd Sub: " +
@@ -531,9 +531,9 @@ namespace SecondLife
             string rootPath = AppDomain.CurrentDomain.BaseDirectory;
 
             parameters.ReferencedAssemblies.Add(Path.Combine(rootPath,
-                    "OpenSim.Region.ScriptEngine.Shared.dll"));
+                    "ZSim.Region.ScriptEngine.Shared.dll"));
             parameters.ReferencedAssemblies.Add(Path.Combine(rootPath,
-                    "OpenSim.Region.ScriptEngine.Shared.Api.Runtime.dll"));
+                    "ZSim.Region.ScriptEngine.Shared.Api.Runtime.dll"));
             parameters.ReferencedAssemblies.Add(Path.Combine(rootPath,
                     "OpenMetaverseTypes.dll"));
 
@@ -781,19 +781,19 @@ namespace SecondLife
         string ReplaceTypes(string message)
         {
             message = message.Replace(
-                    "OpenSim.Region.ScriptEngine.Shared.LSL_Types.LSLString",
+                    "ZSim.Region.ScriptEngine.Shared.LSL_Types.LSLString",
                     "string");
 
             message = message.Replace(
-                    "OpenSim.Region.ScriptEngine.Shared.LSL_Types.LSLInteger",
+                    "ZSim.Region.ScriptEngine.Shared.LSL_Types.LSLInteger",
                     "integer");
 
             message = message.Replace(
-                    "OpenSim.Region.ScriptEngine.Shared.LSL_Types.LSLFloat",
+                    "ZSim.Region.ScriptEngine.Shared.LSL_Types.LSLFloat",
                     "float");
 
             message = message.Replace(
-                    "OpenSim.Region.ScriptEngine.Shared.LSL_Types.list",
+                    "ZSim.Region.ScriptEngine.Shared.LSL_Types.list",
                     "list");
 
             return message;

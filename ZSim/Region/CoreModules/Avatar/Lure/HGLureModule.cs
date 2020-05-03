@@ -38,7 +38,7 @@ using ZSim.Region.Framework.Interfaces;
 using ZSim.Region.Framework.Scenes;
 using ZSim.Services.Connectors.Hypergrid;
 
-using GridRegion = OpenSim.Services.Interfaces.GridRegion;
+using GridRegion = ZSim.Services.Interfaces.GridRegion;
 
 namespace ZSim.Region.CoreModules.Avatar.Lure
 {

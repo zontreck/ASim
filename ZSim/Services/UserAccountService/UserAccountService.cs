@@ -36,8 +36,8 @@ using ZSim.Data;
 using ZSim.Framework;
 using ZSim.Services.Interfaces;
 using ZSim.Framework.Console;
-using GridRegion = OpenSim.Services.Interfaces.GridRegion;
-using PermissionMask = OpenSim.Framework.PermissionMask;
+using GridRegion = ZSim.Services.Interfaces.GridRegion;
+using PermissionMask = ZSim.Framework.PermissionMask;
 
 namespace ZSim.Services.UserAccountService
 {
@@ -133,7 +133,7 @@ namespace ZSim.Services.UserAccountService
                     MainConsole.Instance.Commands.AddCommand("Users", false,
                             "set user level",
                             "set user level [<first> [<last> [<level>]]]",
-                            "Set user level. If >= 200 and 'allow_grid_gods = true' in OpenSim.ini, "
+                            "Set user level. If >= 200 and 'allow_grid_gods = true' in ZSim.ini, "
                                 + "this account will be treated as god-moded. "
                                 + "It will also affect the 'login level' command. ",
                             HandleSetUserLevel);

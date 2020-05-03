@@ -174,23 +174,23 @@ public class HullCreation : OpenSimTestCase
                 string shapeType = physShape.GetType().ToString();
                 switch (shapeType)
                 {
-                    case "OpenSim.Region.Physics.BulletSPlugin.BSShapeNative":
+                    case "ZSim.Region.Physics.BulletSPlugin.BSShapeNative":
                         BSShapeNative nShape = physShape as BSShapeNative;
                         prim.PhysScene.DetailLog("{0}, type={1}", prim.Name, shapeType);
                         break;
-                    case "OpenSim.Region.Physics.BulletSPlugin.BSShapeMesh":
+                    case "ZSim.Region.Physics.BulletSPlugin.BSShapeMesh":
                         BSShapeMesh mShape = physShape as BSShapeMesh;
                         prim.PhysScene.DetailLog("{0}, mesh, shapeInfo={1}", prim.Name, mShape.shapeInfo);
                         break;
-                    case "OpenSim.Region.Physics.BulletSPlugin.BSShapeHull":
+                    case "ZSim.Region.Physics.BulletSPlugin.BSShapeHull":
                         // BSShapeHull hShape = physShape as BSShapeHull;
                         // prim.PhysScene.DetailLog("{0}, hull, shapeInfo={1}", prim.Name, hShape.shapeInfo);
                         break;
-                    case "OpenSim.Region.Physics.BulletSPlugin.BSShapeConvexHull":
+                    case "ZSim.Region.Physics.BulletSPlugin.BSShapeConvexHull":
                         BSShapeConvexHull chShape = physShape as BSShapeConvexHull;
                         prim.PhysScene.DetailLog("{0}, convexHull, shapeInfo={1}", prim.Name, chShape.shapeInfo);
                         break;
-                    case "OpenSim.Region.Physics.BulletSPlugin.BSShapeCompound":
+                    case "ZSim.Region.Physics.BulletSPlugin.BSShapeCompound":
                         BSShapeCompound cShape = physShape as BSShapeCompound;
                         prim.PhysScene.DetailLog("{0}, type={1}", prim.Name, shapeType);
                         break;

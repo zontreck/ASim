@@ -52,14 +52,14 @@ namespace ZSim.Region.ScriptEngine.Shared.CodeTools
             if (null == m_datatypeLSL2OpenSim)
             {
                 m_datatypeLSL2OpenSim = new Dictionary<string, string>();
-                m_datatypeLSL2OpenSim.Add("integer", "LSL_Types.LSLInteger");
-                m_datatypeLSL2OpenSim.Add("float", "LSL_Types.LSLFloat");
-                //m_datatypeLSL2OpenSim.Add("key", "LSL_Types.key"); // key doesn't seem to be used
-                m_datatypeLSL2OpenSim.Add("key", "LSL_Types.LSLString");
-                m_datatypeLSL2OpenSim.Add("string", "LSL_Types.LSLString");
-                m_datatypeLSL2OpenSim.Add("vector", "LSL_Types.Vector3");
-                m_datatypeLSL2OpenSim.Add("rotation", "LSL_Types.Quaternion");
-                m_datatypeLSL2OpenSim.Add("list", "LSL_Types.list");
+                m_datatypeLSL2ZSim.Add("integer", "LSL_Types.LSLInteger");
+                m_datatypeLSL2ZSim.Add("float", "LSL_Types.LSLFloat");
+                //m_datatypeLSL2ZSim.Add("key", "LSL_Types.key"); // key doesn't seem to be used
+                m_datatypeLSL2ZSim.Add("key", "LSL_Types.LSLString");
+                m_datatypeLSL2ZSim.Add("string", "LSL_Types.LSLString");
+                m_datatypeLSL2ZSim.Add("vector", "LSL_Types.Vector3");
+                m_datatypeLSL2ZSim.Add("rotation", "LSL_Types.Quaternion");
+                m_datatypeLSL2ZSim.Add("list", "LSL_Types.list");
             }
         }
 

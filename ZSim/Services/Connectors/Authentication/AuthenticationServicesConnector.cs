@@ -67,7 +67,7 @@ namespace ZSim.Services.Connectors
             IConfig assetConfig = source.Configs["AuthenticationService"];
             if (assetConfig == null)
             {
-                m_log.Error("[AUTH CONNECTOR]: AuthenticationService missing from OpenSim.ini");
+                m_log.Error("[AUTH CONNECTOR]: AuthenticationService missing from ZSim.ini");
                 throw new Exception("Authentication connector init error");
             }
 

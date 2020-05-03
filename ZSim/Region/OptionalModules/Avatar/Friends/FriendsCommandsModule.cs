@@ -43,7 +43,7 @@ using ZSim.Region.CoreModules.Avatar.Friends;
 using ZSim.Region.Framework.Interfaces;
 using ZSim.Region.Framework.Scenes;
 using ZSim.Services.Interfaces;
-using FriendInfo = OpenSim.Services.Interfaces.FriendInfo;
+using FriendInfo = ZSim.Services.Interfaces.FriendInfo;
 
 namespace ZSim.Region.OptionalModules.Avatar.Friends
 {
@@ -185,7 +185,7 @@ namespace ZSim.Region.OptionalModules.Avatar.Friends
                 else
                     friendName = friend.Friend;
 
-                OpenSim.Services.Interfaces.PresenceInfo[] pi = m_presenceService.GetAgents(new string[] { friend.Friend });
+                ZSim.Services.Interfaces.PresenceInfo[] pi = m_presenceService.GetAgents(new string[] { friend.Friend });
                 if (pi.Length > 0)
                     onlineText = "online";
                 else

@@ -33,7 +33,7 @@ using ZSim.Region.Framework.Scenes;
 using ZSim.Server.Base;
 using ZSim.Services.Interfaces;
 using ZSim.Services.Connectors;
-using PresenceInfo = OpenSim.Services.Interfaces.PresenceInfo;
+using PresenceInfo = ZSim.Services.Interfaces.PresenceInfo;
 
 using OpenMetaverse;
 using log4net;

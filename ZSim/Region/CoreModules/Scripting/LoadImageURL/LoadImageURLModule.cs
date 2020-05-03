@@ -299,7 +299,7 @@ namespace ZSim.Region.CoreModules.Scripting.LoadImageURL
 
                         m_textureManager.ReturnData(
                             state.RequestID,
-                            new OpenSim.Region.CoreModules.Scripting.DynamicTexture.DynamicTexture(
+                            new ZSim.Region.CoreModules.Scripting.DynamicTexture.DynamicTexture(
                             request.RequestUri, null, imageJ2000, newSize, false));
                     }
                     response.Close();

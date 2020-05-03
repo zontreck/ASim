@@ -100,7 +100,7 @@ namespace ZSim.Tools.Configger
                 }
             }
 
-            string iniFileName = startupConfig.GetString("inifile", Path.Combine(".", "OpenSim.ini"));
+            string iniFileName = startupConfig.GetString("inifile", Path.Combine(".", "ZSim.ini"));
 
             if (IsUri(iniFileName))
             {
@@ -123,7 +123,7 @@ namespace ZSim.Tools.Configger
             if (sources.Count == 0)
             {
                 m_log.FatalFormat("[CONFIG] Could not load any configuration");
-                m_log.FatalFormat("[CONFIG] Did you copy the OpenSim.ini.example file to OpenSim.ini?");
+                m_log.FatalFormat("[CONFIG] Did you copy the ZSim.ini.example file to ZSim.ini?");
                 Environment.Exit(1);
             }
 

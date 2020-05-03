@@ -103,7 +103,7 @@ namespace ZSim
             else
             {
                 XmlConfigurator.Configure();
-                m_log.Info("[OPENSIM MAIN]: configured log4net using default OpenSim.exe.config");
+                m_log.Info("[OPENSIM MAIN]: configured log4net using default ZSim.exe.config");
             }
 
             m_log.InfoFormat(
@@ -195,10 +195,10 @@ namespace ZSim
             /*
             m_log.Info("Checking for reguired configuration...\n");
 
-            bool OpenSim_Ini = (File.Exists(Path.Combine(Util.configDir(), "OpenSim.ini")))
-                               || (File.Exists(Path.Combine(Util.configDir(), "opensim.ini")))
-                               || (File.Exists(Path.Combine(Util.configDir(), "openSim.ini")))
-                               || (File.Exists(Path.Combine(Util.configDir(), "Opensim.ini")));
+            bool OpenSim_Ini = (File.Exists(Path.Combine(Util.configDir(), "ZSim.ini")))
+                               || (File.Exists(Path.Combine(Util.configDir(), "ZSim.ini")))
+                               || (File.Exists(Path.Combine(Util.configDir(), "ZSim.ini")))
+                               || (File.Exists(Path.Combine(Util.configDir(), "ZSim.ini")));
 
             bool StanaloneCommon_ProperCased = File.Exists(Path.Combine(Path.Combine(Util.configDir(), "config-include"), "StandaloneCommon.ini"));
             bool StanaloneCommon_lowercased = File.Exists(Path.Combine(Path.Combine(Util.configDir(), "config-include"), "standalonecommon.ini"));
@@ -219,7 +219,7 @@ namespace ZSim
             {
                 MainConsole.Instance = new LocalConsole("Region");
                 string resp = MainConsole.Instance.CmdPrompt(
-                                        "\n\n*************Required Configuration files not found.*************\n\n   OpenSimulator will not run without these files.\n\nRemember, these file names are Case Sensitive in Linux and Proper Cased.\n1. ./OpenSim.ini\nand\n2. ./config-include/StandaloneCommon.ini \nor\n3. ./config-include/GridCommon.ini\n\nAlso, you will want to examine these files in great detail because only the basic system will load by default. OpenSimulator can do a LOT more if you spend a little time going through these files.\n\n" + ": " + "Do you want to copy the most basic Defaults from standalone?",
+                                        "\n\n*************Required Configuration files not found.*************\n\n   OpenSimulator will not run without these files.\n\nRemember, these file names are Case Sensitive in Linux and Proper Cased.\n1. ./ZSim.ini\nand\n2. ./config-include/StandaloneCommon.ini \nor\n3. ./config-include/GridCommon.ini\n\nAlso, you will want to examine these files in great detail because only the basic system will load by default. OpenSimulator can do a LOT more if you spend a little time going through these files.\n\n" + ": " + "Do you want to copy the most basic Defaults from standalone?",
                                         "yes");
                 if (resp == "yes")
                 {
@@ -228,30 +228,30 @@ namespace ZSim
                         {
                             try
                             {
-                                File.Copy(Path.Combine(Util.configDir(), "OpenSim.ini.example"),
-                                          Path.Combine(Util.configDir(), "OpenSim.ini"));
+                                File.Copy(Path.Combine(Util.configDir(), "ZSim.ini.example"),
+                                          Path.Combine(Util.configDir(), "ZSim.ini"));
                             } catch (UnauthorizedAccessException)
                             {
-                                MainConsole.Instance.Output("Unable to Copy OpenSim.ini.example to OpenSim.ini, Make sure OpenSim has have the required permissions\n");
+                                MainConsole.Instance.Output("Unable to Copy ZSim.ini.example to ZSim.ini, Make sure OpenSim has have the required permissions\n");
                             } catch (ArgumentException)
                             {
-                                MainConsole.Instance.Output("Unable to Copy OpenSim.ini.example to OpenSim.ini, The current directory is invalid.\n");
+                                MainConsole.Instance.Output("Unable to Copy ZSim.ini.example to ZSim.ini, The current directory is invalid.\n");
                             } catch (System.IO.PathTooLongException)
                             {
-                                MainConsole.Instance.Output("Unable to Copy OpenSim.ini.example to OpenSim.ini, the Path to these files is too long.\n");
+                                MainConsole.Instance.Output("Unable to Copy ZSim.ini.example to ZSim.ini, the Path to these files is too long.\n");
                             } catch (System.IO.DirectoryNotFoundException)
                             {
-                                MainConsole.Instance.Output("Unable to Copy OpenSim.ini.example to OpenSim.ini, the current directory is reporting as not found.\n");
+                                MainConsole.Instance.Output("Unable to Copy ZSim.ini.example to ZSim.ini, the current directory is reporting as not found.\n");
                             } catch (System.IO.FileNotFoundException)
                             {
-                                MainConsole.Instance.Output("Unable to Copy OpenSim.ini.example to OpenSim.ini, the example is not found, please make sure that the example files exist.\n");
+                                MainConsole.Instance.Output("Unable to Copy ZSim.ini.example to ZSim.ini, the example is not found, please make sure that the example files exist.\n");
                             } catch (System.IO.IOException)
                             {
                                 // Destination file exists already or a hard drive failure...   ..    so we can just drop this one
-                                //MainConsole.Instance.Output("Unable to Copy OpenSim.ini.example to OpenSim.ini, the example is not found, please make sure that the example files exist.\n");
+                                //MainConsole.Instance.Output("Unable to Copy ZSim.ini.example to ZSim.ini, the example is not found, please make sure that the example files exist.\n");
                             } catch (System.NotSupportedException)
                             {
-                                MainConsole.Instance.Output("Unable to Copy OpenSim.ini.example to OpenSim.ini, The current directory is invalid.\n");
+                                MainConsole.Instance.Output("Unable to Copy ZSim.ini.example to ZSim.ini, The current directory is invalid.\n");
                             }
 
                         }
@@ -285,7 +285,7 @@ namespace ZSim
                             catch (System.IO.IOException)
                             {
                                 // Destination file exists already or a hard drive failure...   ..    so we can just drop this one
-                                //MainConsole.Instance.Output("Unable to Copy OpenSim.ini.example to OpenSim.ini, the example is not found, please make sure that the example files exist.\n");
+                                //MainConsole.Instance.Output("Unable to Copy ZSim.ini.example to ZSim.ini, the example is not found, please make sure that the example files exist.\n");
                             }
                             catch (System.NotSupportedException)
                             {
@@ -401,7 +401,7 @@ namespace ZSim
                         m_crashLog.WriteLine(msg);
                     }
 
-                    File.Copy("OpenSim.ini", Path.Combine(m_crashDir, log + "_OpenSim.ini"), true);
+                    File.Copy("ZSim.ini", Path.Combine(m_crashDir, log + "_ZSim.ini"), true);
                 }
                 catch (Exception e2)
                 {

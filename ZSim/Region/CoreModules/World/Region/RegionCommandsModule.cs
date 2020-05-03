@@ -40,7 +40,7 @@ using ZSim.Framework.Console;
 using ZSim.Framework.Monitoring;
 using ZSim.Region.Framework.Interfaces;
 using ZSim.Region.Framework.Scenes;
-using GridRegion = OpenSim.Services.Interfaces.GridRegion;
+using GridRegion = ZSim.Services.Interfaces.GridRegion;
 
 namespace ZSim.Region.CoreModules.World.Objects.Commands
 {

@@ -28,7 +28,7 @@
 using System.Collections.Generic;
 using OpenMetaverse;
 using ZSim.Framework;
-using Caps=OpenSim.Framework.Capabilities.Caps;
+using Caps=ZSim.Framework.Capabilities.Caps;
 
 namespace ZSim.Region.Framework.Interfaces
 {

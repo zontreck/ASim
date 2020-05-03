@@ -39,7 +39,7 @@ using System.Web;
 using ZSim.Server.Base;
 using ZSim.Server.Handlers.Base;
 using ZSim.Services.Interfaces;
-using GridRegion = OpenSim.Services.Interfaces.GridRegion;
+using GridRegion = ZSim.Services.Interfaces.GridRegion;
 using ZSim.Framework;
 using ZSim.Framework.Servers.HttpServer;
 

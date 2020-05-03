@@ -46,7 +46,7 @@ namespace ZSim.Region.ScriptEngine.Yengine
         None = -1,
 
         // must be bit numbers of equivalent values in ...
-        // OpenSim.Region.ScriptEngine.Shared.ScriptBase.scriptEvents
+        // ZSim.Region.ScriptEngine.Shared.ScriptBase.scriptEvents
         // ... so they can be passed to m_Part.SetScriptEvents().
         attach = 0,
         state_exit = 1,

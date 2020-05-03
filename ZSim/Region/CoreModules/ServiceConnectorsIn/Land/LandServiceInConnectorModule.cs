@@ -103,7 +103,7 @@ namespace ZSim.Region.CoreModules.ServiceConnectorsIn.Land
             {
                 m_Registered = true;
                 Object[] args = new Object[] { m_Config, MainServer.Instance, this, scene };
-                ServerUtils.LoadPlugin<IServiceConnector>("OpenSim.Server.Handlers.dll:LandServiceInConnector", args);
+                ServerUtils.LoadPlugin<IServiceConnector>("ZSim.Server.Handlers.dll:LandServiceInConnector", args);
             }
 
             m_Scenes.Add(scene);

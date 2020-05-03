@@ -957,7 +957,7 @@ namespace ZSim.Framework
             configMember.addConfigurationOption("sim_size_z", ConfigurationOption.ConfigurationTypes.TYPE_UINT32,
                                                 "Size of region in Z dimension", RegionSizeZ.ToString(), true);
 
-            //m_configMember.addConfigurationOption("datastore", ConfigurationOption.ConfigurationTypes.TYPE_STRING_NOT_EMPTY, "Filename for local storage", "OpenSim.db", false);
+            //m_configMember.addConfigurationOption("datastore", ConfigurationOption.ConfigurationTypes.TYPE_STRING_NOT_EMPTY, "Filename for local storage", "ZSim.db", false);
             configMember.addConfigurationOption("internal_ip_address",
                                                 ConfigurationOption.ConfigurationTypes.TYPE_IP_ADDRESS,
                                                 "Internal IP Address for incoming UDP client connections",
@@ -1027,7 +1027,7 @@ namespace ZSim.Framework
             configMember.addConfigurationOption("sim_size_z", ConfigurationOption.ConfigurationTypes.TYPE_UINT32,
                                                 "Size of region in Z dimension", Constants.RegionHeight.ToString(), false);
 
-            //m_configMember.addConfigurationOption("datastore", ConfigurationOption.ConfigurationTypes.TYPE_STRING_NOT_EMPTY, "Filename for local storage", "OpenSim.db", false);
+            //m_configMember.addConfigurationOption("datastore", ConfigurationOption.ConfigurationTypes.TYPE_STRING_NOT_EMPTY, "Filename for local storage", "ZSim.db", false);
             configMember.addConfigurationOption("internal_ip_address",
                                                 ConfigurationOption.ConfigurationTypes.TYPE_IP_ADDRESS,
                                                 "Internal IP Address for incoming UDP client connections", "0.0.0.0",

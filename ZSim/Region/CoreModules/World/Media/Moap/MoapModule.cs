@@ -42,7 +42,7 @@ using ZSim.Framework.Servers.HttpServer;
 using ZSim.Region.Framework.Interfaces;
 using ZSim.Region.Framework.Scenes;
 
-using Caps = OpenSim.Framework.Capabilities.Caps;
+using Caps = ZSim.Framework.Capabilities.Caps;
 using OSDMap = OpenMetaverse.StructuredData.OSDMap;
 
 namespace ZSim.Region.CoreModules.World.Media.Moap

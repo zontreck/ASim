@@ -37,7 +37,7 @@ using ZSim.Region.CoreModules.Avatar.Inventory.Transfer;
 using ZSim.Region.CoreModules.Framework.InventoryAccess;
 using ZSim.Services.Interfaces;
 using ZSim.Tests.Common;
-using PermissionMask = OpenSim.Framework.PermissionMask;
+using PermissionMask = ZSim.Framework.PermissionMask;
 
 namespace ZSim.Tests.Permissions
 {
@@ -77,13 +77,13 @@ namespace ZSim.Tests.Permissions
             config.Configs["Modules"].Set("InventoryAccessModule", "BasicInventoryAccessModule");
 
             config.AddConfig("InventoryService");
-            config.Configs["InventoryService"].Set("LocalServiceModule", "OpenSim.Services.InventoryService.dll:XInventoryService");
-            config.Configs["InventoryService"].Set("StorageProvider", "OpenSim.Tests.Common.dll:TestXInventoryDataPlugin");
+            config.Configs["InventoryService"].Set("LocalServiceModule", "ZSim.Services.InventoryService.dll:XInventoryService");
+            config.Configs["InventoryService"].Set("StorageProvider", "ZSim.Tests.Common.dll:TestXInventoryDataPlugin");
 
             config.AddConfig("Groups");
             config.Configs["Groups"].Set("Enabled", "true");
             config.Configs["Groups"].Set("Module", "Groups Module V2");
-            config.Configs["Groups"].Set("StorageProvider", "OpenSim.Tests.Common.dll:TestGroupsDataPlugin");
+            config.Configs["Groups"].Set("StorageProvider", "ZSim.Tests.Common.dll:TestGroupsDataPlugin");
             config.Configs["Groups"].Set("ServicesConnectorModule", "Groups Local Service Connector");
             config.Configs["Groups"].Set("LocalService", "local");
 

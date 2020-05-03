@@ -42,7 +42,7 @@ namespace ZSim.Framework
     /// hostnames depending on the requestors network
     ///
     /// This enables standard port forwarding techniques
-    /// to work correctly with OpenSim.
+    /// to work correctly with ZSim.
     /// </summary>
     public static class NetworkUtil
     {

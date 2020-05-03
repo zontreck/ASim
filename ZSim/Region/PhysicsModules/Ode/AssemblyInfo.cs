@@ -56,7 +56,7 @@ using Mono.Addins;
 // You can specify all values by your own or you can build default build and revision
 // numbers with the '*' character (the default):
 
-[assembly : AssemblyVersion(OpenSim.VersionInfo.AssemblyVersionNumber)]
+[assembly : AssemblyVersion(ZSim.VersionInfo.AssemblyVersionNumber)]
 
-[assembly: Addin("OpenSim.Region.PhysicsModule.ODE", OpenSim.VersionInfo.VersionNumber)]
-[assembly: AddinDependency("OpenSim.Region.Framework", OpenSim.VersionInfo.VersionNumber)]
+[assembly: Addin("ZSim.Region.PhysicsModule.ODE", ZSim.VersionInfo.VersionNumber)]
+[assembly: AddinDependency("ZSim.Region.Framework", ZSim.VersionInfo.VersionNumber)]

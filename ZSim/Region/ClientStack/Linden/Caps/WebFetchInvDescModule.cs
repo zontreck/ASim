@@ -42,7 +42,7 @@ using ZSim.Region.Framework.Interfaces;
 using ZSim.Region.Framework.Scenes;
 using ZSim.Framework.Capabilities;
 using ZSim.Services.Interfaces;
-using Caps = OpenSim.Framework.Capabilities.Caps;
+using Caps = ZSim.Framework.Capabilities.Caps;
 using ZSim.Capabilities.Handlers;
 using ZSim.Framework.Monitoring;
 

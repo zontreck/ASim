@@ -150,7 +150,7 @@ public BSAPIUnman(string paramName, BSScene physScene)
         Util.LoadArchSpecificWindowsDll("BulletSim.dll");
     // If not Windows, loading is performed by the
     // Mono loader as specified in
-    // "bin/Physics/OpenSim.Region.Physics.BulletSPlugin.dll.config".
+    // "bin/Physics/ZSim.Region.Physics.BulletSPlugin.dll.config".
 }
 
 // Initialization and simulation

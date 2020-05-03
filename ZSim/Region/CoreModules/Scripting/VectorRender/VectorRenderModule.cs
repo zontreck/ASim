@@ -403,7 +403,7 @@ namespace ZSim.Region.CoreModules.Scripting.VectorRender
                         e.Message, e.StackTrace);
                 }
 
-                return new OpenSim.Region.CoreModules.Scripting.DynamicTexture.DynamicTexture(
+                return new ZSim.Region.CoreModules.Scripting.DynamicTexture.DynamicTexture(
                     data, extraParams, imageJ2000, new Size(width, height), reuseable);
             }
             finally

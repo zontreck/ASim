@@ -33,7 +33,7 @@ using ZSim.Services.Interfaces;
 using ZSim.Data;
 using Nini.Config;
 using log4net;
-using FriendInfo = OpenSim.Services.Interfaces.FriendInfo;
+using FriendInfo = ZSim.Services.Interfaces.FriendInfo;
 
 namespace ZSim.Services.Friends
 {

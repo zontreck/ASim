@@ -35,7 +35,7 @@ using ZSim.Framework;
 
 using ZSim.Framework.ServiceAuth;
 using ZSim.Services.Interfaces;
-using GridRegion = OpenSim.Services.Interfaces.GridRegion;
+using GridRegion = ZSim.Services.Interfaces.GridRegion;
 using ZSim.Server.Base;
 using OpenMetaverse;
 

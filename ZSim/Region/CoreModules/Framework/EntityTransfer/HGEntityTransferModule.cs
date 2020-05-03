@@ -43,7 +43,7 @@ using log4net;
 using Nini.Config;
 using Mono.Addins;
 
-using GridRegion = OpenSim.Services.Interfaces.GridRegion;
+using GridRegion = ZSim.Services.Interfaces.GridRegion;
 
 
 namespace ZSim.Region.CoreModules.Framework.EntityTransfer
@@ -225,7 +225,7 @@ namespace ZSim.Region.CoreModules.Framework.EntityTransfer
             m_log.DebugFormat("[HG ENTITY TRANSFER MODULE]: region {0} flags: {1}", region.RegionName, flags);
             message = null;
 
-            if ((flags & (int)OpenSim.Framework.RegionFlags.Hyperlink) != 0)
+            if ((flags & (int)ZSim.Framework.RegionFlags.Hyperlink) != 0)
             {
                 m_log.DebugFormat("[HG ENTITY TRANSFER MODULE]: Destination region is hyperlink");
                 GridRegion real_destination = m_GatekeeperConnector.GetHyperlinkRegion(region, region.RegionID, agentID, agentHomeURI, out message);
@@ -245,7 +245,7 @@ namespace ZSim.Region.CoreModules.Framework.EntityTransfer
                 return true;
 
             int flags = Scene.GridService.GetRegionFlags(Scene.RegionInfo.ScopeID, reg.RegionID);
-            if (flags == -1 || (flags & (int)OpenSim.Framework.RegionFlags.Hyperlink) != 0)
+            if (flags == -1 || (flags & (int)ZSim.Framework.RegionFlags.Hyperlink) != 0)
                 return true;
 
             return false;
@@ -269,7 +269,7 @@ namespace ZSim.Region.CoreModules.Framework.EntityTransfer
             reason = string.Empty;
             logout = false;
             int flags = Scene.GridService.GetRegionFlags(Scene.RegionInfo.ScopeID, reg.RegionID);
-            if (flags == -1 /* no region in DB */ || (flags & (int)OpenSim.Framework.RegionFlags.Hyperlink) != 0)
+            if (flags == -1 /* no region in DB */ || (flags & (int)ZSim.Framework.RegionFlags.Hyperlink) != 0)
             {
                 // this user is going to another grid
                 // for local users, check if HyperGrid teleport is allowed, based on user level
@@ -325,7 +325,7 @@ namespace ZSim.Region.CoreModules.Framework.EntityTransfer
             // The rest is only needed for controlling appearance
 
             int flags = Scene.GridService.GetRegionFlags(Scene.RegionInfo.ScopeID, reg.RegionID);
-            if (flags == -1 /* no region in DB */ || (flags & (int)OpenSim.Framework.RegionFlags.Hyperlink) != 0)
+            if (flags == -1 /* no region in DB */ || (flags & (int)ZSim.Framework.RegionFlags.Hyperlink) != 0)
             {
                 // this user is going to another grid
                 if (Scene.UserManagementModule.IsLocalGridUser(sp.UUID))
@@ -399,7 +399,7 @@ namespace ZSim.Region.CoreModules.Framework.EntityTransfer
         //protected override bool UpdateAgent(GridRegion reg, GridRegion finalDestination, AgentData agentData, ScenePresence sp)
         //{
         //    int flags = Scene.GridService.GetRegionFlags(Scene.RegionInfo.ScopeID, reg.RegionID);
-        //    if (flags == -1 /* no region in DB */ || (flags & (int)OpenSim.Data.RegionFlags.Hyperlink) != 0)
+        //    if (flags == -1 /* no region in DB */ || (flags & (int)ZSim.Data.RegionFlags.Hyperlink) != 0)
         //    {
         //        // this user is going to another grid
         //        if (m_RestrictAppearanceAbroad && Scene.UserManagementModule.IsLocalGridUser(agentData.AgentID))
@@ -803,7 +803,7 @@ namespace ZSim.Region.CoreModules.Framework.EntityTransfer
             region.ServerURI = wantedURI;  //uri.AbsoluteUri for some reason default ports are needed
             region.RegionName = string.Empty;
             region.InternalEndPoint = new System.Net.IPEndPoint(System.Net.IPAddress.Parse("0.0.0.0"), (int)0);
-            region.RegionFlags = OpenSim.Framework.RegionFlags.Hyperlink;
+            region.RegionFlags = ZSim.Framework.RegionFlags.Hyperlink;
             return region;
         }
     }

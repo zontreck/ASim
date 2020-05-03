@@ -62,7 +62,7 @@ namespace ZSim.Services.Connectors
             IConfig gridConfig = source.Configs["EstateService"];
             if (gridConfig == null)
             {
-                m_log.Error("[ESTATE CONNECTOR]: EstateService missing from OpenSim.ini");
+                m_log.Error("[ESTATE CONNECTOR]: EstateService missing from ZSim.ini");
                 throw new Exception("Estate connector init error");
             }
 

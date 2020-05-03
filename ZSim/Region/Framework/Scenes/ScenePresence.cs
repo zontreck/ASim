@@ -42,9 +42,9 @@ using ZSim.Region.Framework.Interfaces;
 using ZSim.Region.Framework.Scenes.Animation;
 using ZSim.Region.Framework.Scenes.Types;
 using ZSim.Region.PhysicsModules.SharedBase;
-using GridRegion = OpenSim.Services.Interfaces.GridRegion;
+using GridRegion = ZSim.Services.Interfaces.GridRegion;
 using ZSim.Services.Interfaces;
-using TeleportFlags = OpenSim.Framework.Constants.TeleportFlags;
+using TeleportFlags = ZSim.Framework.Constants.TeleportFlags;
 
 namespace ZSim.Region.Framework.Scenes
 {

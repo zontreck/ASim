@@ -133,7 +133,7 @@ namespace ZSim.Data
         /// to avoid problems with proc definitions in MySQL, we must use
         /// MySqlScript class instead of just DbCommand. We don't want to bring
         /// MySQL references here, so instead define a MySQLMigration class
-        /// in OpenSim.Data.MySQL
+        /// in ZSim.Data.MySQL
         /// </summary>
         /// <param name="conn"></param>
         /// <param name="script">Array of strings, one-per-batch (often just one)</param>

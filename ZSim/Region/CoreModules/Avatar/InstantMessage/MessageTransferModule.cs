@@ -38,8 +38,8 @@ using ZSim.Framework;
 using ZSim.Framework.Servers;
 using ZSim.Region.Framework.Interfaces;
 using ZSim.Region.Framework.Scenes;
-using GridRegion = OpenSim.Services.Interfaces.GridRegion;
-using PresenceInfo = OpenSim.Services.Interfaces.PresenceInfo;
+using GridRegion = ZSim.Services.Interfaces.GridRegion;
+using PresenceInfo = ZSim.Services.Interfaces.PresenceInfo;
 using ZSim.Services.Interfaces;
 
 namespace ZSim.Region.CoreModules.Avatar.InstantMessage

@@ -33,7 +33,7 @@ using Mono.Addins;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 
-[assembly : AssemblyTitle("OpenSim.ApplicationPlugins.LoadRegions")]
+[assembly : AssemblyTitle("ZSim.ApplicationPlugins.LoadRegions")]
 [assembly : AssemblyDescription("")]
 [assembly : AssemblyConfiguration("")]
 [assembly : AssemblyCompany("http://opensimulator.org")]
@@ -62,7 +62,7 @@ using Mono.Addins;
 // You can specify all the values or you can default the Build and Revision Numbers
 // by using the '*' as shown below:
 
-[assembly : AssemblyVersion(OpenSim.VersionInfo.AssemblyVersionNumber)]
+[assembly : AssemblyVersion(ZSim.VersionInfo.AssemblyVersionNumber)]
 
-[assembly: Addin("OpenSim.ApplicationPlugins.LoadRegions", OpenSim.VersionInfo.VersionNumber)]
-[assembly: AddinDependency("OpenSim", OpenSim.VersionInfo.VersionNumber)]
+[assembly: Addin("ZSim.ApplicationPlugins.LoadRegions", ZSim.VersionInfo.VersionNumber)]
+[assembly: AddinDependency("OpenSim", ZSim.VersionInfo.VersionNumber)]

@@ -476,7 +476,7 @@ namespace ZSim.Region.ScriptEngine.Shared.Instance
                 Object[] args =
                     new Object[] { tag.InnerText };
 
-                assembly = itemType+", OpenSim.Region.ScriptEngine.Shared";
+                assembly = itemType+", ZSim.Region.ScriptEngine.Shared";
                 itemT = Type.GetType(assembly);
                 if (itemT == null)
                     return null;

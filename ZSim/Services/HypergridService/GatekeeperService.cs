@@ -33,7 +33,7 @@ using System.Text.RegularExpressions;
 
 using ZSim.Framework;
 using ZSim.Services.Interfaces;
-using GridRegion = OpenSim.Services.Interfaces.GridRegion;
+using GridRegion = ZSim.Services.Interfaces.GridRegion;
 using ZSim.Server.Base;
 using ZSim.Services.Connectors.InstantMessage;
 using ZSim.Services.Connectors.Hypergrid;

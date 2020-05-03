@@ -73,9 +73,9 @@ namespace ZSim.Region.CoreModules.Avatar.Friends.Tests
             // Not strictly necessary since FriendsModule assumes it is the default (!)
             config.Configs["Modules"].Set("FriendsModule", "FriendsModule");
             config.AddConfig("Friends");
-            config.Configs["Friends"].Set("Connector", "OpenSim.Services.FriendsService.dll");
+            config.Configs["Friends"].Set("Connector", "ZSim.Services.FriendsService.dll");
             config.AddConfig("FriendsService");
-            config.Configs["FriendsService"].Set("StorageProvider", "OpenSim.Data.Null.dll");
+            config.Configs["FriendsService"].Set("StorageProvider", "ZSim.Data.Null.dll");
 
             m_scene = new SceneHelpers().SetupScene();
             m_fm = new FriendsModule();

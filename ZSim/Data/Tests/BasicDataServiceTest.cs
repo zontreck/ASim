@@ -46,7 +46,7 @@ namespace ZSim.Data.Tests
     /// </summary>
     /// <remarks>
     /// FIXME: Should extend OpenSimTestCase but compile on mono 2.4.3 currently fails with
-    /// AssetTests`2 : System.MemberAccessException : Cannot create an instance of OpenSim.Data.Tests.AssetTests`2[TConn,TAssetData] because Type.ContainsGenericParameters is true.
+    /// AssetTests`2 : System.MemberAccessException : Cannot create an instance of ZSim.Data.Tests.AssetTests`2[TConn,TAssetData] because Type.ContainsGenericParameters is true.
     /// and similar on EstateTests, InventoryTests and RegionTests.
     /// Runs fine with mono 2.10.8.1, so easiest thing is to wait until min Mono version uplifts.
     /// </remarks>
@@ -76,7 +76,7 @@ namespace ZSim.Data.Tests
             m_connStr = !String.IsNullOrEmpty(conn) ? conn : DefaultTestConns.Get(typeof(TConn));
 
             m_log = LogManager.GetLogger(this.GetType());
-            OpenSim.Tests.Common.TestLogging.LogToConsole();    // TODO: Is that right?
+            ZSim.Tests.Common.TestLogging.LogToConsole();    // TODO: Is that right?
         }
 
         /// <summary>

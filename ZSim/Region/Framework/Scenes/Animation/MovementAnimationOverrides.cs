@@ -41,7 +41,7 @@ using ZSim.Region.Framework.Interfaces;
 using ZSim.Region.Framework.Scenes.Animation;
 using ZSim.Region.Framework.Scenes.Types;
 using ZSim.Region.PhysicsModules.SharedBase;
-using GridRegion = OpenSim.Services.Interfaces.GridRegion;
+using GridRegion = ZSim.Services.Interfaces.GridRegion;
 using ZSim.Services.Interfaces;
 
 namespace ZSim.Region.Framework.Scenes

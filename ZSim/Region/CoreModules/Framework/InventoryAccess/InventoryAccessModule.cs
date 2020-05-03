@@ -41,13 +41,13 @@ using ZSim.Region.Framework.Scenes;
 using ZSim.Region.Framework.Scenes.Serialization;
 using ZSim.Services.Interfaces;
 
-using GridRegion = OpenSim.Services.Interfaces.GridRegion;
+using GridRegion = ZSim.Services.Interfaces.GridRegion;
 
 using OpenMetaverse;
 using log4net;
 using Nini.Config;
 using Mono.Addins;
-using PermissionMask = OpenSim.Framework.PermissionMask;
+using PermissionMask = ZSim.Framework.PermissionMask;
 
 namespace ZSim.Region.CoreModules.Framework.InventoryAccess
 {

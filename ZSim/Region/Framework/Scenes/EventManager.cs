@@ -33,8 +33,8 @@ using OpenMetaverse;
 using ZSim.Framework;
 using ZSim.Framework.Client;
 using ZSim.Region.Framework.Interfaces;
-using Caps = OpenSim.Framework.Capabilities.Caps;
-using GridRegion = OpenSim.Services.Interfaces.GridRegion;
+using Caps = ZSim.Framework.Capabilities.Caps;
+using GridRegion = ZSim.Services.Interfaces.GridRegion;
 
 namespace ZSim.Region.Framework.Scenes
 {
@@ -51,7 +51,7 @@ namespace ZSim.Region.Framework.Scenes
         /// Triggered on each sim frame.
         /// </summary>
         /// <remarks>
-        /// This gets triggered in <see cref="OpenSim.Region.Framework.Scenes.Scene.Update"/>
+        /// This gets triggered in <see cref="ZSim.Region.Framework.Scenes.Scene.Update"/>
         /// Core uses it for things like Sun, Wind & Clouds
         /// The MRM module also uses it.
         /// </remarks>
@@ -63,8 +63,8 @@ namespace ZSim.Region.Framework.Scenes
         /// Trigerred when an agent moves.
         /// </summary>
         /// <remarks>
-        /// This gets triggered in <see cref="OpenSim.Region.Framework.Scenes.ScenePresence.HandleAgentUpdate"/>
-        /// prior to <see cref="OpenSim.Region.Framework.Scenes.ScenePresence.TriggerScenePresenceUpdated"/>
+        /// This gets triggered in <see cref="ZSim.Region.Framework.Scenes.ScenePresence.HandleAgentUpdate"/>
+        /// prior to <see cref="ZSim.Region.Framework.Scenes.ScenePresence.TriggerScenePresenceUpdated"/>
         /// </remarks>
         public event ClientMovement OnClientMovement;
 
@@ -74,7 +74,7 @@ namespace ZSim.Region.Framework.Scenes
         /// Triggered if the terrain has been edited
         /// </summary>
         /// <remarks>
-        /// This gets triggered in <see cref="OpenSim.Region.CoreModules.World.Terrain.CheckForTerrainUpdates"/>
+        /// This gets triggered in <see cref="ZSim.Region.CoreModules.World.Terrain.CheckForTerrainUpdates"/>
         /// after it determines that an update has been made.
         /// </remarks>
         public event OnTerrainTaintedDelegate OnTerrainTainted;
@@ -86,7 +86,7 @@ namespace ZSim.Region.Framework.Scenes
         /// Triggered if the terrain has been edited
         /// </summary>
         /// <remarks>
-        /// This gets triggered in <see cref="OpenSim.Region.Framework.Scenes.Scene.UpdateTerrain"/>
+        /// This gets triggered in <see cref="ZSim.Region.Framework.Scenes.Scene.UpdateTerrain"/>
         /// but is used by core solely to update the physics engine.
         /// </remarks>
         public event OnTerrainTickDelegate OnTerrainTick;
@@ -102,7 +102,7 @@ namespace ZSim.Region.Framework.Scenes
         /// Triggered when a region is backed up/persisted to storage
         /// </summary>
         /// <remarks>
-        /// This gets triggered in <see cref="OpenSim.Region.Framework.Scenes.Scene.Backup"/>
+        /// This gets triggered in <see cref="ZSim.Region.Framework.Scenes.Scene.Backup"/>
         /// and is fired before the persistence occurs.
         /// </remarks>
         public event OnBackupDelegate OnBackup;
@@ -114,9 +114,9 @@ namespace ZSim.Region.Framework.Scenes
         /// </summary>
         /// <remarks>
         /// This gets triggered in <see cref="TriggerOnNewClient"/>,
-        /// which checks if an instance of <see cref="OpenSim.Framework.IClientAPI"/>
-        /// also implements <see cref="OpenSim.Framework.Client.IClientCore"/> and as such,
-        /// is not triggered by <see cref="OpenSim.Region.OptionalModules.World.NPC">NPCs</see>.
+        /// which checks if an instance of <see cref="ZSim.Framework.IClientAPI"/>
+        /// also implements <see cref="ZSim.Framework.Client.IClientCore"/> and as such,
+        /// is not triggered by <see cref="ZSim.Region.OptionalModules.World.NPC">NPCs</see>.
         /// </remarks>
         public event OnClientConnectCoreDelegate OnClientConnect;
 
@@ -150,8 +150,8 @@ namespace ZSim.Region.Framework.Scenes
         /// Triggered when a new presence is added to the scene
         /// </summary>
         /// <remarks>
-        /// Triggered in <see cref="OpenSim.Region.Framework.Scenes.Scene.AddNewAgent"/> which is used by both
-        /// <see cref="OpenSim.Framework.PresenceType.User">users</see> and <see cref="OpenSim.Framework.PresenceType.Npc">NPCs</see>
+        /// Triggered in <see cref="ZSim.Region.Framework.Scenes.Scene.AddNewAgent"/> which is used by both
+        /// <see cref="ZSim.Framework.PresenceType.User">users</see> and <see cref="ZSim.Framework.PresenceType.Npc">NPCs</see>
         /// </remarks>
         public event OnNewPresenceDelegate OnNewPresence;
 
@@ -161,8 +161,8 @@ namespace ZSim.Region.Framework.Scenes
         /// Triggered when a presence is removed from the scene
         /// </summary>
         /// <remarks>
-        /// Triggered in <see cref="OpenSim.Region.Framework.Scenes.Scene.AddNewAgent"/> which is used by both
-        /// <see cref="OpenSim.Framework.PresenceType.User">users</see> and <see cref="OpenSim.Framework.PresenceType.Npc">NPCs</see>
+        /// Triggered in <see cref="ZSim.Region.Framework.Scenes.Scene.AddNewAgent"/> which is used by both
+        /// <see cref="ZSim.Framework.PresenceType.User">users</see> and <see cref="ZSim.Framework.PresenceType.Npc">NPCs</see>
         ///
         /// Triggered under per-agent lock.  So if you want to perform any long-running operations, please
         /// do this on a separate thread.
@@ -177,13 +177,13 @@ namespace ZSim.Region.Framework.Scenes
         /// </summary>
         /// <remarks>
         /// Triggered by <see cref="TriggerParcelPrimCountUpdate"/> in
-        /// <see cref="OpenSim.OpenSimBase.CreateRegion"/>,
-        /// <see cref="OpenSim.Region.CoreModules.World.Land.LandManagementModule.EventManagerOnRequestParcelPrimCountUpdate"/>,
-        /// <see cref="OpenSim.Region.CoreModules.World.Land.LandManagementModule.ClientOnParcelObjectOwnerRequest"/>,
-        /// <see cref="OpenSim.Region.CoreModules.World.Land.LandObject.GetPrimsFree"/>,
-        /// <see cref="OpenSim.Region.CoreModules.World.Land.LandObject.UpdateLandSold"/>,
-        /// <see cref="OpenSim.Region.CoreModules.World.Land.LandObject.DeedToGroup"/>,
-        /// <see cref="OpenSim.Region.CoreModules.World.Land.LandObject.SendLandUpdateToClient"/>
+        /// <see cref="ZSim.OpenSimBase.CreateRegion"/>,
+        /// <see cref="ZSim.Region.CoreModules.World.Land.LandManagementModule.EventManagerOnRequestParcelPrimCountUpdate"/>,
+        /// <see cref="ZSim.Region.CoreModules.World.Land.LandManagementModule.ClientOnParcelObjectOwnerRequest"/>,
+        /// <see cref="ZSim.Region.CoreModules.World.Land.LandObject.GetPrimsFree"/>,
+        /// <see cref="ZSim.Region.CoreModules.World.Land.LandObject.UpdateLandSold"/>,
+        /// <see cref="ZSim.Region.CoreModules.World.Land.LandObject.DeedToGroup"/>,
+        /// <see cref="ZSim.Region.CoreModules.World.Land.LandObject.SendLandUpdateToClient"/>
         /// </remarks>
         public event OnParcelPrimCountUpdateDelegate OnParcelPrimCountUpdate;
 
@@ -195,27 +195,27 @@ namespace ZSim.Region.Framework.Scenes
         /// </summary>
         /// <remarks>
         /// Triggered by <see cref="TriggerParcelPrimCountAdd"/> in
-        /// <see cref="OpenSim.Region.CoreModules.World.Land.LandManagementModule.EventManagerOnParcelPrimCountUpdate"/>
+        /// <see cref="ZSim.Region.CoreModules.World.Land.LandManagementModule.EventManagerOnParcelPrimCountUpdate"/>
         /// </remarks>
         public event OnParcelPrimCountAddDelegate OnParcelPrimCountAdd;
 
         public delegate void OnPluginConsoleDelegate(string[] args);
 
         /// <summary>
-        /// Triggered after <see cref="OpenSim.IApplicationPlugin.PostInitialise"/>
-        /// has been called for all <see cref="OpenSim.IApplicationPlugin"/>
-        /// loaded via <see cref="OpenSim.OpenSimBase.LoadPlugins"/>.
+        /// Triggered after <see cref="ZSim.IApplicationPlugin.PostInitialise"/>
+        /// has been called for all <see cref="ZSim.IApplicationPlugin"/>
+        /// loaded via <see cref="ZSim.OpenSimBase.LoadPlugins"/>.
         /// Handlers for this event are typically used to parse the arguments
         /// from <see cref="OnPluginConsoleDelegate"/> in order to process or
-        /// filter the arguments and pass them onto <see cref="OpenSim.Region.CoreModules.Framework.InterfaceCommander.Commander.ProcessConsoleCommand"/>
+        /// filter the arguments and pass them onto <see cref="ZSim.Region.CoreModules.Framework.InterfaceCommander.Commander.ProcessConsoleCommand"/>
         /// </summary>
         /// <remarks>
         /// Triggered by <see cref="TriggerOnPluginConsole"/> in
         /// <see cref="Scene.SendCommandToPlugins"/> via
         /// <see cref="SceneManager.SendCommandToPluginModules"/> via
-        /// <see cref="OpenSim.OpenSimBase.HandleCommanderCommand"/> via
-        /// <see cref="OpenSim.OpenSimBase.AddPluginCommands"/> via
-        /// <see cref="OpenSim.OpenSimBase.StartupSpecific"/>
+        /// <see cref="ZSim.OpenSimBase.HandleCommanderCommand"/> via
+        /// <see cref="ZSim.OpenSimBase.AddPluginCommands"/> via
+        /// <see cref="ZSim.OpenSimBase.StartupSpecific"/>
         /// </remarks>
         public event OnPluginConsoleDelegate OnPluginConsole;
 
@@ -250,8 +250,8 @@ namespace ZSim.Region.Framework.Scenes
         /// </summary>
         /// <remarks>
         /// Triggered by <see cref="TriggerOnParcelPropertiesUpdateRequest"/> in
-        /// <see cref="OpenSim.Region.CoreModules.World.Land.LandManagementModule.ClientOnParcelPropertiesUpdateRequest"/>,
-        /// <see cref="OpenSim.Region.CoreModules.World.Land.LandManagementModule.ProcessPropertiesUpdate"/>
+        /// <see cref="ZSim.Region.CoreModules.World.Land.LandManagementModule.ClientOnParcelPropertiesUpdateRequest"/>,
+        /// <see cref="ZSim.Region.CoreModules.World.Land.LandManagementModule.ProcessPropertiesUpdate"/>
         /// </remarks>
         public event ParcelPropertiesUpdateRequest OnParcelPropertiesUpdateRequest;
 
@@ -270,7 +270,7 @@ namespace ZSim.Region.Framework.Scenes
         /// <remarks>
         /// The originalID is the local ID of the part that was actually touched.  The localID itself is always that of
         /// the root part.
-        /// Triggerd in response to <see cref="OpenSim.Framework.IClientAPI.OnGrabObject"/>
+        /// Triggerd in response to <see cref="ZSim.Framework.IClientAPI.OnGrabObject"/>
         /// via <see cref="TriggerObjectGrab"/>
         /// in <see cref="Scene.ProcessObjectGrab"/>
         /// </remarks>
@@ -281,7 +281,7 @@ namespace ZSim.Region.Framework.Scenes
         /// Triggered when an object is being touched/grabbed continuously.
         /// </summary>
         /// <remarks>
-        /// Triggered in response to <see cref="OpenSim.Framework.IClientAPI.OnGrabUpdate"/>
+        /// Triggered in response to <see cref="ZSim.Framework.IClientAPI.OnGrabUpdate"/>
         /// via <see cref="TriggerObjectGrabbing"/>
         /// in <see cref="Scene.ProcessObjectGrabUpdate"/>
         /// </remarks>
@@ -291,7 +291,7 @@ namespace ZSim.Region.Framework.Scenes
         /// Triggered when an object stops being touched/grabbed.
         /// </summary>
         /// <remarks>
-        /// Triggered in response to <see cref="OpenSim.Framework.IClientAPI.OnDeGrabObject"/>
+        /// Triggered in response to <see cref="ZSim.Framework.IClientAPI.OnDeGrabObject"/>
         /// via <see cref="TriggerObjectDeGrab"/>
         /// in <see cref="Scene.ProcessObjectDeGrab"/>
         /// </remarks>
@@ -303,8 +303,8 @@ namespace ZSim.Region.Framework.Scenes
         /// <remarks>
         /// Triggered by <see cref="TriggerScriptReset"/>
         /// in <see cref="Scene.ProcessScriptReset"/>
-        /// via <see cref="OpenSim.Framework.IClientAPI.OnScriptReset"/>
-        /// via <see cref="OpenSim.Region.ClientStack.LindenUDP.LLClientView.HandleScriptReset"/>
+        /// via <see cref="ZSim.Framework.IClientAPI.OnScriptReset"/>
+        /// via <see cref="ZSim.Region.ClientStack.LindenUDP.LLClientView.HandleScriptReset"/>
         /// </remarks>
         public event ScriptResetDelegate OnScriptReset;
 
@@ -343,8 +343,8 @@ namespace ZSim.Region.Framework.Scenes
         /// <remarks>
         /// Triggered by <see cref="TriggerStartScript"/>
         /// in <see cref="Scene.SetScriptRunning"/>
-        /// via <see cref="OpenSim.Framework.IClientAPI.OnSetScriptRunning"/>,
-        /// via <see cref="OpenSim.Region.ClientStack.LindenUDP.HandleSetScriptRunning"/>
+        /// via <see cref="ZSim.Framework.IClientAPI.OnSetScriptRunning"/>,
+        /// via <see cref="ZSim.Region.ClientStack.LindenUDP.HandleSetScriptRunning"/>
         /// </remarks>
         public event StartScript OnStartScript;
 
@@ -383,8 +383,8 @@ namespace ZSim.Region.Framework.Scenes
         /// in <see cref="SceneObjectGroup.OnGrabGroup"/>
         /// via <see cref="SceneObjectGroup.ObjectGrabHandler"/>
         /// via <see cref="Scene.ProcessObjectGrab"/>
-        /// via <see cref="OpenSim.Framework.IClientAPI.OnGrabObject"/>
-        /// via <see cref="OpenSim.Region.ClientStack.LindenUDP.LLClientView.HandleObjectGrab"/>
+        /// via <see cref="ZSim.Framework.IClientAPI.OnGrabObject"/>
+        /// via <see cref="ZSim.Region.ClientStack.LindenUDP.LLClientView.HandleObjectGrab"/>
         /// </remarks>
         public event SceneGroupGrabed OnSceneGroupGrab;
 
@@ -397,8 +397,8 @@ namespace ZSim.Region.Framework.Scenes
         /// Triggered by <see cref="TriggerGroupSpinStart"/>
         /// in <see cref="SceneObjectGroup.SpinStart"/>
         /// via <see cref="SceneGraph.SpinStart"/>
-        /// via <see cref="OpenSim.Framework.IClientAPI.OnSpinStart"/>
-        /// via <see cref="OpenSim.Region.ClientStack.LindenUDP.LLClientView.HandleObjectSpinStart"/>
+        /// via <see cref="ZSim.Framework.IClientAPI.OnSpinStart"/>
+        /// via <see cref="ZSim.Region.ClientStack.LindenUDP.LLClientView.HandleObjectSpinStart"/>
         /// </remarks>
         public event SceneGroupSpinStarted OnSceneGroupSpinStart;
 
@@ -411,8 +411,8 @@ namespace ZSim.Region.Framework.Scenes
         /// Triggered by <see cref="TriggerGroupSpin"/>
         /// in <see cref="SceneObjectGroup.SpinMovement"/>
         /// via <see cref="SceneGraph.SpinObject"/>
-        /// via <see cref="OpenSim.Framework.IClientAPI.OnSpinUpdate"/>
-        /// via <see cref="OpenSim.Region.ClientStack.LindenUDP.LLClientView.HandleObjectSpinUpdate"/>
+        /// via <see cref="ZSim.Framework.IClientAPI.OnSpinUpdate"/>
+        /// via <see cref="ZSim.Region.ClientStack.LindenUDP.LLClientView.HandleObjectSpinUpdate"/>
         /// </remarks>
         public event SceneGroupSpun OnSceneGroupSpin;
 
@@ -498,9 +498,9 @@ namespace ZSim.Region.Framework.Scenes
         /// Triggered by <see cref="TriggerUpdateScript"/>
         /// in <see cref="Scene.CapsUpdateTaskInventoryScriptAsset"/>
         /// via <see cref="Scene.CapsUpdateTaskInventoryScriptAsset"/>
-        /// via <see cref="OpenSim.Region.ClientStack.Linden.BunchOfCaps.TaskScriptUpdated"/>
-        /// via <see cref="OpenSim.Region.ClientStack.Linden.TaskInventoryScriptUpdater.OnUpLoad"/>
-        /// via <see cref="OpenSim.Region.ClientStack.Linden.TaskInventoryScriptUpdater.uploaderCaps"/>
+        /// via <see cref="ZSim.Region.ClientStack.Linden.BunchOfCaps.TaskScriptUpdated"/>
+        /// via <see cref="ZSim.Region.ClientStack.Linden.TaskInventoryScriptUpdater.OnUpLoad"/>
+        /// via <see cref="ZSim.Region.ClientStack.Linden.TaskInventoryScriptUpdater.uploaderCaps"/>
         /// </remarks>
         public event UpdateScript OnUpdateScript;
 
@@ -535,7 +535,7 @@ namespace ZSim.Region.Framework.Scenes
         /// This event is sent to a script to tell it that some property changed on
         /// the object the script is in. See http://lslwiki.net/lslwiki/wakka.php?wakka=changed .
         /// Triggered by <see cref="TriggerOnScriptChangedEvent"/>
-        /// in <see cref="OpenSim.Region.CoreModules.Framework.EntityTransfer.EntityTransferModule.TeleportAgentWithinRegion"/>,
+        /// in <see cref="ZSim.Region.CoreModules.Framework.EntityTransfer.EntityTransferModule.TeleportAgentWithinRegion"/>,
         /// <see cref="SceneObjectPart.TriggerScriptChangedEvent"/>
         /// </remarks>
         public event ScriptChangedEvent OnScriptChangedEvent;
@@ -550,8 +550,8 @@ namespace ZSim.Region.Framework.Scenes
         /// Triggered by <see cref="TriggerControlEvent"/>
         /// in <see cref="ScenePresence.SendControlsToScripts"/>
         /// via <see cref="ScenePresence.HandleAgentUpdate"/>
-        /// via <see cref="OpenSim.Framework.IClientAPI.OnAgentUpdate"/>
-        /// via <see cref="OpenSim.Region.ClientStack.LindenUDP.LLClientView.HandleAgentUpdate"/>
+        /// via <see cref="ZSim.Framework.IClientAPI.OnAgentUpdate"/>
+        /// via <see cref="ZSim.Region.ClientStack.LindenUDP.LLClientView.HandleAgentUpdate"/>
         /// </remarks>
         public event ScriptControlEvent OnScriptControlEvent;
 
@@ -635,8 +635,8 @@ namespace ZSim.Region.Framework.Scenes
         /// Triggered by <see cref="TriggerScriptCollidingStart"/>
         /// in <see cref="SceneObjectPart.SendCollisionEvent"/>
         /// via <see cref="SceneObjectPart.PhysicsCollision"/>
-        /// via <see cref="OpenSim.Region.PhysicsModule.SharedBase.PhysicsActor.OnCollisionUpdate"/>
-        /// via <see cref="OpenSim.Region.PhysicsModule.SharedBase.PhysicsActor.SendCollisionUpdate"/>
+        /// via <see cref="ZSim.Region.PhysicsModule.SharedBase.PhysicsActor.OnCollisionUpdate"/>
+        /// via <see cref="ZSim.Region.PhysicsModule.SharedBase.PhysicsActor.SendCollisionUpdate"/>
         /// </remarks>
         public event ScriptColliding OnScriptColliderStart;
 
@@ -649,8 +649,8 @@ namespace ZSim.Region.Framework.Scenes
         /// Triggered by <see cref="TriggerScriptColliding"/>
         /// in <see cref="SceneObjectPart.SendCollisionEvent"/>
         /// via <see cref="SceneObjectPart.PhysicsCollision"/>
-        /// via <see cref="OpenSim.Region.PhysicsModule.SharedBase.PhysicsActor.OnCollisionUpdate"/>
-        /// via <see cref="OpenSim.Region.PhysicsModule.SharedBase.PhysicsActor.SendCollisionUpdate"/>
+        /// via <see cref="ZSim.Region.PhysicsModule.SharedBase.PhysicsActor.OnCollisionUpdate"/>
+        /// via <see cref="ZSim.Region.PhysicsModule.SharedBase.PhysicsActor.SendCollisionUpdate"/>
         /// </remarks>
         public event ScriptColliding OnScriptColliding;
 
@@ -662,8 +662,8 @@ namespace ZSim.Region.Framework.Scenes
         /// Triggered by <see cref="TriggerScriptCollidingEnd"/>
         /// in <see cref="SceneObjectPart.SendCollisionEvent"/>
         /// via <see cref="SceneObjectPart.PhysicsCollision"/>
-        /// via <see cref="OpenSim.Region.PhysicsModule.SharedBase.PhysicsActor.OnCollisionUpdate"/>
-        /// via <see cref="OpenSim.Region.PhysicsModule.SharedBase.PhysicsActor.SendCollisionUpdate"/>
+        /// via <see cref="ZSim.Region.PhysicsModule.SharedBase.PhysicsActor.OnCollisionUpdate"/>
+        /// via <see cref="ZSim.Region.PhysicsModule.SharedBase.PhysicsActor.SendCollisionUpdate"/>
         /// </remarks>
         public event ScriptColliding OnScriptCollidingEnd;
 
@@ -675,8 +675,8 @@ namespace ZSim.Region.Framework.Scenes
         /// Triggered by <see cref="TriggerScriptLandCollidingStart"/>
         /// in <see cref="SceneObjectPart.SendLandCollisionEvent"/>
         /// via <see cref="SceneObjectPart.PhysicsCollision"/>
-        /// via <see cref="OpenSim.Region.PhysicsModule.SharedBase.PhysicsActor.OnCollisionUpdate"/>
-        /// via <see cref="OpenSim.Region.PhysicsModule.SharedBase.PhysicsActor.SendCollisionUpdate"/>
+        /// via <see cref="ZSim.Region.PhysicsModule.SharedBase.PhysicsActor.OnCollisionUpdate"/>
+        /// via <see cref="ZSim.Region.PhysicsModule.SharedBase.PhysicsActor.SendCollisionUpdate"/>
         /// </remarks>
         public event ScriptColliding OnScriptLandColliderStart;
 
@@ -688,8 +688,8 @@ namespace ZSim.Region.Framework.Scenes
         /// Triggered by <see cref="TriggerScriptLandColliding"/>
         /// in <see cref="SceneObjectPart.SendLandCollisionEvent"/>
         /// via <see cref="SceneObjectPart.PhysicsCollision"/>
-        /// via <see cref="OpenSim.Region.PhysicsModule.SharedBase.PhysicsActor.OnCollisionUpdate"/>
-        /// via <see cref="OpenSim.Region.PhysicsModule.SharedBase.PhysicsActor.SendCollisionUpdate"/>
+        /// via <see cref="ZSim.Region.PhysicsModule.SharedBase.PhysicsActor.OnCollisionUpdate"/>
+        /// via <see cref="ZSim.Region.PhysicsModule.SharedBase.PhysicsActor.SendCollisionUpdate"/>
         /// </remarks>
         public event ScriptColliding OnScriptLandColliding;
 
@@ -701,8 +701,8 @@ namespace ZSim.Region.Framework.Scenes
         /// Triggered by <see cref="TriggerScriptLandCollidingEnd"/>
         /// in <see cref="SceneObjectPart.SendLandCollisionEvent"/>
         /// via <see cref="SceneObjectPart.PhysicsCollision"/>
-        /// via <see cref="OpenSim.Region.PhysicsModule.SharedBase.PhysicsActor.OnCollisionUpdate"/>
-        /// via <see cref="OpenSim.Region.PhysicsModule.SharedBase.PhysicsActor.SendCollisionUpdate"/>
+        /// via <see cref="ZSim.Region.PhysicsModule.SharedBase.PhysicsActor.OnCollisionUpdate"/>
+        /// via <see cref="ZSim.Region.PhysicsModule.SharedBase.PhysicsActor.SendCollisionUpdate"/>
         /// </remarks>
         public event ScriptColliding OnScriptLandColliderEnd;
 
@@ -714,9 +714,9 @@ namespace ZSim.Region.Framework.Scenes
         /// <remarks>
         /// Triggered by <see cref="TriggerOnMakeChildAgent"/>
         /// in <see cref="ScenePresence.MakeChildAgent"/>
-        /// via <see cref="OpenSim.Region.CoreModules.Framework.EntityTransfer.EntityTransferModule.CrossAgentToNewRegionAsync"/>,
-        /// <see cref="OpenSim.Region.CoreModules.Framework.EntityTransfer.EntityTransferModule.DoTeleport"/>,
-        /// <see cref="OpenSim.Region.CoreModules.InterGrid.KillAUser.ShutdownNoLogout"/>
+        /// via <see cref="ZSim.Region.CoreModules.Framework.EntityTransfer.EntityTransferModule.CrossAgentToNewRegionAsync"/>,
+        /// <see cref="ZSim.Region.CoreModules.Framework.EntityTransfer.EntityTransferModule.DoTeleport"/>,
+        /// <see cref="ZSim.Region.CoreModules.InterGrid.KillAUser.ShutdownNoLogout"/>
         /// </remarks>
         public event OnMakeChildAgentDelegate OnMakeChildAgent;
 
@@ -850,8 +850,8 @@ namespace ZSim.Region.Framework.Scenes
         /// </summary>
         /// <remarks>
         /// Triggered by <see cref="TriggerParcelPrimCountTainted"/> in
-        /// <see cref="OpenSim.Region.CoreModules.Avatar.Attachments.AttachmentsModule.DetachSingleAttachmentToGround"/>,
-        /// <see cref="OpenSim.Region.CoreModules.Avatar.Attachments.AttachmentsModule.AttachToAgent"/>,
+        /// <see cref="ZSim.Region.CoreModules.Avatar.Attachments.AttachmentsModule.DetachSingleAttachmentToGround"/>,
+        /// <see cref="ZSim.Region.CoreModules.Avatar.Attachments.AttachmentsModule.AttachToAgent"/>,
         /// <see cref="Scene.DeleteSceneObject"/>,
         /// <see cref="Scene.SelectPrim"/>,
         /// <see cref="Scene.DeselectPrim"/>,
@@ -975,7 +975,7 @@ namespace ZSim.Region.Framework.Scenes
         /// <param name="original"></param>
         /// <param name="userExposed">True if the duplicate will immediately be in the scene, false otherwise</param>
         /// <remarks>
-        /// Triggered in <see cref="OpenSim.Region.Framework.Scenes.SceneObjectPart.Copy"/>
+        /// Triggered in <see cref="ZSim.Region.Framework.Scenes.SceneObjectPart.Copy"/>
         /// </remarks>
         public event SceneObjectPartCopyDelegate OnSceneObjectPartCopy;
         public delegate void SceneObjectPartCopyDelegate(SceneObjectPart copy, SceneObjectPart original, bool userExposed);
@@ -1026,9 +1026,9 @@ namespace ZSim.Region.Framework.Scenes
         /// </summary>
         /// <remarks>
         /// Triggered by <see cref="TriggerTeleportStart"/>
-        /// in <see cref="OpenSim.Region.CoreModules.Framework.EntityTransfer.EntityTransferModule.CreateAgent"/>
-        /// and <see cref="OpenSim.Region.CoreModules.Framework.EntityTransfer.HGEntityTransferModule.CreateAgent"/>
-        /// via <see cref="OpenSim.Region.CoreModules.Framework.EntityTransfer.EntityTransferModule.DoTeleport"/>
+        /// in <see cref="ZSim.Region.CoreModules.Framework.EntityTransfer.EntityTransferModule.CreateAgent"/>
+        /// and <see cref="ZSim.Region.CoreModules.Framework.EntityTransfer.HGEntityTransferModule.CreateAgent"/>
+        /// via <see cref="ZSim.Region.CoreModules.Framework.EntityTransfer.EntityTransferModule.DoTeleport"/>
         /// </remarks>
         public event TeleportStart OnTeleportStart;
 
@@ -1039,8 +1039,8 @@ namespace ZSim.Region.Framework.Scenes
         /// </summary>
         /// <remarks>
         /// Triggered by <see cref="TriggerTeleportFail"/>
-        /// in <see cref="OpenSim.Region.CoreModules.Framework.EntityTransfer.EntityTransferModule.Fail"/>
-        /// via <see cref="OpenSim.Region.CoreModules.Framework.EntityTransfer.EntityTransferModule.DoTeleport"/>
+        /// in <see cref="ZSim.Region.CoreModules.Framework.EntityTransfer.EntityTransferModule.Fail"/>
+        /// via <see cref="ZSim.Region.CoreModules.Framework.EntityTransfer.EntityTransferModule.DoTeleport"/>
         /// </remarks>
         public event TeleportFail OnTeleportFail;
 
@@ -1122,10 +1122,10 @@ namespace ZSim.Region.Framework.Scenes
         /// Triggered when an attempt to transfer grid currency occurs
         /// </summary>
         /// <remarks>
-        /// Triggered in <see cref="OpenSim.Region.Framework.Scenes.Scene.ProcessMoneyTransferRequest"/>
-        /// via <see cref="OpenSim.Region.Framework.Scenes.Scene.SubscribeToClientGridEvents"/>
-        /// via <see cref="OpenSim.Region.Framework.Scenes.Scene.SubscribeToClientEvents"/>
-        /// via <see cref="OpenSim.Region.Framework.Scenes.Scene.AddNewAgent"/>
+        /// Triggered in <see cref="ZSim.Region.Framework.Scenes.Scene.ProcessMoneyTransferRequest"/>
+        /// via <see cref="ZSim.Region.Framework.Scenes.Scene.SubscribeToClientGridEvents"/>
+        /// via <see cref="ZSim.Region.Framework.Scenes.Scene.SubscribeToClientEvents"/>
+        /// via <see cref="ZSim.Region.Framework.Scenes.Scene.AddNewAgent"/>
         /// </remarks>
         public event MoneyTransferEvent OnMoneyTransfer;
 
@@ -1138,8 +1138,8 @@ namespace ZSim.Region.Framework.Scenes
         /// Triggered to allow or prevent a real estate transaction
         /// </summary>
         /// <remarks>
-        /// Triggered in <see cref="OpenSim.Region.Framework.Scenes.Scene.ProcessParcelBuy"/>
-        /// <seealso cref="OpenSim.Region.OptionalModules.World.MoneyModule.SampleMoneyModule.ValidateLandBuy"/>
+        /// Triggered in <see cref="ZSim.Region.Framework.Scenes.Scene.ProcessParcelBuy"/>
+        /// <seealso cref="ZSim.Region.OptionalModules.World.MoneyModule.SampleMoneyModule.ValidateLandBuy"/>
         /// </remarks>
         public event LandBuy OnValidateLandBuy;
 

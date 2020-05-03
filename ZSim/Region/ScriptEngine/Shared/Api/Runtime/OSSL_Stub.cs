@@ -35,15 +35,15 @@ using ZSim.Framework;
 using ZSim.Region.Framework.Interfaces;
 using ZSim.Region.ScriptEngine.Interfaces;
 using ZSim.Region.ScriptEngine.Shared.Api.Interfaces;
-using integer = OpenSim.Region.ScriptEngine.Shared.LSL_Types.LSLInteger;
-using vector = OpenSim.Region.ScriptEngine.Shared.LSL_Types.Vector3;
-using rotation = OpenSim.Region.ScriptEngine.Shared.LSL_Types.Quaternion;
-using key = OpenSim.Region.ScriptEngine.Shared.LSL_Types.LSLString;
-using LSL_List = OpenSim.Region.ScriptEngine.Shared.LSL_Types.list;
-using LSL_String = OpenSim.Region.ScriptEngine.Shared.LSL_Types.LSLString;
-using LSL_Key = OpenSim.Region.ScriptEngine.Shared.LSL_Types.LSLString;
-using LSL_Float = OpenSim.Region.ScriptEngine.Shared.LSL_Types.LSLFloat;
-using LSL_Integer = OpenSim.Region.ScriptEngine.Shared.LSL_Types.LSLInteger;
+using integer = ZSim.Region.ScriptEngine.Shared.LSL_Types.LSLInteger;
+using vector = ZSim.Region.ScriptEngine.Shared.LSL_Types.Vector3;
+using rotation = ZSim.Region.ScriptEngine.Shared.LSL_Types.Quaternion;
+using key = ZSim.Region.ScriptEngine.Shared.LSL_Types.LSLString;
+using LSL_List = ZSim.Region.ScriptEngine.Shared.LSL_Types.list;
+using LSL_String = ZSim.Region.ScriptEngine.Shared.LSL_Types.LSLString;
+using LSL_Key = ZSim.Region.ScriptEngine.Shared.LSL_Types.LSLString;
+using LSL_Float = ZSim.Region.ScriptEngine.Shared.LSL_Types.LSLFloat;
+using LSL_Integer = ZSim.Region.ScriptEngine.Shared.LSL_Types.LSLInteger;
 
 namespace ZSim.Region.ScriptEngine.Shared.ScriptBase
 {

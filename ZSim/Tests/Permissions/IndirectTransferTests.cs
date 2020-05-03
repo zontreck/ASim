@@ -32,7 +32,7 @@ using OpenMetaverse;
 using ZSim.Framework;
 using ZSim.Region.Framework.Scenes;
 using ZSim.Tests.Common;
-using PermissionMask = OpenSim.Framework.PermissionMask;
+using PermissionMask = ZSim.Framework.PermissionMask;
 
 namespace ZSim.Tests.Permissions
 {

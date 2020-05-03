@@ -39,7 +39,7 @@ using ZSim.Region.Framework.Scenes;
 using ZSim.Region.PhysicsModules.SharedBase;
 using ZSim.Services.Interfaces;
 
-using GridRegion = OpenSim.Services.Interfaces.GridRegion;
+using GridRegion = ZSim.Services.Interfaces.GridRegion;
 
 using OpenMetaverse;
 using log4net;
@@ -1432,7 +1432,7 @@ namespace ZSim.Region.CoreModules.Framework.EntityTransfer
                 return false;
             }
 
-            //OpenSim.Services.Interfaces.PresenceInfo pinfo = Scene.PresenceService.GetAgent(client.SessionId);
+            //ZSim.Services.Interfaces.PresenceInfo pinfo = Scene.PresenceService.GetAgent(client.SessionId);
             GridUserInfo uinfo = Scene.GridUserService.GetGridUserInfo(id.ToString());
             if(uinfo == null)
             {
@@ -2044,10 +2044,10 @@ namespace ZSim.Region.CoreModules.Framework.EntityTransfer
 
             foreach (GridRegion r in fullneighbours)
             {
-                OpenSim.Framework.RegionFlags? regionFlags = r.RegionFlags;
+                ZSim.Framework.RegionFlags? regionFlags = r.RegionFlags;
                 if (regionFlags != null)
                 {
-                    if ((regionFlags & OpenSim.Framework.RegionFlags.RegionOnline) == 0)
+                    if ((regionFlags & ZSim.Framework.RegionFlags.RegionOnline) == 0)
                         continue;
                 }
 

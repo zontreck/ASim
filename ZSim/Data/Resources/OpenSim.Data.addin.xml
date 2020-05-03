@@ -1,12 +1,12 @@
-<Addin id="OpenSim.Data" isroot="true" version="0.5">
+<Addin id="ZSim.Data" isroot="true" version="0.5">
     <Runtime>
-        <Import assembly="OpenSim.Data.dll" />
-        <Import assembly="OpenSim.Framework.dll" />
+        <Import assembly="ZSim.Data.dll" />
+        <Import assembly="ZSim.Framework.dll" />
     </Runtime>
     <ExtensionPoint path = "/OpenSim/AssetData">
-        <ExtensionNode name="Plugin" type="OpenSim.Framework.PluginExtensionNode" objectType="OpenSim.Data.IAssetDataPlugin" />
+        <ExtensionNode name="Plugin" type="ZSim.Framework.PluginExtensionNode" objectType="ZSim.Data.IAssetDataPlugin" />
     </ExtensionPoint>
     <ExtensionPoint path = "/OpenSim/InventoryData">
-        <ExtensionNode name="Plugin" type="OpenSim.Framework.PluginExtensionNode" objectType="OpenSim.Data.IInventoryDataPlugin" />
+        <ExtensionNode name="Plugin" type="ZSim.Framework.PluginExtensionNode" objectType="ZSim.Data.IInventoryDataPlugin" />
     </ExtensionPoint>
 </Addin>

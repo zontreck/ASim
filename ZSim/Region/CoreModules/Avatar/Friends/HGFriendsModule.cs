@@ -40,9 +40,9 @@ using ZSim.Region.Framework.Interfaces;
 using ZSim.Region.Framework.Scenes;
 using ZSim.Services.Interfaces;
 using ZSim.Services.Connectors.Hypergrid;
-using FriendInfo = OpenSim.Services.Interfaces.FriendInfo;
-using PresenceInfo = OpenSim.Services.Interfaces.PresenceInfo;
-using GridRegion = OpenSim.Services.Interfaces.GridRegion;
+using FriendInfo = ZSim.Services.Interfaces.FriendInfo;
+using PresenceInfo = ZSim.Services.Interfaces.PresenceInfo;
+using GridRegion = ZSim.Services.Interfaces.GridRegion;
 
 namespace ZSim.Region.CoreModules.Avatar.Friends
 {

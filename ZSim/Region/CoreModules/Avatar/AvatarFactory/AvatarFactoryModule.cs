@@ -42,7 +42,7 @@ using ZSim.Region.Framework.Scenes;
 using ZSim.Services.Interfaces;
 
 using Mono.Addins;
-using PermissionMask = OpenSim.Framework.PermissionMask;
+using PermissionMask = ZSim.Framework.PermissionMask;
 
 namespace ZSim.Region.CoreModules.Avatar.AvatarFactory
 {

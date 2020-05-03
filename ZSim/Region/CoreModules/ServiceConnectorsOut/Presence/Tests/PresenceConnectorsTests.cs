@@ -37,7 +37,7 @@ using ZSim.Framework;
 using Nini.Config;
 using ZSim.Region.CoreModules.ServiceConnectorsOut.Presence;
 using ZSim.Region.Framework.Scenes;
-using PresenceInfo = OpenSim.Services.Interfaces.PresenceInfo;
+using PresenceInfo = ZSim.Services.Interfaces.PresenceInfo;
 using ZSim.Tests.Common;
 
 namespace ZSim.Region.CoreModules.ServiceConnectorsOut.Presence.Tests
@@ -55,8 +55,8 @@ namespace ZSim.Region.CoreModules.ServiceConnectorsOut.Presence.Tests
             config.AddConfig("Modules");
             config.AddConfig("PresenceService");
             config.Configs["Modules"].Set("PresenceServices", "LocalPresenceServicesConnector");
-            config.Configs["PresenceService"].Set("LocalServiceModule", "OpenSim.Services.PresenceService.dll:PresenceService");
-            config.Configs["PresenceService"].Set("StorageProvider", "OpenSim.Data.Null.dll");
+            config.Configs["PresenceService"].Set("LocalServiceModule", "ZSim.Services.PresenceService.dll:PresenceService");
+            config.Configs["PresenceService"].Set("StorageProvider", "ZSim.Data.Null.dll");
 
             m_LocalConnector = new LocalPresenceServicesConnector();
             m_LocalConnector.Initialise(config);

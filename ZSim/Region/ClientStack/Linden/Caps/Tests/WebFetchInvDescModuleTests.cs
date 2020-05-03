@@ -113,7 +113,7 @@ namespace ZSim.Region.ClientStack.Linden.Caps.Tests
             SceneHelpers.AddScenePresence(scene, ua.PrincipalID);
 
             TestHttpRequest req = new TestHttpRequest();
-            OpenSim.Framework.Capabilities.Caps userCaps = capsModule.GetCapsForUser(ua.PrincipalID);
+            ZSim.Framework.Capabilities.Caps userCaps = capsModule.GetCapsForUser(ua.PrincipalID);
             PollServiceEventArgs pseArgs;
             userCaps.TryGetPollHandler("FetchInventoryDescendents2", out pseArgs);
             req.UriPath = pseArgs.Url;

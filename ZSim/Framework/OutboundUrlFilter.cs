@@ -62,7 +62,7 @@ namespace ZSim.Framework
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="OpenSim.Framework.OutboundUrlFilter"/> class.
+        /// Initializes a new instance of the <see cref="ZSim.Framework.OutboundUrlFilter"/> class.
         /// </summary>
         /// <param name="name">Name of the filter for logging purposes.</param>
         /// <param name="config">Filter configuration</param>

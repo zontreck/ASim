@@ -54,7 +54,7 @@ namespace ZSim.Server.Handlers.Asset.Test
 
             IConfigSource config = new IniConfigSource();
             config.AddConfig("AssetService");
-            config.Configs["AssetService"].Set("StorageProvider", "OpenSim.Tests.Common.dll");
+            config.Configs["AssetService"].Set("StorageProvider", "ZSim.Tests.Common.dll");
 
             AssetService assetService = new AssetService(config);
 
@@ -89,7 +89,7 @@ namespace ZSim.Server.Handlers.Asset.Test
 
             IConfigSource config = new IniConfigSource();
             config.AddConfig("AssetService");
-            config.Configs["AssetService"].Set("StorageProvider", "OpenSim.Tests.Common.dll");
+            config.Configs["AssetService"].Set("StorageProvider", "ZSim.Tests.Common.dll");
 
             AssetService assetService = new AssetService(config);
 

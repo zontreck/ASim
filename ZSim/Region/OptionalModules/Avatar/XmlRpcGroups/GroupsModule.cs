@@ -47,7 +47,7 @@ namespace ZSim.Region.OptionalModules.Avatar.XmlRpcGroups
     public class GroupsModule : ISharedRegionModule, IGroupsModule
     {
         /// <summary>
-        /// ; To use this module, you must specify the following in your OpenSim.ini
+        /// ; To use this module, you must specify the following in your ZSim.ini
         /// [GROUPS]
         /// Enabled = true
         ///

@@ -36,7 +36,7 @@ using ZSim.Framework;
 using ZSim.Framework.Console;
 
 using ZSim.Region.Framework.Interfaces;
-using GridRegion = OpenSim.Services.Interfaces.GridRegion;
+using GridRegion = ZSim.Services.Interfaces.GridRegion;
 
 namespace ZSim.Region.Framework.Scenes
 {

@@ -385,7 +385,7 @@ namespace ZSim.Region.OptionalModules.Avatar.Concierge
             updatePost.Method = "POST";
             updatePost.ContentType = "text/xml";
             updatePost.ContentLength = payload.Length;
-            updatePost.UserAgent = "OpenSim.Concierge";
+            updatePost.UserAgent = "ZSim.Concierge";
 
 
             BrokerState bs = new BrokerState(uri, payload, updatePost);
@@ -578,7 +578,7 @@ namespace ZSim.Region.OptionalModules.Avatar.Concierge
                     (string)requestData["password"] != m_xmlRpcPassword) throw new Exception("wrong password");
 
                 if (String.IsNullOrEmpty(m_welcomes))
-                    throw new Exception("welcome templates are not enabled, ask your OpenSim operator to set the \"welcomes\" option in the [Concierge] section of OpenSim.ini");
+                    throw new Exception("welcome templates are not enabled, ask your OpenSim operator to set the \"welcomes\" option in the [Concierge] section of ZSim.ini");
 
                 string msg = (string)requestData["welcome"];
                 if (String.IsNullOrEmpty(msg))

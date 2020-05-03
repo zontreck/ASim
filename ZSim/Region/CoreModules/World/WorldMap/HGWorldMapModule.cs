@@ -38,7 +38,7 @@ using ZSim.Region.CoreModules.World.WorldMap;
 using ZSim.Region.Framework.Interfaces;
 using ZSim.Region.Framework.Scenes;
 using ZSim.Services.Interfaces;
-using GridRegion = OpenSim.Services.Interfaces.GridRegion;
+using GridRegion = ZSim.Services.Interfaces.GridRegion;
 
 namespace ZSim.Region.CoreModules.Hypergrid
 {

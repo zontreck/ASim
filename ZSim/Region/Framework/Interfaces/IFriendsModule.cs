@@ -29,7 +29,7 @@ using System.Collections.Generic;
 using OpenMetaverse;
 using ZSim.Framework;
 using ZSim.Region.Framework.Scenes;
-using FriendInfo = OpenSim.Services.Interfaces.FriendInfo;
+using FriendInfo = ZSim.Services.Interfaces.FriendInfo;
 
 namespace ZSim.Region.Framework.Interfaces
 {

@@ -41,7 +41,7 @@ using ZSim.Framework.Servers.HttpServer;
 using ZSim.Framework.Servers;
 using ZSim.Region.Framework.Scenes;
 using ZSim.Services.Interfaces;
-using GridRegion = OpenSim.Services.Interfaces.GridRegion;
+using GridRegion = ZSim.Services.Interfaces.GridRegion;
 using OpenMetaverse;
 
 namespace ZSim.Region.CoreModules.ServiceConnectorsOut.Profile
@@ -104,7 +104,7 @@ namespace ZSim.Region.CoreModules.ServiceConnectorsOut.Profile
             IConfig config = source.Configs[ConfigName];
             if (config == null)
             {
-                //m_log.Error("[LOCAL USERPROFILES SERVICE CONNECTOR]: UserProfilesService missing from OpenSim.ini");
+                //m_log.Error("[LOCAL USERPROFILES SERVICE CONNECTOR]: UserProfilesService missing from ZSim.ini");
                 return;
             }
 

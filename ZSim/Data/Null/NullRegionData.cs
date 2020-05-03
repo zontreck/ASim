@@ -33,7 +33,7 @@ using ZSim.Framework;
 using ZSim.Data;
 using System.Reflection;
 using log4net;
-using RegionFlags = OpenSim.Framework.RegionFlags;
+using RegionFlags = ZSim.Framework.RegionFlags;
 
 namespace ZSim.Data.Null
 {

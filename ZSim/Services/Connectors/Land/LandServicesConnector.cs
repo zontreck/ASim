@@ -37,7 +37,7 @@ using ZSim.Framework;
 using ZSim.Services.Interfaces;
 using OpenMetaverse;
 using Nwc.XmlRpc;
-using GridRegion = OpenSim.Services.Interfaces.GridRegion;
+using GridRegion = ZSim.Services.Interfaces.GridRegion;
 
 namespace ZSim.Services.Connectors
 {

@@ -47,7 +47,7 @@ using GZipStream = Ionic.Zlib.GZipStream;
 using CompressionMode = Ionic.Zlib.CompressionMode;
 using CompressionLevel = Ionic.Zlib.CompressionLevel;
 using ZSim.Framework.Serialization.External;
-using PermissionMask = OpenSim.Framework.PermissionMask;
+using PermissionMask = ZSim.Framework.PermissionMask;
 
 namespace ZSim.Region.CoreModules.World.Archiver
 {

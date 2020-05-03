@@ -54,7 +54,7 @@ namespace ZSim.Server.Handlers.Grid
         /// grid information</param>
         /// <remarks>
         /// GridInfoService uses the [GridInfo] section of the
-        /// standard OpenSim.ini file --- which is not optimal, but
+        /// standard ZSim.ini file --- which is not optimal, but
         /// anything else requires a general redesign of the config
         /// system.
         /// </remarks>

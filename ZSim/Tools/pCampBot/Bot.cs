@@ -41,7 +41,7 @@ using ZSim.Framework;
 using ZSim.Framework.Console;
 using pCampBot.Interfaces;
 using Timer = System.Timers.Timer;
-using PermissionMask = OpenSim.Framework.PermissionMask;
+using PermissionMask = ZSim.Framework.PermissionMask;
 
 namespace pCampBot
 {

@@ -32,7 +32,7 @@ using OpenMetaverse;
 using OpenMetaverse.StructuredData;
 using ZSim.Framework;
 using ZSim.Tests.Common;
-using Animation = OpenSim.Framework.Animation;
+using Animation = ZSim.Framework.Animation;
 
 namespace ZSim.Framework.Tests
 {

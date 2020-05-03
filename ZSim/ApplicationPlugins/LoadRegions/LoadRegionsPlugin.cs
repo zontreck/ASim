@@ -77,7 +77,7 @@ namespace ZSim.ApplicationPlugins.LoadRegions
         public void Initialise(OpenSimBase openSim)
         {
             m_openSim = openSim;
-            m_openSim.ApplicationRegistry.RegisterInterface<IRegionCreator>(this);
+            m_ZSim.ApplicationRegistry.RegisterInterface<IRegionCreator>(this);
         }
 
         public void PostInitialise()
@@ -85,7 +85,7 @@ namespace ZSim.ApplicationPlugins.LoadRegions
             //m_log.Info("[LOADREGIONS]: Load Regions addin being initialised");
 
             IRegionLoader regionLoader;
-            if (m_openSim.ConfigSource.Source.Configs["Startup"].GetString("region_info_source", "filesystem") == "filesystem")
+            if (m_ZSim.ConfigSource.Source.Configs["Startup"].GetString("region_info_source", "filesystem") == "filesystem")
             {
                 m_log.Info("[LOAD REGIONS PLUGIN]: Loading region configurations from filesystem");
                 regionLoader = new RegionLoaderFileSystem();
@@ -96,18 +96,18 @@ namespace ZSim.ApplicationPlugins.LoadRegions
                 regionLoader = new RegionLoaderWebServer();
             }
 
-            regionLoader.SetIniConfigSource(m_openSim.ConfigSource.Source);
+            regionLoader.SetIniConfigSource(m_ZSim.ConfigSource.Source);
             RegionInfo[] regionsToLoad = regionLoader.LoadRegions();
 
             m_log.Info("[LOAD REGIONS PLUGIN]: Loading specific shared modules...");
             //m_log.Info("[LOAD REGIONS PLUGIN]: DynamicTextureModule...");
-            //m_openSim.ModuleLoader.LoadDefaultSharedModule(new DynamicTextureModule());
+            //m_ZSim.ModuleLoader.LoadDefaultSharedModule(new DynamicTextureModule());
             //m_log.Info("[LOAD REGIONS PLUGIN]: LoadImageURLModule...");
-            //m_openSim.ModuleLoader.LoadDefaultSharedModule(new LoadImageURLModule());
+            //m_ZSim.ModuleLoader.LoadDefaultSharedModule(new LoadImageURLModule());
             //m_log.Info("[LOAD REGIONS PLUGIN]: XMLRPCModule...");
-            //m_openSim.ModuleLoader.LoadDefaultSharedModule(new XMLRPCModule());
+            //m_ZSim.ModuleLoader.LoadDefaultSharedModule(new XMLRPCModule());
 //            m_log.Info("[LOADREGIONSPLUGIN]: AssetTransactionModule...");
-//            m_openSim.ModuleLoader.LoadDefaultSharedModule(new AssetTransactionModule());
+//            m_ZSim.ModuleLoader.LoadDefaultSharedModule(new AssetTransactionModule());
             m_log.Info("[LOAD REGIONS PLUGIN]: Done.");
 
             if (!CheckRegionsForSanity(regionsToLoad))
@@ -125,13 +125,13 @@ namespace ZSim.ApplicationPlugins.LoadRegions
                             Thread.CurrentThread.ManagedThreadId.ToString() +
                             ")");
 
-                bool changed = m_openSim.PopulateRegionEstateInfo(regionsToLoad[i]);
+                bool changed = m_ZSim.PopulateRegionEstateInfo(regionsToLoad[i]);
 
-                m_openSim.CreateRegion(regionsToLoad[i], true, out scene);
+                m_ZSim.CreateRegion(regionsToLoad[i], true, out scene);
                 createdScenes.Add(scene);
 
                 if (changed)
-                    m_openSim.EstateDataService.StoreEstateSettings(regionsToLoad[i].EstateSettings);
+                    m_ZSim.EstateDataService.StoreEstateSettings(regionsToLoad[i].EstateSettings);
             }
 
             foreach (IScene scene in createdScenes)

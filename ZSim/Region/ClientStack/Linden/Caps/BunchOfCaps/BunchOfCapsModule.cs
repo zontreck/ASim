@@ -38,10 +38,10 @@ using ZSim.Framework;
 using ZSim.Region.Framework;
 using ZSim.Region.Framework.Interfaces;
 using ZSim.Region.Framework.Scenes;
-using Caps = OpenSim.Framework.Capabilities.Caps;
+using Caps = ZSim.Framework.Capabilities.Caps;
 
-[assembly: Addin("LindenCaps", OpenSim.VersionInfo.VersionNumber)]
-[assembly: AddinDependency("OpenSim.Region.Framework", OpenSim.VersionInfo.VersionNumber)]
+[assembly: Addin("LindenCaps", ZSim.VersionInfo.VersionNumber)]
+[assembly: AddinDependency("ZSim.Region.Framework", ZSim.VersionInfo.VersionNumber)]
 namespace ZSim.Region.ClientStack.Linden
 {
 

@@ -47,7 +47,7 @@ using Nini.Config;
 using log4net;
 using Mono.Addins;
 using OSDMap = OpenMetaverse.StructuredData.OSDMap;
-using TeleportFlags = OpenSim.Framework.Constants.TeleportFlags;
+using TeleportFlags = ZSim.Framework.Constants.TeleportFlags;
 
 namespace ZSim.Region.OptionalModules.ViewerSupport
 {

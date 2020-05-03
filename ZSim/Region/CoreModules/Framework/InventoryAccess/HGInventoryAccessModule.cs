@@ -37,7 +37,7 @@ using ZSim.Services.Connectors.Hypergrid;
 using ZSim.Services.Interfaces;
 using ZSim.Server.Base;
 
-using GridRegion = OpenSim.Services.Interfaces.GridRegion;
+using GridRegion = ZSim.Services.Interfaces.GridRegion;
 
 using OpenMetaverse;
 using log4net;

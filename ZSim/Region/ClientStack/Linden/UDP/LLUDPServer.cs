@@ -44,7 +44,7 @@ using ZSim.Region.Framework.Scenes;
 using ZSim.Region.Framework.Interfaces;
 using OpenMetaverse;
 using Mono.Addins;
-using TokenBucket = OpenSim.Region.ClientStack.LindenUDP.TokenBucket;
+using TokenBucket = ZSim.Region.ClientStack.LindenUDP.TokenBucket;
 
 
 namespace ZSim.Region.ClientStack.LindenUDP

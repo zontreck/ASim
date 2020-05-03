@@ -66,7 +66,7 @@ namespace ZSim.Services.Connectors
             IConfig freeswitchConfig = source.Configs["FreeSwitchVoice"];
             if (freeswitchConfig == null)
             {
-                m_log.Error("[FREESWITCH CONNECTOR]: FreeSwitchVoice missing from OpenSim.ini");
+                m_log.Error("[FREESWITCH CONNECTOR]: FreeSwitchVoice missing from ZSim.ini");
                 throw new Exception("Freeswitch connector init error");
             }
 

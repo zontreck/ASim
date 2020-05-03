@@ -52,10 +52,10 @@ using ZSim.Framework.Servers;
 using ZSim.Framework.Servers.HttpServer;
 using ZSim.Services.Interfaces;
 
-using Caps = OpenSim.Framework.Capabilities.Caps;
+using Caps = ZSim.Framework.Capabilities.Caps;
 using OSDArray = OpenMetaverse.StructuredData.OSDArray;
 using OSDMap = OpenMetaverse.StructuredData.OSDMap;
-using PermissionMask = OpenSim.Framework.PermissionMask;
+using PermissionMask = ZSim.Framework.PermissionMask;
 
 namespace ZSim.Region.ClientStack.Linden
 {

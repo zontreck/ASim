@@ -41,7 +41,7 @@ using ZSim.Framework;
 using ZSim.Region.Framework.Interfaces;
 using ZSim.Region.PhysicsModules.SharedBase;
 using ZSim.Region.Framework.Scenes.Serialization;
-using PermissionMask = OpenSim.Framework.PermissionMask;
+using PermissionMask = ZSim.Framework.PermissionMask;
 using ZSim.Services.Interfaces;
 
 namespace ZSim.Region.Framework.Scenes
@@ -693,7 +693,7 @@ namespace ZSim.Region.Framework.Scenes
                 return sog;
 
             Vector3 newpos = Vector3.Zero;
-            OpenSim.Services.Interfaces.GridRegion destination = null;
+            ZSim.Services.Interfaces.GridRegion destination = null;
 
             destination = entityTransfer.GetObjectDestination(sog, val, out newpos);
             if (destination == null)

@@ -37,7 +37,7 @@ namespace ZSim.Framework
 //        private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         /// <summary>
-        /// Asset types used only in OpenSim.
+        /// Asset types used only in ZSim.
         /// To avoid clashing with the code numbers used in Second Life, use only negative numbers here.
         /// </summary>
         public enum OpenSimAssetType : sbyte

@@ -42,7 +42,7 @@ using ZSim.Region.Framework.Scenes;
 using ZSim.Region.Framework.Scenes.Scripting;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
-using PermissionMask = OpenSim.Framework.PermissionMask;
+using PermissionMask = ZSim.Framework.PermissionMask;
 
 namespace ZSim.Region.OptionalModules.Scripting.JsonStore
 {

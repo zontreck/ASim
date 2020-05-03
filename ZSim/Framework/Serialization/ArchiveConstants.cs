@@ -29,7 +29,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using OpenMetaverse;
-using OpenSimAssetType = OpenSim.Framework.SLUtil.OpenSimAssetType;
+using OpenSimAssetType = ZSim.Framework.SLUtil.OpenSimAssetType;
 
 namespace ZSim.Framework.Serialization
 {

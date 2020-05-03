@@ -46,7 +46,7 @@ using ZSim.Region.CoreModules.ServiceConnectorsOut.Simulation;
 using ZSim.Region.Framework.Scenes;
 using ZSim.Region.Framework.Interfaces;
 using ZSim.Tests.Common;
-using GridRegion = OpenSim.Services.Interfaces.GridRegion;
+using GridRegion = ZSim.Services.Interfaces.GridRegion;
 
 namespace ZSim.Region.Framework.Scenes.Tests
 {

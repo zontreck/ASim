@@ -49,7 +49,7 @@ using Mono.Addins;
 using ZSim.Services.Connectors.Hypergrid;
 using ZSim.Framework.Servers.HttpServer;
 using ZSim.Services.UserProfilesService;
-using GridRegion = OpenSim.Services.Interfaces.GridRegion;
+using GridRegion = ZSim.Services.Interfaces.GridRegion;
 using Microsoft.CSharp;
 
 namespace ZSim.Region.CoreModules.Avatar.UserProfiles
@@ -272,7 +272,7 @@ namespace ZSim.Region.CoreModules.Avatar.UserProfiles
 
         /// <summary>
         /// Gets or sets a value indicating whether this
-        /// <see cref="OpenSim.Region.Coremodules.UserProfiles.UserProfileModule"/> is enabled.
+        /// <see cref="ZSim.Region.Coremodules.UserProfiles.UserProfileModule"/> is enabled.
         /// </summary>
         /// <value>
         /// <c>true</c> if enabled; otherwise, <c>false</c>.

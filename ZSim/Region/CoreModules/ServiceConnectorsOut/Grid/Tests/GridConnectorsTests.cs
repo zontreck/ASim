@@ -38,7 +38,7 @@ using OpenMetaverse;
 using ZSim.Framework;
 using ZSim.Region.CoreModules.ServiceConnectorsOut.Grid;
 using ZSim.Region.Framework.Scenes;
-using GridRegion = OpenSim.Services.Interfaces.GridRegion;
+using GridRegion = ZSim.Services.Interfaces.GridRegion;
 using ZSim.Tests.Common;
 
 namespace ZSim.Region.CoreModules.ServiceConnectorsOut.Grid.Tests
@@ -57,8 +57,8 @@ namespace ZSim.Region.CoreModules.ServiceConnectorsOut.Grid.Tests
             config.AddConfig("Modules");
             config.AddConfig("GridService");
             config.Configs["Modules"].Set("GridServices", "LocalGridServicesConnector");
-            config.Configs["GridService"].Set("LocalServiceModule", "OpenSim.Services.GridService.dll:GridService");
-            config.Configs["GridService"].Set("StorageProvider", "OpenSim.Data.Null.dll");
+            config.Configs["GridService"].Set("LocalServiceModule", "ZSim.Services.GridService.dll:GridService");
+            config.Configs["GridService"].Set("StorageProvider", "ZSim.Data.Null.dll");
             config.Configs["GridService"].Set("Region_Test_Region_1", "DefaultRegion");
             config.Configs["GridService"].Set("Region_Test_Region_2", "FallbackRegion");
             config.Configs["GridService"].Set("Region_Test_Region_3", "FallbackRegion");

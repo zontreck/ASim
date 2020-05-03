@@ -93,7 +93,7 @@ namespace ZSim.Region.CoreModules.ServiceConnectorsOut.Inventory
                     IConfig inventoryConfig = source.Configs["InventoryService"];
                     if (inventoryConfig == null)
                     {
-                        m_log.Error("[LOCAL INVENTORY SERVICES CONNECTOR]: InventoryService missing from OpenSim.ini");
+                        m_log.Error("[LOCAL INVENTORY SERVICES CONNECTOR]: InventoryService missing from ZSim.ini");
                         return;
                     }
 

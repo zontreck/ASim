@@ -6,11 +6,11 @@ using Mono.Addins;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("OpenSim.Addons.OfflineIM")]
+[assembly: AssemblyTitle("ZSim.Addons.OfflineIM")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("http://opensimulator.org")]
-[assembly: AssemblyProduct("OpenSim.Addons.OfflineIM")]
+[assembly: AssemblyProduct("ZSim.Addons.OfflineIM")]
 [assembly: AssemblyCopyright("Copyright (c) OpenSimulator.org Developers")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -30,7 +30,7 @@ using Mono.Addins;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion(OpenSim.VersionInfo.AssemblyVersionNumber)]
+[assembly: AssemblyVersion(ZSim.VersionInfo.AssemblyVersionNumber)]
 
-[assembly: Addin("OpenSim.OfflineIM", OpenSim.VersionInfo.VersionNumber)]
-[assembly: AddinDependency("OpenSim.Region.Framework", OpenSim.VersionInfo.VersionNumber)]
+[assembly: Addin("ZSim.OfflineIM", ZSim.VersionInfo.VersionNumber)]
+[assembly: AddinDependency("ZSim.Region.Framework", ZSim.VersionInfo.VersionNumber)]

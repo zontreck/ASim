@@ -169,7 +169,7 @@ namespace ZSim.Region.OptionalModules.Avatar.XmlRpcGroups
                 m_groupsServerURI = groupsConfig.GetString("GroupsServerURI", string.Empty);
                 if (string.IsNullOrEmpty(m_groupsServerURI))
                 {
-                    m_log.ErrorFormat("Please specify a valid URL for GroupsServerURI in OpenSim.ini, [Groups]");
+                    m_log.ErrorFormat("Please specify a valid URL for GroupsServerURI in ZSim.ini, [Groups]");
                     m_connectorEnabled = false;
                     return;
                 }
@@ -202,7 +202,7 @@ namespace ZSim.Region.OptionalModules.Avatar.XmlRpcGroups
         {
         }
 
-        public void AddRegion(OpenSim.Region.Framework.Scenes.Scene scene)
+        public void AddRegion(ZSim.Region.Framework.Scenes.Scene scene)
         {
             if (m_connectorEnabled)
             {
@@ -217,7 +217,7 @@ namespace ZSim.Region.OptionalModules.Avatar.XmlRpcGroups
             }
         }
 
-        public void RemoveRegion(OpenSim.Region.Framework.Scenes.Scene scene)
+        public void RemoveRegion(ZSim.Region.Framework.Scenes.Scene scene)
         {
             if (scene.RequestModuleInterface<IGroupsServicesConnector>() == this)
             {
@@ -225,7 +225,7 @@ namespace ZSim.Region.OptionalModules.Avatar.XmlRpcGroups
             }
         }
 
-        public void RegionLoaded(OpenSim.Region.Framework.Scenes.Scene scene)
+        public void RegionLoaded(ZSim.Region.Framework.Scenes.Scene scene)
         {
             // TODO: May want to consider listenning for Agent Connections so we can pre-cache group info
             // scene.EventManager.OnNewClient += OnNewClient;

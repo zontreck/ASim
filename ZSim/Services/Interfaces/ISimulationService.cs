@@ -30,7 +30,7 @@ using System.Collections.Generic;
 using ZSim.Framework;
 using OpenMetaverse;
 
-using GridRegion = OpenSim.Services.Interfaces.GridRegion;
+using GridRegion = ZSim.Services.Interfaces.GridRegion;
 
 namespace ZSim.Services.Interfaces
 {

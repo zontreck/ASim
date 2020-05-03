@@ -45,7 +45,7 @@ using log4net;
 using Nwc.XmlRpc;
 using OpenMetaverse.StructuredData;
 using ZSim.Framework.ServiceAuth;
-using XMLResponseHelper = OpenSim.Framework.SynchronousRestObjectRequester.XMLResponseHelper;
+using XMLResponseHelper = ZSim.Framework.SynchronousRestObjectRequester.XMLResponseHelper;
 
 
 namespace ZSim.Framework

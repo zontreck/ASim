@@ -95,7 +95,7 @@ namespace ZSim.Services.Connectors
             IConfig config = source.Configs[m_configName];
             if (config == null)
             {
-                m_log.ErrorFormat("[INVENTORY CONNECTOR]: {0} missing from OpenSim.ini", m_configName);
+                m_log.ErrorFormat("[INVENTORY CONNECTOR]: {0} missing from ZSim.ini", m_configName);
                 throw new Exception("Inventory connector init error");
             }
 

@@ -35,11 +35,11 @@ using System.Text;
 using ZSim.Server.Base;
 using ZSim.Server.Handlers.Base;
 using ZSim.Services.Interfaces;
-using GridRegion = OpenSim.Services.Interfaces.GridRegion;
+using GridRegion = ZSim.Services.Interfaces.GridRegion;
 using ZSim.Framework;
 using ZSim.Framework.Servers.HttpServer;
 using ZSim.Server.Handlers.Simulation;
-using Utils = OpenSim.Server.Handlers.Simulation.Utils;
+using Utils = ZSim.Server.Handlers.Simulation.Utils;
 
 using OpenMetaverse;
 using OpenMetaverse.StructuredData;

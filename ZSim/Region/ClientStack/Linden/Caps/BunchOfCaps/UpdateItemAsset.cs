@@ -442,7 +442,7 @@ namespace ZSim.Region.ClientStack.Linden
                 uploadComplete.new_asset = m_inventoryItemID;
                 uploadComplete.compiled = errors.Count > 0 ? false : true;
                 uploadComplete.state = "complete";
-                uploadComplete.errors = new OpenSim.Framework.Capabilities.OSDArray();
+                uploadComplete.errors = new ZSim.Framework.Capabilities.OSDArray();
                 uploadComplete.errors.Array = errors;
 
                 res = LLSDHelpers.SerialiseLLSDReply(uploadComplete);

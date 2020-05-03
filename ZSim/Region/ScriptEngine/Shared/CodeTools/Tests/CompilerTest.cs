@@ -82,8 +82,8 @@ namespace ZSim.Region.ScriptEngine.Shared.CodeTools.Tests
 
             System.AppDomain.CurrentDomain.AssemblyResolve += m_resolveEventHandler;
 
-            m_compilerParameters.ReferencedAssemblies.Add(Path.Combine(rootPath, "OpenSim.Region.ScriptEngine.Shared.dll"));
-            m_compilerParameters.ReferencedAssemblies.Add(Path.Combine(rootPath, "OpenSim.Region.ScriptEngine.Shared.Api.Runtime.dll"));
+            m_compilerParameters.ReferencedAssemblies.Add(Path.Combine(rootPath, "ZSim.Region.ScriptEngine.Shared.dll"));
+            m_compilerParameters.ReferencedAssemblies.Add(Path.Combine(rootPath, "ZSim.Region.ScriptEngine.Shared.Api.Runtime.dll"));
             m_compilerParameters.ReferencedAssemblies.Add(Path.Combine(rootPath, "OpenMetaverseTypes.dll"));
             m_compilerParameters.GenerateExecutable = false;
         }

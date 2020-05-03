@@ -35,13 +35,13 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading;
 
-using LSL_Float = OpenSim.Region.ScriptEngine.Shared.LSL_Types.LSLFloat;
-using LSL_Integer = OpenSim.Region.ScriptEngine.Shared.LSL_Types.LSLInteger;
-using LSL_Key = OpenSim.Region.ScriptEngine.Shared.LSL_Types.LSLString;
-using LSL_List = OpenSim.Region.ScriptEngine.Shared.LSL_Types.list;
-using LSL_Rotation = OpenSim.Region.ScriptEngine.Shared.LSL_Types.Quaternion;
-using LSL_String = OpenSim.Region.ScriptEngine.Shared.LSL_Types.LSLString;
-using LSL_Vector = OpenSim.Region.ScriptEngine.Shared.LSL_Types.Vector3;
+using LSL_Float = ZSim.Region.ScriptEngine.Shared.LSL_Types.LSLFloat;
+using LSL_Integer = ZSim.Region.ScriptEngine.Shared.LSL_Types.LSLInteger;
+using LSL_Key = ZSim.Region.ScriptEngine.Shared.LSL_Types.LSLString;
+using LSL_List = ZSim.Region.ScriptEngine.Shared.LSL_Types.list;
+using LSL_Rotation = ZSim.Region.ScriptEngine.Shared.LSL_Types.Quaternion;
+using LSL_String = ZSim.Region.ScriptEngine.Shared.LSL_Types.LSLString;
+using LSL_Vector = ZSim.Region.ScriptEngine.Shared.LSL_Types.Vector3;
 
 namespace ZSim.Region.ScriptEngine.Yengine
 {
@@ -377,7 +377,7 @@ namespace ZSim.Region.ScriptEngine.Yengine
 
     /*
      * Contains only items required by the stand-alone compiler
-     * so the compiler doesn't need to pull in all of OpenSim.
+     * so the compiler doesn't need to pull in all of ZSim.
      *
      * Inherit from ScriptBaseClass so we can be used as 'this'
      * parameter for backend-API calls, eg llSay().
@@ -1218,11 +1218,11 @@ namespace ZSim.Region.ScriptEngine.Yengine
 
         // internal use only: converts any IL addresses in script-defined methods to source location equivalent
         // Mono ex.StackTrace:
-        //   at OpenSim.Region.ScriptEngine.YEngine.TypeCast.ObjectToInteger (System.Object x) [0x0005e] in /home/kunta/opensim-0.9/addon-modules/YEngine/Module/MMRScriptTypeCast.cs:750
-        //   at (wrapper dynamic-method) System.Object:default state_entry (OpenSim.Region.ScriptEngine.YEngine.XMRInstAbstract) [0x00196]
+        //   at ZSim.Region.ScriptEngine.YEngine.TypeCast.ObjectToInteger (System.Object x) [0x0005e] in /home/kunta/opensim-0.9/addon-modules/YEngine/Module/MMRScriptTypeCast.cs:750
+        //   at (wrapper dynamic-method) System.Object:default state_entry (ZSim.Region.ScriptEngine.YEngine.XMRInstAbstract) [0x00196]
 
         // Microsoft ex.StackTrace:
-        //    at OpenSim.Region.ScriptEngine.YEngine.TypeCast.ObjectToInteger(Object x) in C:\Users\mrieker\opensim-0.9-source\addon-modules\YEngine\Module\MMRScriptTypeCast.cs:line 750
+        //    at ZSim.Region.ScriptEngine.YEngine.TypeCast.ObjectToInteger(Object x) in C:\Users\mrieker\opensim-0.9-source\addon-modules\YEngine\Module\MMRScriptTypeCast.cs:line 750
         //    at default state_entry (XMRInstAbstract )
         public string XMRExceptionStackString(Exception ex)
         {
@@ -1250,7 +1250,7 @@ namespace ZSim.Region.ScriptEngine.Yengine
                 // strip the (systemargtypes...) from our dynamic method names cuz it's messy
                 //  'default state_entry (XMRInstAbstract )'
                 //      => 'default state_entry'
-                //  'CallSomethingThatThrows(string) (OpenSim.Region.ScriptEngine.YEngine.XMRInstance,string)'
+                //  'CallSomethingThatThrows(string) (ZSim.Region.ScriptEngine.YEngine.XMRInstance,string)'
                 //      => 'CallSomethingThatThrows(string)'
                 int kwin = stline.IndexOf(" in ");
                 int br0x = stline.IndexOf(" [0x");

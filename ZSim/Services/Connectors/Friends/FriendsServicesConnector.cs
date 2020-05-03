@@ -35,7 +35,7 @@ using ZSim.Framework;
 using ZSim.Framework.ServiceAuth;
 
 using ZSim.Services.Interfaces;
-using FriendInfo = OpenSim.Services.Interfaces.FriendInfo;
+using FriendInfo = ZSim.Services.Interfaces.FriendInfo;
 using ZSim.Server.Base;
 using OpenMetaverse;
 
@@ -68,7 +68,7 @@ namespace ZSim.Services.Connectors.Friends
             IConfig gridConfig = source.Configs["FriendsService"];
             if (gridConfig == null)
             {
-                m_log.Error("[FRIENDS SERVICE CONNECTOR]: FriendsService missing from OpenSim.ini");
+                m_log.Error("[FRIENDS SERVICE CONNECTOR]: FriendsService missing from ZSim.ini");
                 throw new Exception("Friends connector init error");
             }
 

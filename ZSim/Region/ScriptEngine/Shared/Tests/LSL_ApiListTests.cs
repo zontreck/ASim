@@ -38,10 +38,10 @@ using ZSim.Region.ScriptEngine.Shared.Instance;
 using ZSim.Region.ScriptEngine.Shared.ScriptBase;
 using OpenMetaverse;
 
-using LSL_Float = OpenSim.Region.ScriptEngine.Shared.LSL_Types.LSLFloat;
-using LSL_Integer = OpenSim.Region.ScriptEngine.Shared.LSL_Types.LSLInteger;
-using LSL_List = OpenSim.Region.ScriptEngine.Shared.LSL_Types.list;
-using LSL_String = OpenSim.Region.ScriptEngine.Shared.LSL_Types.LSLString;
+using LSL_Float = ZSim.Region.ScriptEngine.Shared.LSL_Types.LSLFloat;
+using LSL_Integer = ZSim.Region.ScriptEngine.Shared.LSL_Types.LSLInteger;
+using LSL_List = ZSim.Region.ScriptEngine.Shared.LSL_Types.list;
+using LSL_String = ZSim.Region.ScriptEngine.Shared.LSL_Types.LSLString;
 
 namespace ZSim.Region.ScriptEngine.Shared.Tests
 {

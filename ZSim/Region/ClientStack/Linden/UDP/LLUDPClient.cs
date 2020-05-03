@@ -35,7 +35,7 @@ using ZSim.Framework.Monitoring;
 using OpenMetaverse;
 using OpenMetaverse.Packets;
 
-using TokenBucket = OpenSim.Region.ClientStack.LindenUDP.TokenBucket;
+using TokenBucket = ZSim.Region.ClientStack.LindenUDP.TokenBucket;
 
 namespace ZSim.Region.ClientStack.LindenUDP
 {
@@ -828,9 +828,9 @@ namespace ZSim.Region.ClientStack.LindenUDP
         }
     }
 
-    public class DoubleLocklessQueue<T> : OpenSim.Framework.LocklessQueue<T>
+    public class DoubleLocklessQueue<T> : ZSim.Framework.LocklessQueue<T>
     {
-        OpenSim.Framework.LocklessQueue<T> highQueue = new OpenSim.Framework.LocklessQueue<T>();
+        ZSim.Framework.LocklessQueue<T> highQueue = new ZSim.Framework.LocklessQueue<T>();
 
         public override int Count
         {

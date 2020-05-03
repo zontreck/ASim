@@ -55,9 +55,9 @@ using ZSim.Region.ScriptEngine.Shared.Api;
 using ZSim.Region.ScriptEngine.Shared.Api.Plugins;
 using ZSim.Region.ScriptEngine.Shared.ScriptBase;
 using ZSim.Region.ScriptEngine.XEngine.ScriptBase;
-using Timer = OpenSim.Region.ScriptEngine.Shared.Api.Plugins.Timer;
+using Timer = ZSim.Region.ScriptEngine.Shared.Api.Plugins.Timer;
 
-using ScriptCompileQueue = OpenSim.Framework.LocklessQueue<object[]>;
+using ScriptCompileQueue = ZSim.Framework.LocklessQueue<object[]>;
 
 namespace ZSim.Region.ScriptEngine.XEngine
 {

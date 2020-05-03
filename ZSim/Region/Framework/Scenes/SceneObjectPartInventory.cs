@@ -39,7 +39,7 @@ using ZSim.Framework;
 using ZSim.Region.Framework.Interfaces;
 using ZSim.Region.Framework.Scenes.Scripting;
 using ZSim.Region.Framework.Scenes.Serialization;
-using PermissionMask = OpenSim.Framework.PermissionMask;
+using PermissionMask = ZSim.Framework.PermissionMask;
 
 namespace ZSim.Region.Framework.Scenes
 {

@@ -119,7 +119,7 @@ namespace ZSim.Region.CoreModules.ServiceConnectorsIn.Login
                 m_Registered = true;
                 new LLLoginServiceInConnector(m_Config, MainServer.Instance, scene);
                 //Object[] args = new Object[] { m_Config, MainServer.Instance, this, scene };
-                //ServerUtils.LoadPlugin<IServiceConnector>("OpenSim.Server.Handlers.dll:LLLoginServiceInConnector", args);
+                //ServerUtils.LoadPlugin<IServiceConnector>("ZSim.Server.Handlers.dll:LLLoginServiceInConnector", args);
             }
 
         }

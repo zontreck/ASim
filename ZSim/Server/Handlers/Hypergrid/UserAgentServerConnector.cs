@@ -37,7 +37,7 @@ using ZSim.Server.Base;
 using ZSim.Services.Interfaces;
 using ZSim.Framework.Servers.HttpServer;
 using ZSim.Server.Handlers.Base;
-using GridRegion = OpenSim.Services.Interfaces.GridRegion;
+using GridRegion = ZSim.Services.Interfaces.GridRegion;
 
 using log4net;
 using Nwc.XmlRpc;

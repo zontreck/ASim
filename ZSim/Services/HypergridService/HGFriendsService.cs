@@ -34,9 +34,9 @@ using ZSim.Framework;
 using ZSim.Services.Connectors.Friends;
 using ZSim.Services.Connectors.Hypergrid;
 using ZSim.Services.Interfaces;
-using GridRegion = OpenSim.Services.Interfaces.GridRegion;
+using GridRegion = ZSim.Services.Interfaces.GridRegion;
 using ZSim.Server.Base;
-using FriendInfo = OpenSim.Services.Interfaces.FriendInfo;
+using FriendInfo = ZSim.Services.Interfaces.FriendInfo;
 
 using OpenMetaverse;
 using log4net;

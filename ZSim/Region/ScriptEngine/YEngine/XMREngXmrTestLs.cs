@@ -33,13 +33,13 @@ using System.Reflection;
 using System.Text;
 using System.Threading;
 
-using LSL_Float = OpenSim.Region.ScriptEngine.Shared.LSL_Types.LSLFloat;
-using LSL_Integer = OpenSim.Region.ScriptEngine.Shared.LSL_Types.LSLInteger;
-using LSL_Key = OpenSim.Region.ScriptEngine.Shared.LSL_Types.LSLString;
-using LSL_List = OpenSim.Region.ScriptEngine.Shared.LSL_Types.list;
-using LSL_Rotation = OpenSim.Region.ScriptEngine.Shared.LSL_Types.Quaternion;
-using LSL_String = OpenSim.Region.ScriptEngine.Shared.LSL_Types.LSLString;
-using LSL_Vector = OpenSim.Region.ScriptEngine.Shared.LSL_Types.Vector3;
+using LSL_Float = ZSim.Region.ScriptEngine.Shared.LSL_Types.LSLFloat;
+using LSL_Integer = ZSim.Region.ScriptEngine.Shared.LSL_Types.LSLInteger;
+using LSL_Key = ZSim.Region.ScriptEngine.Shared.LSL_Types.LSLString;
+using LSL_List = ZSim.Region.ScriptEngine.Shared.LSL_Types.list;
+using LSL_Rotation = ZSim.Region.ScriptEngine.Shared.LSL_Types.Quaternion;
+using LSL_String = ZSim.Region.ScriptEngine.Shared.LSL_Types.LSLString;
+using LSL_Vector = ZSim.Region.ScriptEngine.Shared.LSL_Types.Vector3;
 
 namespace ZSim.Region.ScriptEngine.Yengine
 {
@@ -253,8 +253,8 @@ namespace ZSim.Region.ScriptEngine.Yengine
                     return;
                 i++;
             }
-            OpenSim.Region.ScriptEngine.Shared.EventParams eps =
-                    new OpenSim.Region.ScriptEngine.Shared.EventParams(eventname, paramvalues, zeroDetectParams);
+            ZSim.Region.ScriptEngine.Shared.EventParams eps =
+                    new ZSim.Region.ScriptEngine.Shared.EventParams(eventname, paramvalues, zeroDetectParams);
 
              // Scan instance list to find those that match selection criteria.
             if(!Monitor.TryEnter(m_InstancesDict, 100))
@@ -367,7 +367,7 @@ namespace ZSim.Region.ScriptEngine.Yengine
             }
             if(token is TokenName)
             {
-                FieldInfo field = typeof(OpenSim.Region.ScriptEngine.Shared.ScriptBase.ScriptBaseClass).GetField(((TokenName)token).val);
+                FieldInfo field = typeof(ZSim.Region.ScriptEngine.Shared.ScriptBase.ScriptBaseClass).GetField(((TokenName)token).val);
                 if((field != null) && field.IsPublic && (field.IsLiteral || (field.IsStatic && field.IsInitOnly)))
                 {
                     return field.GetValue(null);

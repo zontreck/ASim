@@ -38,7 +38,7 @@ using ZSim.Services.Interfaces;
 using log4net;
 using Nini.Config;
 using OpenMetaverse;
-using PermissionMask = OpenSim.Framework.PermissionMask;
+using PermissionMask = ZSim.Framework.PermissionMask;
 
 namespace ZSim.Services.InventoryService
 {

@@ -98,7 +98,7 @@ namespace ZSim.Region.CoreModules.ServiceConnectorsIn.Asset
 
                 Object[] args = new Object[] { m_Config, MainServer.Instance, "HGAssetService" };
 
-                ServerUtils.LoadPlugin<IServiceConnector>("OpenSim.Server.Handlers.dll:AssetServiceConnector", args);
+                ServerUtils.LoadPlugin<IServiceConnector>("ZSim.Server.Handlers.dll:AssetServiceConnector", args);
             }
         }
 

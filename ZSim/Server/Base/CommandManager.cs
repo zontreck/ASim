@@ -41,7 +41,7 @@ namespace ZSim.Server.Base
 {
     /// <summary>
     /// Command manager -
-    /// Wrapper for OpenSim.Framework.PluginManager to allow
+    /// Wrapper for ZSim.Framework.PluginManager to allow
     /// us to add commands to the console to perform operations
     /// on our repos and plugins
     /// </summary>

@@ -50,10 +50,10 @@ using ZSim.Framework.Servers.HttpServer;
 using ZSim.Region.Framework.Interfaces;
 using ZSim.Region.Framework.Scenes;
 using ZSim.Region.CoreModules.World.Land;
-using Caps=OpenSim.Framework.Capabilities.Caps;
+using Caps=ZSim.Framework.Capabilities.Caps;
 using OSDArray=OpenMetaverse.StructuredData.OSDArray;
 using OSDMap=OpenMetaverse.StructuredData.OSDMap;
-using GridRegion = OpenSim.Services.Interfaces.GridRegion;
+using GridRegion = ZSim.Services.Interfaces.GridRegion;
 
 namespace ZSim.Region.CoreModules.World.WorldMap
 {

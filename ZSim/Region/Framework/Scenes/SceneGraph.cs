@@ -884,7 +884,7 @@ namespace ZSim.Region.Framework.Scenes
         ///
         /// FIXME: The only user of the method right now is Caps.cs, in order to resolve a client API since it can't
         /// use the ScenePresence.  This could be better solved in a number of ways - we could establish an
-        /// OpenSim.Framework.IScenePresence, or move the caps code into a region package (which might be the more
+        /// ZSim.Framework.IScenePresence, or move the caps code into a region package (which might be the more
         /// suitable solution).
         /// </summary>
         /// <param name="agentId"></param>

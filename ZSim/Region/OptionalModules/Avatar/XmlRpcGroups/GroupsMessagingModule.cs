@@ -38,7 +38,7 @@ using ZSim.Framework;
 using ZSim.Region.Framework.Interfaces;
 using ZSim.Region.Framework.Scenes;
 using ZSim.Services.Interfaces;
-using PresenceInfo = OpenSim.Services.Interfaces.PresenceInfo;
+using PresenceInfo = ZSim.Services.Interfaces.PresenceInfo;
 
 namespace ZSim.Region.OptionalModules.Avatar.XmlRpcGroups
 {

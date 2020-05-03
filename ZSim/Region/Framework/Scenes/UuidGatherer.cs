@@ -37,7 +37,7 @@ using OpenMetaverse.StructuredData;
 using ZSim.Framework;
 using ZSim.Region.Framework.Scenes.Serialization;
 using ZSim.Services.Interfaces;
-using OpenSimAssetType = OpenSim.Framework.SLUtil.OpenSimAssetType;
+using OpenSimAssetType = ZSim.Framework.SLUtil.OpenSimAssetType;
 
 namespace ZSim.Region.Framework.Scenes
 {
@@ -259,7 +259,7 @@ namespace ZSim.Region.Framework.Scenes
         protected Queue<UUID> m_assetUuidsToInspect;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="OpenSim.Region.Framework.Scenes.UuidGatherer"/> class.
+        /// Initializes a new instance of the <see cref="ZSim.Region.Framework.Scenes.UuidGatherer"/> class.
         /// </summary>
         /// <remarks>In this case the collection of gathered assets will start out blank.</remarks>
         /// <param name="assetService">
@@ -271,7 +271,7 @@ namespace ZSim.Region.Framework.Scenes
             new HashSet <UUID>(), new HashSet <UUID>()) {}
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="OpenSim.Region.Framework.Scenes.UuidGatherer"/> class.
+        /// Initializes a new instance of the <see cref="ZSim.Region.Framework.Scenes.UuidGatherer"/> class.
         /// </summary>
         /// <param name="assetService">
         /// Asset service.

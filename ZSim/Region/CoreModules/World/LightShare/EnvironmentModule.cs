@@ -38,7 +38,7 @@ using log4net;
 using Nini.Config;
 using Mono.Addins;
 
-using Caps = OpenSim.Framework.Capabilities.Caps;
+using Caps = ZSim.Framework.Capabilities.Caps;
 
 
 namespace ZSim.Region.CoreModules.World.LightShare

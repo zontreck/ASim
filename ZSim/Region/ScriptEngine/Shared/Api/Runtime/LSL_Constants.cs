@@ -26,9 +26,9 @@
  */
 
 using System;
-using vector = OpenSim.Region.ScriptEngine.Shared.LSL_Types.Vector3;
-using rotation = OpenSim.Region.ScriptEngine.Shared.LSL_Types.Quaternion;
-using LSLInteger = OpenSim.Region.ScriptEngine.Shared.LSL_Types.LSLInteger;
+using vector = ZSim.Region.ScriptEngine.Shared.LSL_Types.Vector3;
+using rotation = ZSim.Region.ScriptEngine.Shared.LSL_Types.Quaternion;
+using LSLInteger = ZSim.Region.ScriptEngine.Shared.LSL_Types.LSLInteger;
 
 namespace ZSim.Region.ScriptEngine.Shared.ScriptBase
 {

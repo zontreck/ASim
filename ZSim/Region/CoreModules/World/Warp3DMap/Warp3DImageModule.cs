@@ -413,7 +413,7 @@ namespace ZSim.Region.CoreModules.World.Warp3DMap
             float[] startHeights = new float[4];
             float[] heightRanges = new float[4];
 
-            OpenSim.Framework.RegionSettings regionInfo = m_scene.RegionInfo.RegionSettings;
+            ZSim.Framework.RegionSettings regionInfo = m_scene.RegionInfo.RegionSettings;
 
             textureIDs[0] = regionInfo.TerrainTexture1;
             textureIDs[1] = regionInfo.TerrainTexture2;

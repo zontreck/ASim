@@ -46,7 +46,7 @@ namespace ZSim.Region.PhysicsModule.ubOde
         /// <summary>
         /// Pending ray requests
         /// </summary>
-        protected OpenSim.Framework.LocklessQueue<ODERayRequest> m_PendingRequests = new OpenSim.Framework.LocklessQueue<ODERayRequest>();
+        protected ZSim.Framework.LocklessQueue<ODERayRequest> m_PendingRequests = new ZSim.Framework.LocklessQueue<ODERayRequest>();
 
         /// <summary>
         /// Scene that created this object.

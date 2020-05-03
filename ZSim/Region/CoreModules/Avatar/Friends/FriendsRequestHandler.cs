@@ -35,7 +35,7 @@ using System.Xml;
 using ZSim.Framework;
 using ZSim.Server.Base;
 using ZSim.Framework.Servers.HttpServer;
-using FriendInfo = OpenSim.Services.Interfaces.FriendInfo;
+using FriendInfo = ZSim.Services.Interfaces.FriendInfo;
 using ZSim.Services.Interfaces;
 
 using OpenMetaverse;

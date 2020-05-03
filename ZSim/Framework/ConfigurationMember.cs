@@ -59,7 +59,7 @@ namespace ZSim.Framework
         /// <summary>
         /// This is the default configuration DLL loaded
         /// </summary>
-        private string configurationPluginFilename = "OpenSim.Framework.Configuration.XML.dll";
+        private string configurationPluginFilename = "ZSim.Framework.Configuration.XML.dll";
 
         private ConfigurationOptionsLoad loadFunction;
         private ConfigurationOptionResult resultFunction;

@@ -35,7 +35,7 @@ using Mono.Addins;
 // change them to the information which is associated with the assembly
 // you compile.
 
-[assembly : AssemblyTitle("OpenSim.Region.PhysicsModule.ubOde")]
+[assembly : AssemblyTitle("ZSim.Region.PhysicsModule.ubOde")]
 [assembly : AssemblyDescription("Ubit Variation of ODE")]
 [assembly : AssemblyConfiguration("")]
 [assembly : AssemblyCompany("http://opensimulator.org")]
@@ -56,6 +56,6 @@ using Mono.Addins;
 // You can specify all values by your own or you can build default build and revision
 // numbers with the '*' character (the default):
 
-[assembly : AssemblyVersion(OpenSim.VersionInfo.AssemblyVersionNumber)]
-[assembly: Addin("OpenSim.Region.PhysicsModule.ubOde", OpenSim.VersionInfo.VersionNumber)]
-[assembly: AddinDependency("OpenSim.Region.Framework", OpenSim.VersionInfo.VersionNumber)]
+[assembly : AssemblyVersion(ZSim.VersionInfo.AssemblyVersionNumber)]
+[assembly: Addin("ZSim.Region.PhysicsModule.ubOde", ZSim.VersionInfo.VersionNumber)]
+[assembly: AddinDependency("ZSim.Region.Framework", ZSim.VersionInfo.VersionNumber)]

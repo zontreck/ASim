@@ -49,7 +49,7 @@ namespace ZSim.Region.CoreModules.Framework.InventoryAccess.Tests
             TestHelpers.InMethod();
 //            TestHelpers.EnableLogging();
 
-            XEngine xengine = new OpenSim.Region.ScriptEngine.XEngine.XEngine();
+            XEngine xengine = new ZSim.Region.ScriptEngine.XEngine.XEngine();
             xengine.DebugLevel = 1;
 
             IniConfigSource configSource = new IniConfigSource();

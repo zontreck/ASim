@@ -36,7 +36,7 @@ using ZSim.Region.Framework.Interfaces;
 using ZSim.Region.Framework.Scenes;
 using ZSim.Server.Base;
 using ZSim.Services.Interfaces;
-using PresenceInfo = OpenSim.Services.Interfaces.PresenceInfo;
+using PresenceInfo = ZSim.Services.Interfaces.PresenceInfo;
 
 namespace ZSim.Region.CoreModules.ServiceConnectorsOut.Presence
 {
@@ -63,7 +63,7 @@ namespace ZSim.Region.CoreModules.ServiceConnectorsOut.Presence
                     IConfig inventoryConfig = source.Configs["PresenceService"];
                     if (inventoryConfig == null)
                     {
-                        m_log.Error("[LOCAL PRESENCE CONNECTOR]: PresenceService missing from OpenSim.ini");
+                        m_log.Error("[LOCAL PRESENCE CONNECTOR]: PresenceService missing from ZSim.ini");
                         return;
                     }
 

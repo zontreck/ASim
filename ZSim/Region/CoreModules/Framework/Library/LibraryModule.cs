@@ -42,7 +42,7 @@ using OpenMetaverse;
 using log4net;
 using Mono.Addins;
 using Nini.Config;
-using PermissionMask = OpenSim.Framework.PermissionMask;
+using PermissionMask = ZSim.Framework.PermissionMask;
 
 namespace ZSim.Region.CoreModules.Framework.Library
 {

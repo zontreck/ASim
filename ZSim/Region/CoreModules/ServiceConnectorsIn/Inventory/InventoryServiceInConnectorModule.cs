@@ -96,7 +96,7 @@ namespace ZSim.Region.CoreModules.ServiceConnectorsIn.Inventory
 
                 Object[] args = new Object[] { m_Config, MainServer.Instance, "HGInventoryService" };
 
-                ServerUtils.LoadPlugin<IServiceConnector>("OpenSim.Server.Handlers.dll:XInventoryInConnector", args);
+                ServerUtils.LoadPlugin<IServiceConnector>("ZSim.Server.Handlers.dll:XInventoryInConnector", args);
             }
         }
 

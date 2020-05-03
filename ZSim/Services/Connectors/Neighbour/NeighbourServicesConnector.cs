@@ -40,7 +40,7 @@ using ZSim.Services.Interfaces;
 using OpenMetaverse;
 using OpenMetaverse.StructuredData;
 
-using GridRegion = OpenSim.Services.Interfaces.GridRegion;
+using GridRegion = ZSim.Services.Interfaces.GridRegion;
 
 namespace ZSim.Services.Connectors
 {

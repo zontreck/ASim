@@ -45,7 +45,7 @@ using ZSim.Region.Framework.Scenes;
 using Mono.Data.SqliteClient;
 using Mono.Addins;
 
-using Caps = OpenSim.Framework.Capabilities.Caps;
+using Caps = ZSim.Framework.Capabilities.Caps;
 
 using OSD = OpenMetaverse.StructuredData.OSD;
 using OSDMap = OpenMetaverse.StructuredData.OSDMap;

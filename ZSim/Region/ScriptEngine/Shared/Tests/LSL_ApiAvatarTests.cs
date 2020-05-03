@@ -45,8 +45,8 @@ using ZSim.Region.ScriptEngine.Shared.Instance;
 using ZSim.Region.ScriptEngine.Shared.ScriptBase;
 using ZSim.Services.Interfaces;
 using ZSim.Tests.Common;
-using LSL_Integer = OpenSim.Region.ScriptEngine.Shared.LSL_Types.LSLInteger;
-using LSL_List = OpenSim.Region.ScriptEngine.Shared.LSL_Types.list;
+using LSL_Integer = ZSim.Region.ScriptEngine.Shared.LSL_Types.LSLInteger;
+using LSL_List = ZSim.Region.ScriptEngine.Shared.LSL_Types.list;
 
 namespace ZSim.Region.ScriptEngine.Shared.Tests
 {

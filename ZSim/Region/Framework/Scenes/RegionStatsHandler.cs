@@ -51,7 +51,7 @@ namespace ZSim.Region.Framework.Scenes
 
         private string osXStatsURI = String.Empty;
         //private string osSecret = String.Empty;
-        private OpenSim.Framework.RegionInfo regionInfo;
+        private ZSim.Framework.RegionInfo regionInfo;
         public string localZone = TimeZone.CurrentTimeZone.StandardName;
         public TimeSpan utcOffset = TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Now);
 
@@ -102,7 +102,7 @@ namespace ZSim.Region.Framework.Scenes
 
         private string osXStatsURI = String.Empty;
         //private string osSecret = String.Empty;
-        private OpenSim.Framework.RegionInfo regionInfo;
+        private ZSim.Framework.RegionInfo regionInfo;
         public string localZone = TimeZone.CurrentTimeZone.StandardName;
         public TimeSpan utcOffset = TimeZone.CurrentTimeZone.GetUtcOffset(DateTime.Now);
 

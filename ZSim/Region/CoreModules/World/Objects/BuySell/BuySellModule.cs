@@ -38,7 +38,7 @@ using ZSim.Region.Framework;
 using ZSim.Region.Framework.Interfaces;
 using ZSim.Region.Framework.Scenes;
 using ZSim.Region.Framework.Scenes.Serialization;
-using PermissionMask = OpenSim.Framework.PermissionMask;
+using PermissionMask = ZSim.Framework.PermissionMask;
 
 namespace ZSim.Region.CoreModules.World.Objects.BuySell
 {

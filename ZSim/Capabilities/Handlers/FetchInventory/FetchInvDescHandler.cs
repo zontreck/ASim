@@ -41,7 +41,7 @@ using ZSim.Framework.Capabilities;
 using ZSim.Region.Framework.Interfaces;
 using ZSim.Framework.Servers.HttpServer;
 using ZSim.Services.Interfaces;
-using Caps = OpenSim.Framework.Capabilities.Caps;
+using Caps = ZSim.Framework.Capabilities.Caps;
 
 namespace ZSim.Capabilities.Handlers
 {

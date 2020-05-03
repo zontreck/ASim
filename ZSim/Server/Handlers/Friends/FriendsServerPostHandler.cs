@@ -38,7 +38,7 @@ using System.Xml.Serialization;
 using System.Collections.Generic;
 using ZSim.Server.Base;
 using ZSim.Services.Interfaces;
-using FriendInfo = OpenSim.Services.Interfaces.FriendInfo;
+using FriendInfo = ZSim.Services.Interfaces.FriendInfo;
 using ZSim.Framework;
 using ZSim.Framework.ServiceAuth;
 using ZSim.Framework.Servers.HttpServer;

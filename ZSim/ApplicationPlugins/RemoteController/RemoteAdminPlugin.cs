@@ -49,10 +49,10 @@ using ZSim.Region.CoreModules.World.Terrain;
 using ZSim.Region.Framework.Interfaces;
 using ZSim.Region.Framework.Scenes;
 using ZSim.Services.Interfaces;
-using PresenceInfo = OpenSim.Services.Interfaces.PresenceInfo;
-using GridRegion = OpenSim.Services.Interfaces.GridRegion;
-using PermissionMask = OpenSim.Framework.PermissionMask;
-using RegionInfo = OpenSim.Framework.RegionInfo;
+using PresenceInfo = ZSim.Services.Interfaces.PresenceInfo;
+using GridRegion = ZSim.Services.Interfaces.GridRegion;
+using PermissionMask = ZSim.Framework.PermissionMask;
+using RegionInfo = ZSim.Framework.RegionInfo;
 
 namespace ZSim.ApplicationPlugins.RemoteController
 {
@@ -94,9 +94,9 @@ namespace ZSim.ApplicationPlugins.RemoteController
 
         public void Initialise(OpenSimBase openSim)
         {
-            m_openSimVersion = openSim.GetVersionText();
+            m_openSimVersion = ZSim.GetVersionText();
 
-            m_configSource = openSim.ConfigSource.Source;
+            m_configSource = ZSim.ConfigSource.Source;
             try
             {
                 if (m_configSource.Configs["RemoteAdmin"] == null ||
@@ -630,7 +630,7 @@ namespace ZSim.ApplicationPlugins.RemoteController
         /// <list type="table">
         /// <listheader><term>parameter name</term><description>description</description></listheader>
         /// <item><term>password</term>
-        ///       <description>admin password as set in OpenSim.ini</description></item>
+        ///       <description>admin password as set in ZSim.ini</description></item>
         /// <item><term>region_name</term>
         ///       <description>desired region name</description></item>
         /// <item><term>region_id</term>
@@ -667,7 +667,7 @@ namespace ZSim.ApplicationPlugins.RemoteController
         ///       already exist)</description></item>
         /// <item><term>region_file</term>
         ///       <description>The name of the file to persist the region specifications to.
-        /// If omitted, the region_file_template setting from OpenSim.ini will be used. (optional)</description></item>
+        /// If omitted, the region_file_template setting from ZSim.ini will be used. (optional)</description></item>
         /// </list>
         ///
         /// XmlRpcCreateRegionMethod returns
@@ -775,7 +775,7 @@ namespace ZSim.ApplicationPlugins.RemoteController
                     string regionConfigPath = Path.Combine(Util.configDir(), "Regions");
                     try
                     {
-                        // OpenSim.ini can specify a different regions dir
+                        // ZSim.ini can specify a different regions dir
                         IConfig startupConfig = (IConfig) m_configSource.Configs["Startup"];
                         regionConfigPath = startupConfig.GetString("regionload_regionsdir", regionConfigPath).Trim();
                     }
@@ -939,7 +939,7 @@ namespace ZSim.ApplicationPlugins.RemoteController
         /// <list type="table">
         /// <listheader><term>parameter name</term><description>description</description></listheader>
         /// <item><term>password</term>
-        ///       <description>admin password as set in OpenSim.ini</description></item>
+        ///       <description>admin password as set in ZSim.ini</description></item>
         /// <item><term>region_name</term>
         ///       <description>desired region name</description></item>
         /// <item><term>region_id</term>
@@ -990,7 +990,7 @@ namespace ZSim.ApplicationPlugins.RemoteController
         /// <list type="table">
         /// <listheader><term>parameter name</term><description>description</description></listheader>
         /// <item><term>password</term>
-        ///       <description>admin password as set in OpenSim.ini</description></item>
+        ///       <description>admin password as set in ZSim.ini</description></item>
         /// <item><term>region_name</term>
         ///       <description>desired region name</description></item>
         /// <item><term>region_id</term>
@@ -1044,7 +1044,7 @@ namespace ZSim.ApplicationPlugins.RemoteController
         /// <list type="table">
         /// <listheader><term>parameter name</term><description>description</description></listheader>
         /// <item><term>password</term>
-        ///       <description>admin password as set in OpenSim.ini</description></item>
+        ///       <description>admin password as set in ZSim.ini</description></item>
         /// <item><term>region_name</term>
         ///       <description>desired region name</description></item>
         /// <item><term>region_id</term>
@@ -1125,7 +1125,7 @@ namespace ZSim.ApplicationPlugins.RemoteController
         /// <list type="table">
         /// <listheader><term>parameter name</term><description>description</description></listheader>
         /// <item><term>password</term>
-        ///       <description>admin password as set in OpenSim.ini</description></item>
+        ///       <description>admin password as set in ZSim.ini</description></item>
         /// <item><term>user_firstname</term>
         ///       <description>avatar's first name</description></item>
         /// <item><term>user_lastname</term>
@@ -1237,7 +1237,7 @@ namespace ZSim.ApplicationPlugins.RemoteController
         /// <list type="table">
         /// <listheader><term>parameter name</term><description>description</description></listheader>
         /// <item><term>password</term>
-        ///       <description>admin password as set in OpenSim.ini</description></item>
+        ///       <description>admin password as set in ZSim.ini</description></item>
         /// <item><term>user_firstname</term>
         ///       <description>avatar's first name</description></item>
         /// <item><term>user_lastname</term>
@@ -1308,7 +1308,7 @@ namespace ZSim.ApplicationPlugins.RemoteController
         /// <list type="table">
         /// <listheader><term>parameter name</term><description>description</description></listheader>
         /// <item><term>password</term>
-        ///       <description>admin password as set in OpenSim.ini</description></item>
+        ///       <description>admin password as set in ZSim.ini</description></item>
         /// <item><term>user_firstname</term>
         ///       <description>avatar's first name (cannot be changed)</description></item>
         /// <item><term>user_lastname</term>
@@ -1467,7 +1467,7 @@ namespace ZSim.ApplicationPlugins.RemoteController
         /// <list type="table">
         /// <listheader><term>parameter name</term><description>description</description></listheader>
         /// <item><term>password</term>
-        ///       <description>admin password as set in OpenSim.ini</description></item>
+        ///       <description>admin password as set in ZSim.ini</description></item>
         /// <item><term>user_firstname</term>
         ///       <description>avatar's first name</description></item>
         /// <item><term>user_lastname</term>
@@ -1600,7 +1600,7 @@ namespace ZSim.ApplicationPlugins.RemoteController
         /// <list type="table">
         /// <listheader><term>parameter name</term><description>description</description></listheader>
         /// <item><term>password</term>
-        ///       <description>admin password as set in OpenSim.ini</description></item>
+        ///       <description>admin password as set in ZSim.ini</description></item>
         /// <item><term>filename</term>
         ///       <description>file name of the OAR file</description></item>
         /// <item><term>region_uuid</term>
@@ -1689,7 +1689,7 @@ namespace ZSim.ApplicationPlugins.RemoteController
         /// <list type="table">
         /// <listheader><term>parameter name</term><description>description</description></listheader>
         /// <item><term>password</term>
-        ///       <description>admin password as set in OpenSim.ini</description></item>
+        ///       <description>admin password as set in ZSim.ini</description></item>
         /// <item><term>filename</term>
         ///       <description>file name for the OAR file</description></item>
         /// <item><term>region_uuid</term>
@@ -3129,7 +3129,7 @@ namespace ZSim.ApplicationPlugins.RemoteController
             {
                 string defaultAppearanceFileName = null;
 
-                //m_config may be null if RemoteAdmin configuration secition is missing or disabled in OpenSim.ini
+                //m_config may be null if RemoteAdmin configuration secition is missing or disabled in ZSim.ini
                 if (m_config != null)
                 {
                     defaultAppearanceFileName = m_config.GetString("default_appearance", "default_appearance.xml");

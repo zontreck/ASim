@@ -33,7 +33,7 @@ using ZSim.Framework;
 using ZSim.Services.Interfaces;
 using OpenMetaverse;
 using log4net;
-using GridRegion = OpenSim.Services.Interfaces.GridRegion;
+using GridRegion = ZSim.Services.Interfaces.GridRegion;
 
 namespace ZSim.Region.CoreModules.ServiceConnectorsOut.Grid
 {

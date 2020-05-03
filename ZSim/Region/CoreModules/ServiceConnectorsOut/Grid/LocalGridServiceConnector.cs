@@ -37,7 +37,7 @@ using ZSim.Server.Base;
 using ZSim.Region.Framework.Interfaces;
 using ZSim.Region.Framework.Scenes;
 using ZSim.Services.Interfaces;
-using GridRegion = OpenSim.Services.Interfaces.GridRegion;
+using GridRegion = ZSim.Services.Interfaces.GridRegion;
 using OpenMetaverse;
 
 namespace ZSim.Region.CoreModules.ServiceConnectorsOut.Grid
@@ -109,7 +109,7 @@ namespace ZSim.Region.CoreModules.ServiceConnectorsOut.Grid
             IConfig config = source.Configs["GridService"];
             if (config == null)
             {
-                m_log.Error("[LOCAL GRID SERVICE CONNECTOR]: GridService missing from OpenSim.ini");
+                m_log.Error("[LOCAL GRID SERVICE CONNECTOR]: GridService missing from ZSim.ini");
                 return false;
             }
 

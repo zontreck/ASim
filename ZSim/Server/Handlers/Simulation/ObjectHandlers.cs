@@ -29,7 +29,7 @@ using System;
 using System.Reflection;
 using System.Net;
 using ZSim.Services.Interfaces;
-using GridRegion = OpenSim.Services.Interfaces.GridRegion;
+using GridRegion = ZSim.Services.Interfaces.GridRegion;
 using ZSim.Framework;
 using ZSim.Framework.Servers.HttpServer;
 

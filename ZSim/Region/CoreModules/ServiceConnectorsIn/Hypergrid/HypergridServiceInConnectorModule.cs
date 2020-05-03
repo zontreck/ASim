@@ -39,7 +39,7 @@ using ZSim.Server.Base;
 using ZSim.Server.Handlers.Base;
 using ZSim.Server.Handlers.Hypergrid;
 using ZSim.Services.Interfaces;
-using GridRegion = OpenSim.Services.Interfaces.GridRegion;
+using GridRegion = ZSim.Services.Interfaces.GridRegion;
 
 namespace ZSim.Region.CoreModules.ServiceConnectorsIn.Hypergrid
 {

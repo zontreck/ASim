@@ -42,8 +42,8 @@ using ZSim.Framework.Console;
 using ZSim.Server.Base;
 using ZSim.Services.Connectors.InstantMessage;
 using ZSim.Services.Interfaces;
-using GridRegion = OpenSim.Services.Interfaces.GridRegion;
-using FriendInfo = OpenSim.Services.Interfaces.FriendInfo;
+using GridRegion = ZSim.Services.Interfaces.GridRegion;
+using FriendInfo = ZSim.Services.Interfaces.FriendInfo;
 using ZSim.Services.Connectors.Hypergrid;
 
 namespace ZSim.Services.LLLoginService

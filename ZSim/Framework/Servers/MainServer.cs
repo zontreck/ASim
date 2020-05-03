@@ -150,7 +150,7 @@ namespace ZSim.Framework.Servers
         }
 
         /// <summary>
-        /// Turn on some debugging values for OpenSim.
+        /// Turn on some debugging values for ZSim.
         /// </summary>
         /// <param name="args"></param>
         private static void HandleDebugHttpCommand(string module, string[] cmdparams)

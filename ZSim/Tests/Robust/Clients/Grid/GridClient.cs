@@ -35,7 +35,7 @@ using NUnit.Framework;
 
 using ZSim.Framework;
 using ZSim.Services.Interfaces;
-using GridRegion = OpenSim.Services.Interfaces.GridRegion;
+using GridRegion = ZSim.Services.Interfaces.GridRegion;
 using ZSim.Services.Connectors;
 
 namespace Robust.Tests

@@ -86,7 +86,7 @@ namespace ZSim.Region.CoreModules.World.Wind.Plugins
 
         #region IWindModelPlugin Members
 
-        public void WindConfig(OpenSim.Region.Framework.Scenes.Scene scene, Nini.Config.IConfig windConfig)
+        public void WindConfig(ZSim.Region.Framework.Scenes.Scene scene, Nini.Config.IConfig windConfig)
         {
             if (windConfig != null)
             {

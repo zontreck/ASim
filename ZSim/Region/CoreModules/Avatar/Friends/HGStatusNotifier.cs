@@ -7,7 +7,7 @@ using ZSim.Framework;
 using ZSim.Region.Framework.Interfaces;
 using ZSim.Services.Interfaces;
 using ZSim.Services.Connectors.Hypergrid;
-using FriendInfo = OpenSim.Services.Interfaces.FriendInfo;
+using FriendInfo = ZSim.Services.Interfaces.FriendInfo;
 
 using OpenMetaverse;
 

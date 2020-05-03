@@ -71,7 +71,7 @@ namespace ZSim.Region.CoreModules.ServiceConnectorsOut.Asset
                     IConfig assetConfig = source.Configs["AssetService"];
                     if (assetConfig == null)
                     {
-                        m_log.Error("[ASSET CONNECTOR]: AssetService missing from OpenSim.ini");
+                        m_log.Error("[ASSET CONNECTOR]: AssetService missing from ZSim.ini");
                         return;
                     }
 

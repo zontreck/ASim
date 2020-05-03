@@ -47,7 +47,7 @@ namespace ZSim.Region.OptionalModules.UDP.Linden
     /// A module that just holds commands for inspecting the current state of the Linden UDP stack.
     /// </summary>
     /// <remarks>
-    /// All actual client stack functionality remains in OpenSim.Region.ClientStack.LindenUDP
+    /// All actual client stack functionality remains in ZSim.Region.ClientStack.LindenUDP
     /// </remarks>
     [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "LindenUDPInfoModule")]
     public class LindenUDPInfoModule : ISharedRegionModule

@@ -112,7 +112,7 @@ namespace ZSim
                 }
             }
 
-            string iniFileName = startupConfig.GetString("inifile", "OpenSim.ini");
+            string iniFileName = startupConfig.GetString("inifile", "ZSim.ini");
 
             if (IsUri(iniFileName))
             {
@@ -127,7 +127,7 @@ namespace ZSim
 
                 if (!File.Exists(Application.iniFilePath))
                 {
-                    iniFileName = "OpenSim.xml";
+                    iniFileName = "ZSim.xml";
                     Application.iniFilePath = Path.GetFullPath(Path.Combine(Util.configDir(), iniFileName));
                 }
 
@@ -339,7 +339,7 @@ namespace ZSim
                 m_configSettings.MeshEngineName = startupConfig.GetString("meshing");
 
                 m_configSettings.ClientstackDll
-                    = startupConfig.GetString("clientstack_plugin", "OpenSim.Region.ClientStack.LindenUDP.dll");
+                    = startupConfig.GetString("clientstack_plugin", "ZSim.Region.ClientStack.LindenUDP.dll");
             }
 
             m_networkServersInfo.loadFromConfiguration(m_config.Source);

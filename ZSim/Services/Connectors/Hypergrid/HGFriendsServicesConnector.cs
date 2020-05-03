@@ -34,7 +34,7 @@ using Nini.Config;
 using ZSim.Framework;
 using ZSim.Services.Interfaces;
 using ZSim.Services.Connectors.Friends;
-using FriendInfo = OpenSim.Services.Interfaces.FriendInfo;
+using FriendInfo = ZSim.Services.Interfaces.FriendInfo;
 using ZSim.Server.Base;
 using OpenMetaverse;
 

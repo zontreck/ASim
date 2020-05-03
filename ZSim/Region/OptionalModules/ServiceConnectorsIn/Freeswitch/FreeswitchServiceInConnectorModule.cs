@@ -96,7 +96,7 @@ namespace ZSim.Region.CoreModules.ServiceConnectorsIn.Freeswitch
 
                 Object[] args = new Object[] { m_Config, MainServer.Instance };
 
-                ServerUtils.LoadPlugin<IServiceConnector>("OpenSim.Server.Handlers.dll:FreeswitchServerConnector", args);
+                ServerUtils.LoadPlugin<IServiceConnector>("ZSim.Server.Handlers.dll:FreeswitchServerConnector", args);
             }
         }
 

@@ -45,7 +45,7 @@ namespace ZSim.Services.Interfaces
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="OpenSim.Services.Interfaces.UserAccount"/> class.
+        /// Initializes a new instance of the <see cref="ZSim.Services.Interfaces.UserAccount"/> class.
         /// This method is used by externasl/3rd party management applications that need us to create a
         /// random UUID for the new user.
         /// </summary>

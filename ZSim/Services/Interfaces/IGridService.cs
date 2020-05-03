@@ -205,7 +205,7 @@ namespace ZSim.Services.Interfaces
         /// XXX: This field is currently ignored when used in RegisterRegion, but could potentially be
         /// used to set flags at this point.
         /// </remarks>
-        public OpenSim.Framework.RegionFlags? RegionFlags { get; set; }
+        public ZSim.Framework.RegionFlags? RegionFlags { get; set; }
 
         protected string m_externalHostName;
 
@@ -352,7 +352,7 @@ namespace ZSim.Services.Interfaces
             }
 
             if (kvp.ContainsKey("flags") && kvp["flags"] != null)
-                RegionFlags = (OpenSim.Framework.RegionFlags?)Convert.ToInt32((string)kvp["flags"]);
+                RegionFlags = (ZSim.Framework.RegionFlags?)Convert.ToInt32((string)kvp["flags"]);
 
             if (kvp.ContainsKey("serverIP"))
             {

@@ -35,7 +35,7 @@ using ZSim.Framework;
 
 using ZSim.Framework.ServiceAuth;
 using ZSim.Services.Interfaces;
-using GridRegion = OpenSim.Services.Interfaces.GridRegion;
+using GridRegion = ZSim.Services.Interfaces.GridRegion;
 using ZSim.Server.Base;
 using OpenMetaverse;
 
@@ -71,7 +71,7 @@ namespace ZSim.Services.Connectors
             IConfig gridConfig = source.Configs["GridService"];
             if (gridConfig == null)
             {
-                m_log.Error("[GRID CONNECTOR]: GridService missing from OpenSim.ini");
+                m_log.Error("[GRID CONNECTOR]: GridService missing from ZSim.ini");
                 throw new Exception("Grid connector init error");
             }
 

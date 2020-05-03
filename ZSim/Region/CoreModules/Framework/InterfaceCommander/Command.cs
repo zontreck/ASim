@@ -148,10 +148,10 @@ namespace ZSim.Region.CoreModules.Framework.InterfaceCommander
                             m_args[i].ArgumentValue = Int32.Parse(arg.ToString());
                             break;
                         case "Float":
-                            m_args[i].ArgumentValue = float.Parse(arg.ToString(), OpenSim.Framework.Culture.NumberFormatInfo);
+                            m_args[i].ArgumentValue = float.Parse(arg.ToString(), ZSim.Framework.Culture.NumberFormatInfo);
                             break;
                         case "Double":
-                            m_args[i].ArgumentValue = Double.Parse(arg.ToString(), OpenSim.Framework.Culture.NumberFormatInfo);
+                            m_args[i].ArgumentValue = Double.Parse(arg.ToString(), ZSim.Framework.Culture.NumberFormatInfo);
                             break;
                         case "Boolean":
                             m_args[i].ArgumentValue = Boolean.Parse(arg.ToString());

@@ -36,7 +36,7 @@ using ZSim.Region.Framework.Interfaces;
 using ZSim.Region.ScriptEngine.Interfaces;
 using ZSim.Region.ScriptEngine.Shared;
 using ZSim.Region.ScriptEngine.Shared.Api.Plugins;
-using Timer=OpenSim.Region.ScriptEngine.Shared.Api.Plugins.Timer;
+using Timer=ZSim.Region.ScriptEngine.Shared.Api.Plugins.Timer;
 using System.Reflection;
 using log4net;
 

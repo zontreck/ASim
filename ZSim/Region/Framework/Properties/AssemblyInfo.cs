@@ -6,7 +6,7 @@ using Mono.Addins;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("OpenSim.Region.Framework")]
+[assembly: AssemblyTitle("ZSim.Region.Framework")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("http://opensimulator.org")]
@@ -31,6 +31,6 @@ using Mono.Addins;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion(OpenSim.VersionInfo.AssemblyVersionNumber)]
-[assembly: AddinRoot("OpenSim.Region.Framework", OpenSim.VersionInfo.VersionNumber)]
+[assembly: AssemblyVersion(ZSim.VersionInfo.AssemblyVersionNumber)]
+[assembly: AddinRoot("ZSim.Region.Framework", ZSim.VersionInfo.VersionNumber)]
 

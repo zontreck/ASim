@@ -47,8 +47,8 @@ using ZSim.Region.Framework.Interfaces;
 using ZSim.Region.Framework.Scenes;
 using ZSim.Region.PhysicsModules.SharedBase;
 using ZSim.Services.Interfaces;
-using Caps = OpenSim.Framework.Capabilities.Caps;
-using GridRegion = OpenSim.Services.Interfaces.GridRegion;
+using Caps = ZSim.Framework.Capabilities.Caps;
+using GridRegion = ZSim.Services.Interfaces.GridRegion;
 using OSDMap = OpenMetaverse.StructuredData.OSDMap;
 using OSDArray = OpenMetaverse.StructuredData.OSDArray;
 

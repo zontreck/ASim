@@ -45,10 +45,10 @@ using ZSim.Region.Framework.Scenes;
 using ZSim.Region.Framework.Scenes.Serialization;
 using ZSim.Region.OptionalModules.Avatar.XmlRpcGroups;
 using ZSim.Tests.Common;
-using ArchiveConstants = OpenSim.Framework.Serialization.ArchiveConstants;
-using TarArchiveReader = OpenSim.Framework.Serialization.TarArchiveReader;
-using TarArchiveWriter = OpenSim.Framework.Serialization.TarArchiveWriter;
-using RegionSettings = OpenSim.Framework.RegionSettings;
+using ArchiveConstants = ZSim.Framework.Serialization.ArchiveConstants;
+using TarArchiveReader = ZSim.Framework.Serialization.TarArchiveReader;
+using TarArchiveWriter = ZSim.Framework.Serialization.TarArchiveWriter;
+using RegionSettings = ZSim.Framework.RegionSettings;
 using ZSim.Region.Framework.Interfaces;
 
 namespace ZSim.Region.CoreModules.World.Archiver.Tests

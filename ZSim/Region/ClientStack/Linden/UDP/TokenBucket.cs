@@ -349,7 +349,7 @@ namespace ZSim.Region.ClientStack.LindenUDP
             get { return m_dripRate; }
             set
             {
-                m_dripRate = OpenSim.Framework.Util.Clamp<float>(value, m_minimumFlow, MaxDripRate);
+                m_dripRate = ZSim.Framework.Util.Clamp<float>(value, m_minimumFlow, MaxDripRate);
 
                 if (m_parent != null)
                     m_parent.RegisterRequest(this, m_dripRate);

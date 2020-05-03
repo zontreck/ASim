@@ -67,8 +67,8 @@ namespace ZSim.Region.Framework.Scenes.Tests
             // For grid servic
             configSource.AddConfig("GridService");
             configSource.Configs["Modules"].Set("GridServices", "LocalGridServicesConnector");
-            configSource.Configs["GridService"].Set("StorageProvider", "OpenSim.Data.Null.dll:NullRegionData");
-            configSource.Configs["GridService"].Set("LocalServiceModule", "OpenSim.Services.GridService.dll:GridService");
+            configSource.Configs["GridService"].Set("StorageProvider", "ZSim.Data.Null.dll:NullRegionData");
+            configSource.Configs["GridService"].Set("LocalServiceModule", "ZSim.Services.GridService.dll:GridService");
             configSource.Configs["GridService"].Set("ConnectionString", "!static");
 
             LocalGridServicesConnector gridService = new LocalGridServicesConnector();
@@ -233,7 +233,7 @@ namespace ZSim.Region.Framework.Scenes.Tests
         public void AddNode(ISharedRegionModule module)
         {
             m_sharedInstances.Add(module);
-            module.Initialise(m_openSim.ConfigSource.Source);
+            module.Initialise(m_ZSim.ConfigSource.Source);
         }
 
         public void Dispose()

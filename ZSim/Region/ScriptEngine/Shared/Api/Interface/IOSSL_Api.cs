@@ -29,15 +29,15 @@ using System;
 using System.Collections;
 using ZSim.Region.ScriptEngine.Interfaces;
 
-using key = OpenSim.Region.ScriptEngine.Shared.LSL_Types.LSLString;
-using rotation = OpenSim.Region.ScriptEngine.Shared.LSL_Types.Quaternion;
-using vector = OpenSim.Region.ScriptEngine.Shared.LSL_Types.Vector3;
-using LSL_List = OpenSim.Region.ScriptEngine.Shared.LSL_Types.list;
-using LSL_String = OpenSim.Region.ScriptEngine.Shared.LSL_Types.LSLString;
-using LSL_Integer = OpenSim.Region.ScriptEngine.Shared.LSL_Types.LSLInteger;
-using LSL_Float = OpenSim.Region.ScriptEngine.Shared.LSL_Types.LSLFloat;
-using LSL_Rotation = OpenSim.Region.ScriptEngine.Shared.LSL_Types.Quaternion;
-using LSL_Key = OpenSim.Region.ScriptEngine.Shared.LSL_Types.LSLString;
+using key = ZSim.Region.ScriptEngine.Shared.LSL_Types.LSLString;
+using rotation = ZSim.Region.ScriptEngine.Shared.LSL_Types.Quaternion;
+using vector = ZSim.Region.ScriptEngine.Shared.LSL_Types.Vector3;
+using LSL_List = ZSim.Region.ScriptEngine.Shared.LSL_Types.list;
+using LSL_String = ZSim.Region.ScriptEngine.Shared.LSL_Types.LSLString;
+using LSL_Integer = ZSim.Region.ScriptEngine.Shared.LSL_Types.LSLInteger;
+using LSL_Float = ZSim.Region.ScriptEngine.Shared.LSL_Types.LSLFloat;
+using LSL_Rotation = ZSim.Region.ScriptEngine.Shared.LSL_Types.Quaternion;
+using LSL_Key = ZSim.Region.ScriptEngine.Shared.LSL_Types.LSLString;
 
 
 namespace ZSim.Region.ScriptEngine.Shared.Api.Interfaces
@@ -47,7 +47,7 @@ namespace ZSim.Region.ScriptEngine.Shared.Api.Interfaces
     /// of OSSL, without allowing malicious scripts to access potentially
     /// troublesome functions, each OSSL function is assigned a threat level,
     /// and access to the functions is granted or denied based on a default
-    /// threshold set in OpenSim.ini (which can be overridden for individual
+    /// threshold set in ZSim.ini (which can be overridden for individual
     /// functions on a case-by-case basis)
     /// </summary>
     public enum ThreatLevel

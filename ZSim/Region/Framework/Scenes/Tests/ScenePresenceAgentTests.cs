@@ -43,7 +43,7 @@ using ZSim.Region.CoreModules.Framework.EntityTransfer;
 using ZSim.Region.CoreModules.World.Serialiser;
 using ZSim.Region.CoreModules.ServiceConnectorsOut.Simulation;
 using ZSim.Tests.Common;
-using GridRegion = OpenSim.Services.Interfaces.GridRegion;
+using GridRegion = ZSim.Services.Interfaces.GridRegion;
 using ZSim.Services.Interfaces;
 
 namespace ZSim.Region.Framework.Scenes.Tests

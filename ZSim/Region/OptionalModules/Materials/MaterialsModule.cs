@@ -42,7 +42,7 @@ using ZSim.Framework;
 using ZSim.Framework.Servers.HttpServer;
 using ZSim.Region.Framework.Interfaces;
 using ZSim.Region.Framework.Scenes;
-using OpenSimAssetType = OpenSim.Framework.SLUtil.OpenSimAssetType;
+using OpenSimAssetType = ZSim.Framework.SLUtil.OpenSimAssetType;
 
 using Ionic.Zlib;
 
@@ -225,7 +225,7 @@ namespace ZSim.Region.OptionalModules.Materials
             }
         }
 
-        private void OnRegisterCaps(UUID agentID, OpenSim.Framework.Capabilities.Caps caps)
+        private void OnRegisterCaps(UUID agentID, ZSim.Framework.Capabilities.Caps caps)
         {
             caps.RegisterSimpleHandler("RenderMaterials", 
                 new SimpleStreamHandler("/" + UUID.Random(),

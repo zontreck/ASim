@@ -66,7 +66,7 @@ namespace ZSim
         private const string PLUGIN_ASSET_CACHE = "/OpenSim/AssetCache";
         private const string PLUGIN_ASSET_SERVER_CLIENT = "/OpenSim/AssetClient";
 
-        // OpenSim.ini Section name for ESTATES Settings
+        // ZSim.ini Section name for ESTATES Settings
         public const string ESTATE_SECTION_NAME = "Estates";
 
         /// <summary>
@@ -246,7 +246,7 @@ namespace ZSim
             // Load the simulation data service
             IConfig simDataConfig = Config.Configs["SimulationDataStore"];
             if (simDataConfig == null)
-                throw new Exception("Configuration file is missing the [SimulationDataStore] section.  Have you copied OpenSim.ini.example to OpenSim.ini to reference config-include/ files?");
+                throw new Exception("Configuration file is missing the [SimulationDataStore] section.  Have you copied ZSim.ini.example to ZSim.ini to reference config-include/ files?");
 
             string module = simDataConfig.GetString("LocalServiceModule", String.Empty);
             if (String.IsNullOrEmpty(module))
@@ -860,7 +860,7 @@ namespace ZSim
                 httpResponse.KeepAlive = false;
                 try
                 {
-                    httpResponse.RawBuffer = Util.UTF8.GetBytes(m_opensim.StatReport(httpRequest));
+                    httpResponse.RawBuffer = Util.UTF8.GetBytes(m_ZSim.StatReport(httpRequest));
                     httpResponse.StatusCode = (int)HttpStatusCode.OK;
                 }
                 catch
@@ -892,7 +892,7 @@ namespace ZSim
                 httpResponse.KeepAlive = false;
                 try
                 {
-                    httpResponse.RawBuffer = Util.UTF8.GetBytes(m_opensim.StatReport(httpRequest));
+                    httpResponse.RawBuffer = Util.UTF8.GetBytes(m_ZSim.StatReport(httpRequest));
                     httpResponse.StatusCode = (int)HttpStatusCode.OK;
                 }
                 catch

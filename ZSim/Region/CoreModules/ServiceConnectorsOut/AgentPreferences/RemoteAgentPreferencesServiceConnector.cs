@@ -72,7 +72,7 @@ namespace ZSim.Region.CoreModules.ServiceConnectorsOut.AgentPreferences
                     IConfig userConfig = source.Configs["AgentPreferencesService"];
                     if (userConfig == null)
                     {
-                        m_log.Error("[AGENT PREFERENCES CONNECTOR]: AgentPreferencesService missing from OpenSim.ini");
+                        m_log.Error("[AGENT PREFERENCES CONNECTOR]: AgentPreferencesService missing from ZSim.ini");
                         return;
                     }
 

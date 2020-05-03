@@ -700,7 +700,7 @@ namespace ZSim.Region.OptionalModules.World.MoneyModule
         /// </summary>
         /// <param name="AgentID">UUID of agent</param>
         /// <param name="scene">Scene the agent was connected to.</param>
-        /// <see cref="OpenSim.Region.Framework.Scenes.EventManager.ClientClosed"/>
+        /// <see cref="ZSim.Region.Framework.Scenes.EventManager.ClientClosed"/>
         public void ClientClosed(UUID AgentID, Scene scene)
         {
 

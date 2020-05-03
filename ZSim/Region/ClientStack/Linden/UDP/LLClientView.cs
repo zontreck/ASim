@@ -47,9 +47,9 @@ using ZSim.Region.Framework.Scenes;
 using ZSim.Services.Interfaces;
 
 
-using AssetLandmark = OpenSim.Framework.AssetLandmark;
-using Caps = OpenSim.Framework.Capabilities.Caps;
-using PermissionMask = OpenSim.Framework.PermissionMask;
+using AssetLandmark = ZSim.Framework.AssetLandmark;
+using Caps = ZSim.Framework.Capabilities.Caps;
+using PermissionMask = ZSim.Framework.PermissionMask;
 using RegionFlags = OpenMetaverse.RegionFlags;
 
 namespace ZSim.Region.ClientStack.LindenUDP
@@ -63,7 +63,7 @@ namespace ZSim.Region.ClientStack.LindenUDP
     public class LLClientView : IClientAPI, IClientCore, IClientIM, IClientChat, IClientInventory, IStatsCollector, IClientIPEndpoint
     {
         /// <value>
-        /// Debug packet level.  See OpenSim.RegisterConsoleCommands() for more details.
+        /// Debug packet level.  See ZSim.RegisterConsoleCommands() for more details.
         /// </value>
         public int DebugPacketLevel { get; set; }
 

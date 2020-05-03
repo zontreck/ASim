@@ -33,8 +33,8 @@ using System.Reflection;
 
 using ZSim.Framework;
 using ZSim.Services.Interfaces;
-using GridRegion = OpenSim.Services.Interfaces.GridRegion;
-using FriendInfo = OpenSim.Services.Interfaces.FriendInfo;
+using GridRegion = ZSim.Services.Interfaces.GridRegion;
+using FriendInfo = ZSim.Services.Interfaces.FriendInfo;
 
 using log4net;
 using OpenMetaverse;
@@ -44,7 +44,7 @@ using OSDMap = OpenMetaverse.StructuredData.OSDMap;
 
 namespace ZSim.Services.LLLoginService
 {
-    public class LLFailedLoginResponse : OpenSim.Services.Interfaces.FailedLoginResponse
+    public class LLFailedLoginResponse : ZSim.Services.Interfaces.FailedLoginResponse
     {
         protected string m_key;
         protected string m_value;
@@ -119,7 +119,7 @@ namespace ZSim.Services.LLLoginService
     /// <summary>
     /// A class to handle LL login response.
     /// </summary>
-    public class LLLoginResponse : OpenSim.Services.Interfaces.LoginResponse
+    public class LLLoginResponse : ZSim.Services.Interfaces.LoginResponse
     {
         private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
         private static Hashtable globalTexturesHash;

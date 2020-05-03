@@ -39,7 +39,7 @@ using ZSim.Framework.Capabilities;
 using ZSim.Region.Framework.Interfaces;
 using ZSim.Services.Interfaces;
 using OSD = OpenMetaverse.StructuredData.OSD;
-using GridRegion = OpenSim.Services.Interfaces.GridRegion;
+using GridRegion = ZSim.Services.Interfaces.GridRegion;
 
 namespace ZSim.Region.Framework.Scenes
 {
@@ -112,7 +112,7 @@ namespace ZSim.Region.Framework.Scenes
 
             foreach (GridRegion n in neighbours)
             {
-                OpenSim.Framework.RegionFlags? regionFlags = n.RegionFlags;
+                ZSim.Framework.RegionFlags? regionFlags = n.RegionFlags;
 
                 //                m_log.DebugFormat(
                 //                    "{0}: Region flags for {1} as seen by {2} are {3}",
@@ -122,7 +122,7 @@ namespace ZSim.Region.Framework.Scenes
                 // make a separate RegionFlags call but this would involve a network call for each neighbour.
                 if (regionFlags != null)
                 {
-                    if ((regionFlags & OpenSim.Framework.RegionFlags.RegionOnline) != 0)
+                    if ((regionFlags & ZSim.Framework.RegionFlags.RegionOnline) != 0)
                         onlineNeighbours.Add(n);
                 }
                 else

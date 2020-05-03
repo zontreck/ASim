@@ -84,9 +84,9 @@ public static class BulletSimTestsUtil
         RegionInfo info = new RegionInfo();
         info.RegionName = "BSTestRegion";
         info.RegionSizeX = info.RegionSizeY = info.RegionSizeZ = Constants.RegionSize;
-        OpenSim.Region.Framework.Scenes.Scene scene = new OpenSim.Region.Framework.Scenes.Scene(info);
+        ZSim.Region.Framework.Scenes.Scene scene = new ZSim.Region.Framework.Scenes.Scene(info);
 
-        IMesher mesher = new OpenSim.Region.PhysicsModule.Meshing.Meshmerizer();
+        IMesher mesher = new ZSim.Region.PhysicsModule.Meshing.Meshmerizer();
         INonSharedRegionModule mod = mesher as INonSharedRegionModule;
         mod.Initialise(openSimINI);
         mod.AddRegion(scene);

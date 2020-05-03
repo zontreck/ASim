@@ -32,11 +32,11 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 
-[assembly : AssemblyTitle("OpenSim.Data.SQLite")]
+[assembly : AssemblyTitle("ZSim.Data.SQLite")]
 [assembly : AssemblyDescription("")]
 [assembly : AssemblyConfiguration("")]
 [assembly : AssemblyCompany("http://opensimulator.org")]
-[assembly : AssemblyProduct("OpenSim.Data.SQLite")]
+[assembly : AssemblyProduct("ZSim.Data.SQLite")]
 [assembly : AssemblyCopyright("Copyright (c) OpenSimulator.org Developers 2007-2009")]
 [assembly : AssemblyTrademark("")]
 [assembly : AssemblyCulture("")]
@@ -61,5 +61,5 @@ using System.Runtime.InteropServices;
 // You can specify all the values or you can default the Revision and Build Numbers
 // by using the '*' as shown below:
 
-[assembly : AssemblyVersion(OpenSim.VersionInfo.AssemblyVersionNumber)]
+[assembly : AssemblyVersion(ZSim.VersionInfo.AssemblyVersionNumber)]
 

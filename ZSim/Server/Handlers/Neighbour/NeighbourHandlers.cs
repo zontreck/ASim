@@ -36,7 +36,7 @@ using ZSim.Server.Handlers.Base;
 using ZSim.Services.Interfaces;
 using ZSim.Framework;
 using ZSim.Framework.Servers.HttpServer;
-using GridRegion = OpenSim.Services.Interfaces.GridRegion;
+using GridRegion = ZSim.Services.Interfaces.GridRegion;
 
 using OpenMetaverse;
 using OpenMetaverse.StructuredData;

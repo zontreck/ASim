@@ -45,7 +45,7 @@ using ZSim.Region.ScriptEngine.Shared.Api;
 using ZSim.Region.ScriptEngine.Shared.Instance;
 using ZSim.Services.Interfaces;
 using ZSim.Tests.Common;
-using PermissionMask = OpenSim.Framework.PermissionMask;
+using PermissionMask = ZSim.Framework.PermissionMask;
 
 namespace ZSim.Region.ScriptEngine.Shared.Tests
 {

@@ -47,7 +47,7 @@ namespace ZSim.Region.ScriptEngine.Shared.Instance.Tests
     public class CoopTerminationTests : OpenSimTestCase
     {
         private TestScene m_scene;
-        private OpenSim.Region.ScriptEngine.XEngine.XEngine m_xEngine;
+        private ZSim.Region.ScriptEngine.XEngine.XEngine m_xEngine;
 
         private AutoResetEvent m_chatEvent;
         private AutoResetEvent m_stoppedEvent;
@@ -75,7 +75,7 @@ namespace ZSim.Region.ScriptEngine.Shared.Instance.Tests
 
             //AppDomain.CurrentDomain.SetData("APPBASE", Environment.CurrentDirectory + "/bin");
 //            Console.WriteLine(AppDomain.CurrentDomain.BaseDirectory);
-            m_xEngine = new OpenSim.Region.ScriptEngine.XEngine.XEngine();
+            m_xEngine = new ZSim.Region.ScriptEngine.XEngine.XEngine();
             m_xEngine.DebugLevel = 1;
 
             IniConfigSource configSource = new IniConfigSource();

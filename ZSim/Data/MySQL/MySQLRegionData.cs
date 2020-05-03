@@ -34,7 +34,7 @@ using MySql.Data.MySqlClient;
 using OpenMetaverse;
 using ZSim.Framework;
 using ZSim.Data;
-using RegionFlags = OpenSim.Framework.RegionFlags;
+using RegionFlags = ZSim.Framework.RegionFlags;
 
 namespace ZSim.Data.MySQL
 {

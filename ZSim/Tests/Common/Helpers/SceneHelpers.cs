@@ -50,7 +50,7 @@ using ZSim.Region.CoreModules.ServiceConnectorsOut.UserAccounts;
 using ZSim.Region.CoreModules.ServiceConnectorsOut.Presence;
 using ZSim.Region.PhysicsModule.BasicPhysics;
 using ZSim.Services.Interfaces;
-using GridRegion = OpenSim.Services.Interfaces.GridRegion;
+using GridRegion = ZSim.Services.Interfaces.GridRegion;
 
 namespace ZSim.Tests.Common
 {
@@ -103,7 +103,7 @@ namespace ZSim.Tests.Common
             m_physicsScene = StartPhysicsScene();
 
             SimDataService
-                = OpenSim.Server.Base.ServerUtils.LoadPlugin<ISimulationDataService>("OpenSim.Tests.Common.dll", null);
+                = ZSim.Server.Base.ServerUtils.LoadPlugin<ISimulationDataService>("ZSim.Tests.Common.dll", null);
         }
 
         /// <summary>
@@ -220,8 +220,8 @@ namespace ZSim.Tests.Common
             config.AddConfig("Modules");
             config.Configs["Modules"].Set("AssetServices", "LocalAssetServicesConnector");
             config.AddConfig("AssetService");
-            config.Configs["AssetService"].Set("LocalServiceModule", "OpenSim.Services.AssetService.dll:AssetService");
-            config.Configs["AssetService"].Set("StorageProvider", "OpenSim.Tests.Common.dll");
+            config.Configs["AssetService"].Set("LocalServiceModule", "ZSim.Services.AssetService.dll:AssetService");
+            config.Configs["AssetService"].Set("StorageProvider", "ZSim.Tests.Common.dll");
 
             LocalAssetServicesConnector assetService = new LocalAssetServicesConnector();
             assetService.Initialise(config);
@@ -246,8 +246,8 @@ namespace ZSim.Tests.Common
             config.AddConfig("AuthenticationService");
             config.Configs["Modules"].Set("AuthenticationServices", "LocalAuthenticationServicesConnector");
             config.Configs["AuthenticationService"].Set(
-                "LocalServiceModule", "OpenSim.Services.AuthenticationService.dll:PasswordAuthenticationService");
-            config.Configs["AuthenticationService"].Set("StorageProvider", "OpenSim.Data.Null.dll");
+                "LocalServiceModule", "ZSim.Services.AuthenticationService.dll:PasswordAuthenticationService");
+            config.Configs["AuthenticationService"].Set("StorageProvider", "ZSim.Data.Null.dll");
 
             LocalAuthenticationServicesConnector service = new LocalAuthenticationServicesConnector();
             service.Initialise(config);
@@ -261,8 +261,8 @@ namespace ZSim.Tests.Common
             config.AddConfig("Modules");
             config.AddConfig("InventoryService");
             config.Configs["Modules"].Set("InventoryServices", "LocalInventoryServicesConnector");
-            config.Configs["InventoryService"].Set("LocalServiceModule", "OpenSim.Services.InventoryService.dll:XInventoryService");
-            config.Configs["InventoryService"].Set("StorageProvider", "OpenSim.Tests.Common.dll");
+            config.Configs["InventoryService"].Set("LocalServiceModule", "ZSim.Services.InventoryService.dll:XInventoryService");
+            config.Configs["InventoryService"].Set("StorageProvider", "ZSim.Tests.Common.dll");
 
             LocalInventoryServicesConnector inventoryService = new LocalInventoryServicesConnector();
             inventoryService.Initialise(config);
@@ -276,8 +276,8 @@ namespace ZSim.Tests.Common
             config.AddConfig("Modules");
             config.AddConfig("GridService");
             config.Configs["Modules"].Set("GridServices", "LocalGridServicesConnector");
-            config.Configs["GridService"].Set("StorageProvider", "OpenSim.Data.Null.dll:NullRegionData");
-            config.Configs["GridService"].Set("LocalServiceModule", "OpenSim.Services.GridService.dll:GridService");
+            config.Configs["GridService"].Set("StorageProvider", "ZSim.Data.Null.dll:NullRegionData");
+            config.Configs["GridService"].Set("LocalServiceModule", "ZSim.Services.GridService.dll:GridService");
             config.Configs["GridService"].Set("ConnectionString", "!static");
 
             LocalGridServicesConnector gridService = new LocalGridServicesConnector();
@@ -297,9 +297,9 @@ namespace ZSim.Tests.Common
             config.AddConfig("Modules");
             config.AddConfig("UserAccountService");
             config.Configs["Modules"].Set("UserAccountServices", "LocalUserAccountServicesConnector");
-            config.Configs["UserAccountService"].Set("StorageProvider", "OpenSim.Data.Null.dll");
+            config.Configs["UserAccountService"].Set("StorageProvider", "ZSim.Data.Null.dll");
             config.Configs["UserAccountService"].Set(
-                "LocalServiceModule", "OpenSim.Services.UserAccountService.dll:UserAccountService");
+                "LocalServiceModule", "ZSim.Services.UserAccountService.dll:UserAccountService");
 
             LocalUserAccountServicesConnector userAccountService = new LocalUserAccountServicesConnector();
             userAccountService.Initialise(config);
@@ -322,9 +322,9 @@ namespace ZSim.Tests.Common
             config.AddConfig("Modules");
             config.AddConfig("PresenceService");
             config.Configs["Modules"].Set("PresenceServices", "LocalPresenceServicesConnector");
-            config.Configs["PresenceService"].Set("StorageProvider", "OpenSim.Data.Null.dll");
+            config.Configs["PresenceService"].Set("StorageProvider", "ZSim.Data.Null.dll");
             config.Configs["PresenceService"].Set(
-                "LocalServiceModule", "OpenSim.Services.PresenceService.dll:PresenceService");
+                "LocalServiceModule", "ZSim.Services.PresenceService.dll:PresenceService");
 
             LocalPresenceServicesConnector presenceService = new LocalPresenceServicesConnector();
             presenceService.Initialise(config);

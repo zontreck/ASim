@@ -43,7 +43,7 @@ using ZSim.Framework.ServiceAuth;
 using ZSim.Framework.Servers.HttpServer;
 using ZSim.Server.Handlers.Base;
 
-using GridRegion = OpenSim.Services.Interfaces.GridRegion;
+using GridRegion = ZSim.Services.Interfaces.GridRegion;
 
 namespace ZSim.Server.Handlers.MapImage
 {

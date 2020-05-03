@@ -63,24 +63,24 @@ using ZSim.Region.ScriptEngine.Shared.ScriptBase;
 using ZSim.Region.ScriptEngine.Interfaces;
 using ZSim.Region.ScriptEngine.Shared.Api.Interfaces;
 using ZSim.Services.Interfaces;
-using GridRegion = OpenSim.Services.Interfaces.GridRegion;
-using PresenceInfo = OpenSim.Services.Interfaces.PresenceInfo;
-using PrimType = OpenSim.Region.Framework.Scenes.PrimType;
-using AssetLandmark = OpenSim.Framework.AssetLandmark;
-using RegionFlags = OpenSim.Framework.RegionFlags;
-using RegionInfo = OpenSim.Framework.RegionInfo;
+using GridRegion = ZSim.Services.Interfaces.GridRegion;
+using PresenceInfo = ZSim.Services.Interfaces.PresenceInfo;
+using PrimType = ZSim.Region.Framework.Scenes.PrimType;
+using AssetLandmark = ZSim.Framework.AssetLandmark;
+using RegionFlags = ZSim.Framework.RegionFlags;
+using RegionInfo = ZSim.Framework.RegionInfo;
 
-using LSL_Float = OpenSim.Region.ScriptEngine.Shared.LSL_Types.LSLFloat;
-using LSL_Integer = OpenSim.Region.ScriptEngine.Shared.LSL_Types.LSLInteger;
-using LSL_Key = OpenSim.Region.ScriptEngine.Shared.LSL_Types.LSLString;
-using LSL_List = OpenSim.Region.ScriptEngine.Shared.LSL_Types.list;
-using LSL_Rotation = OpenSim.Region.ScriptEngine.Shared.LSL_Types.Quaternion;
-using LSL_String = OpenSim.Region.ScriptEngine.Shared.LSL_Types.LSLString;
-using LSL_Vector = OpenSim.Region.ScriptEngine.Shared.LSL_Types.Vector3;
+using LSL_Float = ZSim.Region.ScriptEngine.Shared.LSL_Types.LSLFloat;
+using LSL_Integer = ZSim.Region.ScriptEngine.Shared.LSL_Types.LSLInteger;
+using LSL_Key = ZSim.Region.ScriptEngine.Shared.LSL_Types.LSLString;
+using LSL_List = ZSim.Region.ScriptEngine.Shared.LSL_Types.list;
+using LSL_Rotation = ZSim.Region.ScriptEngine.Shared.LSL_Types.Quaternion;
+using LSL_String = ZSim.Region.ScriptEngine.Shared.LSL_Types.LSLString;
+using LSL_Vector = ZSim.Region.ScriptEngine.Shared.LSL_Types.Vector3;
 using System.Reflection;
 using Timer = System.Timers.Timer;
 using System.Linq;
-using PermissionMask = OpenSim.Framework.PermissionMask;
+using PermissionMask = ZSim.Framework.PermissionMask;
 
 namespace ZSim.Region.ScriptEngine.Shared.Api
 {
@@ -189,7 +189,7 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
         protected int m_sleepMsOnGetParcelPrimOwners = 2000;
         protected int m_sleepMsOnGetNumberOfNotecardLines = 100;
         protected int m_sleepMsOnGetNotecardLine = 100;
-        protected string m_internalObjectHost = "lsl.opensim.local";
+        protected string m_internalObjectHost = "lsl.ZSim.local";
         protected bool m_restrictEmail = false;
         protected ISoundModule m_SoundModule = null;
 
@@ -3785,7 +3785,7 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
         /// Attach the object containing this script to the avatar that owns it.
         /// </summary>
         /// <param name='attachmentPoint'>
-        /// The attachment point (e.g. <see cref="OpenSim.Region.ScriptEngine.Shared.ScriptBase.ScriptBaseClass.ATTACH_CHEST">ATTACH_CHEST</see>)
+        /// The attachment point (e.g. <see cref="ZSim.Region.ScriptEngine.Shared.ScriptBase.ScriptBaseClass.ATTACH_CHEST">ATTACH_CHEST</see>)
         /// </param>
         /// <returns>true if the attach suceeded, false if it did not</returns>
         public bool AttachToAvatar(int attachmentPoint)

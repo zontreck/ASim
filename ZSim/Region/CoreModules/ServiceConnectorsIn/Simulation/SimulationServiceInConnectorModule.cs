@@ -111,7 +111,7 @@ namespace ZSim.Region.CoreModules.ServiceConnectorsIn.Simulation
 
                 Object[] args = new Object[] { m_Config, MainServer.Instance, scene };
 
-                ServerUtils.LoadPlugin<IServiceConnector>("OpenSim.Server.Handlers.dll:SimulationServiceInConnector", args);
+                ServerUtils.LoadPlugin<IServiceConnector>("ZSim.Server.Handlers.dll:SimulationServiceInConnector", args);
             }
         }
 

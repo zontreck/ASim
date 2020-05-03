@@ -36,7 +36,7 @@ using ZSim.Framework.Console;
 using ZSim.Data;
 using ZSim.Server.Base;
 using ZSim.Services.Interfaces;
-using GridRegion = OpenSim.Services.Interfaces.GridRegion;
+using GridRegion = ZSim.Services.Interfaces.GridRegion;
 using OpenMetaverse;
 
 namespace ZSim.Services.GridService
@@ -231,11 +231,11 @@ namespace ZSim.Services.GridService
                 //
                 // Get it's flags
                 //
-                OpenSim.Framework.RegionFlags rflags = (OpenSim.Framework.RegionFlags)Convert.ToInt32(region.Data["flags"]);
+                ZSim.Framework.RegionFlags rflags = (ZSim.Framework.RegionFlags)Convert.ToInt32(region.Data["flags"]);
 
                 // Is this a reservation?
                 //
-                if ((rflags & OpenSim.Framework.RegionFlags.Reservation) != 0)
+                if ((rflags & ZSim.Framework.RegionFlags.Reservation) != 0)
                 {
                     // Regions reserved for the null key cannot be taken.
                     if ((string)region.Data["PrincipalID"] == UUID.Zero.ToString())
@@ -246,10 +246,10 @@ namespace ZSim.Services.GridService
                     // NOTE: Fudging the flags value here, so these flags
                     //       should not be used elsewhere. Don't optimize
                     //       this with the later retrieval of the same flags!
-                    rflags |= OpenSim.Framework.RegionFlags.Authenticate;
+                    rflags |= ZSim.Framework.RegionFlags.Authenticate;
                 }
 
-                if ((rflags & OpenSim.Framework.RegionFlags.Authenticate) != 0)
+                if ((rflags & ZSim.Framework.RegionFlags.Authenticate) != 0)
                 {
                     // Can we authenticate at all?
                     //
@@ -285,10 +285,10 @@ namespace ZSim.Services.GridService
             if ((region != null) && (region.RegionID == regionInfos.RegionID) &&
                 ((region.posX != regionInfos.RegionLocX) || (region.posY != regionInfos.RegionLocY)))
             {
-                if ((Convert.ToInt32(region.Data["flags"]) & (int)OpenSim.Framework.RegionFlags.NoMove) != 0)
+                if ((Convert.ToInt32(region.Data["flags"]) & (int)ZSim.Framework.RegionFlags.NoMove) != 0)
                     return "Can't move this region";
 
-                if ((Convert.ToInt32(region.Data["flags"]) & (int)OpenSim.Framework.RegionFlags.LockedOut) != 0)
+                if ((Convert.ToInt32(region.Data["flags"]) & (int)ZSim.Framework.RegionFlags.LockedOut) != 0)
                     return "Region locked out";
 
                 // Region reregistering in other coordinates. Delete the old entry
@@ -313,7 +313,7 @@ namespace ZSim.Services.GridService
             {
                 int oldFlags = Convert.ToInt32(region.Data["flags"]);
 
-                oldFlags &= ~(int)OpenSim.Framework.RegionFlags.Reservation;
+                oldFlags &= ~(int)ZSim.Framework.RegionFlags.Reservation;
 
                 rdata.Data["flags"] = oldFlags.ToString(); // Preserve flags
             }
@@ -332,7 +332,7 @@ namespace ZSim.Services.GridService
             }
 
             int flags = Convert.ToInt32(rdata.Data["flags"]);
-            flags |= (int)OpenSim.Framework.RegionFlags.RegionOnline;
+            flags |= (int)ZSim.Framework.RegionFlags.RegionOnline;
             rdata.Data["flags"] = flags.ToString();
 
             try
@@ -349,7 +349,7 @@ namespace ZSim.Services.GridService
                 ("[GRID SERVICE]: Region {0} ({1}, {2}x{3}) registered at {4},{5} with flags {6}",
                 regionInfos.RegionName, regionInfos.RegionID, regionInfos.RegionSizeX, regionInfos.RegionSizeY,
                 regionInfos.RegionCoordX, regionInfos.RegionCoordY,
-                (OpenSim.Framework.RegionFlags)flags);
+                (ZSim.Framework.RegionFlags)flags);
 
             return String.Empty;
         }
@@ -380,9 +380,9 @@ namespace ZSim.Services.GridService
 
             int flags = Convert.ToInt32(region.Data["flags"]);
 
-            if ((!m_DeleteOnUnregister) || ((flags & (int)OpenSim.Framework.RegionFlags.Persistent) != 0))
+            if ((!m_DeleteOnUnregister) || ((flags & (int)ZSim.Framework.RegionFlags.Persistent) != 0))
             {
-                flags &= ~(int)OpenSim.Framework.RegionFlags.RegionOnline;
+                flags &= ~(int)ZSim.Framework.RegionFlags.RegionOnline;
                 region.Data["flags"] = flags.ToString();
                 region.Data["last_seen"] = Util.UnixTimeSinceEpoch();
                 try
@@ -700,7 +700,7 @@ namespace ZSim.Services.GridService
 
             foreach (RegionData r in regions)
             {
-                if ((Convert.ToInt32(r.Data["flags"]) & (int)OpenSim.Framework.RegionFlags.RegionOnline) != 0)
+                if ((Convert.ToInt32(r.Data["flags"]) & (int)ZSim.Framework.RegionFlags.RegionOnline) != 0)
                     ret.Add(RegionData2RegionInfo(r));
             }
 
@@ -716,7 +716,7 @@ namespace ZSim.Services.GridService
 
             foreach (RegionData r in regions)
             {
-                if ((Convert.ToInt32(r.Data["flags"]) & (int)OpenSim.Framework.RegionFlags.RegionOnline) != 0)
+                if ((Convert.ToInt32(r.Data["flags"]) & (int)ZSim.Framework.RegionFlags.RegionOnline) != 0)
                     ret.Add(RegionData2RegionInfo(r));
             }
 
@@ -743,7 +743,7 @@ namespace ZSim.Services.GridService
 
             foreach (RegionData r in regions)
             {
-                if ((Convert.ToInt32(r.Data["flags"]) & (int)OpenSim.Framework.RegionFlags.RegionOnline) != 0)
+                if ((Convert.ToInt32(r.Data["flags"]) & (int)ZSim.Framework.RegionFlags.RegionOnline) != 0)
                     ret.Add(RegionData2RegionInfo(r));
             }
 
@@ -759,7 +759,7 @@ namespace ZSim.Services.GridService
 
             foreach (RegionData r in regions)
             {
-                if ((Convert.ToInt32(r.Data["flags"]) & (int)OpenSim.Framework.RegionFlags.RegionOnline) != 0)
+                if ((Convert.ToInt32(r.Data["flags"]) & (int)ZSim.Framework.RegionFlags.RegionOnline) != 0)
                     ret.Add(RegionData2RegionInfo(r));
             }
 
@@ -910,7 +910,7 @@ namespace ZSim.Services.GridService
 
         private void OutputRegionToConsole(RegionData r)
         {
-            OpenSim.Framework.RegionFlags flags = (OpenSim.Framework.RegionFlags)Convert.ToInt32(r.Data["flags"]);
+            ZSim.Framework.RegionFlags flags = (ZSim.Framework.RegionFlags)Convert.ToInt32(r.Data["flags"]);
 
             ConsoleDisplayList dispList = new ConsoleDisplayList();
             dispList.AddRow("Region Name", r.RegionName);
@@ -941,7 +941,7 @@ namespace ZSim.Services.GridService
 
             foreach (RegionData r in regions)
             {
-                OpenSim.Framework.RegionFlags flags = (OpenSim.Framework.RegionFlags)Convert.ToInt32(r.Data["flags"]);
+                ZSim.Framework.RegionFlags flags = (ZSim.Framework.RegionFlags)Convert.ToInt32(r.Data["flags"]);
                 dispTable.AddRow(
                     r.RegionName,
                     r.RegionID.ToString(),
@@ -955,7 +955,7 @@ namespace ZSim.Services.GridService
 
         private int ParseFlags(int prev, string flags)
         {
-            OpenSim.Framework.RegionFlags f = (OpenSim.Framework.RegionFlags)prev;
+            ZSim.Framework.RegionFlags f = (ZSim.Framework.RegionFlags)prev;
 
             string[] parts = flags.Split(new char[] {',', ' '}, StringSplitOptions.RemoveEmptyEntries);
 
@@ -967,18 +967,18 @@ namespace ZSim.Services.GridService
                 {
                     if (p.StartsWith("+"))
                     {
-                        val = (int)Enum.Parse(typeof(OpenSim.Framework.RegionFlags), p.Substring(1));
-                        f |= (OpenSim.Framework.RegionFlags)val;
+                        val = (int)Enum.Parse(typeof(ZSim.Framework.RegionFlags), p.Substring(1));
+                        f |= (ZSim.Framework.RegionFlags)val;
                     }
                     else if (p.StartsWith("-"))
                     {
-                        val = (int)Enum.Parse(typeof(OpenSim.Framework.RegionFlags), p.Substring(1));
-                        f &= ~(OpenSim.Framework.RegionFlags)val;
+                        val = (int)Enum.Parse(typeof(ZSim.Framework.RegionFlags), p.Substring(1));
+                        f &= ~(ZSim.Framework.RegionFlags)val;
                     }
                     else
                     {
-                        val = (int)Enum.Parse(typeof(OpenSim.Framework.RegionFlags), p);
-                        f |= (OpenSim.Framework.RegionFlags)val;
+                        val = (int)Enum.Parse(typeof(ZSim.Framework.RegionFlags), p);
+                        f |= (ZSim.Framework.RegionFlags)val;
                     }
                 }
                 catch (Exception)
@@ -1010,7 +1010,7 @@ namespace ZSim.Services.GridService
                 int flags = Convert.ToInt32(r.Data["flags"]);
                 flags = ParseFlags(flags, cmd[4]);
                 r.Data["flags"] = flags.ToString();
-                OpenSim.Framework.RegionFlags f = (OpenSim.Framework.RegionFlags)flags;
+                ZSim.Framework.RegionFlags f = (ZSim.Framework.RegionFlags)flags;
 
                 MainConsole.Instance.Output(String.Format("Set region {0} to {1}", r.RegionName, f));
                 m_Database.Store(r);

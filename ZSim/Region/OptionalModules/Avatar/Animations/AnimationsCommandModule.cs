@@ -42,7 +42,7 @@ using ZSim.Region.Framework.Interfaces;
 using ZSim.Region.Framework.Scenes;
 using ZSim.Region.Framework.Scenes.Animation;
 using ZSim.Services.Interfaces;
-using AnimationSet = OpenSim.Region.Framework.Scenes.Animation.AnimationSet;
+using AnimationSet = ZSim.Region.Framework.Scenes.Animation.AnimationSet;
 
 namespace ZSim.Region.OptionalModules.Avatar.Animations
 {

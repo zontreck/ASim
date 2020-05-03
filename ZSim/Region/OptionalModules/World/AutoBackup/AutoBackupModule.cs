@@ -59,9 +59,9 @@ namespace ZSim.Region.OptionalModules.World.AutoBackup
     /// </summary>
     /// <remarks>
     /// Config Settings Documentation.
-    /// Configuration setting can be specified in two places: OpenSim.ini and/or Regions.ini.
+    /// Configuration setting can be specified in two places: ZSim.ini and/or Regions.ini.
     ///
-    /// OpenSim.ini only settings section [AutoBackupModule]
+    /// ZSim.ini only settings section [AutoBackupModule]
     /// AutoBackupModuleEnabled: True/False. Default: False. If True, use the auto backup module.
     ///     if false module is disable and all rest is ignored
     /// AutoBackupInterval: Double, non-negative value. Default: 720 (12 hours).
@@ -70,11 +70,11 @@ namespace ZSim.Region.OptionalModules.World.AutoBackup
     /// 	A directory (absolute or relative) where backups should be saved.
     /// AutoBackupKeepFilesForDays remove files older than this number of days. 0  disables
     /// 
-    /// Next can be set on OpenSim.ini, as default, and or per region in Regions.ini
+    /// Next can be set on ZSim.ini, as default, and or per region in Regions.ini
     /// Region-specific settings take precedence.
     /// 
     /// AutoBackup: True/False. Default: False. If True, activate auto backup functionality.
-    ///     controls backup per region, with default optionaly set on OpenSim.ini
+    ///     controls backup per region, with default optionaly set on ZSim.ini
     
     /// AutoBackupSkipAssets
     ///     If true, assets are not saved to the oar file. Considerably reduces impact on simulator when backing up. Intended for when assets db is backed up separately
@@ -143,10 +143,10 @@ namespace ZSim.Region.OptionalModules.World.AutoBackup
         /// <summary>
         /// Called once in the lifetime of the module at startup.
         /// </summary>
-        /// <param name="source">The input config source for OpenSim.ini.</param>
+        /// <param name="source">The input config source for ZSim.ini.</param>
         public void Initialise(IConfigSource source)
         {
-            // Determine if we have been enabled at all in OpenSim.ini -- this is part and parcel of being an optional module
+            // Determine if we have been enabled at all in ZSim.ini -- this is part and parcel of being an optional module
             m_configSource = source;
             IConfig moduleConfig = source.Configs["AutoBackupModule"];
             if (moduleConfig == null)
@@ -573,8 +573,8 @@ namespace ZSim.Region.OptionalModules.World.AutoBackup
 
         /// <summary>
         /// Run the script or executable specified by the "AutoBackupScript" config setting.
-        /// Of course this is a security risk if you let anyone modify OpenSim.ini and they want to run some nasty bash script.
-        /// But there are plenty of other nasty things that can be done with an untrusted OpenSim.ini, such as running high threat level scripting functions.
+        /// Of course this is a security risk if you let anyone modify ZSim.ini and they want to run some nasty bash script.
+        /// But there are plenty of other nasty things that can be done with an untrusted ZSim.ini, such as running high threat level scripting functions.
         /// </summary>
         /// <param name="scriptName"></param>
         /// <param name="savePath"></param>

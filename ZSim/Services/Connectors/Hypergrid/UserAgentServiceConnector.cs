@@ -35,7 +35,7 @@ using System.Text;
 using ZSim.Framework;
 using ZSim.Services.Interfaces;
 using ZSim.Services.Connectors.Simulation;
-using GridRegion = OpenSim.Services.Interfaces.GridRegion;
+using GridRegion = ZSim.Services.Interfaces.GridRegion;
 using OpenMetaverse;
 using OpenMetaverse.StructuredData;
 using log4net;

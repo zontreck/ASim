@@ -77,7 +77,7 @@ namespace ZSim.Region.CoreModules.World.Sound
             }
             else
             {
-                Enabled = config.GetString("Module", "OpenSim.Region.CoreModules.dll:SoundModule") ==
+                Enabled = config.GetString("Module", "ZSim.Region.CoreModules.dll:SoundModule") ==
                         Path.GetFileName(Assembly.GetExecutingAssembly().Location)
                         + ":" + MethodBase.GetCurrentMethod().DeclaringType.Name;
                 MaxDistance = config.GetFloat("MaxDistance", 100.0f);

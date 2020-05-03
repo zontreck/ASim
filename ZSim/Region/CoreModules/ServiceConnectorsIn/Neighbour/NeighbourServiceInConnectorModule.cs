@@ -102,7 +102,7 @@ namespace ZSim.Region.CoreModules.ServiceConnectorsIn.Neighbour
             {
                 m_Registered = true;
                 Object[] args = new Object[] { m_Config, MainServer.Instance, this, scene };
-                ServerUtils.LoadPlugin<IServiceConnector>("OpenSim.Server.Handlers.dll:NeighbourServiceInConnector", args);
+                ServerUtils.LoadPlugin<IServiceConnector>("ZSim.Server.Handlers.dll:NeighbourServiceInConnector", args);
             }
 
             m_Scenes.Add(scene);

@@ -45,9 +45,9 @@ namespace ZSim.Region.PhysicsModule.ODE.Tests
     {
         private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
-        //private OpenSim.Region.PhysicsModule.ODE.OdePlugin cbt;
+        //private ZSim.Region.PhysicsModule.ODE.OdePlugin cbt;
         private PhysicsScene pScene;
-        private OpenSim.Region.PhysicsModule.ODE.OdeModule odemodule;
+        private ZSim.Region.PhysicsModule.ODE.OdeModule odemodule;
 
 
         [SetUp]
@@ -65,16 +65,16 @@ namespace ZSim.Region.PhysicsModule.ODE.Tests
             RegionInfo info = new RegionInfo();
             info.RegionName = "ODETestRegion";
             info.RegionSizeX = info.RegionSizeY = info.RegionSizeZ = Constants.RegionSize;
-            OpenSim.Region.Framework.Scenes.Scene scene = new OpenSim.Region.Framework.Scenes.Scene(info);
+            ZSim.Region.Framework.Scenes.Scene scene = new ZSim.Region.Framework.Scenes.Scene(info);
 
-            //IMesher mesher = new OpenSim.Region.PhysicsModule.Meshing.Meshmerizer();
+            //IMesher mesher = new ZSim.Region.PhysicsModule.Meshing.Meshmerizer();
             //INonSharedRegionModule mod = mesher as INonSharedRegionModule;
             //mod.Initialise(openSimINI);
             //mod.AddRegion(scene);
             //mod.RegionLoaded(scene);
 
             //            pScene = new OdeScene();
-            odemodule = new OpenSim.Region.PhysicsModule.ODE.OdeModule();
+            odemodule = new ZSim.Region.PhysicsModule.ODE.OdeModule();
             Console.WriteLine("HERE " + (odemodule == null ? "Null" : "Not null"));
             odemodule.Initialise(openSimINI);
             odemodule.AddRegion(scene);

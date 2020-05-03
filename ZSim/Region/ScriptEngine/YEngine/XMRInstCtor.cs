@@ -45,13 +45,13 @@ using ZSim.Region.ScriptEngine.Yengine;
 using ZSim.Region.Framework.Scenes;
 using log4net;
 
-using LSL_Float = OpenSim.Region.ScriptEngine.Shared.LSL_Types.LSLFloat;
-using LSL_Integer = OpenSim.Region.ScriptEngine.Shared.LSL_Types.LSLInteger;
-using LSL_Key = OpenSim.Region.ScriptEngine.Shared.LSL_Types.LSLString;
-using LSL_List = OpenSim.Region.ScriptEngine.Shared.LSL_Types.list;
-using LSL_Rotation = OpenSim.Region.ScriptEngine.Shared.LSL_Types.Quaternion;
-using LSL_String = OpenSim.Region.ScriptEngine.Shared.LSL_Types.LSLString;
-using LSL_Vector = OpenSim.Region.ScriptEngine.Shared.LSL_Types.Vector3;
+using LSL_Float = ZSim.Region.ScriptEngine.Shared.LSL_Types.LSLFloat;
+using LSL_Integer = ZSim.Region.ScriptEngine.Shared.LSL_Types.LSLInteger;
+using LSL_Key = ZSim.Region.ScriptEngine.Shared.LSL_Types.LSLString;
+using LSL_List = ZSim.Region.ScriptEngine.Shared.LSL_Types.list;
+using LSL_Rotation = ZSim.Region.ScriptEngine.Shared.LSL_Types.Quaternion;
+using LSL_String = ZSim.Region.ScriptEngine.Shared.LSL_Types.LSLString;
+using LSL_Vector = ZSim.Region.ScriptEngine.Shared.LSL_Types.Vector3;
 
 namespace ZSim.Region.ScriptEngine.Yengine
 {
@@ -980,7 +980,7 @@ namespace ZSim.Region.ScriptEngine.Yengine
                 Object[] args =
                     new Object[] { tag.InnerText };
 
-                assembly = itemType + ", OpenSim.Region.ScriptEngine.Shared";
+                assembly = itemType + ", ZSim.Region.ScriptEngine.Shared";
                 itemT = Type.GetType(assembly);
                 if (itemT == null)
                     return null;
@@ -1121,7 +1121,7 @@ namespace ZSim.Region.ScriptEngine.Yengine
             {
                 Object[] args = new Object[] { item.InnerText };
 
-                string assembly = itemType + ", OpenSim.Region.ScriptEngine.Shared";
+                string assembly = itemType + ", ZSim.Region.ScriptEngine.Shared";
                 itemT = Type.GetType(assembly);
                 if(itemT == null)
                 {

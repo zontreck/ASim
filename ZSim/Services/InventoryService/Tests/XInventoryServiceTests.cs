@@ -49,10 +49,10 @@ namespace ZSim.Services.InventoryService.Tests
         {
             IConfigSource config = new IniConfigSource();
             config.AddConfig("InventoryService");
-            config.Configs["InventoryService"].Set("StorageProvider", "OpenSim.Tests.Common.dll");
+            config.Configs["InventoryService"].Set("StorageProvider", "ZSim.Tests.Common.dll");
 
             return ServerUtils.LoadPlugin<IInventoryService>(
-                "OpenSim.Services.InventoryService.dll:XInventoryService", new Object[] { config });
+                "ZSim.Services.InventoryService.dll:XInventoryService", new Object[] { config });
         }
 
         /// <summary>

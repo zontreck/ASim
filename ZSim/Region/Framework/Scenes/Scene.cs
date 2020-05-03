@@ -50,9 +50,9 @@ using ZSim.Region.Framework.Scenes.Scripting;
 using ZSim.Region.Framework.Scenes.Serialization;
 using ZSim.Region.PhysicsModules.SharedBase;
 using Timer = System.Timers.Timer;
-using TPFlags = OpenSim.Framework.Constants.TeleportFlags;
-using GridRegion = OpenSim.Services.Interfaces.GridRegion;
-using PermissionMask = OpenSim.Framework.PermissionMask;
+using TPFlags = ZSim.Framework.Constants.TeleportFlags;
+using GridRegion = ZSim.Services.Interfaces.GridRegion;
+using PermissionMask = ZSim.Framework.PermissionMask;
 
 namespace ZSim.Region.Framework.Scenes
 {
@@ -618,7 +618,7 @@ namespace ZSim.Region.Framework.Scenes
 
                     if (m_InventoryService == null)
                     {
-                        throw new Exception("No IInventoryService available. This could happen if the config_include folder doesn't exist or if the OpenSim.ini [Architecture] section isn't set.  Please also check that you have the correct version of your inventory service dll.  Sometimes old versions of this dll will still exist.  Do a clean checkout and re-create the opensim.ini from the opensim.ini.example.");
+                        throw new Exception("No IInventoryService available. This could happen if the config_include folder doesn't exist or if the ZSim.ini [Architecture] section isn't set.  Please also check that you have the correct version of your inventory service dll.  Sometimes old versions of this dll will still exist.  Do a clean checkout and re-create the ZSim.ini from the ZSim.ini.example.");
                     }
                 }
 
@@ -636,7 +636,7 @@ namespace ZSim.Region.Framework.Scenes
 
                     if (m_GridService == null)
                     {
-                        throw new Exception("No IGridService available. This could happen if the config_include folder doesn't exist or if the OpenSim.ini [Architecture] section isn't set.  Please also check that you have the correct version of your inventory service dll.  Sometimes old versions of this dll will still exist.  Do a clean checkout and re-create the opensim.ini from the opensim.ini.example.");
+                        throw new Exception("No IGridService available. This could happen if the config_include folder doesn't exist or if the ZSim.ini [Architecture] section isn't set.  Please also check that you have the correct version of your inventory service dll.  Sometimes old versions of this dll will still exist.  Do a clean checkout and re-create the ZSim.ini from the ZSim.ini.example.");
                     }
                 }
 
@@ -1403,7 +1403,7 @@ namespace ZSim.Region.Framework.Scenes
         }
 
         // This is a helper function that notifies root agents in this region that a new sim near them has come up
-        // This is in the form of a timer because when an instance of OpenSim.exe is started,
+        // This is in the form of a timer because when an instance of ZSim.exe is started,
         // Even though the sims initialize, they don't listen until 'all of the sims are initialized'
         // If we tell an agent about a sim that's not listening yet, the agent will not be able to connect to it.
         // subsequently the agent will never see the region come back online.
@@ -4318,7 +4318,7 @@ namespace ZSim.Region.Framework.Scenes
                 return false;
             }
 
-            OpenSim.Services.Interfaces.PresenceInfo pinfo = presence.GetAgent(agent.SessionID);
+            ZSim.Services.Interfaces.PresenceInfo pinfo = presence.GetAgent(agent.SessionID);
 
             if (pinfo == null)
             {

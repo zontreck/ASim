@@ -39,7 +39,7 @@ using ZSim.Framework.Servers.HttpServer;
 using Nini.Config;
 using log4net;
 using Mono.Addins;
-using Caps = OpenSim.Framework.Capabilities.Caps;
+using Caps = ZSim.Framework.Capabilities.Caps;
 using OSDMap = OpenMetaverse.StructuredData.OSDMap;
 
 namespace ZSim.Region.OptionalModules.ViewerSupport

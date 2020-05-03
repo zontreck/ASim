@@ -64,7 +64,7 @@ namespace ZSim.Region.CoreModules.Scripting.EmailModules
         private Dictionary<UUID, List<Email>> m_MailQueues = new Dictionary<UUID, List<Email>>();
         private Dictionary<UUID, DateTime> m_LastGetEmailCall = new Dictionary<UUID, DateTime>();
         private TimeSpan m_QueueTimeout = new TimeSpan(2, 0, 0); // 2 hours without llGetNextEmail drops the queue
-        private string m_InterObjectHostname = "lsl.opensim.local";
+        private string m_InterObjectHostname = "lsl.ZSim.local";
 
         private int m_MaxEmailSize = 4096;  // largest email allowed by default, as per lsl docs.
 

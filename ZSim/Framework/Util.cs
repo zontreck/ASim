@@ -1584,7 +1584,7 @@ namespace ZSim.Framework
                 }
             }
 
-            return "./OpenSim.log";
+            return "./ZSim.log";
         }
 
         public static string statsLogFile()

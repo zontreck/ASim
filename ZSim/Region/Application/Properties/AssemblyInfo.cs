@@ -30,7 +30,7 @@ using Mono.Addins;
 //      Build Number
 //      Revision
 //
-[assembly: AssemblyVersion(OpenSim.VersionInfo.AssemblyVersionNumber)]
+[assembly: AssemblyVersion(ZSim.VersionInfo.AssemblyVersionNumber)]
 
-[assembly: AddinRoot("OpenSim", OpenSim.VersionInfo.VersionNumber)]
-[assembly: ImportAddinAssembly("OpenSim.Framework.dll")]
+[assembly: AddinRoot("OpenSim", ZSim.VersionInfo.VersionNumber)]
+[assembly: ImportAddinAssembly("ZSim.Framework.dll")]

@@ -53,7 +53,7 @@ namespace ZSim.Region.ScriptEngine.Shared.Tests
     /// </summary>
     /// <remarks>
     /// This relates to LSL.  Actual linking functionality should be tested in the main
-    /// OpenSim.Region.Framework.Scenes.Tests.SceneObjectLinkingTests.
+    /// ZSim.Region.Framework.Scenes.Tests.SceneObjectLinkingTests.
     /// </remarks>
     [TestFixture]
     public class LSL_ApiLinkingTests : OpenSimTestCase
