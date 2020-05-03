@@ -94,9 +94,10 @@ namespace ZSim.ApplicationPlugins.RemoteController
 
         public void Initialise(OpenSimBase openSim)
         {
-            m_openSimVersion = ZSim.GetVersionText();
+            
+            m_openSimVersion = openSim.GetVersionText();
 
-            m_configSource = ZSim.ConfigSource.Source;
+            m_configSource = openSim.ConfigSource.Source;
             try
             {
                 if (m_configSource.Configs["RemoteAdmin"] == null ||

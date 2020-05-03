@@ -82,7 +82,7 @@ namespace ZSim
 
             List<string> sources = new List<string>();
 
-            string masterFileName = startupConfig.GetString("inimaster", "OpenSimDefaults.ini");
+            string masterFileName = startupConfig.GetString("inimaster", "ZSimDefaults.ini");
 
             if (masterFileName == "none")
                 masterFileName = String.Empty;

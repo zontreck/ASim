@@ -38,7 +38,7 @@ namespace ZSim.Region.ScriptEngine.Shared.CodeTools
 //        private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
 
         private SYMBOL m_astRoot = null;
-        private static Dictionary<string, string> m_datatypeLSL2OpenSim = null;
+        private static Dictionary<string, string> m_datatypeLSL2ZSim = null;
 
         /// <summary>
         /// Pass the new CodeTranformer an abstract syntax tree.
@@ -49,9 +49,9 @@ namespace ZSim.Region.ScriptEngine.Shared.CodeTools
             m_astRoot = astRoot;
 
             // let's populate the dictionary
-            if (null == m_datatypeLSL2OpenSim)
+            if (null == m_datatypeLSL2ZSim)
             {
-                m_datatypeLSL2OpenSim = new Dictionary<string, string>();
+                m_datatypeLSL2ZSim = new Dictionary<string, string>();
                 m_datatypeLSL2ZSim.Add("integer", "LSL_Types.LSLInteger");
                 m_datatypeLSL2ZSim.Add("float", "LSL_Types.LSLFloat");
                 //m_datatypeLSL2ZSim.Add("key", "LSL_Types.key"); // key doesn't seem to be used
@@ -88,13 +88,13 @@ namespace ZSim.Region.ScriptEngine.Shared.CodeTools
             // ie: since IdentConstant and StringConstant inherit from Constant,
             // put IdentConstant and StringConstant before Constant
             if (s is Declaration)
-                ((Declaration) s).Datatype = m_datatypeLSL2OpenSim[((Declaration) s).Datatype];
+                ((Declaration) s).Datatype = m_datatypeLSL2ZSim[((Declaration) s).Datatype];
             else if (s is Constant)
-                ((Constant) s).Type = m_datatypeLSL2OpenSim[((Constant) s).Type];
+                ((Constant) s).Type = m_datatypeLSL2ZSim[((Constant) s).Type];
             else if (s is TypecastExpression)
-                ((TypecastExpression) s).TypecastType = m_datatypeLSL2OpenSim[((TypecastExpression) s).TypecastType];
+                ((TypecastExpression) s).TypecastType = m_datatypeLSL2ZSim[((TypecastExpression) s).TypecastType];
             else if (s is GlobalFunctionDefinition && "void" != ((GlobalFunctionDefinition) s).ReturnType) // we don't need to translate "void"
-                ((GlobalFunctionDefinition) s).ReturnType = m_datatypeLSL2OpenSim[((GlobalFunctionDefinition) s).ReturnType];
+                ((GlobalFunctionDefinition) s).ReturnType = m_datatypeLSL2ZSim[((GlobalFunctionDefinition) s).ReturnType];
 
             for (int i = 0; i < s.kids.Count; i++)
             {

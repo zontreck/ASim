@@ -179,7 +179,7 @@ namespace ZSim.Region.Framework.Scenes.Tests
         private List<ISharedRegionModule> m_sharedInstances = new List<ISharedRegionModule>();
 
         // Config access
-        private OpenSimBase m_openSim;
+        private OpenSimBase m_ZSim;
 
         public string Version { get { return "0"; } }
         public string Name { get { return "MockRegionModulesControllerPlugin"; } }
@@ -188,7 +188,7 @@ namespace ZSim.Region.Framework.Scenes.Tests
 
         public void Initialise(OpenSimBase sim)
         {
-            m_openSim = sim;
+            m_ZSim = sim;
         }
 
         /// <summary>

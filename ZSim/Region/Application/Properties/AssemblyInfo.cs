@@ -6,12 +6,12 @@ using Mono.Addins;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("OpenSim")]
+[assembly: AssemblyTitle("ZSim")]
 [assembly: AssemblyDescription("The executable for regions simulator")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("http://opensimulator.org")]
-[assembly: AssemblyProduct("OpenSim")]
-[assembly: AssemblyCopyright("OpenSimulator developers")]
+[assembly: AssemblyCompany("https://sim.zontreck.dev")]
+[assembly: AssemblyProduct("ZSim")]
+[assembly: AssemblyCopyright("ZSimulator Developers, OpenSimulator Developers")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

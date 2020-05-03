@@ -66,7 +66,7 @@ namespace ZSim.ApplicationPlugins.LoadRegions
             get { return m_name; }
         }
 
-        protected OpenSimBase m_openSim;
+        protected OpenSimBase m_ZSim;
 
         public void Initialise()
         {
@@ -76,7 +76,7 @@ namespace ZSim.ApplicationPlugins.LoadRegions
 
         public void Initialise(OpenSimBase openSim)
         {
-            m_openSim = openSim;
+            m_ZSim = openSim;
             m_ZSim.ApplicationRegistry.RegisterInterface<IRegionCreator>(this);
         }
 

@@ -847,12 +847,12 @@ namespace ZSim
         /// </summary>
         public class XSimStatusHandler : SimpleStreamHandler
         {
-            OpenSimBase m_opensim;
+            OpenSimBase m_ZSim;
 
             public XSimStatusHandler(OpenSimBase sim)
                 : base("/" + Util.SHA1Hash(sim.osSecret), "XSimStatus")
             {
-                m_opensim = sim;
+                m_ZSim = sim;
             }
 
             protected override void ProcessRequest(IOSHttpRequest httpRequest, IOSHttpResponse httpResponse)
@@ -879,12 +879,12 @@ namespace ZSim
         /// </summary>
         protected class UXSimStatusHandler : SimpleStreamHandler
         {
-            OpenSimBase m_opensim;
+            OpenSimBase m_zsim;
 
             public UXSimStatusHandler(OpenSimBase sim)
                 : base("/" + sim.userStatsURI, "UXSimStatus")
             {
-                m_opensim = sim;
+                m_zsim = sim;
             }
 
             protected override void ProcessRequest(IOSHttpRequest httpRequest, IOSHttpResponse httpResponse)
@@ -892,7 +892,7 @@ namespace ZSim
                 httpResponse.KeepAlive = false;
                 try
                 {
-                    httpResponse.RawBuffer = Util.UTF8.GetBytes(m_ZSim.StatReport(httpRequest));
+                    httpResponse.RawBuffer = Util.UTF8.GetBytes(m_zsim.StatReport(httpRequest));
                     httpResponse.StatusCode = (int)HttpStatusCode.OK;
                 }
                 catch

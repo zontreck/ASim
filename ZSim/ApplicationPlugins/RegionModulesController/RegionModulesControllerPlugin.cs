@@ -54,7 +54,7 @@ namespace ZSim.ApplicationPlugins.RegionModulesController
         public bool LoadModulesFromAddins { get; set; }
 
         // Config access
-        private OpenSimBase m_openSim;
+        private OpenSimBase m_ZSim;
 
         // Our name
         private string m_name;
@@ -78,7 +78,7 @@ namespace ZSim.ApplicationPlugins.RegionModulesController
 
         public void Initialise (OpenSimBase openSim)
         {
-            m_openSim = openSim;
+            m_ZSim = openSim;
             m_ZSim.ApplicationRegistry.RegisterInterface<IRegionModulesController>(this);
             m_log.DebugFormat("[REGIONMODULES]: Initializing...");
 
