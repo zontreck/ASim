@@ -18250,6 +18250,26 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
                     return ScriptBaseClass.JSON_INVALID;
             }
         }
+
+        public LSL_Key llRequestUserKey(string AvatarName)
+        {
+            m_host.AddScriptLPS(1);
+
+            IUserManagement userManager = World.RequestModuleInterface<IUserManagement>();
+            UUID UserID = userManager.GetUserIdByName(AvatarName);
+
+
+            UUID SessionKey = UUID.Random();
+
+            UUID tid = AsyncCommands.
+                DataserverPlugin.RegisterRequest(m_host.LocalId,
+                                             m_item.ItemID, SessionKey.ToString());
+
+            AsyncCommands.
+            DataserverPlugin.DataserverReply(SessionKey.ToString(), UserID.ToString());
+
+            return tid.ToString();
+        }
     }
 
     public class NotecardCache

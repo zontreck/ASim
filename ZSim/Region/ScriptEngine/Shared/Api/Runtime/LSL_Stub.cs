@@ -2110,5 +2110,10 @@ namespace ZSim.Region.ScriptEngine.Shared.ScriptBase
         {
             return m_LSL_Functions.llJsonValueType(json, specifiers);
         }
+
+        public LSL_Key llRequestUserKey(LSL_String AvatarName)
+        {
+            return m_LSL_Functions.llRequestUserKey(AvatarName);
+        }
     }
 }
