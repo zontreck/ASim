@@ -109,8 +109,8 @@ namespace ZSim.Region.ScriptEngine.XEngine
         private bool m_InitialStartup = true;
         private int m_ScriptFailCount; // Number of script fails since compile queue was last empty
         private string m_ScriptErrorMessage;
-        private bool m_AppDomainLoading;
         private bool m_CompactMemOnLoad;
+        private bool m_DebugAppDomains;
         private Dictionary<UUID,ArrayList> m_ScriptErrors =
                 new Dictionary<UUID,ArrayList>();
 
@@ -307,7 +307,6 @@ namespace ZSim.Region.ScriptEngine.XEngine
             m_MaxScriptQueue = m_ScriptConfig.GetInt("MaxScriptEventQueue",300);
             m_StackSize = m_ScriptConfig.GetInt("ThreadStackSize", 262144);
             m_SleepTime = m_ScriptConfig.GetInt("MaintenanceInterval", 10) * 1000;
-            m_AppDomainLoading = m_ScriptConfig.GetBoolean("AppDomainLoading", false);
             m_CompactMemOnLoad = m_ScriptConfig.GetBoolean("CompactMemOnLoad", false);
             m_EventLimit = m_ScriptConfig.GetInt("EventLimit", 30);
             m_KillTimedOutScripts = m_ScriptConfig.GetBoolean("KillTimedOutScripts", false);
@@ -316,6 +315,7 @@ namespace ZSim.Region.ScriptEngine.XEngine
                 = m_ScriptConfig.GetInt("WaitForEventCompletionOnScriptStop", m_WaitForEventCompletionOnScriptStop);
 
             m_ScriptEnginesPath = m_ScriptConfig.GetString("ScriptEnginesPath", "ScriptEngines");
+            m_DebugAppDomains = m_ScriptConfig.GetBoolean("DebugAppDomain", false); // This can get very spammy
 
             m_Prio = ThreadPriority.BelowNormal;
             switch (priority)
@@ -1307,38 +1307,33 @@ namespace ZSim.Region.ScriptEngine.XEngine
                 if ((!m_Scripts.ContainsKey(itemID)) ||
                     (m_Scripts[itemID].AssetID != assetID))
                 {
-//                    UUID appDomain = assetID;
+                    //                    UUID appDomain = assetID;
 
-//                    if (part.ParentGroup.IsAttachment)
-//                        appDomain = part.ParentGroup.RootPart.UUID;
-                    UUID appDomain = part.ParentGroup.RootPart.UUID;
-
+                    //                    if (part.ParentGroup.IsAttachment)
+                    //                        appDomain = part.ParentGroup.RootPart.UUID;
+                    //UUID appDomain = part.ParentGroup.RootPart.UUID;
+                    UUID appDomain = itemID; // It should be assigning the app domain to the items' uuid. not the object. see OpenSim.ini.example, as it states clearly that it is a appdomain per script
                     if (!m_AppDomains.ContainsKey(appDomain))
                     {
                         try
                         {
                             AppDomain sandbox;
-                            if (m_AppDomainLoading)
-                            {
-                                AppDomainSetup appSetup = new AppDomainSetup();
-                                appSetup.PrivateBinPath = Path.Combine(
-                                    m_ScriptEnginesPath,
-                                    m_Scene.RegionInfo.RegionID.ToString());
+                            AppDomainSetup appSetup = new AppDomainSetup();
+                            appSetup.PrivateBinPath = Path.Combine(
+                                m_ScriptEnginesPath,
+                                m_Scene.RegionInfo.RegionID.ToString());
 
-                                Evidence baseEvidence = AppDomain.CurrentDomain.Evidence;
-                                Evidence evidence = new Evidence(baseEvidence);
+                            Evidence baseEvidence = AppDomain.CurrentDomain.Evidence;
+                            Evidence evidence = new Evidence(baseEvidence);
 
-                                sandbox = AppDomain.CreateDomain(
-                                                m_Scene.RegionInfo.RegionID.ToString(),
-                                                evidence, appSetup);
-                                sandbox.AssemblyResolve +=
-                                    new ResolveEventHandler(
-                                        AssemblyResolver.OnAssemblyResolve);
-                            }
-                            else
-                            {
-                                sandbox = AppDomain.CurrentDomain;
-                            }
+                            sandbox = AppDomain.CreateDomain(
+                                assetID.ToString(),
+                                            //m_Scene.RegionInfo.RegionID.ToString(),
+                                            evidence, appSetup);
+                            sandbox.AssemblyResolve +=
+                                new ResolveEventHandler(
+                                    AssemblyResolver.OnAssemblyResolve);
+
 
                             //PolicyLevel sandboxPolicy = PolicyLevel.CreateAppDomainLevel();
                             //AllMembershipCondition sandboxMembershipCondition = new AllMembershipCondition();
@@ -1691,10 +1686,49 @@ namespace ZSim.Region.ScriptEngine.XEngine
                 m_AppDomains.Remove(id);
 
                 if (domain != AppDomain.CurrentDomain)
-                    AppDomain.Unload(domain);
-                domain = null;
+                {
+                    TryUnloadAppDomain(domain);
+                }
+                _ = domain;
                 // m_log.DebugFormat("[XEngine] Unloaded app domain {0}", id.ToString());
             }
+        }
+
+        private void TryUnloadAppDomain(AppDomain domain)
+        {
+            string currentAppdomain = domain.FriendlyName;
+            
+            if(m_DebugAppDomains)
+                m_log.Info($"[XEngine] Unloading Script AppDomain {currentAppdomain}");
+            
+            try
+            {
+
+                AppDomain.Unload(domain);
+
+                
+            }
+            catch (CannotUnloadAppDomainException ex)
+            {
+                if(m_DebugAppDomains)
+                    m_log.Info($"[XEngine] TryUnloadAppDomain has failed for {currentAppdomain} - (Likely tasks that are still finishing) Trying again in 1 minute");
+                // This can happen if the script has not yet fully stopped. Add it to a queue, and we'll try unloading it again later. Only upon success can we dequeue it.
+                System.Threading.Timer tryAgain = new System.Threading.Timer(new TimerCallback(obj =>
+                {
+                    GC.Collect();
+                    AppDomain dom = (AppDomain)obj;
+                    TryUnloadAppDomain(dom); // Loop back through until the domain is unloaded
+                }), domain, 0, Convert.ToInt32(TimeSpan.FromMinutes(1).TotalMilliseconds));
+
+                return;
+            }
+            if(m_DebugAppDomains)
+                m_log.Info($"[XEngine] Unload succeeded for {currentAppdomain}");
+            
+            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, true, true);
+
+            if(m_DebugAppDomains)
+                m_log.Info($"[XEngine] Remaining appdomains: {m_AppDomains.Count} / {m_DomainScripts.Count}");
         }
 
         //
