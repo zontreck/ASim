@@ -82,22 +82,7 @@ one you set up using the "create user" command.
 
 # Bug reports
 
-In the very likely event of bugs biting you (err, your ZSim) we
-encourage you to see whether the problem has already been reported on
-the ZSim bug tracker. (This page has not yet been created)
-
-If your bug has already been reported, you might want to add to the
-bug description and supply additional information.
-
-If your bug has not been reported yet, file a bug report ("opening a
-mantis"). Useful information to include:
- * description of what went wrong
- * stack trace
- * ZSim.log (attach as file)
- * ZSim.ini (attach as file)
- * if running under mono: run OpenSim.exe with the "--debug" flag:
-
-       mono --debug OpenSim.exe
+To file bug reports or feature requests see Bugs.md
 
 # More Information on ZSim
 
