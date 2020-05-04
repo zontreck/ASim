@@ -35,10 +35,8 @@ using OpenMetaverse;
 using ZSim.Data;
 using ZSim.Framework;
 using ZSim.Services.Interfaces;
-using ZSim.Framework.Console;
 using GridRegion = ZSim.Services.Interfaces.GridRegion;
 using PermissionMask = ZSim.Framework.PermissionMask;
-using ZSim.Server.Base;
 using ZSim.Frameork;
 
 namespace ZSim.Services.UserAccountService
