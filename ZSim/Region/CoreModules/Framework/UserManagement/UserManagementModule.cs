@@ -51,7 +51,7 @@ using DirFindFlags = OpenMetaverse.DirectoryManager.DirFindFlags;
 
 namespace ZSim.Region.CoreModules.Framework.UserManagement
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "UserManagementModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "UserManagementModule")]
     public class UserManagementModule : ISharedRegionModule, IUserManagement, IPeople
     {
         private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

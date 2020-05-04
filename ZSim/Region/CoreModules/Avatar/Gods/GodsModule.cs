@@ -43,7 +43,7 @@ using OSDMap = OpenMetaverse.StructuredData.OSDMap;
 
 namespace ZSim.Region.CoreModules.Avatar.Gods
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "GodsModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "GodsModule")]
     public class GodsModule : INonSharedRegionModule, IGodsModule
     {
         private static readonly ILog m_log =

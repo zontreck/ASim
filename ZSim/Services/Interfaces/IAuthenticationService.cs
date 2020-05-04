@@ -97,7 +97,7 @@ namespace ZSim.Services.Interfaces
         // because it's a bit risky. Such handlers require
         // authentication/authorization.
         //
-        bool SetPassword(UUID principalID, string passwd);
+        bool SetPassword(UUID principalID, string passwd, bool PreHashed=false);
 
         AuthInfo GetAuthInfo(UUID principalID);
 

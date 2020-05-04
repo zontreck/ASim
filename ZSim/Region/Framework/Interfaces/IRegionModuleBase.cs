@@ -32,7 +32,7 @@ using ZSim.Region.Framework.Scenes;
 
 namespace ZSim.Region.Framework.Interfaces
 {
-    [TypeExtensionPoint(Path = "/OpenSim/RegionModules", NodeName="RegionModule")]
+    [TypeExtensionPoint(Path = "/ZSim/RegionModules", NodeName="RegionModule")]
     public interface IRegionModuleBase
     {
         /// <value>

@@ -39,7 +39,7 @@ using Mono.Addins;
 
 namespace ZSim.Region.CoreModules.World.LightShare
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "LightShareModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "LightShareModule")]
     public class LightShareModule : INonSharedRegionModule, ILightShareModule, ICommandableModule
     {
         private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

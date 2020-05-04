@@ -37,7 +37,7 @@ using ZSim.Region.Framework.Interfaces;
 
 namespace ZSim.Region.PhysicsModule.POS
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "POSPhysicsScene")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "POSPhysicsScene")]
     public class POSScene : PhysicsScene, INonSharedRegionModule
     {
         private List<POSCharacter> _characters = new List<POSCharacter>();

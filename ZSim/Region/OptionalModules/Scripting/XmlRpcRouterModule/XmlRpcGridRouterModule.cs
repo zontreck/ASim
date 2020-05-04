@@ -50,7 +50,7 @@ namespace ZSim.Region.OptionalModules.Scripting.XmlRpcGridRouterModule
         public string uri;
     }
 
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "XmlRpcGridRouter")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "XmlRpcGridRouter")]
     public class XmlRpcGridRouter : INonSharedRegionModule, IXmlRpcRouter
     {
         private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

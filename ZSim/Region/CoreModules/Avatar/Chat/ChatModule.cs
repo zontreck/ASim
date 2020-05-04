@@ -39,7 +39,7 @@ using ZSim.Region.Framework.Scenes;
 
 namespace ZSim.Region.CoreModules.Avatar.Chat
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "ChatModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "ChatModule")]
     public class ChatModule : ISharedRegionModule
     {
         private static readonly ILog m_log =

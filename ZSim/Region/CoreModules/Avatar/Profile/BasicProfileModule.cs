@@ -42,7 +42,7 @@ using ZSim.Services.Interfaces;
 
 namespace ZSim.Region.CoreModules.Avatar.Profile
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "BasicProfileModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "BasicProfileModule")]
     public class BasicProfileModule : IProfileModule, ISharedRegionModule
     {
         private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

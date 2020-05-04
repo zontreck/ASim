@@ -50,7 +50,7 @@ using Caps = ZSim.Framework.Capabilities.Caps;
 
 namespace ZSim.Region.OptionalModules.Avatar.Voice.VivoxVoice
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "VivoxVoiceModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "VivoxVoiceModule")]
     public class VivoxVoiceModule : ISharedRegionModule
     {
 

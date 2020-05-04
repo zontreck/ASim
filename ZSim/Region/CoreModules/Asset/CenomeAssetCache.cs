@@ -90,7 +90,7 @@ namespace ZSim.Region.CoreModules.Asset
     /// ExpirationTime = 60
     /// </code>
     /// </example>
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "CenomeMemoryAssetCache")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "CenomeMemoryAssetCache")]
     public class CenomeMemoryAssetCache : IAssetCache, ISharedRegionModule
     {
         private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

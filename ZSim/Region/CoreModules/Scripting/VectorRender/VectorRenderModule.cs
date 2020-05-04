@@ -46,7 +46,7 @@ using Mono.Addins;
 
 namespace ZSim.Region.CoreModules.Scripting.VectorRender
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "VectorRenderModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "VectorRenderModule")]
     public class VectorRenderModule : ISharedRegionModule, IDynamicTextureRender
     {
         // These fields exist for testing purposes, please do not remove.

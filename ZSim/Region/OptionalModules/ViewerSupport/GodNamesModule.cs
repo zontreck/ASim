@@ -39,7 +39,7 @@ using ZSim.Region.Framework.Scenes;
 
 namespace ZSim.Region.OptionalModules.ViewerSupport
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "GodNamesModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "GodNamesModule")]
     public class GodNamesModule : ISharedRegionModule
     {
         // Infrastructure

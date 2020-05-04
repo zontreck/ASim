@@ -56,7 +56,7 @@ using RegionInfo = ZSim.Framework.RegionInfo;
 
 namespace ZSim.ApplicationPlugins.RemoteController
 {
-    [Extension(Path = "/OpenSim/Startup", Id = "LoadRegions", NodeName = "Plugin")]
+    [Extension(Path = "/ZSim/Startup", Id = "LoadRegions", NodeName = "Plugin")]
     public class RemoteAdminPlugin : IApplicationPlugin
     {
         private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

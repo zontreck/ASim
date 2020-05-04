@@ -39,7 +39,7 @@ using GridRegion = ZSim.Services.Interfaces.GridRegion;
 
 namespace ZSim.Region.CoreModules.World.WorldMap
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "MapSearchModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "MapSearchModule")]
     public class MapSearchModule : ISharedRegionModule
     {
         private static readonly ILog m_log =

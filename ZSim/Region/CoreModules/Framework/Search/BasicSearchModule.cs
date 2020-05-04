@@ -50,7 +50,7 @@ using DirFindFlags = OpenMetaverse.DirectoryManager.DirFindFlags;
 
 namespace ZSim.Region.CoreModules.Framework.Search
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "BasicSearchModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "BasicSearchModule")]
     public class BasicSearchModule : ISharedRegionModule
     {
         private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

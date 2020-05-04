@@ -42,7 +42,7 @@ using ZSim.Region.OptionalModules.Avatar.XmlRpcGroups;
 
 namespace ZSim.Tests.Common
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule")]
     public class MockGroupsServicesConnector : ISharedRegionModule, IGroupsServicesConnector
     {
         private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

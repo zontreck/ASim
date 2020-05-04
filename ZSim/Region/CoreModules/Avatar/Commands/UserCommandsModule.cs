@@ -46,7 +46,7 @@ namespace ZSim.Region.CoreModules.Avatars.Commands
     /// <summary>
     /// A module that holds commands for manipulating objects in the scene.
     /// </summary>
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "UserCommandsModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "UserCommandsModule")]
     public class UserCommandsModule : ISharedRegionModule
     {
 //        private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

@@ -44,7 +44,7 @@ using OpenMetaverse;
 
 namespace ZSim.Region.PhysicsModule.BulletS
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule")]
     public class ExtendedPhysics : INonSharedRegionModule
     {
         private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

@@ -46,7 +46,7 @@ using ZSim.Capabilities.Handlers;
 
 namespace ZSim.Region.ClientStack.LindenCaps
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "AgentPreferencesModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "AgentPreferencesModule")]
     public class AgentPreferencesModule : ISharedRegionModule
     {
         private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

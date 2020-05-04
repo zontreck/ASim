@@ -42,7 +42,7 @@ using ZSim.Services.Interfaces;
 
 namespace ZSim.Region.CoreModules.ServiceConnectorsIn.Authentication
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "AuthenticationServiceInConnectorModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "AuthenticationServiceInConnectorModule")]
     public class AuthenticationServiceInConnectorModule : ISharedRegionModule
     {
         private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

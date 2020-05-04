@@ -46,7 +46,7 @@ namespace ZSim.Region.OptionalModules.Avatar.Attachments
     /// <summary>
     /// A module that just holds commands for inspecting avatar appearance.
     /// </summary>
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "SceneCommandsModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "SceneCommandsModule")]
     public class SceneCommandsModule : ISceneCommandsModule, INonSharedRegionModule
     {
 //        private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

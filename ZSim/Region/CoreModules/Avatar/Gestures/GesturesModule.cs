@@ -40,7 +40,7 @@ using Mono.Addins;
 
 namespace ZSim.Region.CoreModules.Avatar.Gestures
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "GesturesModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "GesturesModule")]
     public class GesturesModule : INonSharedRegionModule
     {
         private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

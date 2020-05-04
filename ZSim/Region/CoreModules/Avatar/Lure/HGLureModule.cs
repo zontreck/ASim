@@ -42,7 +42,7 @@ using GridRegion = ZSim.Services.Interfaces.GridRegion;
 
 namespace ZSim.Region.CoreModules.Avatar.Lure
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "HGLureModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "HGLureModule")]
     public class HGLureModule : ISharedRegionModule
     {
         private static readonly ILog m_log = LogManager.GetLogger(

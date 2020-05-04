@@ -39,7 +39,7 @@ using ZSim.Region.Framework.Scenes;
 
 namespace ZSim.Region.CoreModules.Avatar.InstantMessage
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "InstantMessageModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "InstantMessageModule")]
     public class InstantMessageModule : ISharedRegionModule
     {
         private static readonly ILog m_log = LogManager.GetLogger(

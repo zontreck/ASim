@@ -44,7 +44,7 @@ using OSDMap = OpenMetaverse.StructuredData.OSDMap;
 
 namespace ZSim.Region.OptionalModules.ViewerSupport
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "DynamicMenu")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "DynamicMenu")]
     public class DynamicMenuModule : INonSharedRegionModule, IDynamicMenuModule
     {
         private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

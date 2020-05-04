@@ -40,7 +40,7 @@ using OpenMetaverse;
 
 namespace ZSim.Region.CoreModules.ServiceConnectorsOut.Authentication
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "LocalAuthenticationServicesConnector")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "LocalAuthenticationServicesConnector")]
     public class LocalAuthenticationServicesConnector : ISharedRegionModule, IAuthenticationService
     {
         private static readonly ILog m_log =
@@ -162,7 +162,7 @@ namespace ZSim.Region.CoreModules.ServiceConnectorsOut.Authentication
             return m_AuthenticationService.Release(principalID, token);
         }
 
-        public bool SetPassword(UUID principalID, string passwd)
+        public bool SetPassword(UUID principalID, string passwd, bool PreHashed=false)
         {
             return m_AuthenticationService.SetPassword(principalID, passwd);
         }

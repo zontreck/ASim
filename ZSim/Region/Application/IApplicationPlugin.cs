@@ -33,7 +33,7 @@ namespace ZSim
     /// <summary>
     /// OpenSimulator Application Plugin framework interface
     /// </summary>
-    [TypeExtensionPoint(NodeName="Plugin", NodeType = typeof(PluginExtensionNode), Path="/OpenSim/Startup")]
+    [TypeExtensionPoint(NodeName="Plugin", NodeType = typeof(PluginExtensionNode), Path="/ZSim/Startup")]
     public interface IApplicationPlugin : IPlugin
     {
         /// <summary>

@@ -48,7 +48,7 @@ namespace ZSim.Region.OptionalModules.Agent.TextureSender
     /// <remarks>
     /// Placed here so that they can be removed if not required and to keep the J2KDecoder module itself simple.
     /// </remarks>
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "J2KDecoderCommandModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "J2KDecoderCommandModule")]
     public class J2KDecoderCommandModule : ISharedRegionModule
     {
 //        private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

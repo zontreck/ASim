@@ -40,7 +40,7 @@ using ZSim.Region.Framework.Scenes;
 
 namespace ZSim.Region.CoreModules.World.Sound
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "SoundModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "SoundModule")]
     public class SoundModule : INonSharedRegionModule, ISoundModule
     {
 //        private static readonly ILog m_log = LogManager.GetLogger(

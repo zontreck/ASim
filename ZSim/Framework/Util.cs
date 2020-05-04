@@ -655,7 +655,7 @@ namespace ZSim.Framework
                 return file;
             }
 
-            // Return %APPDATA%/OpenSim/file for 2K/XP/NT/2K3/VISTA
+            // Return %APPDATA%/ZSim/file for 2K/XP/NT/2K3/VISTA
             // TODO: Switch this to System.Enviroment.SpecialFolders.ApplicationData
             if (Environment.OSVersion.Platform == PlatformID.Win32NT)
             {

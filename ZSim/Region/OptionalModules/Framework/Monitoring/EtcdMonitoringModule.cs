@@ -48,7 +48,7 @@ namespace ZSim.Region.OptionalModules.Framework.Monitoring
     /// Allows to store monitoring data in etcd, a high availability
     /// name-value store.
     /// </summary>
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "EtcdMonitoringModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "EtcdMonitoringModule")]
     public class EtcdMonitoringModule : INonSharedRegionModule, IEtcdModule
     {
         private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

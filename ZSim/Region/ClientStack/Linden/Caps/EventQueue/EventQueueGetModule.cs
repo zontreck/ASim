@@ -54,7 +54,7 @@ namespace ZSim.Region.ClientStack.Linden
         public OSDMap body;
     }
 
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "EventQueueGetModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "EventQueueGetModule")]
     public class EventQueueGetModule : IEventQueue, INonSharedRegionModule
     {
         private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

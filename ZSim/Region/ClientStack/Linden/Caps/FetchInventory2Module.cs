@@ -41,7 +41,7 @@ namespace ZSim.Region.ClientStack.Linden
     /// <summary>
     /// This module implements both WebFetchInventoryDescendents and FetchInventoryDescendents2 capabilities.
     /// </summary>
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "FetchInventory2Module")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "FetchInventory2Module")]
     public class FetchInventory2Module : ISharedRegionModule
     {
 //        private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

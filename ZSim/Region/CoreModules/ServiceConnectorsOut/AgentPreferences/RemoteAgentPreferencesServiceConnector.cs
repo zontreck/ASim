@@ -43,7 +43,7 @@ using Nini.Config;
 
 namespace ZSim.Region.CoreModules.ServiceConnectorsOut.AgentPreferences
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "RemoteAgentPreferencesServicesConnector")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "RemoteAgentPreferencesServicesConnector")]
     public class RemoteAgentPreferencesServicesConnector : AgentPreferencesServicesConnector,
             ISharedRegionModule, IAgentPreferencesService
     {

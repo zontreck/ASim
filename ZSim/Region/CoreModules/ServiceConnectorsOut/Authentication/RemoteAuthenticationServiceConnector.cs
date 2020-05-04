@@ -37,7 +37,7 @@ using ZSim.Services.Connectors;
 
 namespace ZSim.Region.CoreModules.ServiceConnectorsOut.Authentication
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "RemoteAuthenticationServicesConnector")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "RemoteAuthenticationServicesConnector")]
     public class RemoteAuthenticationServicesConnector : AuthenticationServicesConnector,
             ISharedRegionModule, IAuthenticationService
     {

@@ -45,7 +45,7 @@ using Caps=ZSim.Framework.Capabilities.Caps;
 
 namespace ZSim.Region.CoreModules.Framework
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "CapabilitiesModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "CapabilitiesModule")]
     public class CapabilitiesModule : INonSharedRegionModule, ICapabilitiesModule
     {
         private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

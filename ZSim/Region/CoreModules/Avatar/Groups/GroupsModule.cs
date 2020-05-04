@@ -39,7 +39,7 @@ using Mono.Addins;
 
 namespace ZSim.Region.CoreModules.Avatar.Groups
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "GroupsModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "GroupsModule")]
     public class GroupsModule : ISharedRegionModule
     {
         private static readonly ILog m_log =

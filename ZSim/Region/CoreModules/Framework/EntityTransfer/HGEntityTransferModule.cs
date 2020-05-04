@@ -48,7 +48,7 @@ using GridRegion = ZSim.Services.Interfaces.GridRegion;
 
 namespace ZSim.Region.CoreModules.Framework.EntityTransfer
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "HGEntityTransferModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "HGEntityTransferModule")]
     public class HGEntityTransferModule
         : EntityTransferModule, INonSharedRegionModule, IEntityTransferModule, IUserAgentVerificationModule
     {

@@ -40,7 +40,7 @@ using PresenceInfo = ZSim.Services.Interfaces.PresenceInfo;
 
 namespace ZSim.Region.CoreModules.ServiceConnectorsOut.Presence
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "LocalPresenceServicesConnector")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "LocalPresenceServicesConnector")]
     public class LocalPresenceServicesConnector : BasePresenceServiceConnector, ISharedRegionModule, IPresenceService
     {
         private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

@@ -57,7 +57,7 @@ namespace ZSim.Region.ClientStack.Linden
     /// NOTE: Part of this code was adapted from the Aurora project, specifically
     /// the normal part of the response in the capability handler.
     /// </remarks>
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "SimulatorFeaturesModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "SimulatorFeaturesModule")]
     public class SimulatorFeaturesModule : INonSharedRegionModule, ISimulatorFeaturesModule
     {
         private static readonly ILog m_log =

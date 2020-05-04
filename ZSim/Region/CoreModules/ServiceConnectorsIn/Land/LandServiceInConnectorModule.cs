@@ -43,7 +43,7 @@ using OpenMetaverse;
 
 namespace ZSim.Region.CoreModules.ServiceConnectorsIn.Land
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "LandServiceInConnectorModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "LandServiceInConnectorModule")]
     public class LandServiceInConnectorModule : ISharedRegionModule, ILandService
     {
         private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

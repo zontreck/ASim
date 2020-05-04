@@ -45,7 +45,7 @@ namespace ZSim.Region.OptionalModules
     /// <remarks>
     /// This module selectivly enables parcel prim limits.
     /// </remarks>
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "PrimLimitsModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "PrimLimitsModule")]
     public class PrimLimitsModule : INonSharedRegionModule
     {
         protected IDialogModule m_dialogModule;

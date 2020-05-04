@@ -157,7 +157,7 @@ namespace ZSim.Services.Connectors
             return true;
         }
 
-        public bool SetPassword(UUID principalID, string passwd)
+        public bool SetPassword(UUID principalID, string passwd, bool PreHashed=false)
         {
             // nope, we don't do this
             return false;

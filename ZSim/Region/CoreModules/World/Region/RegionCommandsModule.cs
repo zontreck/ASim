@@ -47,7 +47,7 @@ namespace ZSim.Region.CoreModules.World.Objects.Commands
     /// <summary>
     /// A module that holds commands for manipulating objects in the scene.
     /// </summary>
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "RegionCommandsModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "RegionCommandsModule")]
     public class RegionCommandsModule : INonSharedRegionModule
     {
         private Scene m_scene;

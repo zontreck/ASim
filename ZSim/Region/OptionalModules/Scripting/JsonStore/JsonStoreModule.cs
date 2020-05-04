@@ -44,7 +44,7 @@ using System.Text.RegularExpressions;
 
 namespace ZSim.Region.OptionalModules.Scripting.JsonStore
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "JsonStoreModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "JsonStoreModule")]
 
     public class JsonStoreModule  : INonSharedRegionModule, IJsonStoreModule
     {

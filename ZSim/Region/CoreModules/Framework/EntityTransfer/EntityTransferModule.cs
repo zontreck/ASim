@@ -48,7 +48,7 @@ using Mono.Addins;
 
 namespace ZSim.Region.CoreModules.Framework.EntityTransfer
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "EntityTransferModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "EntityTransferModule")]
     public class EntityTransferModule : INonSharedRegionModule, IEntityTransferModule
     {
         private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

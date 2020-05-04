@@ -60,7 +60,7 @@ namespace ZSim.Region.CoreModules.World.LegacyMap
         public face[] trns;
     }
 
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "MapImageModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "MapImageModule")]
     public class MapImageModule : IMapImageGenerator, INonSharedRegionModule
     {
         private static readonly ILog m_log =

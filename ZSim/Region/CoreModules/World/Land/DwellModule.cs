@@ -52,7 +52,7 @@ using GridRegion = ZSim.Services.Interfaces.GridRegion;
 
 namespace ZSim.Region.CoreModules.World.Land
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "DefaultDwellModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "DefaultDwellModule")]
     public class DefaultDwellModule : INonSharedRegionModule, IDwellModule
     {
         private Scene m_scene;

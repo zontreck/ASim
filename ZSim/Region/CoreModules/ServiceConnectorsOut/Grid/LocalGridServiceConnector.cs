@@ -42,7 +42,7 @@ using OpenMetaverse;
 
 namespace ZSim.Region.CoreModules.ServiceConnectorsOut.Grid
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "LocalGridServicesConnector")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "LocalGridServicesConnector")]
     public class LocalGridServicesConnector : ISharedRegionModule, IGridService
     {
         private static readonly ILog m_log =

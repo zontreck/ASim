@@ -35,7 +35,7 @@ using ZSim.Region.Framework.Interfaces;
 
 namespace ZSim.Region.CoreModules.World.Wind.Plugins
 {
-    [Extension(Path = "/OpenSim/WindModule", NodeName = "WindModel", Id = "SimpleRandomWind")]
+    [Extension(Path = "/ZSim/WindModule", NodeName = "WindModel", Id = "SimpleRandomWind")]
     class SimpleRandomWind : Mono.Addins.TypeExtensionNode, IWindModelPlugin
     {
         private Vector2[] m_windSpeeds = new Vector2[16 * 16];

@@ -38,6 +38,8 @@ using ZSim.Services.Interfaces;
 using ZSim.Framework.Console;
 using GridRegion = ZSim.Services.Interfaces.GridRegion;
 using PermissionMask = ZSim.Framework.PermissionMask;
+using ZSim.Server.Base;
+using ZSim.Frameork;
 
 namespace ZSim.Services.UserAccountService
 {
@@ -91,6 +93,7 @@ namespace ZSim.Services.UserAccountService
             {
                 m_RootInstance = this;
 
+                ZSingletonManager.Instance.Singletons.Add("UserAccountService", this);
                 //  create a system grid god account
                 UserAccount ggod = GetUserAccount(UUID.Zero, UUID_GRID_GOD);
                 if(ggod == null)
@@ -590,7 +593,7 @@ namespace ZSim.Services.UserAccountService
         /// <param name="password"></param>
         /// <param name="email"></param>
         /// <param name="model"></param>
-        public UserAccount CreateUser(UUID scopeID, UUID principalID, string firstName, string lastName, string password, string email, string model = "")
+        public UserAccount CreateUser(UUID scopeID, UUID principalID, string firstName, string lastName, string password, string email, string model = "", bool preHashed=false)
         {
             UserAccount account = GetUserAccount(UUID.Zero, firstName, lastName);
             if (null == account)
@@ -609,7 +612,7 @@ namespace ZSim.Services.UserAccountService
                     bool success;
                     if (m_AuthenticationService != null)
                     {
-                        success = m_AuthenticationService.SetPassword(account.PrincipalID, password);
+                        success = m_AuthenticationService.SetPassword(account.PrincipalID, password, preHashed);
                         if (!success)
                             m_log.WarnFormat("[USER ACCOUNT SERVICE]: Unable to set password for account {0} {1}.",
                                 firstName, lastName);
@@ -1057,6 +1060,11 @@ namespace ZSim.Services.UserAccountService
             item.CurrentPermissions &= item.NextPermissions;
             item.BasePermissions &= item.NextPermissions;
             item.EveryOnePermissions &= item.NextPermissions;
+        }
+
+        public void TryMakeUser(UUID scope, string first, string last, string password, string email, string model)
+        {
+            CreateUser(scope, UUID.Random(), first, last, password, email, model, true);
         }
     }
 }

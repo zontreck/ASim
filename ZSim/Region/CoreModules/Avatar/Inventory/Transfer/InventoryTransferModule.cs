@@ -39,7 +39,7 @@ using ZSim.Services.Interfaces;
 
 namespace ZSim.Region.CoreModules.Avatar.Inventory.Transfer
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "InventoryTransferModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "InventoryTransferModule")]
     public class InventoryTransferModule : ISharedRegionModule
     {
         private static readonly ILog m_log

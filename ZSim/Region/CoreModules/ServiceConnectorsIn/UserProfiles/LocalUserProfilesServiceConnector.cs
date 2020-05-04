@@ -46,7 +46,7 @@ using OpenMetaverse;
 
 namespace ZSim.Region.CoreModules.ServiceConnectorsOut.Profile
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "LocalUserProfilesServicesConnector")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "LocalUserProfilesServicesConnector")]
     public class LocalUserProfilesServicesConnector : ISharedRegionModule
     {
         private static readonly ILog m_log =

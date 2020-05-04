@@ -42,7 +42,7 @@ using ZSim.Services.Interfaces;
 
 namespace ZSim.Region.CoreModules.ServiceConnectorsIn.MapImage
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "MapImageServiceInConnectorModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "MapImageServiceInConnectorModule")]
     public class MapImageServiceInConnectorModule : ISharedRegionModule
     {
         private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

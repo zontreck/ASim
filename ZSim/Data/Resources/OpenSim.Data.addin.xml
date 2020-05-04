@@ -3,10 +3,10 @@
         <Import assembly="ZSim.Data.dll" />
         <Import assembly="ZSim.Framework.dll" />
     </Runtime>
-    <ExtensionPoint path = "/OpenSim/AssetData">
+    <ExtensionPoint path = "/ZSim/AssetData">
         <ExtensionNode name="Plugin" type="ZSim.Framework.PluginExtensionNode" objectType="ZSim.Data.IAssetDataPlugin" />
     </ExtensionPoint>
-    <ExtensionPoint path = "/OpenSim/InventoryData">
+    <ExtensionPoint path = "/ZSim/InventoryData">
         <ExtensionNode name="Plugin" type="ZSim.Framework.PluginExtensionNode" objectType="ZSim.Data.IInventoryDataPlugin" />
     </ExtensionPoint>
 </Addin>

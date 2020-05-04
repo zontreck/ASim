@@ -44,7 +44,7 @@ namespace ZSim.Region.OptionalModules.Asset
     /// <summary>
     /// A module that just holds commands for inspecting assets.
     /// </summary>
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "AssetInfoModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "AssetInfoModule")]
     public class AssetInfoModule : ISharedRegionModule
     {
 //        private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

@@ -41,7 +41,7 @@ using OpenMetaverse;
 
 namespace ZSim.Region.CoreModules.ServiceConnectorsOut.Asset
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "HGAssetBroker")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "HGAssetBroker")]
     public class HGAssetBroker : ISharedRegionModule, IAssetService
     {
         private static readonly ILog m_log =

@@ -61,7 +61,7 @@ using ScriptCompileQueue = ZSim.Framework.LocklessQueue<object[]>;
 
 namespace ZSim.Region.ScriptEngine.XEngine
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "XEngine")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "XEngine")]
     public class XEngine : INonSharedRegionModule, IScriptModule, IScriptEngine
     {
         private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

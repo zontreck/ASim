@@ -51,7 +51,7 @@ using TeleportFlags = ZSim.Framework.Constants.TeleportFlags;
 
 namespace ZSim.Region.OptionalModules.ViewerSupport
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "CameraOnlyMode")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "CameraOnlyMode")]
     public class CameraOnlyModeModule : INonSharedRegionModule
     {
         private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

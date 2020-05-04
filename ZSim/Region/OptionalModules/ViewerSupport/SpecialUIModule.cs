@@ -50,7 +50,7 @@ using TeleportFlags = ZSim.Framework.Constants.TeleportFlags;
 
 namespace ZSim.Region.OptionalModules.ViewerSupport
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "SpecialUI")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "SpecialUI")]
     public class SpecialUIModule : INonSharedRegionModule
     {
         private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

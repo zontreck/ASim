@@ -40,7 +40,7 @@ using ZSim.Services.Interfaces;
 
 namespace ZSim.Region.CoreModules.World
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "AccessModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "AccessModule")]
     public class AccessModule : ISharedRegionModule
     {
 //        private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

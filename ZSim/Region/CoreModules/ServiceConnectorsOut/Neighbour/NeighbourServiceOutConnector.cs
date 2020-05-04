@@ -40,7 +40,7 @@ using ZSim.Services.Interfaces;
 
 namespace ZSim.Region.CoreModules.ServiceConnectorsOut.Neighbour
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "NeighbourServicesOutConnector")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "NeighbourServicesOutConnector")]
     public class NeighbourServicesOutConnector :
             NeighbourServicesConnector, ISharedRegionModule, INeighbourService
     {

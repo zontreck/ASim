@@ -41,7 +41,7 @@ using ZSim.Region.Framework.Scenes;
 
 namespace ZSim.Region.CoreModules.Framework.Statistics.Logging
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "BinaryLoggingModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "BinaryLoggingModule")]
     public class BinaryLoggingModule : INonSharedRegionModule
     {
         private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

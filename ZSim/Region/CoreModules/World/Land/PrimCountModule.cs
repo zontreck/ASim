@@ -50,7 +50,7 @@ namespace ZSim.Region.CoreModules.World.Land
         public Dictionary <UUID, int> Users = new Dictionary <UUID, int>();
     }
 
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "PrimCountModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "PrimCountModule")]
     public class PrimCountModule : IPrimCountModule, INonSharedRegionModule
     {
 //        private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

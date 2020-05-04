@@ -50,7 +50,7 @@ using log4net;
 namespace ZSim.Region.PhysicsModule.Meshing
 {
 
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "ZeroMesher")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "ZeroMesher")]
     public class ZeroMesher : IMesher, INonSharedRegionModule
     {
         private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

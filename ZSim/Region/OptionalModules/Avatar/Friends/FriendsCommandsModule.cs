@@ -50,7 +50,7 @@ namespace ZSim.Region.OptionalModules.Avatar.Friends
     /// <summary>
     /// A module that just holds commands for inspecting avatar appearance.
     /// </summary>
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "FriendsCommandModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "FriendsCommandModule")]
     public class FriendsCommandsModule : ISharedRegionModule
     {
 //        private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

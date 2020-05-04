@@ -45,6 +45,7 @@ using ZSim.Services.Interfaces;
 using GridRegion = ZSim.Services.Interfaces.GridRegion;
 using FriendInfo = ZSim.Services.Interfaces.FriendInfo;
 using ZSim.Services.Connectors.Hypergrid;
+using ZSim.Frameork;
 
 namespace ZSim.Services.LLLoginService
 {
@@ -93,6 +94,7 @@ namespace ZSim.Services.LLLoginService
         protected string m_DSTZone;
         protected bool m_allowDuplicatePresences = false;
         protected string m_messageKey;
+        protected bool m_AutoNewAccount = false;
 
         IConfig m_LoginServerConfig;
 //        IConfig m_ClientsConfig;
@@ -130,6 +132,7 @@ namespace ZSim.Services.LLLoginService
             m_ClassifiedFee = m_LoginServerConfig.GetString("ClassifiedFee", string.Empty);
             m_DestinationGuide = m_LoginServerConfig.GetString ("DestinationGuide", string.Empty);
             m_AvatarPicker = m_LoginServerConfig.GetString ("AvatarPicker", string.Empty);
+            m_AutoNewAccount = m_LoginServerConfig.GetBoolean("AutoCreateNewAccount", true);
 
             string[] possibleAccessControlConfigSections = new string[] { "AccessControl", "LoginService" };
             m_AllowedClients = Util.GetConfigVarFromSections<string>(
@@ -296,7 +299,7 @@ namespace ZSim.Services.LLLoginService
                 firstName, lastName, startLocation, clientVersion, channel, clientIP.Address.ToString(), mac, id0);
 
             string curMac = mac.ToString();
-
+            
             try
             {
                 //
@@ -349,12 +352,43 @@ namespace ZSim.Services.LLLoginService
                 //
                 // Get the account and check that it exists
                 //
+                if (!passwd.StartsWith("$1$"))
+                    passwd = "$1$" + Util.Md5Hash(passwd);
+                passwd = passwd.Remove(0, 3); //remove $1$
                 UserAccount account = m_UserAccountService.GetUserAccount(scopeID, firstName, lastName);
                 if (account == null)
                 {
-                    m_log.InfoFormat(
-                        "[LLOGIN SERVICE]: Login failed for {0} {1}, reason: user not found", firstName, lastName);
-                    return LLFailedLoginResponse.UserProblem;
+                    if (m_AutoNewAccount)
+                    {
+                        // Make new account
+                        m_log.InfoFormat("[LLOGIN SERVICE]: Making user {0} {1}", firstName, lastName);
+                        if (ZSingletonManager.Instance.Singletons.ContainsKey("UserAccountService"))
+                        {
+
+                            IUserAccountService UAS = (IUserAccountService)ZSim.Frameork.ZSingletonManager.Instance.Singletons["UserAccountService"];
+                            UAS.TryMakeUser(scopeID, firstName, lastName, passwd, "not-set@not.set", "");
+
+                            account = m_UserAccountService.GetUserAccount(scopeID, firstName, lastName);
+
+                            if (account == null)
+                            {
+                                m_log.InfoFormat("[LLOGIN SERVICE]: Login failed for {0} {1}, reason user creation failed", firstName, lastName);
+                                return LLFailedLoginResponse.UserProblem;
+                            }
+                        }
+                        else
+                        {
+                            m_log.InfoFormat("[LLOGIN SERVICE]: Failed to make user. UserAccountService not loaded into singleton registry");
+                            return LLFailedLoginResponse.InternalError;
+                        }
+                    }
+                    else
+                    {
+
+                        m_log.InfoFormat(
+                            "[LLOGIN SERVICE]: Login failed for {0} {1}, reason: user not found", firstName, lastName);
+                        return LLFailedLoginResponse.UserProblem;
+                    }
                 }
 
                 if (account.UserLevel < m_MinLoginLevel)
@@ -385,9 +419,6 @@ namespace ZSim.Services.LLLoginService
                 //
                 // Authenticate this user
                 //
-                if (!passwd.StartsWith("$1$"))
-                    passwd = "$1$" + Util.Md5Hash(passwd);
-                passwd = passwd.Remove(0, 3); //remove $1$
                 UUID realID;
                 string token = m_AuthenticationService.Authenticate(account.PrincipalID, passwd, 30, out realID);
                 UUID secureSession = UUID.Zero;

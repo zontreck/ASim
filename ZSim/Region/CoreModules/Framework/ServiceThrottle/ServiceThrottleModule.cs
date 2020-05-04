@@ -41,7 +41,7 @@ using GridRegion = ZSim.Services.Interfaces.GridRegion;
 
 namespace ZSim.Region.CoreModules.Framework
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "GridServiceThrottleModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "GridServiceThrottleModule")]
     public class ServiceThrottleModule : ISharedRegionModule, IServiceThrottleModule
     {
         private static readonly ILog m_log = LogManager.GetLogger(

@@ -114,6 +114,11 @@ namespace ZSim.Services.HypergridService
         {
             return false;
         }
+
+        public void TryMakeUser(UUID scope, string first, string last, string password, string email, string model)
+        {
+            return;
+        }
         #endregion
 
     }

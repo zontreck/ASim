@@ -46,7 +46,7 @@ using PermissionMask = ZSim.Framework.PermissionMask;
 
 namespace ZSim.Region.CoreModules.Framework.Library
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "LibraryModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "LibraryModule")]
     public class LibraryModule : ISharedRegionModule
     {
         private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

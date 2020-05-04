@@ -44,7 +44,7 @@ namespace ZSim.Region.PhysicsModule.BasicPhysics
     /// Not useful for anything at the moment apart from some regression testing in other components where some form
     /// of physics plugin is needed.
     /// </remarks>
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "BasicPhysicsScene")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "BasicPhysicsScene")]
     public class BasicScene : PhysicsScene, INonSharedRegionModule
     {
         private List<BasicActor> _actors = new List<BasicActor>();

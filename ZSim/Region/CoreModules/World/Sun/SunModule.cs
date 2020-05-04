@@ -38,7 +38,7 @@ using ZSim.Region.Framework.Scenes;
 
 namespace ZSim.Region.CoreModules
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "SunModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "SunModule")]
     public class SunModule : ISunModule
     {
         /// <summary>

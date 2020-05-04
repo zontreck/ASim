@@ -43,7 +43,7 @@ using Mono.Addins;
 
 namespace ZSim.Region.PhysicsModule.BulletS
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "BulletSPhysicsScene")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "BulletSPhysicsScene")]
     public sealed class BSScene : PhysicsScene, IPhysicsParameters, INonSharedRegionModule
     {
         internal static readonly ILog m_log = LogManager.GetLogger(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);

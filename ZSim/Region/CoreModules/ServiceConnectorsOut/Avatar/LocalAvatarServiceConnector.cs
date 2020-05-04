@@ -41,7 +41,7 @@ using OpenMetaverse;
 
 namespace ZSim.Region.CoreModules.ServiceConnectorsOut.Avatar
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "LocalAvatarServicesConnector")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "LocalAvatarServicesConnector")]
     public class LocalAvatarServicesConnector : ISharedRegionModule, IAvatarService
     {
         private static readonly ILog m_log =

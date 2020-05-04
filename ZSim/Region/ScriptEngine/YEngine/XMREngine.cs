@@ -65,7 +65,7 @@ using LSL_Vector = ZSim.Region.ScriptEngine.Shared.LSL_Types.Vector3;
 
 namespace ZSim.Region.ScriptEngine.Yengine
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "YEngine")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "YEngine")]
     public partial class Yengine: INonSharedRegionModule, IScriptEngine,
             IScriptModule
     {

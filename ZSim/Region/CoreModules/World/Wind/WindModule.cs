@@ -40,7 +40,7 @@ using ZSim.Region.CoreModules.World.Wind;
 
 namespace ZSim.Region.CoreModules
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "WindModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "WindModule")]
     public class WindModule : IWindModule
     {
         private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
@@ -98,7 +98,7 @@ namespace ZSim.Region.CoreModules
             m_scene = scene;
             m_frame = 0;
             // Register all the Wind Model Plug-ins
-            foreach (IWindModelPlugin windPlugin in AddinManager.GetExtensionObjects("/OpenSim/WindModule", false))
+            foreach (IWindModelPlugin windPlugin in AddinManager.GetExtensionObjects("/ZSim/WindModule", false))
             {
                 m_log.InfoFormat("[WIND] Found Plugin: {0}", windPlugin.Name);
                 m_availableWindPlugins.Add(windPlugin.Name, windPlugin);

@@ -46,7 +46,7 @@ namespace ZSim.Region.CoreModules.Avatar.InstantMessage
         public int Disposition;
     }
 
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "OfflineMessageModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "OfflineMessageModule")]
     public class OfflineMessageModule : ISharedRegionModule
     {
         private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

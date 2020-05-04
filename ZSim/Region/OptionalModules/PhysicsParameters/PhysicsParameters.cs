@@ -44,7 +44,7 @@ namespace ZSim.Region.OptionalModules.PhysicsParameters
     /// </summary>
     /// <remarks>
     /// </remarks>
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "PhysicsParameters")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "PhysicsParameters")]
     public class PhysicsParameters : ISharedRegionModule
     {
 //        private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

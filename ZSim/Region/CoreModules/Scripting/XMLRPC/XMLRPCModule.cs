@@ -78,7 +78,7 @@ using Mono.Addins;
 
 namespace ZSim.Region.CoreModules.Scripting.XMLRPC
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "XMLRPCModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "XMLRPCModule")]
     public class XMLRPCModule : ISharedRegionModule, IXMLRPC
     {
         private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

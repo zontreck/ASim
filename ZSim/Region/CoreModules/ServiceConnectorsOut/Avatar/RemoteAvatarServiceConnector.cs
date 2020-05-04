@@ -37,7 +37,7 @@ using ZSim.Services.Connectors;
 
 namespace ZSim.Region.CoreModules.ServiceConnectorsOut.Avatar
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "RemoteAvatarServicesConnector")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "RemoteAvatarServicesConnector")]
     public class RemoteAvatarServicesConnector : AvatarServicesConnector,
             ISharedRegionModule, IAvatarService
     {

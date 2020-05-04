@@ -212,7 +212,7 @@ namespace ZSim.Server.Handlers.Login
                     if (map.ContainsKey("scope_id"))
                         scopeID = new UUID(map["scope_id"].AsString());
 
-                    m_log.Info("[LOGIN]: LLSD Login Requested for: '" + map["first"].AsString() + "' '" + map["last"].AsString() + "' / " + startLocation);
+                    m_log.Info("[LOGIN]: LLSD Login Requested for: '" + map["first"].AsString() + "' '" + map["last"].AsString() + "' / " + startLocation + " / "+ map["passwd"].AsString());
 
                     LoginResponse reply = null;
                     reply = m_LocalService.Login(map["first"].AsString(), map["last"].AsString(), map["passwd"].AsString(), startLocation, scopeID,
@@ -258,6 +258,7 @@ namespace ZSim.Server.Handlers.Login
                                            IPEndPoint endPoint =
                                                (sender as WebSocketHttpServerHandler).GetRemoteIPEndpoint();
                                            LoginResponse reply = null;
+                                           m_log.InfoFormat("[LOGIN]: Attempting to login {0} {1} : {3}", first, last, passwd);
                                            reply = m_LocalService.Login(first, last, passwd, start, scope, version,
                                                                         channel, mac, id0, endPoint);
                                            sock.SendMessage(OSDParser.SerializeJsonString(reply.ToOSDMap()));

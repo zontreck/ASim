@@ -43,7 +43,7 @@ using PresenceInfo = ZSim.Services.Interfaces.PresenceInfo;
 
 namespace ZSim.Region.CoreModules.Avatar.InstantMessage
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "PresenceModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "PresenceModule")]
     public class PresenceModule : ISharedRegionModule, IPresenceModule
     {
         private static readonly ILog m_log = LogManager.GetLogger(

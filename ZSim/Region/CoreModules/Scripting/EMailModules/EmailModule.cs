@@ -41,7 +41,7 @@ using Mono.Addins;
 
 namespace ZSim.Region.CoreModules.Scripting.EmailModules
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "EmailModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "EmailModule")]
     public class EmailModule : ISharedRegionModule, IEmailModule
     {
         //

@@ -37,7 +37,7 @@ using ZSim.Region.Framework.Scenes;
 
 namespace ZSim.Region.CoreModules.World
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "CloudModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "CloudModule")]
     public class CloudModule : ICloudModule, INonSharedRegionModule
     {
 //        private static readonly log4net.ILog m_log

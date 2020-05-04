@@ -41,7 +41,7 @@ using ZSim.Region.Framework.Scenes;
 
 namespace ZSim.Region.CoreModules.Framework.DynamicAttributes.DAExampleModule
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "DAExampleModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "DAExampleModule")]
     public class DAExampleModule : INonSharedRegionModule
     {
         private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

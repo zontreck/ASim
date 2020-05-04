@@ -40,7 +40,7 @@ using PermissionMask = ZSim.Framework.PermissionMask;
 
 namespace ZSim.Region.CoreModules.Avatar.Friends
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "XCallingCard")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "XCallingCard")]
     public class CallingCardModule : ISharedRegionModule, ICallingCardModule
     {
         private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

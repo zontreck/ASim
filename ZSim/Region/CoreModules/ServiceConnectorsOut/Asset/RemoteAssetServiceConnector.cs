@@ -39,7 +39,7 @@ using ZSim.Services.Interfaces;
 
 namespace ZSim.Region.CoreModules.ServiceConnectorsOut.Asset
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "RemoteAssetServicesConnector")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "RemoteAssetServicesConnector")]
     public class RemoteAssetServicesConnector :
             AssetServicesConnector, ISharedRegionModule, IAssetService
     {

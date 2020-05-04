@@ -42,7 +42,7 @@ using Mono.Addins;
 
 namespace ZSim.ApplicationPlugins.LoadRegions
 {
-    [Extension(Path="/OpenSim/Startup", Id="LoadRegions", NodeName="Plugin")]
+    [Extension(Path="/ZSim/Startup", Id="LoadRegions", NodeName="Plugin")]
     public class LoadRegionsPlugin : IApplicationPlugin, IRegionCreator
     {
         private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

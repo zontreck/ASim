@@ -44,7 +44,7 @@ namespace ZSim.Region.ClientStack.Linden
     /// <summary>
     /// MeshUploadFlag capability. This is required for uploading Mesh.
     /// </summary>
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "MeshUploadFlagModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "MeshUploadFlagModule")]
     public class MeshUploadFlagModule : INonSharedRegionModule
     {
 //        private static readonly ILog m_log =

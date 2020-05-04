@@ -57,7 +57,7 @@ using OSDMap = OpenMetaverse.StructuredData.OSDMap;
 
 namespace ZSim.Region.OptionalModules.Avatar.Voice.FreeSwitchVoice
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "FreeSwitchVoiceModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "FreeSwitchVoiceModule")]
     public class FreeSwitchVoiceModule : ISharedRegionModule, IVoiceModule
     {
         private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

@@ -46,7 +46,7 @@ using Mono.Addins;
 
 namespace ZSim.Region.PhysicsModule.Meshing
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "Meshmerizer")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "Meshmerizer")]
     public class Meshmerizer : IMesher, INonSharedRegionModule
     {
         private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

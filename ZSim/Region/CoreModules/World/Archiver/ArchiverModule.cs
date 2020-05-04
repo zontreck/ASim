@@ -46,7 +46,7 @@ namespace ZSim.Region.CoreModules.World.Archiver
     /// <summary>
     /// This module loads and saves OpenSimulator region archives
     /// </summary>
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "ArchiverModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "ArchiverModule")]
     public class ArchiverModule : INonSharedRegionModule, IRegionArchiverModule
     {
         private static readonly ILog m_log =

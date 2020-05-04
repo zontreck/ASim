@@ -49,7 +49,7 @@ namespace ZSim.Region.OptionalModules.Avatar.Animations
     /// <summary>
     /// A module that just holds commands for inspecting avatar animations.
     /// </summary>
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "AnimationsCommandModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "AnimationsCommandModule")]
     public class AnimationsCommandModule : ISharedRegionModule
     {
 //        private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

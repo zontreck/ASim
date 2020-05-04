@@ -50,7 +50,7 @@ using ZSim.Services.Interfaces;
 
 namespace ZSim.Region.CoreModules.Asset
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "FlotsamAssetCache")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "FlotsamAssetCache")]
     public class FlotsamAssetCache : ISharedRegionModule, IAssetCache, IAssetService
     {
         private static readonly ILog m_log = LogManager.GetLogger( MethodBase.GetCurrentMethod().DeclaringType);

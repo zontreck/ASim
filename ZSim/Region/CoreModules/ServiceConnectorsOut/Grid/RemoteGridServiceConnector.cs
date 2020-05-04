@@ -44,7 +44,7 @@ using GridRegion = ZSim.Services.Interfaces.GridRegion;
 
 namespace ZSim.Region.CoreModules.ServiceConnectorsOut.Grid
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "RemoteGridServicesConnector")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "RemoteGridServicesConnector")]
     public class RemoteGridServicesConnector : ISharedRegionModule, IGridService
     {
         private static readonly ILog m_log =

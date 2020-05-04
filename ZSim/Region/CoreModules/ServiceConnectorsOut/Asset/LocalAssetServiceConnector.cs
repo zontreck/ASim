@@ -39,7 +39,7 @@ using ZSim.Services.Interfaces;
 
 namespace ZSim.Region.CoreModules.ServiceConnectorsOut.Asset
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "LocalAssetServicesConnector")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "LocalAssetServicesConnector")]
     public class LocalAssetServicesConnector : ISharedRegionModule, IAssetService
     {
         private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

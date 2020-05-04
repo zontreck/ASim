@@ -38,7 +38,7 @@ using ZSim.Region.Framework.Scenes;
 
 namespace ZSim.ApplicationPlugins.RegionModulesController
 {
-    [Extension(Path = "/OpenSim/Startup", Id = "LoadRegions", NodeName = "Plugin")]
+    [Extension(Path = "/ZSim/Startup", Id = "LoadRegions", NodeName = "Plugin")]
     public class RegionModulesControllerPlugin : IRegionModulesController,
             IApplicationPlugin
     {
@@ -104,7 +104,7 @@ namespace ZSim.ApplicationPlugins.RegionModulesController
             Dictionary<RuntimeAddin, IList<int>> loadedModules = new Dictionary<RuntimeAddin, IList<int>>();
 
             // Scan modules and load all that aren't disabled
-            foreach (TypeExtensionNode node in AddinManager.GetExtensionNodes("/OpenSim/RegionModules"))
+            foreach (TypeExtensionNode node in AddinManager.GetExtensionNodes("/ZSim/RegionModules"))
                 AddNode(node, modulesConfig, loadedModules);
 
             foreach (KeyValuePair<RuntimeAddin, IList<int>> loadedModuleData in loadedModules)

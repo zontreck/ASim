@@ -43,7 +43,7 @@ using Caps = ZSim.Framework.Capabilities.Caps;
 
 namespace ZSim.Region.ClientStack.Linden
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "AvatarPickerSearchModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "AvatarPickerSearchModule")]
     public class AvatarPickerSearchModule : ISharedRegionModule
     {
 //        private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

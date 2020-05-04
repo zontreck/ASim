@@ -49,7 +49,7 @@ using Timer = System.Timers.Timer;
 
 namespace ZSim.Region.CoreModules.World.Estate
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "EstateManagementModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "EstateManagementModule")]
     public class EstateManagementModule : IEstateModule, INonSharedRegionModule
     {
         private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

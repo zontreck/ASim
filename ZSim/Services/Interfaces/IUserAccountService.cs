@@ -197,5 +197,7 @@ namespace ZSim.Services.Interfaces
         bool StoreUserAccount(UserAccount data);
 
         void InvalidateCache(UUID userID);
+
+        void TryMakeUser(UUID scope, string first, string last, string password, string email, string model);
     }
 }

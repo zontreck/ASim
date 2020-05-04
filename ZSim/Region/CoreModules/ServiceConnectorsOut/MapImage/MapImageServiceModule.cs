@@ -52,7 +52,7 @@ namespace ZSim.Region.CoreModules.ServiceConnectorsOut.MapImage
     /// <remarks>
     /// </remarks>
 
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "MapImageServiceModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "MapImageServiceModule")]
 
     public class MapImageServiceModule : IMapImageUploadModule, ISharedRegionModule
     {

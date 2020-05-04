@@ -38,7 +38,7 @@ using Mono.Addins;
 
 namespace ZSim.Region.CoreModules.Agent.AssetTransaction
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "AssetTransactionModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "AssetTransactionModule")]
     public class AssetTransactionModule : INonSharedRegionModule,
             IAgentAssetTransactions
     {

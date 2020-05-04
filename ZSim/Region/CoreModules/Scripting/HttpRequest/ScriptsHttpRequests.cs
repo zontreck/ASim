@@ -90,7 +90,7 @@ using Amib.Threading;
 
 namespace ZSim.Region.CoreModules.Scripting.HttpRequest
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "HttpRequestModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "HttpRequestModule")]
     public class HttpRequestModule : ISharedRegionModule, IHttpRequestModule
     {
 //        private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

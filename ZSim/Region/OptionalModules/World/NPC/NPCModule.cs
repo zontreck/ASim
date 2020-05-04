@@ -43,7 +43,7 @@ using ZSim.Services.Interfaces;
 
 namespace ZSim.Region.OptionalModules.World.NPC
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "NPCModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "NPCModule")]
     public class NPCModule : INPCModule, ISharedRegionModule
     {
         private static readonly ILog m_log = LogManager.GetLogger(

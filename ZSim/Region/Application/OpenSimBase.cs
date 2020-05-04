@@ -63,8 +63,8 @@ namespace ZSim
         // class during system startup.
         //
 
-        private const string PLUGIN_ASSET_CACHE = "/OpenSim/AssetCache";
-        private const string PLUGIN_ASSET_SERVER_CLIENT = "/OpenSim/AssetClient";
+        private const string PLUGIN_ASSET_CACHE = "/ZSim/AssetCache";
+        private const string PLUGIN_ASSET_SERVER_CLIENT = "/ZSim/AssetClient";
 
         // ZSim.ini Section name for ESTATES Settings
         public const string ESTATE_SECTION_NAME = "Estates";
@@ -186,7 +186,7 @@ namespace ZSim
             {
                 using (PluginLoader<IApplicationPlugin> loader = new PluginLoader<IApplicationPlugin>(new ApplicationPluginInitialiser(this)))
                 {
-                    loader.Load("/OpenSim/Startup");
+                    loader.Load("/ZSim/Startup");
                     m_plugins = loader.Plugins;
                 }
             }
@@ -194,7 +194,7 @@ namespace ZSim
             {
                 using (PluginLoader<IApplicationPlugin> loader = new PluginLoader<IApplicationPlugin>(new ApplicationPluginInitialiser(this), registryLocation))
                 {
-                    loader.Load("/OpenSim/Startup");
+                    loader.Load("/ZSim/Startup");
                     m_plugins = loader.Plugins;
                 }
             }

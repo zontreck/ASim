@@ -48,7 +48,7 @@ using PermissionMask = ZSim.Framework.PermissionMask;
 
 namespace ZSim.Region.CoreModules.Avatar.Attachments
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "AttachmentsModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "AttachmentsModule")]
     public class AttachmentsModule : IAttachmentsModule, INonSharedRegionModule
     {
         #region INonSharedRegionModule

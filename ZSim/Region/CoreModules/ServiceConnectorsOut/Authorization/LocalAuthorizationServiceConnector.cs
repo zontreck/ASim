@@ -40,7 +40,7 @@ using OpenMetaverse;
 
 namespace ZSim.Region.CoreModules.ServiceConnectorsOut.Authorization
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "LocalAuthorizationServicesConnector")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "LocalAuthorizationServicesConnector")]
     public class LocalAuthorizationServicesConnector : INonSharedRegionModule, IAuthorizationService
     {
         private static readonly ILog m_log =

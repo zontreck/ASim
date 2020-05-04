@@ -42,7 +42,7 @@ using ZSim.Region.Framework.Scenes.Serialization;
 
 namespace ZSim.Region.CoreModules.World.Serialiser
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "SerialiserModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "SerialiserModule")]
     public class SerialiserModule : ISharedRegionModule, IRegionSerialiserModule
     {
         private static readonly ILog m_log =

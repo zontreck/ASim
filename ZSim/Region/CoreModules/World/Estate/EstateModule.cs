@@ -44,7 +44,7 @@ using Mono.Addins;
 
 namespace ZSim.Region.CoreModules.World.Estate
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "XEstate")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "XEstate")]
     public class EstateModule : ISharedRegionModule
     {
         private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

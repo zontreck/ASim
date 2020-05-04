@@ -38,7 +38,7 @@ using ZSim.Region.Framework.Scenes;
 
 namespace ZSim.Region.CoreModules.Avatar.Lure
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "LureModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "LureModule")]
     public class LureModule : ISharedRegionModule
     {
         private static readonly ILog m_log = LogManager.GetLogger(

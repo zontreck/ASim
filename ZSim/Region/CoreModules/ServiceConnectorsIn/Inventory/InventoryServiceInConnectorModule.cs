@@ -40,7 +40,7 @@ using ZSim.Server.Handlers.Base;
 
 namespace ZSim.Region.CoreModules.ServiceConnectorsIn.Inventory
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "InventoryServiceInConnectorModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "InventoryServiceInConnectorModule")]
     public class InventoryServiceInConnectorModule : ISharedRegionModule
     {
         private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

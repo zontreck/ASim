@@ -40,7 +40,7 @@ using OpenMetaverse;
 
 namespace ZSim.Region.CoreModules.ServiceConnectorsOut.UserAccounts
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "LocalUserAccountServicesConnector")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "LocalUserAccountServicesConnector")]
     public class LocalUserAccountServicesConnector : ISharedRegionModule, IUserAccountService
     {
         private static readonly ILog m_log =
@@ -246,6 +246,11 @@ namespace ZSim.Region.CoreModules.ServiceConnectorsOut.UserAccounts
         public void InvalidateCache(UUID userID)
         {
             m_Cache.Invalidate(userID);
+        }
+
+        public void TryMakeUser(UUID scope, string first, string last, string password, string email, string model)
+        {
+            return;
         }
 
         #endregion

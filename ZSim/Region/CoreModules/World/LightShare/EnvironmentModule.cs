@@ -43,7 +43,7 @@ using Caps = ZSim.Framework.Capabilities.Caps;
 
 namespace ZSim.Region.CoreModules.World.LightShare
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "EnvironmentModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "EnvironmentModule")]
 
     public class EnvironmentModule : INonSharedRegionModule, IEnvironmentModule
     {

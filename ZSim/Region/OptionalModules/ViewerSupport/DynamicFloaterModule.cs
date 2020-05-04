@@ -48,7 +48,7 @@ using OSDMap = OpenMetaverse.StructuredData.OSDMap;
 
 namespace ZSim.Region.OptionalModules.ViewerSupport
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "DynamicFloater")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "DynamicFloater")]
     public class DynamicFloaterModule : INonSharedRegionModule, IDynamicFloaterModule
     {
         private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

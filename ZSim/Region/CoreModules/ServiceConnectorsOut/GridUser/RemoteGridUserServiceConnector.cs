@@ -41,7 +41,7 @@ using Nini.Config;
 
 namespace ZSim.Region.CoreModules.ServiceConnectorsOut.GridUser
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "RemoteGridUserServicesConnector")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "RemoteGridUserServicesConnector")]
     public class RemoteGridUserServicesConnector : ISharedRegionModule, IGridUserService
     {
         private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

@@ -49,7 +49,7 @@ namespace ZSim.Region.OptionalModules.UDP.Linden
     /// <remarks>
     /// All actual client stack functionality remains in ZSim.Region.ClientStack.LindenUDP
     /// </remarks>
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "LindenUDPInfoModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "LindenUDPInfoModule")]
     public class LindenUDPInfoModule : ISharedRegionModule
     {
         private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

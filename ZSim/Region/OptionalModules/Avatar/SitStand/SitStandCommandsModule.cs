@@ -46,7 +46,7 @@ namespace ZSim.Region.OptionalModules.Avatar.SitStand
     /// <summary>
     /// A module that just holds commands for changing avatar sitting and standing states.
     /// </summary>
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "AnimationsCommandModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "AnimationsCommandModule")]
     public class SitStandCommandModule : INonSharedRegionModule
     {
 //        private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

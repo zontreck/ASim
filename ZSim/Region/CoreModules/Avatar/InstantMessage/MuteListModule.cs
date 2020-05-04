@@ -43,7 +43,7 @@ using ZSim.Services.Interfaces;
 
 namespace ZSim.Region.CoreModules.Avatar.InstantMessage
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "MuteListModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "MuteListModule")]
     public class MuteListModule : ISharedRegionModule
     {
         private static readonly ILog m_log = LogManager.GetLogger(

@@ -41,7 +41,7 @@ using ZSim.Framework.Servers.HttpServer;
 namespace ZSim.Region.OptionalModules.WebSocketEchoModule
 {
 
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "WebSocketEchoModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "WebSocketEchoModule")]
     public class WebSocketEchoModule : ISharedRegionModule
     {
         private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

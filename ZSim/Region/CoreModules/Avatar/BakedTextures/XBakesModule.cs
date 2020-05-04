@@ -45,7 +45,7 @@ using Mono.Addins;
 
 namespace ZSim.Region.CoreModules.Avatar.BakedTextures
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "XBakes.Module")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "XBakes.Module")]
     public class XBakesModule : INonSharedRegionModule, IBakedTextureModule
     {
         protected Scene m_Scene;

@@ -49,7 +49,7 @@ using ZSim.Region.Framework.Scenes;
 
 namespace ZSim.Region.CoreModules.World.Terrain
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "TerrainModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "TerrainModule")]
     public class TerrainModule : INonSharedRegionModule, ICommandableModule, ITerrainModule
     {
         #region StandardTerrainEffects enum

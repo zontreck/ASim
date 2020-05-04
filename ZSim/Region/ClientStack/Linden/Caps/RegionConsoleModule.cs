@@ -46,7 +46,7 @@ using Caps = ZSim.Framework.Capabilities.Caps;
 
 namespace ZSim.Region.ClientStack.Linden
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "RegionConsoleModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "RegionConsoleModule")]
     public class RegionConsoleModule : INonSharedRegionModule, IRegionConsole
     {
 //        private static readonly ILog m_log =

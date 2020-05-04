@@ -114,7 +114,7 @@ namespace ZSim.Region.PhysicsModule.ODE
         /// mono() [0x489171]
         /// mono() [0x4d154f]
         /// /lib/x86_64-linux-gnu/libpthread.so.0(+0xfc60) [0x7f6ded592c60]
-        /// .../opensim/bin/libode-x86_64.so(_ZN6Opcode11OBBCollider8_CollideEPKNS_14AABBNoLeafNodeE+0xd7a) [0x7f6dd822628a]
+        /// .../ZSim/bin/libode-x86_64.so(_ZN6Opcode11OBBCollider8_CollideEPKNS_14AABBNoLeafNodeE+0xd7a) [0x7f6dd822628a]
         ///
         /// ODE provides an experimental option to cache in thread local storage but compiling ODE with this option
         /// causes OpenSimulator to immediately crash with a native stack trace similar to
@@ -122,7 +122,7 @@ namespace ZSim.Region.PhysicsModule.ODE
         /// mono() [0x489171]
         /// mono() [0x4d154f]
         /// /lib/x86_64-linux-gnu/libpthread.so.0(+0xfc60) [0x7f03c9849c60]
-        /// .../opensim/bin/libode-x86_64.so(_Z12dCollideCCTLP6dxGeomS0_iP12dContactGeomi+0x92) [0x7f03b44bcf82]
+        /// .../ZSim/bin/libode-x86_64.so(_Z12dCollideCCTLP6dxGeomS0_iP12dContactGeomi+0x92) [0x7f03b44bcf82]
         /// </remarks>
         internal static object UniversalColliderSyncObject = new object();
         internal static object SimulationLock = new object();

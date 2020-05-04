@@ -91,7 +91,7 @@ using ZSim.Region.Framework.Scenes;
 
 namespace ZSim.Region.CoreModules.Scripting.WorldComm
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "WorldCommModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "WorldCommModule")]
     public class WorldCommModule : IWorldComm, INonSharedRegionModule
     {
         // private static readonly ILog m_log =

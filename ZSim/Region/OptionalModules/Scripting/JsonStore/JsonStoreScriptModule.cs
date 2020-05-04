@@ -46,7 +46,7 @@ using PermissionMask = ZSim.Framework.PermissionMask;
 
 namespace ZSim.Region.OptionalModules.Scripting.JsonStore
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "JsonStoreScriptModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "JsonStoreScriptModule")]
 
     public class JsonStoreScriptModule  : INonSharedRegionModule
     {

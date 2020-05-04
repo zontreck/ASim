@@ -55,7 +55,7 @@ namespace ZSim.Region.OptionalModules.World.MoneyModule
     ///
     /// </summary>
 
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "SampleMoneyModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "SampleMoneyModule")]
     public class SampleMoneyModule : IMoneyModule, ISharedRegionModule
     {
         private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

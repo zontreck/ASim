@@ -46,7 +46,7 @@ using ZSim.Services.Interfaces;
 
 namespace ZSim.Region.OptionalModules.World.WorldView
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "WorldViewModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "WorldViewModule")]
     public class WorldViewModule : INonSharedRegionModule
     {
         private static readonly ILog m_log =

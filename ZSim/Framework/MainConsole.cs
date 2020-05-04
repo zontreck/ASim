@@ -36,5 +36,6 @@ namespace ZSim.Framework
             get { return instance; }
             set { instance = value; }
         }
+
     }
 }

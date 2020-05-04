@@ -55,7 +55,7 @@ namespace ZSim.Region.OptionalModules.Example.BareBonesNonShared
     /// When the module is enabled it will print messages when it receives certain events to the screen and the log
     /// file.
     /// </remarks>
-    //[Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "BareBonesNonSharedModule")]
+    //[Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "BareBonesNonSharedModule")]
     public class BareBonesNonSharedModule : INonSharedRegionModule
     {
         private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

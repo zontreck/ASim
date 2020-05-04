@@ -54,7 +54,7 @@ using Microsoft.CSharp;
 
 namespace ZSim.Region.CoreModules.Avatar.UserProfiles
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "UserProfilesModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "UserProfilesModule")]
     public class UserProfileModule : IProfileModule, INonSharedRegionModule
     {
         const double PROFILECACHEEXPIRE = 300;

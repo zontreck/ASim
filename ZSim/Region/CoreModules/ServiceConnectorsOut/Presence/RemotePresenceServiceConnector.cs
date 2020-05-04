@@ -42,7 +42,7 @@ using Nini.Config;
 
 namespace ZSim.Region.CoreModules.ServiceConnectorsOut.Presence
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "RemotePresenceServicesConnector")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "RemotePresenceServicesConnector")]
     public class RemotePresenceServicesConnector : BasePresenceServiceConnector, ISharedRegionModule
     {
         private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

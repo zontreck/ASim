@@ -39,7 +39,7 @@ using ZSim.Services.Interfaces;
 
 namespace ZSim.Region.CoreModules.Asset
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "CoreAssetCache")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "CoreAssetCache")]
     public class CoreAssetCache : ISharedRegionModule, IAssetCache
     {
         private static readonly ILog m_log =

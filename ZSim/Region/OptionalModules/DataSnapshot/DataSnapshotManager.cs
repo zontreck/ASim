@@ -46,7 +46,7 @@ using ZSim.Region.Framework.Scenes;
 
 namespace ZSim.Region.DataSnapshot
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "DataSnapshotManager")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "DataSnapshotManager")]
     public class DataSnapshotManager : ISharedRegionModule, IDataSnapshot
     {
         #region Class members

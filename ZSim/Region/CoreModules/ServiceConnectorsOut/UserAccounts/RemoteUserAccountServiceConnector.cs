@@ -42,7 +42,7 @@ using OpenMetaverse;
 
 namespace ZSim.Region.CoreModules.ServiceConnectorsOut.UserAccounts
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "RemoteUserAccountServicesConnector")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "RemoteUserAccountServicesConnector")]
     public class RemoteUserAccountServicesConnector : UserAccountServicesConnector,
             ISharedRegionModule, IUserAccountService
     {

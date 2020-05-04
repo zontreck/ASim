@@ -37,7 +37,7 @@ using Mono.Addins;
 
 namespace ZSim.Region.Framework.Interfaces
 {
-    [TypeExtensionPoint(Path = "/OpenSim/WindModule", NodeName = "WindModel")]
+    [TypeExtensionPoint(Path = "/ZSim/WindModule", NodeName = "WindModel")]
     public interface IWindModelPlugin : IPlugin
     {
         /// <summary>

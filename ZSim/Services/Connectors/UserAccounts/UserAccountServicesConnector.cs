@@ -319,7 +319,7 @@ namespace ZSim.Services.Connectors
         }
 
         /// <summary>
-        /// Create user remotely. Note this this is not part of the IUserAccountsService
+        /// Create user
         /// </summary>
         /// <param name="first"></param>
         /// <param name="last"></param>
@@ -421,5 +421,10 @@ namespace ZSim.Services.Connectors
             return false;
         }
 
+        public void TryMakeUser(UUID scope, string first, string last, string password, string email, string model)
+        {
+            m_log.Info($"[UserAccountServicesConnector] No such method (TryMakeUser)");
+            return;
+        }
     }
 }

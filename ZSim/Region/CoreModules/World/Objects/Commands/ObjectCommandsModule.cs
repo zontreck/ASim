@@ -50,7 +50,7 @@ namespace ZSim.Region.CoreModules.World.Objects.Commands
     /// <summary>
     /// A module that holds commands for manipulating objects in the scene.
     /// </summary>
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "ObjectCommandsModule")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "ObjectCommandsModule")]
     public class ObjectCommandsModule : INonSharedRegionModule
     {
 //        private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);

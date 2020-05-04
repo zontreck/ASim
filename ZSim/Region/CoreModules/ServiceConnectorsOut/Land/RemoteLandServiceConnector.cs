@@ -42,7 +42,7 @@ using OpenMetaverse;
 
 namespace ZSim.Region.CoreModules.ServiceConnectorsOut.Land
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "RemoteLandServicesConnector")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "RemoteLandServicesConnector")]
     public class RemoteLandServicesConnector :
             LandServicesConnector, ISharedRegionModule, ILandService
     {

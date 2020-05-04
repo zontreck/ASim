@@ -109,10 +109,18 @@ namespace ZSim.Services.AuthenticationService
             return m_Database.CheckToken(principalID, token, 0);
         }
 
-        public virtual bool SetPassword(UUID principalID, string password)
+        public virtual bool SetPassword(UUID principalID, string password, bool PreHashed=false)
         {
             string passwordSalt = Util.Md5Hash(UUID.Random().ToString());
-            string md5PasswdHash = Util.Md5Hash(Util.Md5Hash(password) + ":" + passwordSalt);
+            string md5PasswdHash = "";
+            if (PreHashed)
+            {
+                md5PasswdHash = Util.Md5Hash(password + ":" + passwordSalt);
+            }
+            else
+            {
+                md5PasswdHash = Util.Md5Hash(Util.Md5Hash(password) + ":" + passwordSalt);
+            }
 
             AuthenticationData auth = m_Database.Get(principalID);
             if (auth == null)

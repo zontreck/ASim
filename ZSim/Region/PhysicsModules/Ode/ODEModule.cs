@@ -9,7 +9,7 @@ using ZSim.Region.Framework.Interfaces;
 
 namespace ZSim.Region.PhysicsModule.ODE
 {
-    [Extension(Path = "/OpenSim/RegionModules", NodeName = "RegionModule", Id = "ODEPhysicsScene")]
+    [Extension(Path = "/ZSim/RegionModules", NodeName = "RegionModule", Id = "ODEPhysicsScene")]
     public class OdeModule : INonSharedRegionModule
     {
         private static readonly ILog m_log = LogManager.GetLogger(MethodBase.GetCurrentMethod().DeclaringType);
