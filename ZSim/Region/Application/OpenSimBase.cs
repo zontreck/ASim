@@ -1019,6 +1019,8 @@ namespace ZSim
             // possible to eliminate some additional later saves made by callers of this method.
             EstateDataService.StoreEstateSettings(regInfo.EstateSettings);
 
+            regInfo.SaveRegionToFile("", regInfo.RegionFile);
+
             return true;
         }
 
@@ -1034,6 +1036,41 @@ namespace ZSim
             if (regInfo.EstateSettings.EstateID != 0)
                 return false;	// estate info in the database did not change
 
+            if (regInfo.m_estateName != String.Empty)
+            {
+                // Populate the estate information from the region ini
+                m_log.InfoFormat("[ESTATE] Loading estate information for {0} from config", regInfo.RegionName);
+
+                if(regInfo.m_estateID != -1 && regInfo.m_estateID!= 0)
+                {
+                    // Link!
+
+
+                    List<EstateSettings> allEstates = EstateDataService.LoadEstateSettingsAll();
+                    int total = allEstates.Where(est => (est.EstateID == regInfo.m_estateID && est.EstateName == regInfo.m_estateName)).Count();
+                    if (total != 0)
+                    {
+                        regInfo.EstateSettings = allEstates.Where(est => (est.EstateID == regInfo.m_estateID && est.EstateName == regInfo.m_estateName)).First();
+                        EstateDataService.LinkRegion(regInfo.RegionID, regInfo.m_estateID);
+
+                        if (regInfo.EstateSettings.EstateID != 0)
+                        {
+                            regInfo.SaveRegionToFile("", regInfo.RegionFile);
+                            return true;
+                        }
+                    }
+                    else
+                    {
+                        m_log.Info($"[ESTATE] Provided information for {regInfo.RegionName} does not match the database");
+                    }
+
+                    
+
+                }else
+                {
+                    m_log.Warn($"[ESTATE] Partial estate information provided for {regInfo.RegionName} - Please provide both ID and name if you wish to set it using Region INI");
+                }
+            }
             m_log.WarnFormat("[ESTATE] Region {0} is not part of an estate.", regInfo.RegionName);
 
             List<EstateSettings> estates = EstateDataService.LoadEstateSettingsAll();
@@ -1067,7 +1104,10 @@ namespace ZSim
                     }
 
                     if (defaultEstateJoined)
+                    {
+                        regInfo.SaveRegionToFile("", regInfo.RegionFile);
                         return true; // need to update the database
+                    }
                     else
                         m_log.ErrorFormat(
                             "[OPENSIM BASE]: Joining default estate {0} failed", defaultEstateName);
@@ -1124,13 +1164,17 @@ namespace ZSim
                         regInfo.EstateSettings = EstateDataService.LoadEstateSettings(estateID);
 
                         if (EstateDataService.LinkRegion(regInfo.RegionID, estateID))
+                        {
+                            regInfo.SaveRegionToFile("", regInfo.RegionFile);
                             break;
+                        }
 
                         MainConsole.Instance.Output("Joining the estate failed. Please try again.");
                     }
                 }
     	    }
-
+            m_log.Info("[ESTATE] New estate created - updating the region INI");
+            regInfo.SaveRegionToFile("", regInfo.RegionFile);
     	    return true;	// need to update the database
     	}
     }

@@ -179,6 +179,8 @@ namespace ZSim.Framework
         public Vector3 DefaultLandingPoint = new Vector3(128, 128, 30);
 
         private Dictionary<String, String> m_extraSettings = new Dictionary<string, string>();
+        public string m_estateName;
+        public int m_estateID;
 
         // Apparently, we're applying the same estatesettings regardless of whether it's local or remote.
 
@@ -525,7 +527,7 @@ namespace ZSim.Framework
                         name = MainConsole.Instance.Prompt("New region name", name);
                         if (name.Trim() == string.Empty)
                         {
-                            MainConsole.Instance.Output("Cannot interactively create region with no name");
+                            MainConsole.Instance.Output("Cannot create region with no name");
                         }
                     }
                 }
@@ -742,6 +744,11 @@ namespace ZSim.Framework
             AgentCapacity = config.GetInt("MaxAgents", 100);
             allKeys.Remove("MaxAgents");
 
+            m_estateName = config.GetString("EstateName", String.Empty);
+            m_estateID = config.GetInt("EstateID", -1);
+            allKeys.Remove("EstateName");
+            allKeys.Remove("EstateID");
+
             // Multi-tenancy
             //
             ScopeID = new UUID(config.GetString("ScopeID", UUID.Zero.ToString()));
@@ -863,18 +870,19 @@ namespace ZSim.Framework
             if (DataStore != String.Empty)
                 config.Set("Datastore", DataStore);
 
-            if (RegionSizeX != Constants.RegionSize || RegionSizeY != Constants.RegionSize)
-            {
-                config.Set("SizeX", RegionSizeX);
-                config.Set("SizeY", RegionSizeY);
+            config.Set("SizeX", RegionSizeX);
+            config.Set("SizeY", RegionSizeY);
                 //            if (RegionSizeZ > 0)
-                //                config.Set("SizeZ", RegionSizeZ);
-            }
+            config.Set("SizeZ", RegionSizeZ);
+            
 
             config.Set("InternalAddress", m_internalEndPoint.Address.ToString());
             config.Set("InternalPort", m_internalEndPoint.Port);
 
-            config.Set("ExternalHostName", m_externalHostName);
+            config.Set("ExternalHostName", m_externalHostName); 
+            
+            config.Set("EstateName", EstateSettings.EstateName);
+            config.Set("EstateID", EstateSettings.EstateID);
 
             if (m_nonphysPrimMin > 0)
                 config.Set("NonphysicalPrimMax", m_nonphysPrimMin);
@@ -888,7 +896,8 @@ namespace ZSim.Framework
             if (m_physPrimMax > 0)
                 config.Set("PhysicalPrimMax", m_physPrimMax);
 
-            config.Set("ClampPrimSize", m_clampPrimSize.ToString());
+            if(m_clampPrimSize)
+                config.Set("ClampPrimSize", m_clampPrimSize.ToString());
 
             if (m_objectCapacity > 0)
                 config.Set("MaxPrims", m_objectCapacity);
@@ -913,6 +922,7 @@ namespace ZSim.Framework
 
             if (MaptileStaticFile != null && MaptileStaticFile != String.Empty)
                 config.Set("MaptileStaticFile", MaptileStaticFile);
+
         }
 
         public void SaveRegionToFile(string description, string filename)
