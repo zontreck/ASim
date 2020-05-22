@@ -81,6 +81,26 @@
       </Files>
     </Project>
 
+    <Project frameworkVersion="v4_6" name="ZSim.Globals" path="ZSim/Globals" type="Library">
+      <Configuration name="Debug">
+        <Options>
+          <OutputPath>../../bin/</OutputPath>
+        </Options>
+      </Configuration>
+      <Configuration name="Release">
+        <Options>
+          <OutputPath>../../bin/</OutputPath>
+        </Options>
+      </Configuration>
+      <ReferencePath>../../bin/</ReferencePath>
+
+      <Files>
+        <Match pattern="*.cs" recurse="true">
+          <Exclude name="obj" pattern="obj"/>
+        </Match>
+      </Files>
+    </Project>
+
     <Project frameworkVersion="v4_6" name="ZSim.Framework" path="ZSim/Framework" type="Library">
       <Configuration name="Debug">
         <Options>
@@ -2025,6 +2045,7 @@
       <Reference name="ZSim.Services.Base"/>
       <Reference name="ZSim.Services.Interfaces"/>
       <Reference name="ZSim.Services.UserAccountService"/>
+      <Reference name="ZSim.Globals"/>
       <Reference name="XMLRPC" path="../../../bin/"/>
       <Reference name="Nini" path="../../../bin/"/>
       <Reference name="log4net" path="../../../bin/"/>
@@ -2132,6 +2153,7 @@
       <Reference name="ZSim.Framework.Servers.HttpServer"/>
       <Reference name="ZSim.Framework.Console"/>
       <Reference name="ZSim.Services.Interfaces"/>
+      <Reference name="ZSim.Globals"/>
       <Reference name="log4net" path="../../../bin/"/>
 
       <Files>

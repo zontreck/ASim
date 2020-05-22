@@ -53,6 +53,7 @@ using PresenceInfo = ZSim.Services.Interfaces.PresenceInfo;
 using GridRegion = ZSim.Services.Interfaces.GridRegion;
 using PermissionMask = ZSim.Framework.PermissionMask;
 using RegionInfo = ZSim.Framework.RegionInfo;
+using ZSim.Globals;
 
 namespace ZSim.ApplicationPlugins.RemoteController
 {

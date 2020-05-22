@@ -49,6 +49,7 @@ using ZSim.Server.Base;
 using ZSim.Services.Base;
 using ZSim.Services.Interfaces;
 using ZSim.Services.UserAccountService;
+using ZSim.Globals;
 
 namespace ZSim
 {
@@ -182,6 +183,8 @@ namespace ZSim
             // The location can also be specified in the environment. If there
             // is no location in the configuration, we must call the constructor
             // without a location parameter to allow that to happen.
+
+
             if (registryLocation == String.Empty)
             {
                 using (PluginLoader<IApplicationPlugin> loader = new PluginLoader<IApplicationPlugin>(new ApplicationPluginInitialiser(this)))
@@ -189,6 +192,9 @@ namespace ZSim
                     loader.Load("/ZSim/Startup");
                     m_plugins = loader.Plugins;
                 }
+
+                Dictionary<Plugin, string> Plgs = Plugins.ScanByAttribute();
+                
             }
             else
             {
