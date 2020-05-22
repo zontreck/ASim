@@ -273,11 +273,17 @@ namespace ZSim.Region.ClientStack.Linden
                         new SimpleStreamHandler(GetNewCapPath(), GroupMemberData));
                 }
 
+                m_HostCapsObj.RegisterSimpleHandler("SetDisplayName", new SimpleOSDMapHandler("POST", GetNewCapPath(), SetDisplayName));
             }
             catch (Exception e)
             {
                 m_log.Error("[CAPS]: " + e.ToString());
             }
+        }
+
+        private void SetDisplayName(IOSHttpRequest httpRequest, IOSHttpResponse httpResponse, OSDMap args)
+        {
+            m_log.Info(args.AsString());
         }
 
         public void RegisterInventoryServiceHandlers()

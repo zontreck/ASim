@@ -33,3 +33,24 @@ BEGIN;
 ALTER TABLE `UserAccounts` ADD `active` BOOLEAN NOT NULL DEFAULT TRUE;
 
 COMMIT;
+
+:VERSION 4     # -------------------------
+
+BEGIN;
+
+CREATE TABLE DisplayNames (
+  PrincipalID char(36) primary key,
+  DisplayName text,
+  ModificationDate text,
+  IsDefault int
+);
+
+COMMIT;
+
+
+:VERSION 5
+BEGIN;
+
+ALTER TABLE `UserAccounts` ADD `balance` int not null default '0';
+
+commit;

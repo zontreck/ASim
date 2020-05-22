@@ -93,6 +93,7 @@ namespace ZSim.Services.Interfaces
         public string UserTitle;
         public string UserCountry;
         public Boolean LocalToGrid = true;
+        public int Balance;
 
         public Dictionary<string, object> ServiceURLs;
 
@@ -125,6 +126,8 @@ namespace ZSim.Services.Interfaces
                 UserCountry = kvp["UserCountry"].ToString();
             if (kvp.ContainsKey("LocalToGrid"))
                 Boolean.TryParse(kvp["LocalToGrid"].ToString(), out LocalToGrid);
+            if (kvp.ContainsKey("Balance"))
+                Balance = Convert.ToInt32(kvp["Balance"]);
 
             if (kvp.ContainsKey("Created"))
                 Created = Convert.ToInt32(kvp["Created"].ToString());
@@ -160,6 +163,7 @@ namespace ZSim.Services.Interfaces
             result["UserTitle"] = UserTitle;
             result["UserCountry"] = UserCountry;
             result["LocalToGrid"] = LocalToGrid.ToString();
+            result["Balance"] = Balance.ToString();
 
             string str = string.Empty;
             foreach (KeyValuePair<string, object> kvp in ServiceURLs)

@@ -29,3 +29,26 @@ BEGIN;
 ALTER TABLE `UserAccounts` ADD `active` INT NOT NULL DEFAULT '1';
 
 COMMIT;
+
+
+:VERSION 7     # -------------------------
+
+BEGIN;
+
+CREATE TABLE IF NOT EXISTS `DisplayNames` (
+  `PrincipalID` char(36) not null,
+  `DisplayName` text,
+  `ModificationDate` text,
+  `IsDefault` int,
+  UNIQUE KEY `PrincipalID` (`PrincipalID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+COMMIT;
+
+
+:VERSION 8
+BEGIN;
+
+ALTER TABLE `UserAccounts` ADD `balance` int not null default '0';
+
+commit;

@@ -55,3 +55,24 @@ BEGIN TRANSACTION;
 ALTER TABLE UserAccounts ADD "active" integer NOT NULL DEFAULT 1;
 
 COMMIT;
+
+:VERSION 6     # -------------------------
+
+BEGIN;
+
+CREATE TABLE DisplayNames (
+  PrincipalID char(36) primary key,
+  DisplayName text,
+  ModificationDate text,
+  IsDefault int
+);
+
+COMMIT;
+
+
+:VERSION 7
+BEGIN;
+
+ALTER TABLE UserAccounts ADD "balance" int not null default 0;
+
+commit;

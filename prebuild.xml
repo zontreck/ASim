@@ -101,6 +101,45 @@
       </Files>
     </Project>
 
+    <Project frameworkVersion="v4_6" name="ZSim.MoneyModule" path="ZSim/MoneyModule" type="Library">
+      <Configuration name="Debug">
+        <Options>
+          <OutputPath>../../bin/</OutputPath>
+        </Options>
+      </Configuration>
+      <Configuration name="Release">
+        <Options>
+          <OutputPath>../../bin/</OutputPath>
+        </Options>
+      </Configuration>
+      <ReferencePath>../../bin/</ReferencePath>
+      <Reference name="ZSim.Globals"/>
+      <Reference name="log4net"/>
+      <Reference name="Nini"/>
+      <Reference name="Mono.Addins"/>
+      <Reference name="OpenMetaverse" path="../../bin/"/>
+      <Reference name="OpenMetaverseTypes" path="../../bin/"/>
+      <Reference name="ZSim.Framework"/>
+      <Reference name="ZSim.Region.Framework"/>
+      <Reference name="ZSim.Framework.Servers"/>
+      <Reference name="ZSim.Framework.Servers.HttpServer"/>
+      <Reference name="XMLRPC"/>
+      <Reference name="ZSim.Services.Interfaces"/>
+      <Reference name="System"/>
+      <Reference name="System.Core"/>
+      <Reference name="System.Xml"/>
+      <Reference name="System.Xml.Linq"/>
+      <Reference name="System.Data"/>
+      <Reference name="System.Web"/>
+      <Reference name="System.Security"/>
+
+      <Files>
+        <Match pattern="*.cs" recurse="true">
+          <Exclude name="obj" pattern="obj"/>
+        </Match>
+      </Files>
+    </Project>
+
     <Project frameworkVersion="v4_6" name="ZSim.Framework" path="ZSim/Framework" type="Library">
       <Configuration name="Debug">
         <Options>

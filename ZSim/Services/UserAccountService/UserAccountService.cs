@@ -107,6 +107,7 @@ namespace ZSim.Services.UserAccountService
                     d.Data["UserLevel"] = "240";
                     d.Data["UserFlags"] = "0";
                     d.Data["ServiceURLs"] = string.Empty;
+                    d.Data["Balance"] = "0";
 
                     m_Database.Store(d);
                 }
@@ -190,6 +191,8 @@ namespace ZSim.Services.UserAccountService
             u.LastName = d.LastName;
             u.PrincipalID = d.PrincipalID;
             u.ScopeID = d.ScopeID;
+            u.Balance = Convert.ToInt32(d.Data["Balance"]);
+
             if (d.Data.ContainsKey("Email") && d.Data["Email"] != null)
                 u.Email = d.Data["Email"].ToString();
             else
@@ -321,6 +324,7 @@ namespace ZSim.Services.UserAccountService
             d.Data["Created"] = data.Created.ToString();
             d.Data["UserLevel"] = data.UserLevel.ToString();
             d.Data["UserFlags"] = data.UserFlags.ToString();
+            d.Data["Balance"] = data.Balance.ToString();
             if (!string.IsNullOrEmpty(data.UserTitle))
                 d.Data["UserTitle"] = data.UserTitle;
             if (!string.IsNullOrEmpty(data.UserCountry))
