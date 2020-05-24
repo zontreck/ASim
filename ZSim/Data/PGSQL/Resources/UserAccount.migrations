@@ -76,3 +76,27 @@ BEGIN;
 ALTER TABLE UserAccounts ADD "balance" int not null default 0;
 
 commit;
+
+:VERSION 8
+BEGIN;
+
+ALTER TABLE UserAccounts CHANGE "balance" "Balance" int not null default 0;
+
+commit;
+
+
+:VERSION 9
+BEGIN;
+
+DROP TABLE DisplayNames;
+ALTER TABLE UserAccounts ADD (DisplayName text not null, DisplayNameModified text not null, DisplayNameDefault int not null default 1);
+
+COMMIT;
+
+
+:VERSION 10
+BEGIN;
+
+ALTER TABLE UserAccounts MODIFY DisplayNameDefault text not null default "true";
+
+COMMIT;

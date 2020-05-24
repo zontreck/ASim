@@ -203,8 +203,12 @@ namespace ZSim.Region.CoreModules.ServiceConnectorsOut.UserAccounts
 
         public override bool StoreUserAccount(UserAccount data)
         {
-            // This remote connector refuses to serve this method
-            return false;
+            return base.StoreUserAccount(data);
+        }
+
+        public override bool StoreDisplayName(UserAccount container)
+        {
+            return base.StoreDisplayName(container);
         }
 
         #endregion

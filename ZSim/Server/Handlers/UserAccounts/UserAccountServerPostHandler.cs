@@ -110,6 +110,8 @@ namespace ZSim.Server.Handlers.UserAccounts
                             return StoreAccount(request);
                         else
                             return FailureResult();
+                    case "setdisplayname":
+                        return StoreDisplayName(request);
                 }
 
                 m_log.DebugFormat("[USER SERVICE HANDLER]: unknown method request: {0}", method);
@@ -120,6 +122,28 @@ namespace ZSim.Server.Handlers.UserAccounts
             }
 
             return FailureResult();
+        }
+
+        private byte[] StoreDisplayName(Dictionary<string, object> request)
+        {
+            UserAccount act = m_UserAccountService.GetUserAccount(UUID.Zero, UUID.Parse(request["uuid"].ToString()));
+            act.DisplayName = request["dn"].ToString();
+            act.DisplayNameDefault = Boolean.Parse(request["dnd"].ToString());
+            act.DisplayNameModified = DateTime.Parse(request["dnm"].ToString());
+
+            m_log.Info($"[SETDISPLAYNAME] DisplayName set request for user: {act.FirstName} {act.LastName}; Set: {act.DisplayName}");
+            Dictionary<string, object> RES = new Dictionary<string, object>();
+            if (m_UserAccountService.StoreDisplayName(act))
+            {
+                RES.Add("result", "success");
+            }
+            else RES.Add("result", "fail");
+
+            
+
+
+            return ResultToBytes(RES);
+
         }
 
         byte[] GetAccount(Dictionary<string, object> request)

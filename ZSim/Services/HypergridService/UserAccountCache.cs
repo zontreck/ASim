@@ -112,12 +112,18 @@ namespace ZSim.Services.HypergridService
 
         public bool StoreUserAccount(UserAccount data)
         {
+            Console.WriteLine("\n\n\n**** ATTEMPTED STORE USER BY HYPERGRID SERVICE ****\n\n\n");
             return false;
         }
 
         public void TryMakeUser(UUID scope, string first, string last, string password, string email, string model)
         {
             return;
+        }
+
+        public bool StoreDisplayName(UserAccount container)
+        {
+            return false;
         }
         #endregion
 

@@ -81,8 +81,10 @@ namespace ZSim.Data.MySQL
                     cmd.Parameters.AddWithValue("?searchLast", "%" + words[1] + "%");
                     cmd.Parameters.AddWithValue("?ScopeID", scopeID.ToString());
                 }
+                UserAccountData[] dat = DoQuery(cmd);
 
-                return DoQuery(cmd);
+
+                return dat;
             }
         }
 
@@ -98,7 +100,8 @@ namespace ZSim.Data.MySQL
 
                 cmd.CommandText = String.Format("select * from {0} where " + where, m_Realm);
 
-                return DoQuery(cmd);
+                UserAccountData[] dat = DoQuery(cmd);
+                return dat;
             }
         }
     }

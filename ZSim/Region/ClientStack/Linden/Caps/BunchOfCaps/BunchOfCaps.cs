@@ -126,6 +126,23 @@ namespace ZSim.Region.ClientStack.Linden
         private IUserAccountService m_userAccountService;
         private IMoneyModule m_moneyModule;
 
+        private static readonly object evqlck = new object();
+        private static IEventQueue m_EventQueue;
+        public IEventQueue EventQueue
+        {
+            get
+            {
+                lock (evqlck)
+                {
+                    if (m_EventQueue == null)
+                    {
+                        m_EventQueue = m_Scene.RequestModuleInterface<IEventQueue>();
+                    }
+                    return m_EventQueue;
+                }
+            }
+        }
+
         private enum FileAgentInventoryState : int
         {
             idle = 0,
@@ -273,7 +290,6 @@ namespace ZSim.Region.ClientStack.Linden
                         new SimpleStreamHandler(GetNewCapPath(), GroupMemberData));
                 }
 
-                m_HostCapsObj.RegisterSimpleHandler("SetDisplayName", new SimpleOSDMapHandler("POST", GetNewCapPath(), SetDisplayName));
             }
             catch (Exception e)
             {
@@ -281,9 +297,146 @@ namespace ZSim.Region.ClientStack.Linden
             }
         }
 
+        /// <summary>
+        /// Generates a displayname update packet
+        /// </summary>
+        /// <param name="newDispName">The new displayname</param>
+        /// <param name="oldDispName">The old displayname</param>
+        /// <param name="ID">User ID</param>
+        /// <param name="isDefault">Whether the displayname is the default display name</param>
+        /// <param name="first">User first name</param>
+        /// <param name="last">User last name</param>
+        /// <param name="username">Username</param>
+        /// <param name="nextUpdate">The date and time that this can next be changed</param>
+        /// <returns>OSD Packet</returns>
+        public OSD DisplayNameUpdate(string newDispName, string oldDispName, UUID ID, bool isDefault, string first, string last, string username, DateTime nextUpdate)
+        {
+            OSDMap nameReply = new OSDMap() { { "message", "DisplayNameUpdate" } };
+            OSDMap body = new OSDMap();
+
+            OSDMap agentData = new OSDMap();
+            agentData["display_name"] = newDispName;
+            agentData["id"] = ID.ToString();
+            agentData["is_display_name_default"] = OSD.FromBoolean(isDefault);
+            agentData["legacy_first_name"] = first;
+            agentData["legacy_last_name"] = last;
+            agentData["username"] = username;
+            agentData["display_name_next_update"] = OSD.FromDate(nextUpdate);
+
+            body.Add("agent", agentData);
+            body.Add("agent_id", OSD.FromUUID(ID));
+            body.Add("old_display_name", oldDispName);
+
+            nameReply.Add("body", body);
+
+            return nameReply;
+        }
+        /// <summary>
+        /// Generates a displayname update packet
+        /// </summary>
+        /// <param name="newDispName">The new displayname</param>
+        /// <param name="oldDispName">The old displayname</param>
+        /// <param name="ID">User ID</param>
+        /// <param name="isDefault">Whether the displayname is the default display name</param>
+        /// <param name="first">User first name</param>
+        /// <param name="last">User last name</param>
+        /// <param name="username">Username</param>
+        /// <param name="nextUpdate">The date and time that this can next be changed</param>
+        /// <param name="code">Reply code</param>
+        /// <param name="status">Status code</param>
+        /// <returns>OSD Packet</returns>
+        public OSD DisplayNameReply(string newDispName, string oldDispName, UUID ID, bool isDefault, string first, string last, string username, DateTime nextUpdate, int status, string code)
+        {
+            OSDMap nameReply = new OSDMap() { { "message", "SetDisplayNameReply" } };
+            OSDMap body = new OSDMap();
+
+            OSDMap agentData = new OSDMap();
+            agentData["display_name"] = newDispName;
+            agentData["id"] = ID.ToString();
+            agentData["is_display_name_default"] = OSD.FromBoolean(isDefault);
+            agentData["legacy_first_name"] = first;
+            agentData["legacy_last_name"] = last;
+            agentData["username"] = username;
+            agentData["display_name_next_update"] = OSD.FromDate(nextUpdate);
+
+            body.Add("content", agentData);
+            body.Add("agent", new OSDArray());
+
+            body.Add("reason", code);
+            body.Add("status", status);
+
+            nameReply.Add("body", body);
+
+            return nameReply;
+        }
+        /// <summary>
+        /// Queues the display name update packet to go out
+        /// </summary>
+        /// <param name="ACT">The account data</param>
+        /// <param name="toID">The user receiving the update</param>
+        /// <param name="OldDisplayName">The old display name</param>
+        void DisplayNameUpdateTrigger(UserAccount ACT, UUID toID, string OldDisplayName)
+        {
+            if (EventQueue != null)
+            {
+                OSD Update = null;
+
+                Update = DisplayNameUpdate(ACT.DisplayName, OldDisplayName, ACT.PrincipalID, ACT.DisplayNameDefault, ACT.FirstName, ACT.LastName, ACT.Name, ACT.DisplayNameModified);
+
+                EventQueue.Enqueue(Update, toID);
+                
+            }
+        }
+
         private void SetDisplayName(IOSHttpRequest httpRequest, IOSHttpResponse httpResponse, OSDMap args)
         {
-            m_log.Info(args.AsString());
+            IUserAccountService uas = m_userAccountService;
+            m_log.Info($"[SETDISPLAYNAME] Starting to set display name for {m_AgentID}");
+            UserAccount thisAct = uas.GetUserAccount(m_Scene.RegionInfo.ScopeID, m_AgentID);
+            OSDArray disp = (OSDArray)args["display_name"];
+            string oldDisp = thisAct.DisplayName;
+
+            if (disp[1] == "")
+            {
+                thisAct.DisplayNameDefault = true;
+                thisAct.DisplayName = disp[1];
+                thisAct.DisplayNameModified = DateTime.MinValue;
+                m_log.Info($"[SETDISPLAYNAME] Display Name Reset pressed");
+                m_Scene.SimChatBroadcast(Encoding.UTF8.GetBytes($"{thisAct.Name} reset their display name"), ChatTypeEnum.Direct, 0, Vector3.Zero, "Simulator", UUID.Zero, false);
+            }
+            else
+            {
+                thisAct.DisplayName = disp[1];
+                thisAct.DisplayNameDefault = false;
+                thisAct.DisplayNameModified = DateTime.UtcNow;
+                m_log.Info($"[SETDISPLAYNAME] Setting displayname to: {disp[1]}");
+                m_Scene.SimChatBroadcast(Encoding.UTF8.GetBytes($"{thisAct.Name} is now known as {thisAct.DisplayName}"), ChatTypeEnum.Direct, 0, Vector3.Zero, "Simulator", UUID.Zero, false);
+            }
+
+            string code;
+            int status;
+            if (uas.StoreDisplayName(thisAct))
+            {
+                m_log.Info($"[SETDISPLAYNAME] User account updated");
+                status = 200;
+                code = "OK";
+            }
+            else
+            {
+                status = 500;
+                code = "Internal Error";
+                m_log.Info($"[SETDISPLAYNAME] User account failed to update");
+            }
+
+
+            EventQueue.Enqueue(DisplayNameReply(thisAct.DisplayName, oldDisp, thisAct.PrincipalID, thisAct.DisplayNameDefault, thisAct.FirstName, thisAct.LastName, thisAct.Name, thisAct.DisplayNameModified, status, code), thisAct.PrincipalID);
+            DisplayNameUpdateTrigger(thisAct, thisAct.PrincipalID, oldDisp);
+
+            m_Scene.ForEachClient(x => { if (x.AgentId != m_AgentID) DisplayNameUpdateTrigger(thisAct, x.AgentId, oldDisp); });
+
+            
+            return;
+
         }
 
         public void RegisterInventoryServiceHandlers()
@@ -349,6 +502,8 @@ namespace ZSim.Region.ClientStack.Linden
                 {
                     m_HostCapsObj.RegisterSimpleHandler("GetDisplayNames",
                         new SimpleStreamHandler(GetNewCapPath() +"/", GetDisplayNames));
+
+                    m_HostCapsObj.RegisterSimpleHandler("SetDisplayName", new SimpleOSDMapHandler("POST", GetNewCapPath(), SetDisplayName));
                 }
             }
             catch (Exception e)
@@ -1978,51 +2133,57 @@ namespace ZSim.Region.ClientStack.Linden
             string[] ids = query.GetValues("ids");
 
             Dictionary<UUID,string> names = m_UserManager.GetUsersNames(ids, m_scopeID);
-            StringBuilder lsl = LLSDxmlEncode.Start(names.Count * 256 + 256);
-            LLSDxmlEncode.AddMap(lsl);
+
+            IUserAccountService uas = m_Scene.RequestModuleInterface<IUserAccountService>();
+
+            OSDMap mp = new OSDMap();
+            OSDArray agents = new OSDArray();
+            
             int ct = 0;
-            if(names.Count == 0)
-                LLSDxmlEncode.AddEmptyArray("agents", lsl);
+            if (names.Count == 0)
+                mp.Add("agents", agents);
             else
             {
-                LLSDxmlEncode.AddArray("agents", lsl);
 
-                foreach (KeyValuePair<UUID,string> kvp in names)
+                foreach (KeyValuePair<UUID, string> kvp in names)
                 {
-                    string[] parts = kvp.Value.Split(new char[] {' '});
+                    string[] parts = kvp.Value.Split(new char[] { ' ' });
                     string fullname = kvp.Value;
+
+                    UserAccount ACT = uas.GetUserAccount(m_Scene.RegionInfo.ScopeID, kvp.Key);
+
 
                     if (string.IsNullOrEmpty(kvp.Value))
                     {
-                        parts = new string[] {"(hippos)", ""};
+                        parts = new string[] { "(hippos)", "" };
                         fullname = "(hippos)";
                     }
 
-                    if(kvp.Key == UUID.Zero)
+                    if (kvp.Key == UUID.Zero)
                         continue;
 
-                // dont tell about unknown users, we can't send them back on Bad either
-                    if(parts[0] == "Unknown")
-                         continue;
+                    // dont tell about unknown users, we can't send them back on Bad either
+                    if (parts[0] == "Unknown")
+                        continue;
 
-                    LLSDxmlEncode.AddMap(lsl);
-                    LLSDxmlEncode.AddElem("display_name_next_update", DateTime.UtcNow.AddDays(8), lsl);
-                    LLSDxmlEncode.AddElem("display_name_expires", DateTime.UtcNow.AddMonths(1), lsl);
-                    LLSDxmlEncode.AddElem("display_name", fullname, lsl);
-                    LLSDxmlEncode.AddElem("legacy_first_name", parts[0], lsl);
-                    LLSDxmlEncode.AddElem("legacy_last_name", parts[1], lsl);
-                    LLSDxmlEncode.AddElem("username", fullname, lsl);
-                    LLSDxmlEncode.AddElem("id", kvp.Key, lsl);
-                    LLSDxmlEncode.AddElem("is_display_name_default", true, lsl);
-                    LLSDxmlEncode.AddEndMap(lsl);
+                    OSDMap agent = new OSDMap();
+                    agent.Add("display_name_next_update", ACT.DisplayNameModified);
+                    agent.Add("display_name", ACT.DisplayName);
+                    agent.Add("legacy_first_name", ACT.FirstName);
+                    agent.Add("legacy_last_name", ACT.LastName);
+                    agent.Add("username", fullname);
+                    agent.Add("id", ACT.PrincipalID);
+                    agent.Add("is_display_name_default", ACT.DisplayNameDefault);
+
+                    agents.Add(agent);
                     ct++;
                 }
-                LLSDxmlEncode.AddEndArray(lsl);
+                mp.Add("agents", agents);
             }
-        
-            LLSDxmlEncode.AddEndMap(lsl);
+            mp.Add("bad_ids", new OSDArray());
+            mp.Add("bad_usernames", new OSDArray());
 
-            httpResponse.RawBuffer = LLSDxmlEncode.EndToNBBytes(lsl);
+            httpResponse.RawBuffer = OSDParser.SerializeLLSDXmlBytes(mp);
             httpResponse.ContentType = "application/llsd+xml";
             httpResponse.StatusCode = (int)HttpStatusCode.OK;
         }

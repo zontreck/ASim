@@ -94,6 +94,9 @@ namespace ZSim.Services.Interfaces
         public string UserCountry;
         public Boolean LocalToGrid = true;
         public int Balance;
+        public string DisplayName;
+        public DateTime DisplayNameModified;
+        public bool DisplayNameDefault;
 
         public Dictionary<string, object> ServiceURLs;
 
@@ -128,6 +131,15 @@ namespace ZSim.Services.Interfaces
                 Boolean.TryParse(kvp["LocalToGrid"].ToString(), out LocalToGrid);
             if (kvp.ContainsKey("Balance"))
                 Balance = Convert.ToInt32(kvp["Balance"]);
+
+            if (kvp.ContainsKey("DisplayName"))
+                DisplayName = kvp["DisplayName"].ToString();
+
+            if (kvp.ContainsKey("DisplayNameDefault"))
+                DisplayNameDefault = Boolean.Parse(kvp["DisplayNameDefault"].ToString());
+
+            if (kvp.ContainsKey("DisplayNameModified"))
+                DisplayNameModified = DateTime.Parse(kvp["DisplayNameModified"].ToString());
 
             if (kvp.ContainsKey("Created"))
                 Created = Convert.ToInt32(kvp["Created"].ToString());
@@ -164,6 +176,9 @@ namespace ZSim.Services.Interfaces
             result["UserCountry"] = UserCountry;
             result["LocalToGrid"] = LocalToGrid.ToString();
             result["Balance"] = Balance.ToString();
+            result["DisplayName"] = DisplayName;
+            result["DisplayNameModified"] = DisplayNameModified.ToString();
+            result["DisplayNameDefault"] = DisplayNameDefault.ToString();
 
             string str = string.Empty;
             foreach (KeyValuePair<string, object> kvp in ServiceURLs)
@@ -203,5 +218,7 @@ namespace ZSim.Services.Interfaces
         void InvalidateCache(UUID userID);
 
         void TryMakeUser(UUID scope, string first, string last, string password, string email, string model);
+
+        bool StoreDisplayName(UserAccount container);
     }
 }

@@ -73,6 +73,7 @@ namespace ZSim.MoneyModule
         private bool m_sellEnabled = true;
 
         public bool GodsCreateMoney { get; private set; }
+        private int LevelMoneyCreate { get; set; }
 
         private IConfigSource m_gConfig;
 
@@ -293,6 +294,7 @@ namespace ZSim.MoneyModule
             PriceGroupCreate = economyConfig.GetInt("PriceGroupCreate", -1);
             m_sellEnabled = economyConfig.GetBoolean("SellEnabled", true);
             GodsCreateMoney = economyConfig.GetBoolean("GodsMakeMoney", true);
+            LevelMoneyCreate = economyConfig.GetInt("LevelCreateMoney", 250);
         }
 
         private void GetClientFunds(IClientAPI client)
@@ -450,16 +452,16 @@ namespace ZSim.MoneyModule
                 {
 
                     IClientAPI client = LocateClientObject(agentId);
-                       if (client != null)
-                       {
+                    if (client != null)
+                    {
 
-                           if (soundId != UUID.Zero)
-                               client.SendPlayAttachedSound(soundId, UUID.Zero, UUID.Zero, 1.0f, 0);
+                        if (soundId != UUID.Zero)
+                            client.SendPlayAttachedSound(soundId, UUID.Zero, UUID.Zero, 1.0f, 0);
 
-                           client.SendBlueBoxMessage(UUID.Zero, "", text);
+                        client.SendBlueBoxMessage(UUID.Zero, "", text);
 
-                           retparam.Add("success", true);
-                       }
+                        retparam.Add("success", true);
+                    }
                     else
                     {
                         retparam.Add("success", false);
@@ -574,7 +576,7 @@ namespace ZSim.MoneyModule
         /// <param name="agentID"></param>
         private void CheckExistAndRefreshFunds(UUID agentID)
         {
-
+            GetFundsForAgentID(agentID);
         }
 
         /// <summary>
@@ -584,7 +586,7 @@ namespace ZSim.MoneyModule
         /// <returns></returns>
         private int GetFundsForAgentID(UUID AgentID)
         {
-
+            m_log.Info($"[MONEYMODULE] Refreshing funds");
             IUserAccountService uas = m_world.RequestModuleInterface<IUserAccountService>();
             UserAccount UA = uas.GetUserAccount(m_world.RegionInfo.ScopeID, AgentID);
             return UA.Balance;
@@ -889,6 +891,17 @@ namespace ZSim.MoneyModule
                 uas.StoreUserAccount(to);
 
             }
+            else
+            {
+                UserAccount from = uas.GetUserAccount(m_world.RegionInfo.ScopeID, fromUser);
+                if(from.UserLevel >= LevelMoneyCreate && GodsCreateMoney)
+                {
+                    UserAccount to = uas.GetUserAccount(m_world.RegionInfo.ScopeID, toUser);
+                    to.Balance += amount;
+
+                    uas.StoreUserAccount(to);
+                }
+            }
         }
 
         public bool MoveMoney(UUID fromUser, UUID toUser, int amount, MoneyTransactionType type, string text)
@@ -908,7 +921,20 @@ namespace ZSim.MoneyModule
 
                 return true;
             }
-            else return false;
+            else
+            {
+                UserAccount from = uas.GetUserAccount(m_world.RegionInfo.ScopeID, fromUser);
+                if (from.UserLevel >= LevelMoneyCreate && GodsCreateMoney)
+                {
+                    UserAccount to = uas.GetUserAccount(m_world.RegionInfo.ScopeID, toUser);
+                    to.Balance += amount;
+
+                    uas.StoreUserAccount(to);
+
+                    return true;
+                }
+                else return false;
+            }
         }
     }
 

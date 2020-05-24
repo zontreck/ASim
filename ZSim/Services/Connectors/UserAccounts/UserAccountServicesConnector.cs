@@ -294,6 +294,7 @@ namespace ZSim.Services.Connectors
 
         public virtual bool StoreUserAccount(UserAccount data)
         {
+            m_log.Info($"[ACCOUNTS CONNECTOR] Setting..");
             Dictionary<string, object> sendData = new Dictionary<string, object>();
             //sendData["SCOPEID"] = scopeID.ToString();
             sendData["VERSIONMIN"] = ProtocolVersions.ClientProtocolVersionMin.ToString();
@@ -425,6 +426,45 @@ namespace ZSim.Services.Connectors
         {
             m_log.Info($"[UserAccountServicesConnector] No such method (TryMakeUser)");
             return;
+        }
+
+        public virtual bool StoreDisplayName(UserAccount container)
+        {
+            m_log.Info($"[SETDISPLAYNAME] Setting displayname for {container.FirstName} {container.LastName}; Set: {container.DisplayName}");
+            Dictionary<string, object> RQ = new Dictionary<string, object>();
+            RQ.Add("dn", container.DisplayName);
+            RQ.Add("uuid", container.PrincipalID.ToString());
+            RQ.Add("dnm", container.DisplayNameModified.ToString());
+            RQ.Add("dnd", container.DisplayNameDefault.ToString());
+            RQ.Add("METHOD", "setdisplayname");
+            RQ.Add("VERSIONMIN", ProtocolVersions.ClientProtocolVersionMin.ToString());
+            RQ.Add("VERSIONMAX", ProtocolVersions.ClientProtocolVersionMax.ToString());
+
+            string req = ServerUtils.BuildQueryString(RQ);
+            string m_srv = m_ServerURI+"/accounts";
+            m_log.Info($"[SETDISPLAYNAME] Query: {req}");
+            try
+            {
+                string reply = SynchronousRestFormsRequester.MakeRequest("POST", m_srv, req, m_Auth);
+
+                m_log.Info($"[SETDISPLAYNAME] Reply: {reply}");
+                if (reply != String.Empty)
+                {
+                    Dictionary<string, object> replyData = ServerUtils.ParseXmlResponse(reply);
+                    if (replyData.ContainsKey("result"))
+                    {
+                        if (replyData["result"].ToString().ToLower() == "success") return true;
+                        else return false;
+                    } else
+                    {
+                        m_log.Info($"[ACCOUNTS CONNECTOR] Set or update display name did not contain a result field");
+                    }
+                }
+            }catch(Exception e)
+            {
+                m_log.Info("[ACCOUNTS CONNECTOR] Error when contacting user account server");
+            }
+            return false;
         }
     }
 }

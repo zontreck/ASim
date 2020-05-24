@@ -28,6 +28,7 @@
 using System;
 using System.Collections.Generic;
 using OpenMetaverse;
+using OpenMetaverse.StructuredData;
 
 namespace ZSim.Services.Interfaces
 {
@@ -77,7 +78,6 @@ namespace ZSim.Services.Interfaces
                 DateTime.TryParse(kvp["Logout"].ToString(), out Logout);
             if (kvp.ContainsKey("Online"))
                 Boolean.TryParse(kvp["Online"].ToString(), out Online);
-
         }
 
         public virtual Dictionary<string, object> ToKeyValuePairs()
@@ -96,6 +96,7 @@ namespace ZSim.Services.Interfaces
             result["Online"] = Online.ToString();
             result["Login"] = Login.ToString();
             result["Logout"] = Logout.ToString();
+
 
             return result;
         }

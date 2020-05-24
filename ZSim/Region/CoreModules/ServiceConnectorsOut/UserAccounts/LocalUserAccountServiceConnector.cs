@@ -253,6 +253,11 @@ namespace ZSim.Region.CoreModules.ServiceConnectorsOut.UserAccounts
             return;
         }
 
+        public bool StoreDisplayName(UserAccount container)
+        {
+            return StoreUserAccount(container);
+        }
+
         #endregion
     }
 }

@@ -609,8 +609,15 @@ namespace ZSim
                 estateOwnerLastName = MainConsole.Instance.Prompt("Estate owner last name", "User", excluded);
             }
 
-            UserAccount account
+            UserAccount account = null;
+            try
+            {
+                account
                 = scene.UserAccountService.GetUserAccount(regionInfo.ScopeID, estateOwnerFirstName, estateOwnerLastName);
+            }catch(Exception e)
+            {
+
+            }
 
             if (account == null)
             {

@@ -39,6 +39,22 @@ namespace ZSim.Data
         public string FirstName;
         public string LastName;
         public Dictionary<string, string> Data;
+
+        public string AsString()
+        {
+            return $"{PrincipalID}\n{ScopeID}\n{FirstName}\n{LastName}\n{Dict2CSV(Data)}";
+        }
+
+        private string Dict2CSV(Dictionary<string, string> arr)
+        {
+            string VX = "";
+            foreach(KeyValuePair<string,string> KVP in arr)
+            {
+                VX += "\n" + KVP.Key + " = " + KVP.Value;
+            }
+
+            return VX;
+        }
     }
 
     /// <summary>

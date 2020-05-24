@@ -108,6 +108,9 @@ namespace ZSim.Services.UserAccountService
                     d.Data["UserFlags"] = "0";
                     d.Data["ServiceURLs"] = string.Empty;
                     d.Data["Balance"] = "0";
+                    d.Data["DisplayName"] = "GRID SERVICES";
+                    d.Data["DisplayNameModified"] = DateTime.UtcNow.ToString();
+                    d.Data["DisplayNameDefault"] = "true";
 
                     m_Database.Store(d);
                 }
@@ -211,6 +214,20 @@ namespace ZSim.Services.UserAccountService
             else
                 u.UserCountry = string.Empty;
 
+            if (d.Data.ContainsKey("DisplayName"))
+                u.DisplayName = d.Data["DisplayName"];
+
+            if (d.Data.ContainsKey("DisplayNameModified"))
+            {
+                if(d.Data["DisplayNameModified"] != "" && d.Data["DisplayNameModified"] != null)
+                {
+                    u.DisplayNameModified = DateTime.Parse(d.Data["DisplayNameModified"]);
+                }
+            }
+
+            if (d.Data.ContainsKey("DisplayNameDefault") && d.Data["DisplayNameDefault"] != null)
+                u.DisplayNameDefault = Boolean.Parse(d.Data["DisplayNameDefault"]);
+
             if (d.Data.ContainsKey("ServiceURLs") && d.Data["ServiceURLs"] != null)
             {
                 string[] URLs = d.Data["ServiceURLs"].ToString().Split(new char[] { ' ' });
@@ -309,9 +326,9 @@ namespace ZSim.Services.UserAccountService
 
         public bool StoreUserAccount(UserAccount data)
         {
-//            m_log.DebugFormat(
-//                "[USER ACCOUNT SERVICE]: Storing user account for {0} {1} {2}, scope {3}",
-//                data.FirstName, data.LastName, data.PrincipalID, data.ScopeID);
+            m_log.InfoFormat(
+                "[USER ACCOUNT SERVICE]: Storing user account for {0} {1} {2}, scope {3}",
+                data.FirstName, data.LastName, data.PrincipalID, data.ScopeID);
 
             UserAccountData d = new UserAccountData();
 
@@ -325,6 +342,10 @@ namespace ZSim.Services.UserAccountService
             d.Data["UserLevel"] = data.UserLevel.ToString();
             d.Data["UserFlags"] = data.UserFlags.ToString();
             d.Data["Balance"] = data.Balance.ToString();
+            d.Data["DisplayName"] = data.DisplayName;
+            d.Data["DisplayNameModified"] = data.DisplayNameModified.ToString();
+            d.Data["DisplayNameDefault"] = data.DisplayNameDefault.ToString();
+
             if (!string.IsNullOrEmpty(data.UserTitle))
                 d.Data["UserTitle"] = data.UserTitle;
             if (!string.IsNullOrEmpty(data.UserCountry))
@@ -339,7 +360,7 @@ namespace ZSim.Services.UserAccountService
             }
 
             d.Data["ServiceURLs"] = string.Join(" ", parts.ToArray());
-
+            
             return m_Database.Store(d);
         }
 
@@ -601,6 +622,10 @@ namespace ZSim.Services.UserAccountService
             if (null == account)
             {
                 account = new UserAccount(UUID.Zero, principalID, firstName, lastName, email);
+                account.Balance = 500;
+                account.DisplayNameDefault = true;
+                account.DisplayNameModified = DateTime.UtcNow;
+                account.DisplayName = "";
                 if (account.ServiceURLs == null || (account.ServiceURLs != null && account.ServiceURLs.Count == 0))
                 {
                     account.ServiceURLs = new Dictionary<string, object>();
@@ -1067,6 +1092,11 @@ namespace ZSim.Services.UserAccountService
         public void TryMakeUser(UUID scope, string first, string last, string password, string email, string model)
         {
             CreateUser(scope, UUID.Random(), first, last, password, email, model, true);
+        }
+
+        public bool StoreDisplayName(UserAccount container)
+        {
+            return StoreUserAccount(container);
         }
     }
 }
