@@ -2177,6 +2177,11 @@ namespace ZSim.Region.ClientStack.Linden
 
                     agents.Add(agent);
                     ct++;
+
+                    m_Scene.ForEachClient(x =>
+                    {
+                        DisplayNameUpdateTrigger(ACT, x.AgentId, ACT.DisplayName);
+                    });
                 }
                 mp.Add("agents", agents);
             }
@@ -2184,6 +2189,7 @@ namespace ZSim.Region.ClientStack.Linden
             mp.Add("bad_usernames", new OSDArray());
 
             httpResponse.RawBuffer = OSDParser.SerializeLLSDXmlBytes(mp);
+            m_log.Info($"[GETDISPLAYNAMES] Displayname response: {OSDParser.SerializeLLSDXmlString(mp)}");
             httpResponse.ContentType = "application/llsd+xml";
             httpResponse.StatusCode = (int)HttpStatusCode.OK;
         }
