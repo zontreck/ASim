@@ -13952,6 +13952,12 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
             return Util.UnixTimeSinceEpoch();
         }
 
+        public LSL_String llTrue(LSL_Integer iTest)
+        {
+            if (iTest == 1) return "True";
+            else return "False";
+        }
+
         public LSL_Integer llGetParcelFlags(LSL_Vector pos)
         {
             m_host.AddScriptLPS(1);

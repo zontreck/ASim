@@ -636,8 +636,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public void osTerrainFlush()
         {
-            CheckThreatLevel(ThreatLevel.VeryLow, "osTerrainFlush");
-
             ITerrainModule terrainModule = World.RequestModuleInterface<ITerrainModule>();
             if (terrainModule != null) terrainModule.TaintTerrain();
         }
@@ -783,7 +781,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
         public string osSetDynamicTextureURL(string dynamicID, string contentType, string url, string extraParams,
                                              int timer)
         {
-            CheckThreatLevel(ThreatLevel.VeryHigh, "osSetDynamicTextureURL");
 
             if (dynamicID == String.Empty)
             {
@@ -804,7 +801,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
         public string osSetDynamicTextureURLBlend(string dynamicID, string contentType, string url, string extraParams,
                                              int timer, int alpha)
         {
-            CheckThreatLevel(ThreatLevel.VeryHigh, "osSetDynamicTextureURLBlend");
 
             if (dynamicID == String.Empty)
             {
@@ -825,7 +821,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
         public string osSetDynamicTextureURLBlendFace(string dynamicID, string contentType, string url, string extraParams,
                                              bool blend, int disp, int timer, int alpha, int face)
         {
-            CheckThreatLevel(ThreatLevel.VeryHigh, "osSetDynamicTextureURLBlendFace");
 
             if (dynamicID == String.Empty)
             {
@@ -852,7 +847,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
         public string osSetDynamicTextureDataFace(string dynamicID, string contentType, string data, string extraParams,
                                            int timer, int face)
         {
-            CheckThreatLevel(ThreatLevel.VeryLow, "osSetDynamicTextureData");
 
             if (dynamicID == String.Empty)
             {
@@ -881,7 +875,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
         public string osSetDynamicTextureDataBlend(string dynamicID, string contentType, string data, string extraParams,
                                           int timer, int alpha)
         {
-            CheckThreatLevel(ThreatLevel.VeryLow, "osSetDynamicTextureDataBlend");
 
             if (dynamicID == String.Empty)
             {
@@ -909,7 +902,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
         public string osSetDynamicTextureDataBlendFace(string dynamicID, string contentType, string data, string extraParams,
                                           bool blend, int disp, int timer, int alpha, int face)
         {
-            CheckThreatLevel(ThreatLevel.VeryLow , "osSetDynamicTextureDataBlendFace");
 
             if (dynamicID == String.Empty)
             {
@@ -950,7 +942,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public void osSetPrimFloatOnWater(int floatYN)
         {
-            CheckThreatLevel(ThreatLevel.VeryLow, "osSetPrimFloatOnWater");
 
             m_host.ParentGroup.RootPart.SetFloatOnWater(floatYN);
         }
@@ -1126,22 +1117,18 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public void osTeleportOwner(string regionName, LSL_Types.Vector3 position, LSL_Types.Vector3 lookat)
         {
-            // Threat level None because this is what can already be done with the World Map in the viewer
-            CheckThreatLevel(ThreatLevel.None, "osTeleportOwner");
 
             TeleportAgent(m_host.OwnerID.ToString(), regionName, position, lookat);
         }
 
         public void osTeleportOwner(int regionGridX, int regionGridY, LSL_Types.Vector3 position, LSL_Types.Vector3 lookat)
         {
-            CheckThreatLevel(ThreatLevel.None, "osTeleportOwner");
 
             TeleportAgent(m_host.OwnerID.ToString(), regionGridX, regionGridY, position, lookat);
         }
 
         public void osTeleportOwner(LSL_Types.Vector3 position, LSL_Types.Vector3 lookat)
         {
-            CheckThreatLevel(ThreatLevel.None, "osTeleportOwner");
 
             osTeleportAgent(m_host.OwnerID.ToString(), position, lookat);
         }
@@ -1198,9 +1185,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
         // Get a list of all the avatars/agents in the region
         public LSL_List osGetAgents()
         {
-            // threat level is None as we could get this information with an
-            // in-world script as well, just not as efficient
-            CheckThreatLevel(ThreatLevel.None, "osGetAgents");
 
             LSL_List result = new LSL_List();
             World.ForEachRootScenePresence(delegate(ScenePresence sp)
@@ -1310,7 +1294,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public string osDrawScaleTransform(string drawList, LSL_Float x, LSL_Float y)
         {
-            CheckThreatLevel();
 
             drawList += "ScaleTransf " + x + "," + y + ";";
             return drawList;
@@ -1318,7 +1301,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public string osDrawTranslationTransform(string drawList, LSL_Float x, LSL_Float y)
         {
-            CheckThreatLevel();
 
             drawList += "TransTransf " + x + "," + y + ";";
             return drawList;
@@ -1326,7 +1308,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public string osMovePen(string drawList, int x, int y)
         {
-            CheckThreatLevel();
 
             drawList += "MoveTo " + x + "," + y + ";";
             return drawList;
@@ -1334,7 +1315,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public string osDrawLine(string drawList, int startX, int startY, int endX, int endY)
         {
-            CheckThreatLevel();
 
             drawList += "MoveTo "+ startX+","+ startY +"; LineTo "+endX +","+endY +"; ";
             return drawList;
@@ -1342,7 +1322,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public string osDrawLine(string drawList, int endX, int endY)
         {
-            CheckThreatLevel();
 
             drawList += "LineTo " + endX + "," + endY + "; ";
             return drawList;
@@ -1350,7 +1329,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public string osDrawText(string drawList, string text)
         {
-            CheckThreatLevel(ThreatLevel.None, "osDrawText");
 
             drawList += "Text " + text + "; ";
             return drawList;
@@ -1358,7 +1336,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public string osDrawEllipse(string drawList, int width, int height)
         {
-            CheckThreatLevel();
 
             drawList += "Ellipse " + width + "," + height + "; ";
             return drawList;
@@ -1366,7 +1343,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public string osDrawFilledEllipse(string drawList, int width, int height)
         {
-            CheckThreatLevel();
 
             drawList += "FillEllipse " + width + "," + height + "; ";
             return drawList;
@@ -1374,7 +1350,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public string osDrawRectangle(string drawList, int width, int height)
         {
-            CheckThreatLevel();
 
             drawList += "Rectangle " + width + "," + height + "; ";
             return drawList;
@@ -1382,7 +1357,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public string osDrawFilledRectangle(string drawList, int width, int height)
         {
-            CheckThreatLevel();
 
             drawList += "FillRectangle " + width + "," + height + "; ";
             return drawList;
@@ -1390,7 +1364,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public string osDrawFilledPolygon(string drawList, LSL_List x, LSL_List y)
         {
-            CheckThreatLevel();
 
             if (x.Length != y.Length || x.Length < 3)
             {
@@ -1407,7 +1380,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public string osDrawPolygon(string drawList, LSL_List x, LSL_List y)
         {
-            CheckThreatLevel();
 
             if (x.Length != y.Length || x.Length < 3)
             {
@@ -1424,7 +1396,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public string osSetFontSize(string drawList, int fontSize)
         {
-            CheckThreatLevel();
 
             drawList += "FontSize "+ fontSize +"; ";
             return drawList;
@@ -1432,7 +1403,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public string osSetFontName(string drawList, string fontName)
         {
-            CheckThreatLevel();
 
             drawList += "FontName "+ fontName +"; ";
             return drawList;
@@ -1440,7 +1410,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public string osSetPenSize(string drawList, int penSize)
         {
-            CheckThreatLevel();
 
             drawList += "PenSize " + penSize + "; ";
             return drawList;
@@ -1448,7 +1417,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public string osSetPenColor(string drawList, string color)
         {
-            CheckThreatLevel();
 
             drawList += "PenColor " + color + "; ";
             return drawList;
@@ -1457,7 +1425,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
         // Deprecated
         public string osSetPenColour(string drawList, string colour)
         {
-            CheckThreatLevel();
             OSSLDeprecated("osSetPenColour", "osSetPenColor");
 
             drawList += "PenColour " + colour + "; ";
@@ -1466,7 +1433,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public string osSetPenCap(string drawList, string direction, string type)
         {
-            CheckThreatLevel();
 
             drawList += "PenCap " + direction + "," + type + "; ";
             return drawList;
@@ -1474,7 +1440,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public string osDrawImage(string drawList, int width, int height, string imageUrl)
         {
-            CheckThreatLevel();
 
             drawList +="Image " +width + "," + height+ ","+ imageUrl +"; " ;
             return drawList;
@@ -1482,7 +1447,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public LSL_Vector osGetDrawStringSize(string contentType, string text, string fontName, int fontSize)
         {
-            CheckThreatLevel();
 
             LSL_Vector vec = new LSL_Vector(0,0,0);
             IDynamicTextureManager textureManager = World.RequestModuleInterface<IDynamicTextureManager>();
@@ -1586,7 +1550,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public double osSunGetParam(string param)
         {
-            CheckThreatLevel(ThreatLevel.None, "osSunGetParam");
             OSSLDeprecated("osSunGetParam", "osGetSunParam");
             return GetSunParam(param);
         }
@@ -1612,14 +1575,12 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public void osSunSetParam(string param, double value)
         {
-            CheckThreatLevel(ThreatLevel.None, "osSunSetParam");
             OSSLDeprecated("osSunSetParam", "osSetSunParam");
             SetSunParam(param, value);
         }
 
         public void osSetSunParam(string param, double value)
         {
-            CheckThreatLevel(ThreatLevel.None, "osSetSunParam");
             SetSunParam(param, value);
         }
 
@@ -1634,7 +1595,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public string osWindActiveModelPluginName()
         {
-            CheckThreatLevel(ThreatLevel.None, "osWindActiveModelPluginName");
 
             IWindModule module = World.RequestModuleInterface<IWindModule>();
             if (module != null)
@@ -1647,7 +1607,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public void osSetWindParam(string plugin, string param, LSL_Float value)
         {
-            CheckThreatLevel(ThreatLevel.VeryLow, "osSetWindParam");
 
             IWindModule module = World.RequestModuleInterface<IWindModule>();
             if (module != null)
@@ -1662,7 +1621,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public LSL_Float osGetWindParam(string plugin, string param)
         {
-            CheckThreatLevel(ThreatLevel.VeryLow, "osGetWindParam");
 
             IWindModule module = World.RequestModuleInterface<IWindModule>();
             if (module != null)
@@ -1910,7 +1868,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
         {
             // What actually is the difference to the LL function?
             //
-            CheckThreatLevel(ThreatLevel.VeryLow, "osSetParcelMediaURL");
 
             ILandObject land = World.LandChannel.GetLandObject(m_host.AbsolutePosition);
 
@@ -1924,7 +1881,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
         {
             // What actually is the difference to the LL function?
             //
-            CheckThreatLevel(ThreatLevel.VeryLow, "osSetParcelSIPAddress");
 
             ILandObject land = World.LandChannel.GetLandObject(m_host.AbsolutePosition);
 
@@ -1950,7 +1906,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
             // that trigger engine-specific failures.
             // Besides, public grid users aren't supposed to know.
             //
-            CheckThreatLevel(ThreatLevel.High, "osGetScriptEngineName");
 
             int scriptEngineNameIndex = 0;
 
@@ -1976,7 +1931,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public LSL_Integer osCheckODE()
         {
-            CheckThreatLevel();
 
             LSL_Integer ret = 0;    // false
             if (m_ScriptEngine.World.PhysicsScene != null)
@@ -2019,7 +1973,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public string osGetPhysicsEngineName()
         {
-            CheckThreatLevel();
 
             string ret = "NoEngine";
             if (m_ScriptEngine.World.PhysicsScene != null)
@@ -2055,7 +2008,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
         /// <param name="message"></param>
         public void osMessageObject(LSL_Key objectUUID, string message)
         {
-            CheckThreatLevel(ThreatLevel.Low, "osMessageObject");
 
             UUID objUUID;
             if (!UUID.TryParse(objectUUID, out objUUID)) // prior to patching, a thrown exception regarding invalid GUID format would be shouted instead.
@@ -2095,7 +2047,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 //            CheckThreatLevel(ThreatLevel.VeryHigh, "osDie");
             // if this is restricted to objects rezzed by this host level can be reduced
 
-            CheckThreatLevel(ThreatLevel.Low, "osDie");
 
             UUID objUUID;
             if (!UUID.TryParse(objectUUID, out objUUID))
@@ -2404,7 +2355,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public string osAvatarName2Key(string firstname, string lastname)
         {
-            CheckThreatLevel(ThreatLevel.Low, "osAvatarName2Key");
 
             IUserManagement userManager = World.RequestModuleInterface<IUserManagement>();
             if (userManager == null)
@@ -2449,7 +2399,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public string osKey2Name(string id)
         {
-            CheckThreatLevel(ThreatLevel.Low, "osKey2Name");
 
             UUID key = new UUID();
 
@@ -2558,7 +2507,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
         /// <returns></returns>
         public string osGetGridNick()
         {
-            CheckThreatLevel(ThreatLevel.Moderate, "osGetGridNick");
 
             string nick = String.Empty;
             IConfigSource config = m_ScriptEngine.ConfigSource;
@@ -2574,7 +2522,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public string osGetGridName()
         {
-            CheckThreatLevel(ThreatLevel.Moderate, "osGetGridName");
 
             string name = String.Empty;
             IConfigSource config = m_ScriptEngine.ConfigSource;
@@ -2590,7 +2537,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public string osGetGridLoginURI()
         {
-            CheckThreatLevel(ThreatLevel.Moderate, "osGetGridLoginURI");
 
             string loginURI = String.Empty;
             IConfigSource config = m_ScriptEngine.ConfigSource;
@@ -2606,7 +2552,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public string osGetGridHomeURI()
         {
-            CheckThreatLevel(ThreatLevel.Moderate, "osGetGridHomeURI");
 
             IConfigSource config = m_ScriptEngine.ConfigSource;
             string HomeURI = Util.GetConfigVarFromSections<string>(config, "HomeURI",
@@ -2627,7 +2572,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public string osGetGridGatekeeperURI()
         {
-            CheckThreatLevel(ThreatLevel.Moderate, "osGetGridGatekeeperURI");
 
             IConfigSource config = m_ScriptEngine.ConfigSource;
             string gatekeeperURI = Util.GetConfigVarFromSections<string>(config, "GatekeeperURI",
@@ -2645,7 +2589,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public string osGetGridCustom(string key)
         {
-            CheckThreatLevel(ThreatLevel.Moderate, "osGetGridCustom");
 
             string retval = String.Empty;
             IConfigSource config = m_ScriptEngine.ConfigSource;
@@ -2661,7 +2604,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public string osGetAvatarHomeURI(string uuid)
         {
-            CheckThreatLevel(ThreatLevel.Low, "osGetAvatarHomeURI");
 
             IUserManagement userManager = m_ScriptEngine.World.RequestModuleInterface<IUserManagement>();
             string returnValue = "";
@@ -2693,14 +2635,12 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public LSL_String osFormatString(string str, LSL_List strings)
         {
-            CheckThreatLevel(ThreatLevel.VeryLow, "osFormatString");
 
             return String.Format(str, strings.Data);
         }
 
         public LSL_List osMatchString(string src, string pattern, int start)
         {
-            CheckThreatLevel(ThreatLevel.VeryLow, "osMatchString");
 
             LSL_List result = new LSL_List();
 
@@ -2741,7 +2681,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public LSL_String osReplaceString(string src, string pattern, string replace, int count, int start)
         {
-            CheckThreatLevel(ThreatLevel.VeryLow, "osReplaceString");
 
             // Normalize indices (if negative).
             // After normlaization they may still be
@@ -2765,21 +2704,18 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public string osLoadedCreationDate()
         {
-            CheckThreatLevel(ThreatLevel.Low, "osLoadedCreationDate");
 
             return World.RegionInfo.RegionSettings.LoadedCreationDate;
         }
 
         public string osLoadedCreationTime()
         {
-            CheckThreatLevel(ThreatLevel.Low, "osLoadedCreationTime");
 
             return World.RegionInfo.RegionSettings.LoadedCreationTime;
         }
 
         public string osLoadedCreationID()
         {
-            CheckThreatLevel(ThreatLevel.Low, "osLoadedCreationID");
 
             return World.RegionInfo.RegionSettings.LoadedCreationID;
         }
@@ -2828,7 +2764,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public void osForceCreateLink(string target, int parent)
         {
-            CheckThreatLevel(ThreatLevel.VeryLow, "osForceCreateLink");
 
             InitLSL();
             m_LSL_Api.CreateLink(target, parent);
@@ -2836,7 +2771,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public void osForceBreakLink(int linknum)
         {
-            CheckThreatLevel(ThreatLevel.VeryLow, "osForceBreakLink");
 
             InitLSL();
             m_LSL_Api.BreakLink(linknum);
@@ -2844,7 +2778,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public void osForceBreakAllLinks()
         {
-            CheckThreatLevel(ThreatLevel.VeryLow, "osForceBreakAllLinks");
 
             InitLSL();
             m_LSL_Api.BreakAllLinks();
@@ -2852,7 +2785,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public LSL_Integer osIsNpc(LSL_Key npc)
         {
-            CheckThreatLevel();
 
             INPCModule module = World.RequestModuleInterface<INPCModule>();
             if (module != null)
@@ -2868,7 +2800,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public LSL_Key osNpcCreate(string firstname, string lastname, LSL_Vector position, string notecard)
         {
-            CheckThreatLevel(ThreatLevel.High, "osNpcCreate");
 
             // have to get the npc module also here to set the default Not Owned
             INPCModule module = World.RequestModuleInterface<INPCModule>();
@@ -2882,7 +2813,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public LSL_Key osNpcCreate(string firstname, string lastname, LSL_Vector position, string notecard, int options)
         {
-            CheckThreatLevel(ThreatLevel.High, "osNpcCreate");
 
             return NpcCreate(
                 firstname, lastname, position, notecard,
@@ -3077,7 +3007,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public LSL_Key osNpcGetOwner(LSL_Key npc)
         {
-            CheckThreatLevel(ThreatLevel.None, "osNpcGetOwner");
 
             INPCModule npcModule = World.RequestModuleInterface<INPCModule>();
             if (npcModule != null)
@@ -3223,7 +3152,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public void osNpcSetProfileAbout(LSL_Key npc, string about)
         {
-            CheckThreatLevel(ThreatLevel.Low, "osNpcSetProfileAbout");
 
             INPCModule module = World.RequestModuleInterface<INPCModule>();
             if (module != null)
@@ -3241,7 +3169,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public void osNpcSetProfileImage(LSL_Key npc, string image)
         {
-            CheckThreatLevel(ThreatLevel.Low, "osNpcSetProfileImage");
 
             INPCModule module = World.RequestModuleInterface<INPCModule>();
             if (module != null)
@@ -3577,7 +3504,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
         /// <returns>"male" or "female" or "unknown"</returns>
         public LSL_String osGetGender(LSL_Key rawAvatarId)
         {
-            CheckThreatLevel(ThreatLevel.None, "osGetGender");
 
             UUID avatarId;
             if (!UUID.TryParse(rawAvatarId, out avatarId))
@@ -3667,7 +3593,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
         /// <returns>List of floats</returns>
         public LSL_List osGetRegionStats()
         {
-            CheckThreatLevel(ThreatLevel.Moderate, "osGetRegionStats");
 
             LSL_List ret = new LSL_List();
             float[] stats = World.StatsReporter.LastReportedSimStats;
@@ -3681,7 +3606,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public LSL_Vector osGetRegionSize()
         {
-            CheckThreatLevel();
 
             Scene scene = m_ScriptEngine.World;
             RegionInfo reg =  World.RegionInfo;
@@ -3692,7 +3616,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public int osGetSimulatorMemory()
         {
-            CheckThreatLevel(ThreatLevel.Moderate, "osGetSimulatorMemory");
 
             long pws = Util.GetPhysicalMemUse();
 
@@ -3706,7 +3629,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public int osGetSimulatorMemoryKB()
         {
-            CheckThreatLevel(ThreatLevel.Moderate, "osGetSimulatorMemoryKB");
 
             long pws = Util.GetPhysicalMemUse();
 
@@ -3722,7 +3644,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public void osSetSpeed(string ID, LSL_Float SpeedModifier)
         {
-            CheckThreatLevel(ThreatLevel.Moderate, "osSetSpeed");
 
             UUID avid;
             if(!UUID.TryParse(ID, out avid))
@@ -3735,7 +3656,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public void osSetOwnerSpeed(LSL_Float SpeedModifier)
         {
-            CheckThreatLevel(ThreatLevel.Moderate, "osSetOwnerSpeed");
 
             if(SpeedModifier > 4)
                 SpeedModifier = 4;
@@ -3785,7 +3705,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public LSL_Float osGetHealth(LSL_Key agentKey)
         {
-            CheckThreatLevel(ThreatLevel.None, "osGetHealth");
 
             LSL_Float health = new LSL_Float(-1);
 
@@ -3987,7 +3906,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
         /// <returns>Strided list of the UUID, position and name of each avatar in the region</returns>
         public LSL_List osGetAvatarList()
         {
-            CheckThreatLevel(ThreatLevel.None, "osGetAvatarList");
 
             LSL_List result = new LSL_List();
             World.ForEachRootScenePresence(delegate (ScenePresence avatar)
@@ -4005,7 +3923,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public LSL_List osGetNPCList()
         {
-            CheckThreatLevel(ThreatLevel.None, "osGetNPCList");
 
             LSL_List result = new LSL_List();
             World.ForEachRootScenePresence(delegate (ScenePresence avatar)
@@ -4029,7 +3946,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
         /// <returns></returns>
         public LSL_String osUnixTimeToTimestamp(LSL_Integer time)
         {
-            CheckThreatLevel(ThreatLevel.VeryLow, "osUnixTimeToTimestamp");
 
             long baseTicks = 621355968000000000;
             long tickResolution = 10000000;
@@ -4046,7 +3962,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
         /// <returns></returns>
         public LSL_Integer osInviteToGroup(LSL_Key agentId)
         {
-            CheckThreatLevel(ThreatLevel.VeryLow, "osInviteToGroup");
 
             UUID agent = new UUID(agentId);
 
@@ -4080,7 +3995,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
         /// <returns></returns>
         public LSL_Integer osEjectFromGroup(LSL_Key agentId)
         {
-            CheckThreatLevel(ThreatLevel.VeryLow, "osEjectFromGroup");
 
             UUID agent = new UUID(agentId);
 
@@ -4422,7 +4336,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public LSL_Key osGetRezzingObject()
         {
-            CheckThreatLevel(ThreatLevel.None, "osGetRezzingObject");
 
             UUID rezID = m_host.ParentGroup.RezzerID;
             if(rezID == UUID.Zero || m_host.ParentGroup.Scene.GetScenePresence(rezID) != null)
@@ -4573,7 +4486,6 @@ namespace ZSim.Region.ScriptEngine.Shared.Api
 
         public LSL_Integer osRegexIsMatch(string input, string pattern)
         {
-            CheckThreatLevel(ThreatLevel.Low, "osRegexIsMatch");
 
             try
             {

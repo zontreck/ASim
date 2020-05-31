@@ -1206,6 +1206,11 @@ namespace ZSim.Region.ScriptEngine.Shared.ScriptBase
             m_LSL_Functions.llOwnerSay(msg);
         }
 
+        public LSL_String llTrue(LSL_Integer iTest)
+        {
+            return m_LSL_Functions.llTrue(iTest);
+        }
+
         public void llParcelMediaCommandList(LSL_List commandList)
         {
             m_LSL_Functions.llParcelMediaCommandList(commandList);

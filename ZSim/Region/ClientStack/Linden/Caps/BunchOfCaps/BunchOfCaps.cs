@@ -320,7 +320,7 @@ namespace ZSim.Region.ClientStack.Linden
             agentData["is_display_name_default"] = OSD.FromBoolean(isDefault);
             agentData["legacy_first_name"] = first;
             agentData["legacy_last_name"] = last;
-            agentData["username"] = username;
+            agentData["username"] = getUsername(username);
             agentData["display_name_next_update"] = OSD.FromDate(nextUpdate);
 
             body.Add("agent", agentData);
@@ -331,6 +331,40 @@ namespace ZSim.Region.ClientStack.Linden
 
             return nameReply;
         }
+
+        public string getUsername(string Name)
+        {
+            Name = Name.ToLower();
+            string[] V = Name.Split(new[] { ' ' });
+            if(V[1] == "resident")
+            {
+                return V[0];
+            }
+            else
+            {
+                return V[0] + "." + V[1];
+            }
+        }
+
+        /// <summary>
+        /// Generates a standard OSD array containing the display name data
+        /// </summary>
+        /// <param name="act">The account to turn into a OSD Display Name reply</param>
+        /// <returns>OSDArray</returns>
+        public OSDMap DisplayNameGetResponse(UserAccount ACT)
+        {
+            OSDMap agent = new OSDMap();
+            agent.Add("display_name_next_update", ACT.DisplayNameModified);
+            agent.Add("display_name", ACT.DisplayName);
+            agent.Add("legacy_first_name", ACT.FirstName);
+            agent.Add("legacy_last_name", ACT.LastName);
+            agent.Add("username", getUsername(ACT.Name));
+            agent.Add("id", ACT.PrincipalID);
+            agent.Add("is_display_name_default", ACT.DisplayNameDefault);
+
+            return agent;
+        }
+
         /// <summary>
         /// Generates a displayname update packet
         /// </summary>
@@ -356,7 +390,7 @@ namespace ZSim.Region.ClientStack.Linden
             agentData["is_display_name_default"] = OSD.FromBoolean(isDefault);
             agentData["legacy_first_name"] = first;
             agentData["legacy_last_name"] = last;
-            agentData["username"] = username;
+            agentData["username"] = getUsername(username);
             agentData["display_name_next_update"] = OSD.FromDate(nextUpdate);
 
             body.Add("content", agentData);
@@ -2166,22 +2200,11 @@ namespace ZSim.Region.ClientStack.Linden
                     if (parts[0] == "Unknown")
                         continue;
 
-                    OSDMap agent = new OSDMap();
-                    agent.Add("display_name_next_update", ACT.DisplayNameModified);
-                    agent.Add("display_name", ACT.DisplayName);
-                    agent.Add("legacy_first_name", ACT.FirstName);
-                    agent.Add("legacy_last_name", ACT.LastName);
-                    agent.Add("username", fullname);
-                    agent.Add("id", ACT.PrincipalID);
-                    agent.Add("is_display_name_default", ACT.DisplayNameDefault);
+                    OSDMap agent = DisplayNameGetResponse(ACT);
 
                     agents.Add(agent);
                     ct++;
 
-                    m_Scene.ForEachClient(x =>
-                    {
-                        DisplayNameUpdateTrigger(ACT, x.AgentId, ACT.DisplayName);
-                    });
                 }
                 mp.Add("agents", agents);
             }

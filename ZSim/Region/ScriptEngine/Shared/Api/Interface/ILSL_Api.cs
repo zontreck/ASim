@@ -232,6 +232,7 @@ namespace ZSim.Region.ScriptEngine.Shared.Api.Interfaces
         LSL_String llInsertString(string dst, int position, string src);
               void llInstantMessage(string user, string message);
         LSL_String llIntegerToBase64(int number);
+        LSL_String llTrue(LSL_Integer iTest);
         LSL_String llKey2Name(LSL_Key id);
         LSL_String llGetUsername(LSL_Key id);
            LSL_Key llRequestUsername(string id);
