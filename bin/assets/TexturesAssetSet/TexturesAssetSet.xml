@@ -270,11 +270,17 @@
     <Key Name="fileName" Value="water3.jp2" />
   </Section>
   <Section Name="Sea">
-    <Key Name="assetID" Value="2bfd3884-7e27-69b9-ba3a-3e673f680004" />
+    <Key Name="assetID" Value="482E671B-9244-4B86-A036-68953A898D11" />
     <Key Name="name" Value="Sea" />
     <Key Name="assetType" Value="0" />
     <Key Name="fileName" Value="water3.jp2" />
   </Section>
+  <Section Name="SeaWaterTrasp">
+    <Key Name="assetID" Value="2bfd3884-7e27-69b9-ba3a-3e673f680004" />
+    <Key Name="name" Value="SeaWaterTrasp" />
+    <Key Name="assetType" Value="0" />
+    <Key Name="fileName" Value="seaWaterTransp.j2c" />
+  </Section>  
   <Section Name="wood1 Texture">
     <Key Name="assetID" Value="00000000-0000-2222-3333-100000001043" />
     <Key Name="name" Value="wood1" />
@@ -414,8 +420,7 @@
     <Key Name="fileName" Value="transparency.jp2" />
   </Section>
 
-  <!-- 3a367d1c-bef1-6d43-7595-e88c1e3aadb3 is a UUID that viewers assume exists in the asset server -->
-  <!-- See http://opensimulator.org/mantis/bug_view_advanced_page.php?bug_id=4751 for more details -->
+
   <Section Name="Default Alpha Layer Texture">
     <Key Name="assetID" Value="3a367d1c-bef1-6d43-7595-e88c1e3aadb3"/>
     <Key Name="name" Value="Default Alpha Layer Texture"/>
@@ -771,12 +776,18 @@
      <Key Name="fileName" Value="b4ba225c-373f-446d-9f7e-6cb7b5cf9b3d.j2c"/>
   </Section>
 
-  <!-- Water texture shown when Transparent Water is disabled in the viewer graphics prefs -->
   <Section Name="Water">
-    <Key Name="assetID" Value="43c32285-d658-1793-c123-bf86315de055"/>
+    <Key Name="assetID" Value="DB814CAF-26AC-4D75-977B-A68578FE643D"/>
     <Key Name="name" Value="Water"/>
     <Key Name="assetType" Value="0" />
-    <Key Name="fileName" Value="43c32285-d658-1793-c123-bf86315de055.jp2" />
+    <Key Name="fileName" Value="water.jp2" />
+  </Section>
+
+  <Section Name="seaWaterOpaque">
+    <Key Name="assetID" Value="43c32285-d658-1793-c123-bf86315de055"/>
+    <Key Name="name" Value="seaWaterOpaque"/>
+    <Key Name="assetType" Value="0" />
+    <Key Name="fileName" Value="seaWaterOpaque.j2c" />
   </Section>
   
   <Section Name="FALLB_BAKED_HEAD">
@@ -855,6 +866,30 @@
      <Key Name="assetType" Value="0" />
      <Key Name="fileName" Value="FALLBACK_BAKED_AUX3_32X32.j2k"/>
   </Section>
-
+  <Section Name="DefaultCloud">
+     <Key Name="assetID" Value="1dc1368f-e8fe-f02d-a08d-9d9f11c1af6b"/>
+     <Key Name="name" Value="DefaultCloud"/>
+     <Key Name="assetType" Value="0" />
+     <Key Name="fileName" Value="DefaultClouds.j2c"/>
+  </Section>
+  <Section Name="DefaultRainbow">
+     <Key Name="assetID" Value="11b4c57c-56b3-04ed-1f82-2004363882e4"/>
+     <Key Name="name" Value="DefaultRainbow"/>
+     <Key Name="assetType" Value="0" />
+     <Key Name="fileName" Value="rainbow.j2c"/>
+  </Section>
+  <Section Name="DefaultHalo">
+     <Key Name="assetID" Value="12149143-f599-91a7-77ac-b52a3c0f59cd"/>
+     <Key Name="name" Value="DefaultHalo"/>
+     <Key Name="assetType" Value="0" />
+     <Key Name="fileName" Value="halo.j2c"/>
+  </Section>
+  
+  <Section Name="MoonAlias">
+     <Key Name="assetID" Value="d07f6eed-b96a-47cd-b51d-400ad4a1c428"/>
+     <Key Name="name" Value="MoonAlias"/>
+     <Key Name="assetType" Value="0" />
+     <Key Name="fileName" Value="moon.jp2"/>
+  </Section>
 
 </Nini>
