@@ -1,0 +1,186 @@
+From 8a59181175aa2c84af545b1debdc3238449b8316 Mon Sep 17 00:00:00 2001
+From: Zontreck <tara@zontreck.dev>
+Date: Sun, 3 May 2020 11:35:47 -0700
+Subject: [PATCH] Fix the app domains This fix essentially deprecates the need
+ for a appdomain loading setting. AppDomain.{Unload} specifically can throw a
+ CannotUnloadAppDomainException, this takes that into account.
+
+---
+ .../Region/ScriptEngine/XEngine/XEngine.cs    | 94 +++++++++++++------
+ bin/OpenSim.ini.example                       | 16 +---
+ 2 files changed, 67 insertions(+), 43 deletions(-)
+
+diff --git a/OpenSim/Region/ScriptEngine/XEngine/XEngine.cs b/OpenSim/Region/ScriptEngine/XEngine/XEngine.cs
+index 9e47530304..5eab81633c 100755
+--- a/OpenSim/Region/ScriptEngine/XEngine/XEngine.cs
++++ b/OpenSim/Region/ScriptEngine/XEngine/XEngine.cs
+@@ -109,8 +109,8 @@ namespace OpenSim.Region.ScriptEngine.XEngine
+         private bool m_InitialStartup = true;
+         private int m_ScriptFailCount; // Number of script fails since compile queue was last empty
+         private string m_ScriptErrorMessage;
+-        private bool m_AppDomainLoading;
+         private bool m_CompactMemOnLoad;
++        private bool m_DebugAppDomains;
+         private Dictionary<UUID,ArrayList> m_ScriptErrors =
+                 new Dictionary<UUID,ArrayList>();
+ 
+@@ -307,7 +307,6 @@ namespace OpenSim.Region.ScriptEngine.XEngine
+             m_MaxScriptQueue = m_ScriptConfig.GetInt("MaxScriptEventQueue",300);
+             m_StackSize = m_ScriptConfig.GetInt("ThreadStackSize", 262144);
+             m_SleepTime = m_ScriptConfig.GetInt("MaintenanceInterval", 10) * 1000;
+-            m_AppDomainLoading = m_ScriptConfig.GetBoolean("AppDomainLoading", false);
+             m_CompactMemOnLoad = m_ScriptConfig.GetBoolean("CompactMemOnLoad", false);
+             m_EventLimit = m_ScriptConfig.GetInt("EventLimit", 30);
+             m_KillTimedOutScripts = m_ScriptConfig.GetBoolean("KillTimedOutScripts", false);
+@@ -316,6 +315,7 @@ namespace OpenSim.Region.ScriptEngine.XEngine
+                 = m_ScriptConfig.GetInt("WaitForEventCompletionOnScriptStop", m_WaitForEventCompletionOnScriptStop);
+ 
+             m_ScriptEnginesPath = m_ScriptConfig.GetString("ScriptEnginesPath", "ScriptEngines");
++            m_DebugAppDomains = m_ScriptConfig.GetBoolean("DebugAppDomain", false); // This can get very spammy
+ 
+             m_Prio = ThreadPriority.BelowNormal;
+             switch (priority)
+@@ -1307,38 +1307,33 @@ namespace OpenSim.Region.ScriptEngine.XEngine
+                 if ((!m_Scripts.ContainsKey(itemID)) ||
+                     (m_Scripts[itemID].AssetID != assetID))
+                 {
+-//                    UUID appDomain = assetID;
+-
+-//                    if (part.ParentGroup.IsAttachment)
+-//                        appDomain = part.ParentGroup.RootPart.UUID;
+-                    UUID appDomain = part.ParentGroup.RootPart.UUID;
++                    //                    UUID appDomain = assetID;
+ 
++                    //                    if (part.ParentGroup.IsAttachment)
++                    //                        appDomain = part.ParentGroup.RootPart.UUID;
++                    //UUID appDomain = part.ParentGroup.RootPart.UUID;
++                    UUID appDomain = itemID; // It should be assigning the app domain to the items' uuid. not the object. see OpenSim.ini.example, as it states clearly that it is a appdomain per script
+                     if (!m_AppDomains.ContainsKey(appDomain))
+                     {
+                         try
+                         {
+                             AppDomain sandbox;
+-                            if (m_AppDomainLoading)
+-                            {
+-                                AppDomainSetup appSetup = new AppDomainSetup();
+-                                appSetup.PrivateBinPath = Path.Combine(
+-                                    m_ScriptEnginesPath,
+-                                    m_Scene.RegionInfo.RegionID.ToString());
+-
+-                                Evidence baseEvidence = AppDomain.CurrentDomain.Evidence;
+-                                Evidence evidence = new Evidence(baseEvidence);
+-
+-                                sandbox = AppDomain.CreateDomain(
+-                                                m_Scene.RegionInfo.RegionID.ToString(),
+-                                                evidence, appSetup);
+-                                sandbox.AssemblyResolve +=
+-                                    new ResolveEventHandler(
+-                                        AssemblyResolver.OnAssemblyResolve);
+-                            }
+-                            else
+-                            {
+-                                sandbox = AppDomain.CurrentDomain;
+-                            }
++                            AppDomainSetup appSetup = new AppDomainSetup();
++                            appSetup.PrivateBinPath = Path.Combine(
++                                m_ScriptEnginesPath,
++                                m_Scene.RegionInfo.RegionID.ToString());
++
++                            Evidence baseEvidence = AppDomain.CurrentDomain.Evidence;
++                            Evidence evidence = new Evidence(baseEvidence);
++
++                            sandbox = AppDomain.CreateDomain(
++                                assetID.ToString(),
++                                            //m_Scene.RegionInfo.RegionID.ToString(),
++                                            evidence, appSetup);
++                            sandbox.AssemblyResolve +=
++                                new ResolveEventHandler(
++                                    AssemblyResolver.OnAssemblyResolve);
++
+ 
+                             //PolicyLevel sandboxPolicy = PolicyLevel.CreateAppDomainLevel();
+                             //AllMembershipCondition sandboxMembershipCondition = new AllMembershipCondition();
+@@ -1691,12 +1686,51 @@ namespace OpenSim.Region.ScriptEngine.XEngine
+                 m_AppDomains.Remove(id);
+ 
+                 if (domain != AppDomain.CurrentDomain)
+-                    AppDomain.Unload(domain);
+-                domain = null;
++                {
++                    TryUnloadAppDomain(domain);
++                }
++                _ = domain;
+                 // m_log.DebugFormat("[XEngine] Unloaded app domain {0}", id.ToString());
+             }
+         }
+ 
++        private void TryUnloadAppDomain(AppDomain domain)
++        {
++            string currentAppdomain = domain.FriendlyName;
++            
++            if(m_DebugAppDomains)
++                m_log.Info($"[XEngine] Unloading Script AppDomain {currentAppdomain}");
++            
++            try
++            {
++
++                AppDomain.Unload(domain);
++
++                
++            }
++            catch (CannotUnloadAppDomainException ex)
++            {
++                if(m_DebugAppDomains)
++                    m_log.Info($"[XEngine] TryUnloadAppDomain has failed for {currentAppdomain} - (Likely tasks that are still finishing) Trying again in 1 minute");
++                // This can happen if the script has not yet fully stopped. Add it to a queue, and we'll try unloading it again later. Only upon success can we dequeue it.
++                System.Threading.Timer tryAgain = new System.Threading.Timer(new TimerCallback(obj =>
++                {
++                    GC.Collect();
++                    AppDomain dom = (AppDomain)obj;
++                    TryUnloadAppDomain(dom); // Loop back through until the domain is unloaded
++                }), domain, 0, Convert.ToInt32(TimeSpan.FromMinutes(1).TotalMilliseconds));
++
++                return;
++            }
++            if(m_DebugAppDomains)
++                m_log.Info($"[XEngine] Unload succeeded for {currentAppdomain}");
++            
++            GC.Collect(GC.MaxGeneration, GCCollectionMode.Forced, true, true);
++
++            if(m_DebugAppDomains)
++                m_log.Info($"[XEngine] Remaining appdomains: {m_AppDomains.Count} / {m_DomainScripts.Count}");
++        }
++
+         //
+         // Start processing
+         //
+diff --git a/bin/OpenSim.ini.example b/bin/OpenSim.ini.example
+index c60aee7f28..05eefe8c2c 100644
+--- a/bin/OpenSim.ini.example
++++ b/bin/OpenSim.ini.example
+@@ -970,19 +970,9 @@
+     ;; The trade-off may be increased memory usage by the script engine.
+     ; ThreadStackSize = 262144
+ 
+-    ;; Set this to true to load each script into a separate
+-    ;; AppDomain.
+-    ;;
+-    ;; Setting this to false will load all script assemblies into the
+-    ;; current AppDomain, which will significantly improve script loading times.
+-    ;; It will also reduce initial per-script memory overhead.
+-    ;;
+-    ;; However, setting this to false will also prevent script DLLs from being unloaded from memory if the script is deleted.
+-    ;; This may cause an OutOfMemory problem over time when avatars with scripted attachments move in and out of the region.
+-    ;; at this time some mono versions seem to have problems with the true option
+-    ;; so default is now false until a fix is found, to simply life of less technical skilled users.
+-    ;; this should only be a issue if regions stay alive for a long time with lots of scripts added or edited.
+-    AppDomainLoading = false
++    ;; Set this to true to see debug on when scripts get unloaded
++    ;; Warning: This will be very spammy with a lot of scripts
++    DebugAppDomain = false
+ 
+     ;; Controls whether scripts are stopped by aborting their threads externally (abort) or by co-operative checks from the compiled script (co-op)
+     ;; co-op will be more stable but this option is currently experimental.
+-- 
+2.25.1.windows.1
+

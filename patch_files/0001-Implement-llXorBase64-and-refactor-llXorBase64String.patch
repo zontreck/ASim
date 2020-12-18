@@ -1,0 +1,292 @@
+From c9f46c85d86ba021aa9f21e1956a4a7450f53166 Mon Sep 17 00:00:00 2001
+From: Tom Mettam <tom@caspertech.co.uk>
+Date: Fri, 11 Dec 2020 19:39:14 +0000
+Subject: [PATCH] Implement llXorBase64 and refactor llXorBase64Strings and
+ llXorBase64StringsCorrect so that they appropriately match SL behaviour
+
+---
+ .../Shared/Api/Implementation/LSL_Api.cs      | 167 ++++++++++++++----
+ .../Shared/Api/Interface/ILSL_Api.cs          |   1 +
+ .../Shared/Api/Runtime/LSL_Stub.cs            |   4 +
+ 3 files changed, 140 insertions(+), 32 deletions(-)
+
+diff --git a/OpenSim/Region/ScriptEngine/Shared/Api/Implementation/LSL_Api.cs b/OpenSim/Region/ScriptEngine/Shared/Api/Implementation/LSL_Api.cs
+index a259a85a7b..ac38c3e6fc 100644
+--- a/OpenSim/Region/ScriptEngine/Shared/Api/Implementation/LSL_Api.cs
++++ b/OpenSim/Region/ScriptEngine/Shared/Api/Implementation/LSL_Api.cs
+@@ -11091,15 +11091,48 @@ namespace OpenSim.Region.ScriptEngine.Shared.Api
+                 Error("llBase64ToString", "Error decoding string");
+                 return String.Empty;
+             }
++
+         }
+ 
+-        public LSL_String llXorBase64Strings(string str1, string str2)
++        private string truncateBase64(string input)
+         {
+-            int padding = 0;
++            int paddingPos = -1;
++            Regex rx = new Regex("(?![a-zA-Z0-9+\\/])");
++            MatchCollection matches = rx.Matches(input);
++            if (matches.Count > 0)
++            {
++                paddingPos = matches[0].Index;
++            }
++            int remainder = input.Length % 4;
++            if (remainder == 0 && (paddingPos == -1 || paddingPos > input.Length - 2))
++            {
++                return input;
++            }
+ 
+-            string b64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
++            if (paddingPos > -1)
++            {
++                input = input.Substring(0, paddingPos);
++            }
+ 
+-            ScriptSleep(300);
++            remainder = input.Length % 4;
++            if (remainder == 0)
++            {
++                return input;
++            }
++            else if (remainder == 1)
++            {
++                return input.Substring(0, input.Length - 1);
++            }
++            else if (remainder == 2)
++            {
++                return input + "==";
++            }
++
++            return input + "=";
++        }
++
++        public LSL_String llXorBase64(string str1, string str2)
++        {
+             m_host.AddScriptLPS(1);
+ 
+             if (str1 == String.Empty)
+@@ -11107,6 +11140,9 @@ namespace OpenSim.Region.ScriptEngine.Shared.Api
+             if (str2 == String.Empty)
+                 return str1;
+ 
++            str1 = truncateBase64(str1);
++            str2 = truncateBase64(str2);
++
+             int len = str2.Length;
+             if ((len % 4) != 0) // LL is EVIL!!!!
+             {
+@@ -11136,26 +11172,61 @@ namespace OpenSim.Region.ScriptEngine.Shared.Api
+                 return new LSL_String(String.Empty);
+             }
+ 
+-            // For cases where the decoded length of s2 is greater
+-            // than the decoded length of s1, simply perform a normal
+-            // decode and XOR
+-            //
+-            /*
+-            if (data2.Length >= data1.Length)
++            if (data1.Length == 0)
++                return String.Empty;
++            if (data2.Length == 0)
++                return String.Empty;
++
++            byte[] d2 = new Byte[data1.Length];
++            int pos = 0;
++
++            if (data1.Length <= data2.Length)
+             {
+-                for (int pos = 0 ; pos < data1.Length ; pos++ )
+-                    data1[pos] ^= data2[pos];
++                Array.Copy(data2, 0, d2, 0, data1.Length);
++            }
++            else
++            {
++                while (pos < data1.Length)
++                {
++                    len = data1.Length - pos;
++                    if (len > data2.Length)
++                        len = data2.Length;
+ 
+-                return Convert.ToBase64String(data1);
++                    Array.Copy(data2, 0, d2, pos, len);
++                    pos += len;
++                }
+             }
+-            */
++
++            for (pos = 0; pos < data1.Length; pos++)
++                data1[pos] ^= d2[pos];
++
++            return Convert.ToBase64String(data1);
++        }
++
++        public LSL_String llXorBase64Strings(string str1u, string str2u)
++        {
++            // Convert to ascii or we get inconsistent results if there is unicode junk in the string
++            byte[] uni1 = Encoding.UTF8.GetBytes(str1u);
++            string str1 = Encoding.ASCII.GetString(uni1);
++
++            byte[] uni2 = Encoding.UTF8.GetBytes(str2u);
++            string str2 = Encoding.ASCII.GetString(uni2);
++
++            string b64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
++
++            ScriptSleep(300);
++            m_host.AddScriptLPS(1);
++
++            if (str1 == String.Empty)
++                return String.Empty;
++            if (str2 == String.Empty)
++                return str1;
++
++            string originalString1 = str1;
+ 
+             // Remove padding
+             while (str1.EndsWith("="))
+-            {
+                 str1 = str1.Substring(0, str1.Length - 1);
+-                padding++;
+-            }
+             while (str2.EndsWith("="))
+                 str2 = str2.Substring(0, str2.Length - 1);
+ 
+@@ -11166,7 +11237,7 @@ namespace OpenSim.Region.ScriptEngine.Shared.Api
+             {
+                 int idx = b64.IndexOf(str1.Substring(i, 1));
+                 if (idx == -1)
+-                    idx = 0;
++                    idx = 64;
+                 d1[i] = (byte)idx;
+             }
+ 
+@@ -11174,23 +11245,30 @@ namespace OpenSim.Region.ScriptEngine.Shared.Api
+             {
+                 int idx = b64.IndexOf(str2.Substring(i, 1));
+                 if (idx == -1)
+-                    idx = 0;
++                    idx = 64;
+                 d2[i] = (byte)idx;
+             }
+ 
+             string output = String.Empty;
+ 
+-            for (int pos = 0 ; pos < d1.Length ; pos++)
+-                output += b64[d1[pos] ^ d2[pos % d2.Length]];
+-
+-            // Here's a funny thing: LL blithely violate the base64
+-            // standard pretty much everywhere. Here, padding is
+-            // added only if the first input string had it, rather
+-            // than when the data actually needs it. This can result
+-            // in invalid base64 being returned. Go figure.
+-
+-            while (padding-- > 0)
+-                output += "=";
++            int d2Pos = 0;
++            for (int pos = 0; pos < originalString1.Length; pos++)
++            {
++                if (pos >= d1.Length || d1[pos] == 64)
++                {
++                    // This crappy old function just blindly replaces junk with =...
++                    output += '=' ;
++                }
++                else
++                {
++                    if (d2Pos >= d2.Length || d2[d2Pos] == 64)
++                    {
++                        d2Pos = 0;
++                    }
++                    output += b64[d1[pos] ^ d2[d2Pos]];
++                }
++                d2Pos++;
++            }
+ 
+             return output;
+         }
+@@ -14116,12 +14194,19 @@ namespace OpenSim.Region.ScriptEngine.Shared.Api
+ 
+         public LSL_String llXorBase64StringsCorrect(string str1, string str2)
+         {
++            if (str1 == "BBBBBBBBBBBBBBB/AAAABBBBBBB+AAAABBB+AAA=")
++            {
++                str1 += "";
++            }
++
+             m_host.AddScriptLPS(1);
+ 
+             if (str1 == String.Empty)
+                 return String.Empty;
+             if (str2 == String.Empty)
+                 return str1;
++            str1 = truncateBase64(str1);
++            str2 = truncateBase64(str2);
+ 
+             int len = str2.Length;
+             if ((len % 4) != 0) // LL is EVIL!!!!
+@@ -14152,6 +14237,11 @@ namespace OpenSim.Region.ScriptEngine.Shared.Api
+                 return new LSL_String(String.Empty);
+             }
+ 
++            if (data1.Length == 0)
++                return String.Empty;
++            if (data2.Length == 0)
++                return String.Empty;
++
+             byte[] d2 = new Byte[data1.Length];
+             int pos = 0;
+ 
+@@ -14172,8 +14262,21 @@ namespace OpenSim.Region.ScriptEngine.Shared.Api
+                 }
+             }
+ 
+-            for (pos = 0 ; pos < data1.Length ; pos++ )
+-                data1[pos] ^= d2[pos];
++            int index = 0;
++            for (pos = 0; pos < data1.Length; pos++)
++            {
++                // Intentionally broken to match SL behaviour https://jira.secondlife.com/browse/SCR-35
++                data1[pos] ^= d2[index];
++
++                if (d2.Length > index + 1 && d2[index + 1] == 0x0)
++                {
++                    index = 0;
++                }
++                else
++                {
++                    ++index;
++                }
++            }
+ 
+             return Convert.ToBase64String(data1);
+         }
+diff --git a/OpenSim/Region/ScriptEngine/Shared/Api/Interface/ILSL_Api.cs b/OpenSim/Region/ScriptEngine/Shared/Api/Interface/ILSL_Api.cs
+index 8c6a8069ea..5883d4ad16 100644
+--- a/OpenSim/Region/ScriptEngine/Shared/Api/Interface/ILSL_Api.cs
++++ b/OpenSim/Region/ScriptEngine/Shared/Api/Interface/ILSL_Api.cs
+@@ -445,6 +445,7 @@ namespace OpenSim.Region.ScriptEngine.Shared.Api.Interfaces
+          LSL_Float llWater(LSL_Vector offset);
+               void llWhisper(int channelID, string text);
+         LSL_Vector llWind(LSL_Vector offset);
++        LSL_String llXorBase64(string str1, string str2);
+         LSL_String llXorBase64Strings(string str1, string str2);
+         LSL_String llXorBase64StringsCorrect(string str1, string str2);
+        LSL_Integer llGetLinkNumberOfSides(LSL_Integer link);
+diff --git a/OpenSim/Region/ScriptEngine/Shared/Api/Runtime/LSL_Stub.cs b/OpenSim/Region/ScriptEngine/Shared/Api/Runtime/LSL_Stub.cs
+index 55dd7cc18b..d96bdebf31 100644
+--- a/OpenSim/Region/ScriptEngine/Shared/Api/Runtime/LSL_Stub.cs
++++ b/OpenSim/Region/ScriptEngine/Shared/Api/Runtime/LSL_Stub.cs
+@@ -2015,6 +2015,10 @@ namespace OpenSim.Region.ScriptEngine.Shared.ScriptBase
+         {
+             return m_LSL_Functions.llWind(offset);
+         }
++        public LSL_String llXorBase64(string str1, string str2)
++        {
++            return m_LSL_Functions.llXorBase64(str1, str2);
++        }
+ 
+         public LSL_String llXorBase64Strings(string str1, string str2)
+         {
+-- 
+2.26.0.windows.1
+

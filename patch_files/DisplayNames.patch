@@ -1,0 +1,834 @@
+From 0ab9e8a8e6037dff1ed389c4b6e8f0e4f4b67338 Mon Sep 17 00:00:00 2001
+From: Zontreck <tara@zontreck.dev>
+Date: Fri, 22 May 2020 05:40:25 -0700
+Subject: [PATCH 1/2] Add new stuff
+
+---
+ .../MySQL/Resources/UserAccount.migrations    |  23 +
+ .../PGSQL/Resources/UserAccount.migrations    |  21 +
+ .../SQLite/Resources/UserAccount.migrations   |  23 +-
+ .../Linden/Caps/BunchOfCaps/BunchOfCaps.cs    |   6 +
+ 8 files changed, 1041 insertions(+), 1 deletion(-)
+
+diff --git a/OpenSim/Data/MySQL/Resources/UserAccount.migrations b/OpenSim/Data/MySQL/Resources/UserAccount.migrations
+index 98be09712e..56d431affe 100644
+--- a/OpenSim/Data/MySQL/Resources/UserAccount.migrations
++++ b/OpenSim/Data/MySQL/Resources/UserAccount.migrations
+@@ -29,3 +29,26 @@ BEGIN;
+ ALTER TABLE `UserAccounts` ADD `active` INT NOT NULL DEFAULT '1';
+ 
+ COMMIT;
++
++
++:VERSION 7     # -------------------------
++
++BEGIN;
++
++CREATE TABLE IF NOT EXISTS `DisplayNames` (
++  `PrincipalID` char(36) not null,
++  `DisplayName` text,
++  `ModificationDate` text,
++  `IsDefault` int,
++  UNIQUE KEY `PrincipalID` (`PrincipalID`)
++) ENGINE=InnoDB DEFAULT CHARSET=utf8;
++
++COMMIT;
+\ No newline at end of file
+diff --git a/OpenSim/Data/PGSQL/Resources/UserAccount.migrations b/OpenSim/Data/PGSQL/Resources/UserAccount.migrations
+index 31358fa694..a9deef9094 100644
+--- a/OpenSim/Data/PGSQL/Resources/UserAccount.migrations
++++ b/OpenSim/Data/PGSQL/Resources/UserAccount.migrations
+@@ -55,3 +55,24 @@ BEGIN TRANSACTION;
+ ALTER TABLE UserAccounts ADD "active" integer NOT NULL DEFAULT 1;
+ 
+ COMMIT;
++
++:VERSION 6     # -------------------------
++
++BEGIN;
++
++CREATE TABLE DisplayNames (
++  PrincipalID char(36) primary key,
++  DisplayName text,
++  ModificationDate text,
++  IsDefault int
++);
++
++COMMIT;
+\ No newline at end of file
+diff --git a/OpenSim/Data/SQLite/Resources/UserAccount.migrations b/OpenSim/Data/SQLite/Resources/UserAccount.migrations
+index f37a22246f..1121c8ee5b 100644
+--- a/OpenSim/Data/SQLite/Resources/UserAccount.migrations
++++ b/OpenSim/Data/SQLite/Resources/UserAccount.migrations
+@@ -32,4 +32,25 @@ BEGIN;
+ 
+ ALTER TABLE `UserAccounts` ADD `active` BOOLEAN NOT NULL DEFAULT TRUE;
+ 
+-COMMIT;
+\ No newline at end of file
++COMMIT;
++
++:VERSION 4     # -------------------------
++
++BEGIN;
++
++CREATE TABLE DisplayNames (
++  PrincipalID char(36) primary key,
++  DisplayName text,
++  ModificationDate text,
++  IsDefault int
++);
++
++COMMIT;
+\ No newline at end of file
+diff --git a/OpenSim/Region/ClientStack/Linden/Caps/BunchOfCaps/BunchOfCaps.cs b/OpenSim/Region/ClientStack/Linden/Caps/BunchOfCaps/BunchOfCaps.cs
+index 7f595f3c56..cd8da265f6 100644
+--- a/OpenSim/Region/ClientStack/Linden/Caps/BunchOfCaps/BunchOfCaps.cs
++++ b/OpenSim/Region/ClientStack/Linden/Caps/BunchOfCaps/BunchOfCaps.cs
+@@ -273,6 +273,7 @@ namespace OpenSim.Region.ClientStack.Linden
+                         new SimpleStreamHandler(GetNewCapPath(), GroupMemberData));
+                 }
+ 
++                m_HostCapsObj.RegisterSimpleHandler("SetDisplayName", new SimpleOSDMapHandler("POST", GetNewCapPath(), SetDisplayName));
+             }
+             catch (Exception e)
+             {
+@@ -280,6 +281,11 @@ namespace OpenSim.Region.ClientStack.Linden
+             }
+         }
+ 
++        private void SetDisplayName(IOSHttpRequest httpRequest, IOSHttpResponse httpResponse, OSDMap args)
++        {
++            m_log.Info(args.AsString());
++        }
++
+         public void RegisterInventoryServiceHandlers()
+         {
+             try
+-- 
+2.26.2.windows.1
+
+
+From 24085e67c44dabb986dba77ad4d7cbb60d6fdece Mon Sep 17 00:00:00 2001
+From: Zontreck <tara@zontreck.dev>
+Date: Sat, 23 May 2020 20:16:48 -0700
+Subject: [PATCH 2/2] Add display name functionality
+
+---
+ OpenSim/Data/MySQL/MySQLUserAccountData.cs       |   7 +-
+ .../MySQL/Resources/UserAccount.migrations    |  26 ++-
+ .../PGSQL/Resources/UserAccount.migrations    |  26 ++-
+ .../SQLite/Resources/UserAccount.migrations   |  26 ++-
+ .../Linden/Caps/BunchOfCaps/BunchOfCaps.cs    | 219 +++++++++++++++---
+ .../LocalUserAccountServiceConnector.cs       |   5 +
+ .../RemoteUserAccountServiceConnector.cs      |   8 +-
+ .../UserAccountServerPostHandler.cs           |  24 ++
+ .../UserAccountServicesConnector.cs           |  40 ++++
+ .../HypergridService/UserAccountCache.cs      |   6 +
+ OpenSim/Services/Interfaces/IGridUserService.cs  |   3 +-
+ .../Interfaces/IUserAccountService.cs         |  17 ++
+ .../UserAccountService/UserAccountService.cs  |  38 ++-
+ 17 files changed, 464 insertions(+), 52 deletions(-)
+
+diff --git a/OpenSim/Data/MySQL/MySQLUserAccountData.cs b/OpenSim/Data/MySQL/MySQLUserAccountData.cs
+index 828738b009..50e9910237 100644
+--- a/OpenSim/Data/MySQL/MySQLUserAccountData.cs
++++ b/OpenSim/Data/MySQL/MySQLUserAccountData.cs
+@@ -81,8 +81,10 @@ namespace OpenSim.Data.MySQL
+                     cmd.Parameters.AddWithValue("?searchLast", "%" + words[1] + "%");
+                     cmd.Parameters.AddWithValue("?ScopeID", scopeID.ToString());
+                 }
++                UserAccountData[] dat = DoQuery(cmd);
+ 
+-                return DoQuery(cmd);
++
++                return dat;
+             }
+         }
+ 
+@@ -98,7 +100,8 @@ namespace OpenSim.Data.MySQL
+ 
+                 cmd.CommandText = String.Format("select * from {0} where " + where, m_Realm);
+ 
+-                return DoQuery(cmd);
++                UserAccountData[] dat = DoQuery(cmd);
++                return dat;
+             }
+         }
+     }
+diff --git a/OpenSim/Data/MySQL/Resources/UserAccount.migrations b/OpenSim/Data/MySQL/Resources/UserAccount.migrations
+index 56d431affe..6fa3d3dbd8 100644
+--- a/OpenSim/Data/MySQL/Resources/UserAccount.migrations
++++ b/OpenSim/Data/MySQL/Resources/UserAccount.migrations
+@@ -51,4 +51,28 @@ BEGIN;
+ 
+ ALTER TABLE `UserAccounts` ADD `balance` int not null default '0';
+ 
+-commit;
+\ No newline at end of file
++:VERSION 10
++BEGIN;
++
++DROP TABLE `DisplayNames`;
++ALTER TABLE `UserAccounts` ADD (`DisplayName` text not null, `DisplayNameModified` text not null, `DisplayNameDefault` int not null default '1');
++
++COMMIT;
++
++
++:VERSION 11
++BEGIN;
++
++ALTER TABLE `UserAccounts` MODIFY `DisplayNameDefault` text not null default 'true';
++
++COMMIT;
+\ No newline at end of file
+diff --git a/OpenSim/Data/PGSQL/Resources/UserAccount.migrations b/OpenSim/Data/PGSQL/Resources/UserAccount.migrations
+index a9deef9094..7abc4c6876 100644
+--- a/OpenSim/Data/PGSQL/Resources/UserAccount.migrations
++++ b/OpenSim/Data/PGSQL/Resources/UserAccount.migrations
+@@ -75,4 +75,28 @@ BEGIN;
+ 
+ ALTER TABLE UserAccounts ADD "balance" int not null default 0;
+ 
+-commit;
+\ No newline at end of file
++:VERSION 9
++BEGIN;
++
++DROP TABLE DisplayNames;
++ALTER TABLE UserAccounts ADD (DisplayName text not null, DisplayNameModified text not null, DisplayNameDefault int not null default 1);
++
++COMMIT;
++
++
++:VERSION 10
++BEGIN;
++
++ALTER TABLE UserAccounts MODIFY DisplayNameDefault text not null default "true";
++
++COMMIT;
+\ No newline at end of file
+diff --git a/OpenSim/Data/SQLite/Resources/UserAccount.migrations b/OpenSim/Data/SQLite/Resources/UserAccount.migrations
+index 1121c8ee5b..6e545640ab 100644
+--- a/OpenSim/Data/SQLite/Resources/UserAccount.migrations
++++ b/OpenSim/Data/SQLite/Resources/UserAccount.migrations
+@@ -53,4 +53,28 @@ BEGIN;
+ 
+ ALTER TABLE `UserAccounts` ADD `balance` int not null default '0';
+ 
+-commit;
+\ No newline at end of file
++:VERSION 7
++BEGIN;
++
++DROP TABLE `DisplayNames`;
++ALTER TABLE `UserAccounts` ADD (`DisplayName` text not null, `DisplayNameModified` text not null, `DisplayNameDefault` int not null default '1');
++
++COMMIT;
++
++
++:VERSION 8
++BEGIN;
++
++ALTER TABLE `UserAccounts` MODIFY `DisplayNameDefault` text not null default 'true';
++
++COMMIT;
+\ No newline at end of file
+diff --git a/OpenSim/Region/ClientStack/Linden/Caps/BunchOfCaps/BunchOfCaps.cs b/OpenSim/Region/ClientStack/Linden/Caps/BunchOfCaps/BunchOfCaps.cs
+index cd8da265f6..9b694ad36a 100644
+--- a/OpenSim/Region/ClientStack/Linden/Caps/BunchOfCaps/BunchOfCaps.cs
++++ b/OpenSim/Region/ClientStack/Linden/Caps/BunchOfCaps/BunchOfCaps.cs
+@@ -126,6 +126,23 @@ namespace OpenSim.Region.ClientStack.Linden
+         private IUserAccountService m_userAccountService;
+         private IMoneyModule m_moneyModule;
+ 
++        private static readonly object evqlck = new object();
++        private static IEventQueue m_EventQueue;
++        public IEventQueue EventQueue
++        {
++            get
++            {
++                lock (evqlck)
++                {
++                    if (m_EventQueue == null)
++                    {
++                        m_EventQueue = m_Scene.RequestModuleInterface<IEventQueue>();
++                    }
++                    return m_EventQueue;
++                }
++            }
++        }
++
+         private enum FileAgentInventoryState : int
+         {
+             idle = 0,
+@@ -273,7 +290,6 @@ namespace OpenSim.Region.ClientStack.Linden
+                         new SimpleStreamHandler(GetNewCapPath(), GroupMemberData));
+                 }
+ 
+-                m_HostCapsObj.RegisterSimpleHandler("SetDisplayName", new SimpleOSDMapHandler("POST", GetNewCapPath(), SetDisplayName));
+             }
+             catch (Exception e)
+             {
+@@ -281,9 +297,146 @@ namespace OpenSim.Region.ClientStack.Linden
+             }
+         }
+ 
++        /// <summary>
++        /// Generates a displayname update packet
++        /// </summary>
++        /// <param name="newDispName">The new displayname</param>
++        /// <param name="oldDispName">The old displayname</param>
++        /// <param name="ID">User ID</param>
++        /// <param name="isDefault">Whether the displayname is the default display name</param>
++        /// <param name="first">User first name</param>
++        /// <param name="last">User last name</param>
++        /// <param name="username">Username</param>
++        /// <param name="nextUpdate">The date and time that this can next be changed</param>
++        /// <returns>OSD Packet</returns>
++        public OSD DisplayNameUpdate(string newDispName, string oldDispName, UUID ID, bool isDefault, string first, string last, string username, DateTime nextUpdate)
++        {
++            OSDMap nameReply = new OSDMap() { { "message", "DisplayNameUpdate" } };
++            OSDMap body = new OSDMap();
++
++            OSDMap agentData = new OSDMap();
++            agentData["display_name"] = newDispName;
++            agentData["id"] = ID.ToString();
++            agentData["is_display_name_default"] = OSD.FromBoolean(isDefault);
++            agentData["legacy_first_name"] = first;
++            agentData["legacy_last_name"] = last;
++            agentData["username"] = username;
++            agentData["display_name_next_update"] = OSD.FromDate(nextUpdate);
++
++            body.Add("agent", agentData);
++            body.Add("agent_id", OSD.FromUUID(ID));
++            body.Add("old_display_name", oldDispName);
++
++            nameReply.Add("body", body);
++
++            return nameReply;
++        }
++        /// <summary>
++        /// Generates a displayname update packet
++        /// </summary>
++        /// <param name="newDispName">The new displayname</param>
++        /// <param name="oldDispName">The old displayname</param>
++        /// <param name="ID">User ID</param>
++        /// <param name="isDefault">Whether the displayname is the default display name</param>
++        /// <param name="first">User first name</param>
++        /// <param name="last">User last name</param>
++        /// <param name="username">Username</param>
++        /// <param name="nextUpdate">The date and time that this can next be changed</param>
++        /// <param name="code">Reply code</param>
++        /// <param name="status">Status code</param>
++        /// <returns>OSD Packet</returns>
++        public OSD DisplayNameReply(string newDispName, string oldDispName, UUID ID, bool isDefault, string first, string last, string username, DateTime nextUpdate, int status, string code)
++        {
++            OSDMap nameReply = new OSDMap() { { "message", "SetDisplayNameReply" } };
++            OSDMap body = new OSDMap();
++
++            OSDMap agentData = new OSDMap();
++            agentData["display_name"] = newDispName;
++            agentData["id"] = ID.ToString();
++            agentData["is_display_name_default"] = OSD.FromBoolean(isDefault);
++            agentData["legacy_first_name"] = first;
++            agentData["legacy_last_name"] = last;
++            agentData["username"] = username;
++            agentData["display_name_next_update"] = OSD.FromDate(nextUpdate);
++
++            body.Add("content", agentData);
++            body.Add("agent", new OSDArray());
++
++            body.Add("reason", code);
++            body.Add("status", status);
++
++            nameReply.Add("body", body);
++
++            return nameReply;
++        }
++        /// <summary>
++        /// Queues the display name update packet to go out
++        /// </summary>
++        /// <param name="ACT">The account data</param>
++        /// <param name="toID">The user receiving the update</param>
++        /// <param name="OldDisplayName">The old display name</param>
++        void DisplayNameUpdateTrigger(UserAccount ACT, UUID toID, string OldDisplayName)
++        {
++            if (EventQueue != null)
++            {
++                OSD Update = null;
++
++                Update = DisplayNameUpdate(ACT.DisplayName, OldDisplayName, ACT.PrincipalID, ACT.DisplayNameDefault, ACT.FirstName, ACT.LastName, ACT.Name, ACT.DisplayNameModified);
++
++                EventQueue.Enqueue(Update, toID);
++                
++            }
++        }
++
+         private void SetDisplayName(IOSHttpRequest httpRequest, IOSHttpResponse httpResponse, OSDMap args)
+         {
+-            m_log.Info(args.AsString());
++            IUserAccountService uas = m_userAccountService;
++            m_log.Info($"[SETDISPLAYNAME] Starting to set display name for {m_AgentID}");
++            UserAccount thisAct = uas.GetUserAccount(m_Scene.RegionInfo.ScopeID, m_AgentID);
++            OSDArray disp = (OSDArray)args["display_name"];
++            string oldDisp = thisAct.DisplayName;
++
++            if (disp[1] == "")
++            {
++                thisAct.DisplayNameDefault = true;
++                thisAct.DisplayName = disp[1];
++                thisAct.DisplayNameModified = DateTime.MinValue;
++                m_log.Info($"[SETDISPLAYNAME] Display Name Reset pressed");
++                m_Scene.SimChatBroadcast(Encoding.UTF8.GetBytes($"{thisAct.Name} reset their display name"), ChatTypeEnum.Direct, 0, Vector3.Zero, "Simulator", UUID.Zero, false);
++            }
++            else
++            {
++                thisAct.DisplayName = disp[1];
++                thisAct.DisplayNameDefault = false;
++                thisAct.DisplayNameModified = DateTime.UtcNow;
++                m_log.Info($"[SETDISPLAYNAME] Setting displayname to: {disp[1]}");
++                m_Scene.SimChatBroadcast(Encoding.UTF8.GetBytes($"{thisAct.Name} is now known as {thisAct.DisplayName}"), ChatTypeEnum.Direct, 0, Vector3.Zero, "Simulator", UUID.Zero, false);
++            }
++
++            string code;
++            int status;
++            if (uas.StoreDisplayName(thisAct))
++            {
++                m_log.Info($"[SETDISPLAYNAME] User account updated");
++                status = 200;
++                code = "OK";
++            }
++            else
++            {
++                status = 500;
++                code = "Internal Error";
++                m_log.Info($"[SETDISPLAYNAME] User account failed to update");
++            }
++
++
++            EventQueue.Enqueue(DisplayNameReply(thisAct.DisplayName, oldDisp, thisAct.PrincipalID, thisAct.DisplayNameDefault, thisAct.FirstName, thisAct.LastName, thisAct.Name, thisAct.DisplayNameModified, status, code), thisAct.PrincipalID);
++            DisplayNameUpdateTrigger(thisAct, thisAct.PrincipalID, oldDisp);
++
++            m_Scene.ForEachClient(x => { if (x.AgentId != m_AgentID) DisplayNameUpdateTrigger(thisAct, x.AgentId, oldDisp); });
++
++            
++            return;
++
+         }
+ 
+         public void RegisterInventoryServiceHandlers()
+@@ -349,6 +502,8 @@ namespace OpenSim.Region.ClientStack.Linden
+                 {
+                     m_HostCapsObj.RegisterSimpleHandler("GetDisplayNames",
+                         new SimpleStreamHandler(GetNewCapPath() +"/", GetDisplayNames));
++
++                    m_HostCapsObj.RegisterSimpleHandler("SetDisplayName", new SimpleOSDMapHandler("POST", GetNewCapPath(), SetDisplayName));
+                 }
+             }
+             catch (Exception e)
+@@ -1978,51 +2133,57 @@ namespace OpenSim.Region.ClientStack.Linden
+             string[] ids = query.GetValues("ids");
+ 
+             Dictionary<UUID,string> names = m_UserManager.GetUsersNames(ids, m_scopeID);
+-            StringBuilder lsl = LLSDxmlEncode.Start(names.Count * 256 + 256);
+-            LLSDxmlEncode.AddMap(lsl);
++
++            IUserAccountService uas = m_Scene.RequestModuleInterface<IUserAccountService>();
++
++            OSDMap mp = new OSDMap();
++            OSDArray agents = new OSDArray();
++            
+             int ct = 0;
+-            if(names.Count == 0)
+-                LLSDxmlEncode.AddEmptyArray("agents", lsl);
++            if (names.Count == 0)
++                mp.Add("agents", agents);
+             else
+             {
+-                LLSDxmlEncode.AddArray("agents", lsl);
+ 
+-                foreach (KeyValuePair<UUID,string> kvp in names)
++                foreach (KeyValuePair<UUID, string> kvp in names)
+                 {
+-                    string[] parts = kvp.Value.Split(new char[] {' '});
++                    string[] parts = kvp.Value.Split(new char[] { ' ' });
+                     string fullname = kvp.Value;
+ 
++                    UserAccount ACT = uas.GetUserAccount(m_Scene.RegionInfo.ScopeID, kvp.Key);
++
++
+                     if (string.IsNullOrEmpty(kvp.Value))
+                     {
+-                        parts = new string[] {"(hippos)", ""};
++                        parts = new string[] { "(hippos)", "" };
+                         fullname = "(hippos)";
+                     }
+ 
+-                    if(kvp.Key == UUID.Zero)
++                    if (kvp.Key == UUID.Zero)
+                         continue;
+ 
+-                // dont tell about unknown users, we can't send them back on Bad either
+-                    if(parts[0] == "Unknown")
+-                         continue;
+-
+-                    LLSDxmlEncode.AddMap(lsl);
+-                    LLSDxmlEncode.AddElem("display_name_next_update", DateTime.UtcNow.AddDays(8), lsl);
+-                    LLSDxmlEncode.AddElem("display_name_expires", DateTime.UtcNow.AddMonths(1), lsl);
+-                    LLSDxmlEncode.AddElem("display_name", fullname, lsl);
+-                    LLSDxmlEncode.AddElem("legacy_first_name", parts[0], lsl);
+-                    LLSDxmlEncode.AddElem("legacy_last_name", parts[1], lsl);
+-                    LLSDxmlEncode.AddElem("username", fullname, lsl);
+-                    LLSDxmlEncode.AddElem("id", kvp.Key, lsl);
+-                    LLSDxmlEncode.AddElem("is_display_name_default", true, lsl);
+-                    LLSDxmlEncode.AddEndMap(lsl);
++                    // dont tell about unknown users, we can't send them back on Bad either
++                    if (parts[0] == "Unknown")
++                        continue;
++
++                    OSDMap agent = new OSDMap();
++                    agent.Add("display_name_next_update", ACT.DisplayNameModified);
++                    agent.Add("display_name", ACT.DisplayName);
++                    agent.Add("legacy_first_name", ACT.FirstName);
++                    agent.Add("legacy_last_name", ACT.LastName);
++                    agent.Add("username", fullname);
++                    agent.Add("id", ACT.PrincipalID);
++                    agent.Add("is_display_name_default", ACT.DisplayNameDefault);
++
++                    agents.Add(agent);
+                     ct++;
+                 }
+-                LLSDxmlEncode.AddEndArray(lsl);
++                mp.Add("agents", agents);
+             }
+-        
+-            LLSDxmlEncode.AddEndMap(lsl);
++            mp.Add("bad_ids", new OSDArray());
++            mp.Add("bad_usernames", new OSDArray());
+ 
+-            httpResponse.RawBuffer = LLSDxmlEncode.EndToNBBytes(lsl);
++            httpResponse.RawBuffer = OSDParser.SerializeLLSDXmlBytes(mp);
+             httpResponse.ContentType = "application/llsd+xml";
+             httpResponse.StatusCode = (int)HttpStatusCode.OK;
+         }
+diff --git a/OpenSim/Region/CoreModules/ServiceConnectorsOut/UserAccounts/LocalUserAccountServiceConnector.cs b/OpenSim/Region/CoreModules/ServiceConnectorsOut/UserAccounts/LocalUserAccountServiceConnector.cs
+index b1ac4d9641..6740dfdaf2 100644
+--- a/OpenSim/Region/CoreModules/ServiceConnectorsOut/UserAccounts/LocalUserAccountServiceConnector.cs
++++ b/OpenSim/Region/CoreModules/ServiceConnectorsOut/UserAccounts/LocalUserAccountServiceConnector.cs
+@@ -253,6 +253,11 @@ namespace OpenSim.Region.CoreModules.ServiceConnectorsOut.UserAccounts
+             return;
+         }
+ 
++        public bool StoreDisplayName(UserAccount container)
++        {
++            return StoreUserAccount(container);
++        }
++
+         #endregion
+     }
+ }
+diff --git a/OpenSim/Region/CoreModules/ServiceConnectorsOut/UserAccounts/RemoteUserAccountServiceConnector.cs b/OpenSim/Region/CoreModules/ServiceConnectorsOut/UserAccounts/RemoteUserAccountServiceConnector.cs
+index 204494523e..4b89bd71cd 100644
+--- a/OpenSim/Region/CoreModules/ServiceConnectorsOut/UserAccounts/RemoteUserAccountServiceConnector.cs
++++ b/OpenSim/Region/CoreModules/ServiceConnectorsOut/UserAccounts/RemoteUserAccountServiceConnector.cs
+@@ -203,8 +203,12 @@ namespace OpenSim.Region.CoreModules.ServiceConnectorsOut.UserAccounts
+ 
+         public override bool StoreUserAccount(UserAccount data)
+         {
+-            // This remote connector refuses to serve this method
+-            return false;
++            return base.StoreUserAccount(data);
++        }
++
++        public override bool StoreDisplayName(UserAccount container)
++        {
++            return base.StoreDisplayName(container);
+         }
+ 
+         #endregion
+diff --git a/OpenSim/Server/Handlers/UserAccounts/UserAccountServerPostHandler.cs b/OpenSim/Server/Handlers/UserAccounts/UserAccountServerPostHandler.cs
+index add89993a6..02c8fa9697 100644
+--- a/OpenSim/Server/Handlers/UserAccounts/UserAccountServerPostHandler.cs
++++ b/OpenSim/Server/Handlers/UserAccounts/UserAccountServerPostHandler.cs
+@@ -110,6 +110,8 @@ namespace OpenSim.Server.Handlers.UserAccounts
+                             return StoreAccount(request);
+                         else
+                             return FailureResult();
++                    case "setdisplayname":
++                        return StoreDisplayName(request);
+                 }
+ 
+                 m_log.DebugFormat("[USER SERVICE HANDLER]: unknown method request: {0}", method);
+@@ -122,6 +124,28 @@ namespace OpenSim.Server.Handlers.UserAccounts
+             return FailureResult();
+         }
+ 
++        private byte[] StoreDisplayName(Dictionary<string, object> request)
++        {
++            UserAccount act = m_UserAccountService.GetUserAccount(UUID.Zero, UUID.Parse(request["uuid"].ToString()));
++            act.DisplayName = request["dn"].ToString();
++            act.DisplayNameDefault = Boolean.Parse(request["dnd"].ToString());
++            act.DisplayNameModified = DateTime.Parse(request["dnm"].ToString());
++
++            m_log.Info($"[SETDISPLAYNAME] DisplayName set request for user: {act.FirstName} {act.LastName}; Set: {act.DisplayName}");
++            Dictionary<string, object> RES = new Dictionary<string, object>();
++            if (m_UserAccountService.StoreDisplayName(act))
++            {
++                RES.Add("result", "success");
++            }
++            else RES.Add("result", "fail");
++
++            
++
++
++            return ResultToBytes(RES);
++
++        }
++
+         byte[] GetAccount(Dictionary<string, object> request)
+         {
+             UserAccount account = null;
+diff --git a/OpenSim/Services/Connectors/UserAccounts/UserAccountServicesConnector.cs b/OpenSim/Services/Connectors/UserAccounts/UserAccountServicesConnector.cs
+index e43b89710a..482fde5a64 100644
+--- a/OpenSim/Services/Connectors/UserAccounts/UserAccountServicesConnector.cs
++++ b/OpenSim/Services/Connectors/UserAccounts/UserAccountServicesConnector.cs
+@@ -294,6 +294,7 @@ namespace OpenSim.Services.Connectors
+ 
+         public virtual bool StoreUserAccount(UserAccount data)
+         {
++            m_log.Info($"[ACCOUNTS CONNECTOR] Setting..");
+             Dictionary<string, object> sendData = new Dictionary<string, object>();
+             //sendData["SCOPEID"] = scopeID.ToString();
+             sendData["VERSIONMIN"] = ProtocolVersions.ClientProtocolVersionMin.ToString();
+@@ -426,5 +427,44 @@ namespace OpenSim.Services.Connectors
+             m_log.Info($"[UserAccountServicesConnector] No such method (TryMakeUser)");
+             return;
+         }
++
++        public virtual bool StoreDisplayName(UserAccount container)
++        {
++            m_log.Info($"[SETDISPLAYNAME] Setting displayname for {container.FirstName} {container.LastName}; Set: {container.DisplayName}");
++            Dictionary<string, object> RQ = new Dictionary<string, object>();
++            RQ.Add("dn", container.DisplayName);
++            RQ.Add("uuid", container.PrincipalID.ToString());
++            RQ.Add("dnm", container.DisplayNameModified.ToString());
++            RQ.Add("dnd", container.DisplayNameDefault.ToString());
++            RQ.Add("METHOD", "setdisplayname");
++            RQ.Add("VERSIONMIN", ProtocolVersions.ClientProtocolVersionMin.ToString());
++            RQ.Add("VERSIONMAX", ProtocolVersions.ClientProtocolVersionMax.ToString());
++
++            string req = ServerUtils.BuildQueryString(RQ);
++            string m_srv = m_ServerURI+"/accounts";
++            m_log.Info($"[SETDISPLAYNAME] Query: {req}");
++            try
++            {
++                string reply = SynchronousRestFormsRequester.MakeRequest("POST", m_srv, req, m_Auth);
++
++                m_log.Info($"[SETDISPLAYNAME] Reply: {reply}");
++                if (reply != String.Empty)
++                {
++                    Dictionary<string, object> replyData = ServerUtils.ParseXmlResponse(reply);
++                    if (replyData.ContainsKey("result"))
++                    {
++                        if (replyData["result"].ToString().ToLower() == "success") return true;
++                        else return false;
++                    } else
++                    {
++                        m_log.Info($"[ACCOUNTS CONNECTOR] Set or update display name did not contain a result field");
++                    }
++                }
++            }catch(Exception e)
++            {
++                m_log.Info("[ACCOUNTS CONNECTOR] Error when contacting user account server");
++            }
++            return false;
++        }
+     }
+ }
+diff --git a/OpenSim/Services/HypergridService/UserAccountCache.cs b/OpenSim/Services/HypergridService/UserAccountCache.cs
+index 3e793a2fcf..d8fbc1e6e2 100644
+--- a/OpenSim/Services/HypergridService/UserAccountCache.cs
++++ b/OpenSim/Services/HypergridService/UserAccountCache.cs
+@@ -112,6 +112,7 @@ namespace OpenSim.Services.HypergridService
+ 
+         public bool StoreUserAccount(UserAccount data)
+         {
++            Console.WriteLine("\n\n\n**** ATTEMPTED STORE USER BY HYPERGRID SERVICE ****\n\n\n");
+             return false;
+         }
+ 
+@@ -119,6 +120,11 @@ namespace OpenSim.Services.HypergridService
+         {
+             return;
+         }
++
++        public bool StoreDisplayName(UserAccount container)
++        {
++            return false;
++        }
+         #endregion
+ 
+     }
+diff --git a/OpenSim/Services/Interfaces/IGridUserService.cs b/OpenSim/Services/Interfaces/IGridUserService.cs
+index de61ed6eb5..7454f973c6 100644
+--- a/OpenSim/Services/Interfaces/IGridUserService.cs
++++ b/OpenSim/Services/Interfaces/IGridUserService.cs
+@@ -28,6 +28,7 @@
+ using System;
+ using System.Collections.Generic;
+ using OpenMetaverse;
++using OpenMetaverse.StructuredData;
+ 
+ namespace OpenSim.Services.Interfaces
+ {
+@@ -77,7 +78,6 @@ namespace OpenSim.Services.Interfaces
+                 DateTime.TryParse(kvp["Logout"].ToString(), out Logout);
+             if (kvp.ContainsKey("Online"))
+                 Boolean.TryParse(kvp["Online"].ToString(), out Online);
+-
+         }
+ 
+         public virtual Dictionary<string, object> ToKeyValuePairs()
+@@ -97,6 +97,7 @@ namespace OpenSim.Services.Interfaces
+             result["Login"] = Login.ToString();
+             result["Logout"] = Logout.ToString();
+ 
++
+             return result;
+         }
+     }
+diff --git a/OpenSim/Services/Interfaces/IUserAccountService.cs b/OpenSim/Services/Interfaces/IUserAccountService.cs
+index 5a176ee302..bbf64d9058 100644
+--- a/OpenSim/Services/Interfaces/IUserAccountService.cs
++++ b/OpenSim/Services/Interfaces/IUserAccountService.cs
+@@ -94,6 +94,9 @@ namespace OpenSim.Services.Interfaces
+         public string UserCountry;
+         public Boolean LocalToGrid = true;
++        public string DisplayName;
++        public DateTime DisplayNameModified;
++        public bool DisplayNameDefault;
+ 
+         public Dictionary<string, object> ServiceURLs;
+ 
+@@ -129,6 +132,15 @@ namespace OpenSim.Services.Interfaces
+ 
++            if (kvp.ContainsKey("DisplayName"))
++                DisplayName = kvp["DisplayName"].ToString();
++
++            if (kvp.ContainsKey("DisplayNameDefault"))
++                DisplayNameDefault = Boolean.Parse(kvp["DisplayNameDefault"].ToString());
++
++            if (kvp.ContainsKey("DisplayNameModified"))
++                DisplayNameModified = DateTime.Parse(kvp["DisplayNameModified"].ToString());
++
+             if (kvp.ContainsKey("Created"))
+                 Created = Convert.ToInt32(kvp["Created"].ToString());
+             if (kvp.ContainsKey("ServiceURLs") && kvp["ServiceURLs"] != null)
+@@ -164,6 +176,9 @@ namespace OpenSim.Services.Interfaces
+             result["UserCountry"] = UserCountry;
+             result["LocalToGrid"] = LocalToGrid.ToString();
++            result["DisplayName"] = DisplayName;
++            result["DisplayNameModified"] = DisplayNameModified.ToString();
++            result["DisplayNameDefault"] = DisplayNameDefault.ToString();
+ 
+             string str = string.Empty;
+             foreach (KeyValuePair<string, object> kvp in ServiceURLs)
+@@ -203,5 +218,7 @@ namespace OpenSim.Services.Interfaces
+         void InvalidateCache(UUID userID);
+ 
+         void TryMakeUser(UUID scope, string first, string last, string password, string email, string model);
++
++        bool StoreDisplayName(UserAccount container);
+     }
+ }
+diff --git a/OpenSim/Services/UserAccountService/UserAccountService.cs b/OpenSim/Services/UserAccountService/UserAccountService.cs
+index 7cdb9c0bf2..f6b3825a87 100644
+--- a/OpenSim/Services/UserAccountService/UserAccountService.cs
++++ b/OpenSim/Services/UserAccountService/UserAccountService.cs
+@@ -108,6 +108,9 @@ namespace OpenSim.Services.UserAccountService
+                     d.Data["UserFlags"] = "0";
+                     d.Data["ServiceURLs"] = string.Empty;
++                    d.Data["DisplayName"] = "GRID SERVICES";
++                    d.Data["DisplayNameModified"] = DateTime.UtcNow.ToString();
++                    d.Data["DisplayNameDefault"] = "true";
+ 
+                     m_Database.Store(d);
+                 }
+@@ -211,6 +214,20 @@ namespace OpenSim.Services.UserAccountService
+             else
+                 u.UserCountry = string.Empty;
+ 
++            if (d.Data.ContainsKey("DisplayName"))
++                u.DisplayName = d.Data["DisplayName"];
++
++            if (d.Data.ContainsKey("DisplayNameModified"))
++            {
++                if(d.Data["DisplayNameModified"] != "" && d.Data["DisplayNameModified"] != null)
++                {
++                    u.DisplayNameModified = DateTime.Parse(d.Data["DisplayNameModified"]);
++                }
++            }
++
++            if (d.Data.ContainsKey("DisplayNameDefault") && d.Data["DisplayNameDefault"] != null)
++                u.DisplayNameDefault = Boolean.Parse(d.Data["DisplayNameDefault"]);
++
+             if (d.Data.ContainsKey("ServiceURLs") && d.Data["ServiceURLs"] != null)
+             {
+                 string[] URLs = d.Data["ServiceURLs"].ToString().Split(new char[] { ' ' });
+@@ -309,9 +326,9 @@ namespace OpenSim.Services.UserAccountService
+ 
+         public bool StoreUserAccount(UserAccount data)
+         {
+-//            m_log.DebugFormat(
+-//                "[USER ACCOUNT SERVICE]: Storing user account for {0} {1} {2}, scope {3}",
+-//                data.FirstName, data.LastName, data.PrincipalID, data.ScopeID);
++            m_log.InfoFormat(
++                "[USER ACCOUNT SERVICE]: Storing user account for {0} {1} {2}, scope {3}",
++                data.FirstName, data.LastName, data.PrincipalID, data.ScopeID);
+ 
+             UserAccountData d = new UserAccountData();
+ 
+@@ -325,6 +342,10 @@ namespace OpenSim.Services.UserAccountService
+             d.Data["UserLevel"] = data.UserLevel.ToString();
+             d.Data["UserFlags"] = data.UserFlags.ToString();
++            d.Data["DisplayName"] = data.DisplayName;
++            d.Data["DisplayNameModified"] = data.DisplayNameModified.ToString();
++            d.Data["DisplayNameDefault"] = data.DisplayNameDefault.ToString();
++
+             if (!string.IsNullOrEmpty(data.UserTitle))
+                 d.Data["UserTitle"] = data.UserTitle;
+             if (!string.IsNullOrEmpty(data.UserCountry))
+@@ -339,7 +360,7 @@ namespace OpenSim.Services.UserAccountService
+             }
+ 
+             d.Data["ServiceURLs"] = string.Join(" ", parts.ToArray());
+-
++            
+             return m_Database.Store(d);
+         }
+ 
+@@ -601,6 +622,10 @@ namespace OpenSim.Services.UserAccountService
+             if (null == account)
+             {
+                 account = new UserAccount(UUID.Zero, principalID, firstName, lastName, email);
++                account.DisplayNameDefault = true;
++                account.DisplayNameModified = DateTime.UtcNow;
++                account.DisplayName = "";
+                 if (account.ServiceURLs == null || (account.ServiceURLs != null && account.ServiceURLs.Count == 0))
+                 {
+                     account.ServiceURLs = new Dictionary<string, object>();
+@@ -1068,5 +1093,10 @@ namespace OpenSim.Services.UserAccountService
+         {
+             CreateUser(scope, UUID.Random(), first, last, password, email, model, true);
+         }
++
++        public bool StoreDisplayName(UserAccount container)
++        {
++            return StoreUserAccount(container);
++        }
+     }
+ }
+-- 
+2.26.2.windows.1
+

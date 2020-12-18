@@ -1,0 +1,307 @@
+From 57d20b11a7de1c6c87eb4f10afa3bfde70ef7ef3 Mon Sep 17 00:00:00 2001
+From: SignpostMarv <github@signpostmarv.name>
+Date: Mon, 27 Aug 2012 01:22:33 +0100
+Subject: [PATCH 1/4] Moving SmoothMap to a utility class
+
+---
+ .../World/Terrain/Effects/ChannelDigger.cs         | 20 +-------
+ .../World/Terrain/Effects/TerrainEffectUtil.cs     | 55 ++++++++++++++++++++++
+ 2 files changed, 56 insertions(+), 19 deletions(-)
+ create mode 100644 OpenSim/Region/CoreModules/World/Terrain/Effects/TerrainEffectUtil.cs
+
+diff --git a/OpenSim/Region/CoreModules/World/Terrain/Effects/ChannelDigger.cs b/OpenSim/Region/CoreModules/World/Terrain/Effects/ChannelDigger.cs
+index 36917e9..1e619ac 100644
+--- a/OpenSim/Region/CoreModules/World/Terrain/Effects/ChannelDigger.cs
++++ b/OpenSim/Region/CoreModules/World/Terrain/Effects/ChannelDigger.cs
+@@ -38,7 +38,6 @@ namespace OpenSim.Region.CoreModules.World.Terrain.Effects
+         private readonly int num_w = 4;
+ 
+         private readonly ITerrainFloodEffect raiseFunction = new RaiseArea();
+-        private readonly ITerrainFloodEffect smoothFunction = new SmoothArea();
+ 
+         #region ITerrainEffect Members
+ 
+@@ -46,28 +45,11 @@ namespace OpenSim.Region.CoreModules.World.Terrain.Effects
+         {
+             FillMap(map, 15);
+             BuildTiles(map, 7);
+-            SmoothMap(map, 3);
++            TerrainEffectUtil.SmoothMap(map, 3);
+         }
+ 
+         #endregion
+ 
+-        private void SmoothMap(ITerrainChannel map, int rounds)
+-        {
+-            Boolean[,] bitmap = new bool[map.Width,map.Height];
+-            for (int x = 0; x < map.Width; x++)
+-            {
+-                for (int y = 0; y < map.Height; y++)
+-                {
+-                    bitmap[x, y] = true;
+-                }
+-            }
+-
+-            for (int i = 0; i < rounds; i++)
+-            {
+-                smoothFunction.FloodEffect(map, bitmap, 1.0);
+-            }
+-        }
+-
+         private void FillMap(ITerrainChannel map, double val)
+         {
+             for (int x = 0; x < map.Width; x++)
+diff --git a/OpenSim/Region/CoreModules/World/Terrain/Effects/TerrainEffectUtil.cs b/OpenSim/Region/CoreModules/World/Terrain/Effects/TerrainEffectUtil.cs
+new file mode 100644
+index 0000000..f723db3
+--- /dev/null
++++ b/OpenSim/Region/CoreModules/World/Terrain/Effects/TerrainEffectUtil.cs
+@@ -0,0 +1,55 @@
++﻿/*
++ * Copyright (c) Contributors, http://opensimulator.org/
++ * See CONTRIBUTORS.TXT for a full list of copyright holders.
++ *
++ * Redistribution and use in source and binary forms, with or without
++ * modification, are permitted provided that the following conditions are met:
++ *     * Redistributions of source code must retain the above copyright
++ *       notice, this list of conditions and the following disclaimer.
++ *     * Redistributions in binary form must reproduce the above copyright
++ *       notice, this list of conditions and the following disclaimer in the
++ *       documentation and/or other materials provided with the distribution.
++ *     * Neither the name of the OpenSimulator Project nor the
++ *       names of its contributors may be used to endorse or promote products
++ *       derived from this software without specific prior written permission.
++ *
++ * THIS SOFTWARE IS PROVIDED BY THE DEVELOPERS ``AS IS'' AND ANY
++ * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
++ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
++ * DISCLAIMED. IN NO EVENT SHALL THE CONTRIBUTORS BE LIABLE FOR ANY
++ * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
++ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
++ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
++ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
++ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
++ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
++ */
++
++using System;
++using OpenSim.Region.Framework.Interfaces;
++using OpenSim.Region.CoreModules.World.Terrain.FloodBrushes;
++
++namespace OpenSim.Region.CoreModules.World.Terrain.Effects
++{
++    public static class TerrainEffectUtil
++    {
++        private static readonly ITerrainFloodEffect smoothFunction = new SmoothArea();
++
++        public static void SmoothMap(ITerrainChannel map, int rounds)
++        {
++            Boolean[,] bitmap = new bool[map.Width, map.Height];
++            for (int x = 0; x < map.Width; x++)
++            {
++                for (int y = 0; y < map.Height; y++)
++                {
++                    bitmap[x, y] = true;
++                }
++            }
++
++            for (int i = 0; i < rounds; i++)
++            {
++                smoothFunction.FloodEffect(map, bitmap, 1.0);
++            }
++        }
++    }
++}
+-- 
+1.7.11.msysgit.0
+
+
+From ce1fb2f40ba5d5abb1237246d8eff5bf01a9facc Mon Sep 17 00:00:00 2001
+From: SignpostMarv <github@signpostmarv.name>
+Date: Mon, 27 Aug 2012 01:24:06 +0100
+Subject: [PATCH 2/4] allowing strength to be specified
+
+---
+ OpenSim/Region/CoreModules/World/Terrain/Effects/ChannelDigger.cs     | 2 +-
+ OpenSim/Region/CoreModules/World/Terrain/Effects/TerrainEffectUtil.cs | 4 ++--
+ 2 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/OpenSim/Region/CoreModules/World/Terrain/Effects/ChannelDigger.cs b/OpenSim/Region/CoreModules/World/Terrain/Effects/ChannelDigger.cs
+index 1e619ac..6d345ef 100644
+--- a/OpenSim/Region/CoreModules/World/Terrain/Effects/ChannelDigger.cs
++++ b/OpenSim/Region/CoreModules/World/Terrain/Effects/ChannelDigger.cs
+@@ -45,7 +45,7 @@ namespace OpenSim.Region.CoreModules.World.Terrain.Effects
+         {
+             FillMap(map, 15);
+             BuildTiles(map, 7);
+-            TerrainEffectUtil.SmoothMap(map, 3);
++            TerrainEffectUtil.SmoothMap(map, 3, 1.0);
+         }
+ 
+         #endregion
+diff --git a/OpenSim/Region/CoreModules/World/Terrain/Effects/TerrainEffectUtil.cs b/OpenSim/Region/CoreModules/World/Terrain/Effects/TerrainEffectUtil.cs
+index f723db3..626e7a1 100644
+--- a/OpenSim/Region/CoreModules/World/Terrain/Effects/TerrainEffectUtil.cs
++++ b/OpenSim/Region/CoreModules/World/Terrain/Effects/TerrainEffectUtil.cs
+@@ -35,7 +35,7 @@ namespace OpenSim.Region.CoreModules.World.Terrain.Effects
+     {
+         private static readonly ITerrainFloodEffect smoothFunction = new SmoothArea();
+ 
+-        public static void SmoothMap(ITerrainChannel map, int rounds)
++        public static void SmoothMap(ITerrainChannel map, int rounds, double strength)
+         {
+             Boolean[,] bitmap = new bool[map.Width, map.Height];
+             for (int x = 0; x < map.Width; x++)
+@@ -48,7 +48,7 @@ namespace OpenSim.Region.CoreModules.World.Terrain.Effects
+ 
+             for (int i = 0; i < rounds; i++)
+             {
+-                smoothFunction.FloodEffect(map, bitmap, 1.0);
++                smoothFunction.FloodEffect(map, bitmap, strength);
+             }
+         }
+     }
+-- 
+1.7.11.msysgit.0
+
+
+From 8280fc46608cbcb02398068289fb6abd33c649d4 Mon Sep 17 00:00:00 2001
+From: SignpostMarv <github@signpostmarv.name>
+Date: Mon, 27 Aug 2012 01:33:47 +0100
+Subject: [PATCH 3/4] Add support for terrain effects that act on RegionInfo,
+ e.g. using grid-coordiantes as seed values in an effect
+
+---
+ OpenSim/Region/CoreModules/World/Terrain/TerrainModule.cs | 6 +++++-
+ OpenSim/Region/Framework/Interfaces/ITerrainEffect.cs     | 6 ++++++
+ 2 files changed, 11 insertions(+), 1 deletion(-)
+
+diff --git a/OpenSim/Region/CoreModules/World/Terrain/TerrainModule.cs b/OpenSim/Region/CoreModules/World/Terrain/TerrainModule.cs
+index 4694b14..58e68c6 100644
+--- a/OpenSim/Region/CoreModules/World/Terrain/TerrainModule.cs
++++ b/OpenSim/Region/CoreModules/World/Terrain/TerrainModule.cs
+@@ -1199,7 +1199,11 @@ namespace OpenSim.Region.CoreModules.World.Terrain
+             }
+             if (m_plugineffects.ContainsKey(firstArg))
+             {
+-                m_plugineffects[firstArg].RunEffect(m_channel);
++                ITerrainEffect effect = m_plugineffects[firstArg];
++                if (effect is ITerrainRegionInfoEffect)
++                    ((ITerrainRegionInfoEffect)effect).RunEffect(m_channel, m_scene.RegionInfo);
++                else
++                    effect.RunEffect(m_channel);
+                 CheckForTerrainUpdates();
+             }
+             else
+diff --git a/OpenSim/Region/Framework/Interfaces/ITerrainEffect.cs b/OpenSim/Region/Framework/Interfaces/ITerrainEffect.cs
+index 890afb3..54e9204 100644
+--- a/OpenSim/Region/Framework/Interfaces/ITerrainEffect.cs
++++ b/OpenSim/Region/Framework/Interfaces/ITerrainEffect.cs
+@@ -24,6 +24,7 @@
+  * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+  * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+  */
++using OpenSim.Framework;
+ 
+ namespace OpenSim.Region.Framework.Interfaces
+ {
+@@ -31,4 +32,9 @@ namespace OpenSim.Region.Framework.Interfaces
+     {
+         void RunEffect(ITerrainChannel map);
+     }
++
++    public interface ITerrainRegionInfoEffect : ITerrainEffect
++    {
++        void RunEffect(ITerrainChannel map, RegionInfo region);
++    }
+ }
+\ No newline at end of file
+-- 
+1.7.11.msysgit.0
+
+
+From e7ca0727bfeb6e3bb394672413bcf44efe001f0e Mon Sep 17 00:00:00 2001
+From: SignpostMarv <github@signpostmarv.name>
+Date: Mon, 27 Aug 2012 01:35:05 +0100
+Subject: [PATCH 4/4] example implementation of ITerrainRegionInfoEffect
+
+---
+ .../World/Terrain/Effects/GridPerlin.cs            | 66 ++++++++++++++++++++++
+ 1 file changed, 66 insertions(+)
+ create mode 100644 OpenSim/Region/CoreModules/World/Terrain/Effects/GridPerlin.cs
+
+diff --git a/OpenSim/Region/CoreModules/World/Terrain/Effects/GridPerlin.cs b/OpenSim/Region/CoreModules/World/Terrain/Effects/GridPerlin.cs
+new file mode 100644
+index 0000000..fc44eb4
+--- /dev/null
++++ b/OpenSim/Region/CoreModules/World/Terrain/Effects/GridPerlin.cs
+@@ -0,0 +1,66 @@
++﻿/*
++ * Copyright (c) Contributors, http://opensimulator.org/
++ * See CONTRIBUTORS.TXT for a full list of copyright holders.
++ *
++ * Redistribution and use in source and binary forms, with or without
++ * modification, are permitted provided that the following conditions are met:
++ *     * Redistributions of source code must retain the above copyright
++ *       notice, this list of conditions and the following disclaimer.
++ *     * Redistributions in binary form must reproduce the above copyright
++ *       notice, this list of conditions and the following disclaimer in the
++ *       documentation and/or other materials provided with the distribution.
++ *     * Neither the name of the OpenSimulator Project nor the
++ *       names of its contributors may be used to endorse or promote products
++ *       derived from this software without specific prior written permission.
++ *
++ * THIS SOFTWARE IS PROVIDED BY THE DEVELOPERS ``AS IS'' AND ANY
++ * EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
++ * WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
++ * DISCLAIMED. IN NO EVENT SHALL THE CONTRIBUTORS BE LIABLE FOR ANY
++ * DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
++ * (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
++ * LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
++ * ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
++ * (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
++ * SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
++ */
++using System;
++using OpenSim.Framework;
++using OpenSim.Region.Framework.Interfaces;
++using OpenSim.Region.Framework.Scenes;
++
++namespace OpenSim.Region.CoreModules.World.Terrain.Effects
++{
++    /// <summary>
++    /// Uses perlin noise based on grid coordinates
++    /// </summary>
++    public class GridPerlin : ITerrainRegionInfoEffect
++    {
++        public void RunEffect(ITerrainChannel map)
++        {
++            doEffect(map, 0, 0);
++        }
++
++        public void RunEffect(ITerrainChannel map, RegionInfo info)
++        {
++            doEffect(map, info.RegionLocX, info.RegionLocY);
++        }
++
++        private void doEffect(ITerrainChannel map, uint seedX, uint seedY)
++        {
++            for (int x = 0; x < map.Width; ++x)
++            {
++                double xPart = seedX + ((double)x / (double)Math.Max(1, map.Width));
++                for (int y = 0; y < map.Height; ++y)
++                {
++                    double yPart = seedY + ((double)y / (double)Math.Max(1, map.Height));
++                    double noiseA = TerrainUtil.PerlinNoise2D(xPart, yPart, 3, 2.0) * 8;
++                    double noiseB = TerrainUtil.PerlinNoise2D(xPart, yPart, 4, 2.0) * 4;
++                    map[x, y] = 32 + noiseA + noiseB;
++                }
++            }
++
++            TerrainEffectUtil.SmoothMap(map, 3, 4.0);
++        }
++    }
++}
+-- 
+1.7.11.msysgit.0
+
