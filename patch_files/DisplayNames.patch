@@ -33,7 +33,6 @@ index 98be09712e..56d431affe 100644
 +) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 +
 +COMMIT;
-\ No newline at end of file
 diff --git a/OpenSim/Data/PGSQL/Resources/UserAccount.migrations b/OpenSim/Data/PGSQL/Resources/UserAccount.migrations
 index 31358fa694..a9deef9094 100644
 --- a/OpenSim/Data/PGSQL/Resources/UserAccount.migrations
@@ -65,7 +64,6 @@ index f37a22246f..1121c8ee5b 100644
  ALTER TABLE `UserAccounts` ADD `active` BOOLEAN NOT NULL DEFAULT TRUE;
  
 -COMMIT;
-\ No newline at end of file
 +COMMIT;
 +
 +:VERSION 4     # -------------------------
@@ -80,7 +78,6 @@ index f37a22246f..1121c8ee5b 100644
 +);
 +
 +COMMIT;
-\ No newline at end of file
 diff --git a/OpenSim/Region/ClientStack/Linden/Caps/BunchOfCaps/BunchOfCaps.cs b/OpenSim/Region/ClientStack/Linden/Caps/BunchOfCaps/BunchOfCaps.cs
 index 7f595f3c56..cd8da265f6 100644
 --- a/OpenSim/Region/ClientStack/Linden/Caps/BunchOfCaps/BunchOfCaps.cs
@@ -165,7 +162,6 @@ index 56d431affe..6fa3d3dbd8 100644
  ALTER TABLE `UserAccounts` ADD `balance` int not null default '0';
  
 -commit;
-\ No newline at end of file
 +:VERSION 10
 +BEGIN;
 +
@@ -181,7 +177,6 @@ index 56d431affe..6fa3d3dbd8 100644
 +ALTER TABLE `UserAccounts` MODIFY `DisplayNameDefault` text not null default 'true';
 +
 +COMMIT;
-\ No newline at end of file
 diff --git a/OpenSim/Data/PGSQL/Resources/UserAccount.migrations b/OpenSim/Data/PGSQL/Resources/UserAccount.migrations
 index a9deef9094..7abc4c6876 100644
 --- a/OpenSim/Data/PGSQL/Resources/UserAccount.migrations
@@ -191,7 +186,6 @@ index a9deef9094..7abc4c6876 100644
  ALTER TABLE UserAccounts ADD "balance" int not null default 0;
  
 -commit;
-\ No newline at end of file
 +:VERSION 9
 +BEGIN;
 +
@@ -207,7 +201,6 @@ index a9deef9094..7abc4c6876 100644
 +ALTER TABLE UserAccounts MODIFY DisplayNameDefault text not null default "true";
 +
 +COMMIT;
-\ No newline at end of file
 diff --git a/OpenSim/Data/SQLite/Resources/UserAccount.migrations b/OpenSim/Data/SQLite/Resources/UserAccount.migrations
 index 1121c8ee5b..6e545640ab 100644
 --- a/OpenSim/Data/SQLite/Resources/UserAccount.migrations
@@ -217,7 +210,6 @@ index 1121c8ee5b..6e545640ab 100644
  ALTER TABLE `UserAccounts` ADD `balance` int not null default '0';
  
 -commit;
-\ No newline at end of file
 +:VERSION 7
 +BEGIN;
 +
@@ -233,7 +225,6 @@ index 1121c8ee5b..6e545640ab 100644
 +ALTER TABLE `UserAccounts` MODIFY `DisplayNameDefault` text not null default 'true';
 +
 +COMMIT;
-\ No newline at end of file
 diff --git a/OpenSim/Region/ClientStack/Linden/Caps/BunchOfCaps/BunchOfCaps.cs b/OpenSim/Region/ClientStack/Linden/Caps/BunchOfCaps/BunchOfCaps.cs
 index cd8da265f6..9b694ad36a 100644
 --- a/OpenSim/Region/ClientStack/Linden/Caps/BunchOfCaps/BunchOfCaps.cs
