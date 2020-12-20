@@ -54,7 +54,6 @@ index 31358fa694..a9deef9094 100644
 +);
 +
 +COMMIT;
-\ No newline at end of file
 diff --git a/OpenSim/Data/SQLite/Resources/UserAccount.migrations b/OpenSim/Data/SQLite/Resources/UserAccount.migrations
 index f37a22246f..1121c8ee5b 100644
 --- a/OpenSim/Data/SQLite/Resources/UserAccount.migrations
