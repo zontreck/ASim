@@ -1,0 +1,1 @@
+for %i in (patch_files\*) do patch -p1 -i %i
